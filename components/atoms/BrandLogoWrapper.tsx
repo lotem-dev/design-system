@@ -20,7 +20,7 @@ function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
-export function BrandLogo({ as: Logo, size = "md", className, title, ...props }: BrandLogoProps) {
+export function BrandLogoWrapper({ as: Logo, size = "md", className, title, ...props }: BrandLogoProps) {
   const px = sizeToPx[size];
 
   return (
