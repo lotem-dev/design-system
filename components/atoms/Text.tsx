@@ -4,14 +4,9 @@ export type TextVariant = "XS" | "Label" | "Body" | "Medium" | "Title" | "Headli
 export type TextWeight = "regular" | "bold";
 export type TextDecoration = "none" | "underline";
 export type TextTransform = "none" | "uppercase";
-
-/**
- * Semantic text colors (mapped to CSS variables from globals.css)
- * Feel free to expand later.
- */
 export type TextColor = "primary" | "secondary" | "brand" | "invert";
 
-type PolymorphicProps<T extends React.ElementType> = {
+type TextProps<T extends React.ElementType> = {
   as?: T;
   variant?: TextVariant;
   weight?: TextWeight;
@@ -21,33 +16,16 @@ type PolymorphicProps<T extends React.ElementType> = {
   truncate?: boolean;
   className?: string;
   children?: React.ReactNode;
-} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "color">;
+  style?: React.CSSProperties;
+} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "color" | "style">;
 
 const variantStyles: Record<TextVariant, React.CSSProperties> = {
-  XS: {
-    fontSize: "var(--font-size-xs)",
-    lineHeight: "var(--line-height-xs)",
-  },
-  Label: {
-    fontSize: "var(--font-size-sm)",
-    lineHeight: "var(--line-height-sm)",
-  },
-  Body: {
-    fontSize: "var(--font-size-base)",
-    lineHeight: "var(--line-height-base)",
-  },
-  Medium: {
-    fontSize: "var(--font-size-lg)",
-    lineHeight: "var(--line-height-lg)",
-  },
-  Title: {
-    fontSize: "var(--font-size-xl)",
-    lineHeight: "var(--line-height-xl)",
-  },
-  Headline: {
-    fontSize: "var(--font-size-2xl)",
-    lineHeight: "var(--line-height-2xl)",
-  },
+  XS: { fontSize: "var(--font-size-xs)", lineHeight: "var(--line-height-xs)" },
+  Label: { fontSize: "var(--font-size-sm)", lineHeight: "var(--line-height-sm)" },
+  Body: { fontSize: "var(--font-size-base)", lineHeight: "var(--line-height-base)" },
+  Medium: { fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-lg)" },
+  Title: { fontSize: "var(--font-size-xl)", lineHeight: "var(--line-height-xl)" },
+  Headline: { fontSize: "var(--font-size-2xl)", lineHeight: "var(--line-height-2xl)" },
 };
 
 const weightStyles: Record<TextWeight, React.CSSProperties> = {
@@ -57,12 +35,12 @@ const weightStyles: Record<TextWeight, React.CSSProperties> = {
 
 const decorationStyles: Record<TextDecoration, React.CSSProperties> = {
   none: { textDecoration: "none" },
-  underline: { textDecoration: "underline" },
+  underline: { textDecoration: "underline", textUnderlineOffset: "2px" },
 };
 
 const transformStyles: Record<TextTransform, React.CSSProperties> = {
   none: { textTransform: "none" },
-  uppercase: { textTransform: "uppercase", letterSpacing: "0.04em" },
+  uppercase: { textTransform: "uppercase", letterSpacing: "var(--letter-spacing-caps)" },
 };
 
 const colorStyles: Record<TextColor, React.CSSProperties> = {
@@ -88,7 +66,7 @@ export function Text<T extends React.ElementType = "p">({
   style,
   children,
   ...props
-}: PolymorphicProps<T>) {
+}: TextProps<T>) {
   const Comp = (as ?? "p") as React.ElementType;
 
   const mergedStyle: React.CSSProperties = {
@@ -100,11 +78,7 @@ export function Text<T extends React.ElementType = "p">({
     ...transformStyles[transform],
     ...colorStyles[color],
     ...(truncate
-      ? {
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }
+      ? { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
       : null),
     ...style,
   };
