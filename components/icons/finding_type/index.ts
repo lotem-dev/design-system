@@ -1,0 +1,9 @@
+export { IconCloudSecurity } from "./IconCloudSecurity";
+export { IconContainerSecurity } from "./IconContainerSecurity";
+export { IconDAST } from "./IconDAST";
+export { IconGitSecurity } from "./IconGitSecurity";
+export { IconIaCSecurity } from "./IconIaCSecurity";
+export { IconLicenseCheck } from "./IconLicenseCheck";
+export { IconSAST } from "./IconSAST";
+export { IconSCA } from "./IconSCA";
+export { IconSecretDetection } from "./IconSecretDetection";
