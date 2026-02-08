@@ -5,7 +5,6 @@ type LinkProps = {
   href: string;
   children: React.ReactNode;
 
-  /** Typography control */
   textVariant?: TextVariant;
   weight?: TextWeight;
 
@@ -41,7 +40,6 @@ export function Link({
       rel={external ? "noreferrer noopener" : undefined}
       aria-disabled={disabled || undefined}
       style={{
-        color: "var(--link-color)",
         cursor: disabled ? "not-allowed" : "pointer",
         opacity: disabled ? 0.6 : 1,
         pointerEvents: disabled ? "none" : undefined,
