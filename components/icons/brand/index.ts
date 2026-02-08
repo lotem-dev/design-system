@@ -8,7 +8,6 @@ export { LogoConfluence } from "./LogoConfluence";
 export { LogoCrowdStrike } from "./LogoCrowdStrike";
 export { LogoCyera } from "./LogoCyera";
 export { LogoDrata } from "./LogoDrata";
-export { LogoExcel } from "./LogoExcel";
 export { LogoGCP } from "./LogoGCP";
 export { LogoGitHub } from "./LogoGitHub";
 export { LogoGitLab } from "./LogoGitLab";
