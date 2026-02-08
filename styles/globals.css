@@ -6,30 +6,27 @@
    1) Typography primitives
    ----------------------------- */
 :root {
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
-    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+   @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+    --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial;
 
-  /* Font weights */
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 
-  /* Font sizes (primitives) */
-  --font-size-2xl: 30px;
-  --font-size-xl: 26px;
-  --font-size-lg: 18px;
-  --font-size-base: 14px;
-  --font-size-sm: 12px;
-  --font-size-xs: 10px;
+  --font-size-2xl: 30px; /* Headline */
+  --font-size-xl: 26px;  /* Title */
+  --font-size-lg: 18px;  /* Medium */
+  --font-size-base: 14px;/* Body */
+  --font-size-sm: 12px;  /* Label */
+  --font-size-xs: 10px;  /* XS */
 
-  /* Line heights (from styles table) */
-  --line-height-2xl: 36px; /* 30/36 */
-  --line-height-xl: 32px;  /* 26/32 */
-  --line-height-lg: 25px;  /* 18/25 */
-  --line-height-base: 22px;/* 14/22 */
-  --line-height-sm: 16px;  /* 12/16 */
-  --line-height-xs: 14px;  /* 10/14 */
+  --line-height-2xl: 36px; /* Headline 30/36 */
+  --line-height-xl: 32px;  /* Title 26/32 */
+  --line-height-lg: 25px;  /* Medium 18/25 */
+  --line-height-base: 22px;/* Body 14/22 */
+  --line-height-sm: 16px;  /* Label 12/16 */
+  --line-height-xs: 14px;  /* XS 10/14 */
 
-  /* Letter spacing */
   --letter-spacing-default: 0%;
 }
 
