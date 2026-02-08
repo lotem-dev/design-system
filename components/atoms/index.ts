@@ -7,6 +7,8 @@ export type {
   TextColor,
 } from "./Text";
 
+export { Link } from "./Link";
+
 export { IconWrapper } from "./IconWrapper";
 export type { IconSize } from "./IconWrapper";
 
