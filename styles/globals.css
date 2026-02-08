@@ -28,6 +28,7 @@
   --line-height-xs: 14px;  /* XS 10/14 */
 
   --letter-spacing-default: 0%;
+  --letter-spacing-caps: 0.04em;
 }
 
 /* Optional: if you want to ensure font is applied globally */
