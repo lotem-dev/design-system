@@ -1,0 +1,340 @@
+/* =========================================================
+   Jit Design System — Globals (Tokens)
+   ========================================================= */
+
+/* -----------------------------
+   1) Typography primitives
+   ----------------------------- */
+:root {
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+
+  /* Font sizes (primitives) */
+  --font-size-2xl: 30px;
+  --font-size-xl: 26px;
+  --font-size-lg: 18px;
+  --font-size-base: 14px;
+  --font-size-sm: 12px;
+  --font-size-xs: 10px;
+
+  /* Line heights (from styles table) */
+  --line-height-2xl: 36px; /* 30/36 */
+  --line-height-xl: 32px;  /* 26/32 */
+  --line-height-lg: 25px;  /* 18/25 */
+  --line-height-base: 22px;/* 14/22 */
+  --line-height-sm: 16px;  /* 12/16 */
+  --line-height-xs: 14px;  /* 10/14 */
+
+  /* Letter spacing */
+  --letter-spacing-default: 0%;
+}
+
+/* Optional: if you want to ensure font is applied globally */
+html, body {
+  font-family: var(--font-sans);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* -----------------------------
+   2) Utilities primitives
+   ----------------------------- */
+:root {
+  /* Spacing */
+  --space-xl: 40px;
+  --space-lg: 20px;
+  --space-base: 12px;
+  --space-sm: 8px;
+  --space-xs: 4px;
+  --space-2xs: 2px;
+
+  /* Radius */
+  --radius-round: 999px;
+  --radius-lg: 15px;
+  --radius-base: 8px;
+  --radius-sm: 6px;
+  --radius-xs: 4px;
+}
+
+/* -----------------------------
+   3) Color primitives (palette)
+   ----------------------------- */
+:root {
+  /* Neutrals */
+  --neutral-50:  #F8FAFC;
+  --neutral-100: #F1F5F9;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CBD5E1;
+  --neutral-400: #94A3B8;
+  --neutral-500: #64748B;
+  --neutral-600: #475569;
+  --neutral-700: #2B3749;
+  --neutral-800: #192232;
+  --neutral-900: #0C1324;
+
+  /* Pink */
+  --pink-50:  #FEEBF5;
+  --pink-100: #FEEBF5;
+  --pink-200: #E4A3C8;
+  --pink-300: #DD88B8;
+  --pink-400: #D56EA9;
+  --pink-500: #CD5499;
+  --pink-600: #C63989;
+  --pink-700: #AB3277;
+  --pink-800: #912A65;
+  --pink-900: #772252;
+
+  /* Purple */
+  --purple-50:  #F3F0FF;
+  --purple-100: #C8BBF9;
+  --purple-200: #A187FF;
+  --purple-300: #7E5BFF;
+  --purple-400: #6C44FF;
+  --purple-500: #5E32FF;
+  --purple-600: #3C18C3;
+  --purple-700: #2A0D95;
+  --purple-800: #1F0779;
+  --purple-900: #140061;
+
+  /* Yellow */
+  --yellow-50:  #FFFBEA;
+  --yellow-100: #FEF3C7;
+  --yellow-200: #FDE68A;
+  --yellow-300: #FCD34D;
+  --yellow-400: #FBBF24;
+  --yellow-500: #DCA600;
+  --yellow-600: #B78C00;
+  --yellow-700: #947300;
+  --yellow-800: #755B00;
+  --yellow-900: #574300;
+
+  /* Orange */
+  --orange-50:  #FFF6ED;
+  --orange-100: #FFEAD5;
+  --orange-200: #FDD1AA;
+  --orange-300: #FCB37E;
+  --orange-400: #FD9B5F;
+  --orange-500: #FE8235;
+  --orange-600: #DE6D25;
+  --orange-700: #C4622B;
+  --orange-800: #A14F22;
+  --orange-900: #7E3D1A;
+
+  /* Red */
+  --red-50:  #FFF5F5;
+  --red-100: #FFE3E6;
+  --red-200: #FFBBC0;
+  --red-300: #FF8A8E;
+  --red-400: #F64E56;
+  --red-500: #D1002A;
+  --red-600: #B00025;
+  --red-700: #8E0021;
+  --red-800: #6C001A;
+  --red-900: #4C0012;
+
+  /* Green */
+  --green-50:  #ECFDF8;
+  --green-100: #C6F7EE;
+  --green-200: #93E8DA;
+  --green-300: #5ED2AB;
+  --green-400: #2EB792;
+  --green-500: #0A8A6C;
+  --green-600: #066F5E;
+  --green-700: #045855;
+  --green-800: #033F3D;
+  --green-900: #022C2A;
+
+  /* “White overlay” tokens used in your spec */
+  --white-100: #FFFFFF;
+  --white-05: rgba(255, 255, 255, 0.05);
+  --white-10: rgba(255, 255, 255, 0.10);
+  --white-15: rgba(255, 255, 255, 0.15);
+}
+
+/* -----------------------------
+   4) Semantic color tokens (Light)
+   ----------------------------- */
+:root {
+  /* Fill */
+  --fill-background: var(--neutral-100);
+  --fill-sidebar: var(--neutral-700);
+  --fill-tooltip: var(--neutral-900);
+  --fill-sidebar-hover: var(--white-05);
+  --fill-sidebar-selection: var(--white-10);
+  --fill-sidebar-selection-soft: var(--white-05);
+
+  /* Brand */
+  --brand-primary: var(--purple-500);
+  --brand-secondary: var(--purple-600);
+  --brand-tertiary: var(--purple-200);
+
+  /* Surface */
+  --surface-primary: var(--white-100);
+  --surface-secondary: var(--neutral-50);
+  --surface-tertiary: var(--neutral-200);
+
+  /* Divider */
+  --divider-primary: var(--neutral-200);
+  --divider-secondary: var(--neutral-200);
+
+  /* Text */
+  --text-brand: var(--purple-500);
+  --text-primary: var(--neutral-600);
+  --text-secondary: var(--neutral-400);
+  --text-invert: var(--white-100);
+
+  /* Stroke */
+  --stroke-brand: var(--purple-500);
+  --stroke-primary: var(--neutral-500);
+  --stroke-secondary: var(--neutral-300);
+  --stroke-invert: var(--white-100);
+  --stroke-invert-soft: var(--white-15);
+
+  /* Semantic - Jit */
+  --jit-primary: var(--pink-500);
+  --jit-secondary: var(--pink-50);
+
+  /* Alerts */
+  --success-primary: var(--green-600);
+  --success-secondary: var(--green-200);
+
+  --warning-primary: var(--yellow-500);
+  --warning-secondary: var(--yellow-50);
+
+  --error-primary: var(--red-400);
+  --error-secondary: var(--red-50);
+
+  /* Statuses */
+  --status-open-primary: var(--red-500);
+  --status-open-secondary: var(--red-200);
+
+  --status-resolved-primary: var(--green-500);
+  --status-resolved-secondary: var(--green-200);
+
+  --status-ignored-primary: var(--neutral-400);
+  --status-ignored-secondary: var(--neutral-50);
+
+  /* Priority */
+  --priority-critical-primary: var(--red-500);
+  --priority-critical-secondary: var(--red-200);
+
+  --priority-high-primary: var(--orange-600);
+  --priority-high-secondary: var(--orange-200);
+
+  --priority-medium-primary: var(--yellow-500);
+  --priority-medium-secondary: var(--yellow-100);
+
+  --priority-new-primary: var(--purple-900);
+  --priority-new-secondary: var(--purple-100);
+}
+
+/* -----------------------------
+   5) Semantic color tokens (Dark)
+   Choose ONE theme switch mechanism:
+   - [data-theme="dark"]
+   - .dark
+   ----------------------------- */
+[data-theme="dark"] {
+  /* Fill */
+  --fill-background: var(--neutral-900);
+  --fill-sidebar: var(--neutral-700);
+  --fill-tooltip: var(--neutral-900);
+  --fill-sidebar-hover: var(--white-05);
+  --fill-sidebar-selection: var(--white-10);
+
+  /* Brand */
+  --brand-primary: var(--purple-200);
+  --brand-secondary: var(--purple-300);
+  --brand-tertiary: var(--purple-50);
+
+  /* Surface */
+  --surface-primary: var(--neutral-800);
+  --surface-secondary: var(--neutral-700);
+  --surface-tertiary: var(--neutral-600);
+
+  /* Divider */
+  --divider-primary: var(--neutral-500);
+  --divider-secondary: var(--neutral-600);
+
+  /* Text */
+  --text-brand: var(--purple-200);
+  --text-primary: var(--neutral-200);
+  --text-secondary: var(--neutral-400);
+  --text-invert: var(--white-100);
+
+  /* Stroke */
+  --stroke-brand: var(--purple-200);
+  --stroke-primary: var(--neutral-400);
+  --stroke-secondary: var(--neutral-600);
+  --stroke-invert: var(--white-100);
+  --stroke-invert-soft: var(--white-15);
+
+  /* Semantic - Jit */
+  --jit-primary: var(--pink-600);
+  --jit-secondary: var(--pink-200);
+
+  /* Alerts */
+  --success-primary: var(--green-700);
+  --success-secondary: var(--green-300);
+
+  --warning-primary: var(--yellow-700);
+  --warning-secondary: var(--yellow-200);
+
+  --error-primary: var(--red-600);
+  --error-secondary: var(--red-200);
+
+  /* Statuses */
+  --status-open-primary: var(--red-500);
+  --status-open-secondary: var(--red-300);
+
+  --status-resolved-primary: var(--green-500);
+  --status-resolved-secondary: var(--green-100);
+
+  --status-ignored-primary: var(--neutral-400);
+  --status-ignored-secondary: var(--neutral-100);
+
+  /* Priority */
+  --priority-critical-primary: var(--red-500);
+  --priority-critical-secondary: var(--red-200);
+
+  --priority-high-primary: var(--orange-600);
+  --priority-high-secondary: var(--orange-200);
+
+  --priority-medium-primary: var(--yellow-500);
+  --priority-medium-secondary: var(--yellow-100);
+
+  --priority-new-primary: var(--purple-900);
+  --priority-new-secondary: var(--purple-200);
+}
+
+/* -----------------------------
+   6) Optional: “token to CSS utility” helpers
+   (so devs can use vars quickly)
+   ----------------------------- */
+
+.bg-app {
+  background: var(--fill-background);
+}
+
+.bg-surface {
+  background: var(--surface-primary);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-brand {
+  color: var(--text-brand);
+}
+
+.divider {
+  border-color: var(--divider-primary);
+}
