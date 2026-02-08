@@ -1,8 +1,14 @@
 export { Text } from "./Text";
-export type { TextVariant, TextWeight, TextDecoration, TextTransform, TextColor } from "./Text";
+export type {
+  TextVariant,
+  TextWeight,
+  TextDecoration,
+  TextTransform,
+  TextColor,
+} from "./Text";
 
-export { Icon } from "./Icon";
-export type { IconSize } from "./Icon";
+export { IconWrapper } from "./IconWrapper";
+export type { IconSize } from "./IconWrapper";
 
-export { BrandLogo } from "./BrandLogo";
-export type { BrandLogoSize } from "./BrandLogo";
+export { BrandLogoWrapper } from "./BrandLogoWrapper";
+export type { BrandLogoSize } from "./BrandLogoWrapper";
