@@ -5,14 +5,13 @@ export type TextWeight = "regular" | "bold";
 export type TextDecoration = "none" | "underline";
 export type TextTransform = "none" | "uppercase";
 
-export type TextColor =
-  | "Text/Default"
-  | "Text/Muted"
-  | "Text/Danger"
-  | "Text/Success"
-  | "Text/Warning";
+/**
+ * Semantic text colors (mapped to CSS variables from globals.css)
+ * Feel free to expand later.
+ */
+export type TextColor = "primary" | "secondary" | "brand" | "invert";
 
-type TextProps<T extends React.ElementType> = {
+type PolymorphicProps<T extends React.ElementType> = {
   as?: T;
   variant?: TextVariant;
   weight?: TextWeight;
@@ -24,36 +23,53 @@ type TextProps<T extends React.ElementType> = {
   children?: React.ReactNode;
 } & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "color">;
 
-const variantClasses: Record<TextVariant, string> = {
-  XS: "text-[10px] leading-[14px]",
-  Label: "text-xs leading-4",
-  Body: "text-sm leading-[22px]",
-  Medium: "text-lg leading-[25px]",
-  Title: "text-[26px] leading-8",
-  Headline: "text-[30px] leading-9",
+const variantStyles: Record<TextVariant, React.CSSProperties> = {
+  XS: {
+    fontSize: "var(--font-size-xs)",
+    lineHeight: "var(--line-height-xs)",
+  },
+  Label: {
+    fontSize: "var(--font-size-sm)",
+    lineHeight: "var(--line-height-sm)",
+  },
+  Body: {
+    fontSize: "var(--font-size-base)",
+    lineHeight: "var(--line-height-base)",
+  },
+  Medium: {
+    fontSize: "var(--font-size-lg)",
+    lineHeight: "var(--line-height-lg)",
+  },
+  Title: {
+    fontSize: "var(--font-size-xl)",
+    lineHeight: "var(--line-height-xl)",
+  },
+  Headline: {
+    fontSize: "var(--font-size-2xl)",
+    lineHeight: "var(--line-height-2xl)",
+  },
 };
 
-const weightClasses: Record<TextWeight, string> = {
-  regular: "font-normal",
-  bold: "font-bold",
+const weightStyles: Record<TextWeight, React.CSSProperties> = {
+  regular: { fontWeight: "var(--font-weight-regular)" as any },
+  bold: { fontWeight: "var(--font-weight-bold)" as any },
 };
 
-const decorationClasses: Record<TextDecoration, string> = {
-  none: "",
-  underline: "underline",
+const decorationStyles: Record<TextDecoration, React.CSSProperties> = {
+  none: { textDecoration: "none" },
+  underline: { textDecoration: "underline" },
 };
 
-const transformClasses: Record<TextTransform, string> = {
-  none: "",
-  uppercase: "uppercase tracking-wide",
+const transformStyles: Record<TextTransform, React.CSSProperties> = {
+  none: { textTransform: "none" },
+  uppercase: { textTransform: "uppercase", letterSpacing: "0.04em" },
 };
 
-const colorClasses: Record<TextColor, string> = {
-  "Text/Default": "text-slate-900",
-  "Text/Muted": "text-slate-600",
-  "Text/Danger": "text-red-600",
-  "Text/Success": "text-emerald-600",
-  "Text/Warning": "text-amber-600",
+const colorStyles: Record<TextColor, React.CSSProperties> = {
+  primary: { color: "var(--text-primary)" },
+  secondary: { color: "var(--text-secondary)" },
+  brand: { color: "var(--text-brand)" },
+  invert: { color: "var(--text-invert)" },
 };
 
 function cx(...parts: Array<string | undefined | false>) {
@@ -66,27 +82,35 @@ export function Text<T extends React.ElementType = "p">({
   weight = "regular",
   decoration = "none",
   transform = "none",
-  color = "Text/Default",
+  color = "primary",
   truncate = false,
   className,
+  style,
   children,
   ...props
-}: TextProps<T>) {
-  const Comp = as ?? "p";
+}: PolymorphicProps<T>) {
+  const Comp = (as ?? "p") as React.ElementType;
+
+  const mergedStyle: React.CSSProperties = {
+    fontFamily: "var(--font-sans)",
+    letterSpacing: "var(--letter-spacing-default)",
+    ...variantStyles[variant],
+    ...weightStyles[weight],
+    ...decorationStyles[decoration],
+    ...transformStyles[transform],
+    ...colorStyles[color],
+    ...(truncate
+      ? {
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }
+      : null),
+    ...style,
+  };
 
   return (
-    <Comp
-      className={cx(
-        variantClasses[variant],
-        weightClasses[weight],
-        decorationClasses[decoration],
-        transformClasses[transform],
-        colorClasses[color],
-        truncate && "truncate",
-        className
-      )}
-      {...props}
-    >
+    <Comp className={cx(className)} style={mergedStyle} {...props}>
       {children}
     </Comp>
   );
