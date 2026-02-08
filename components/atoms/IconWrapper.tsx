@@ -20,7 +20,7 @@ function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
-export function Icon({ as: Svg, size = "lg", className, title, ...props }: IconProps) {
+export function IconWrapper({ as: Svg, size = "lg", className, title, ...props }: IconProps) {
   const px = sizeToPx[size];
 
   return (
