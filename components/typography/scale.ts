@@ -50,14 +50,14 @@ export const typographyScale: Record<TypographyScale, TextStyle> = {
     letterSpacing: "var(--letter-spacing-default)",
   },
 
-    "label": {
+  "label": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-sm)",
     lineHeight: "var(--line-height-sm)",
     letterSpacing: "var(--letter-spacing-default)",
   },
 
-    "xs": {
+  "xs": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-xs)",
     lineHeight: "var(--line-height-xs)",
