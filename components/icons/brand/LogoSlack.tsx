@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function IconSlack(props: React.SVGProps<SVGSVGElement>) {
+export function LogoSlack(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 29 28"
