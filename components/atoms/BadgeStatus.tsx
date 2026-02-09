@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextRole } from "../typography/TextRole";
+import { Text } from "../typography/Text";
 
 export type BadgeStatus = "open" | "fixed" | "ignored";
 
@@ -10,6 +10,10 @@ type BadgeStatusProps = {
   style?: React.CSSProperties;
 };
 
+/**
+ * We already have status color tokens in globals.css, so we reuse them.
+ * No new tokens needed.
+ */
 const STATUS_TOKENS: Record<BadgeStatus, { fg: string; bg: string }> = {
   open: {
     fg: "var(--status-open-primary)",
@@ -35,17 +39,24 @@ export function BadgeStatus({ status, children, className, style }: BadgeStatusP
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        paddingInline: "var(--badge-padding-x)",
-        paddingBlock: "var(--badge-padding-y)",
-        borderRadius: "var(--badge-radius)",
+
+        // Reuse existing spacing tokens (no badge-specific tokens)
+        paddingInline: "var(--space-xs)",
+        paddingBlock: "var(--space-2xs)",
+
+        // Reuse existing radius token
+        borderRadius: "var(--radius-round)",
+
         border: "1px solid var(--stroke-primary)",
         backgroundColor: colors.bg,
+
         ...style,
       }}
     >
-      <TextRole role="badgeStatus" style={{ color: colors.fg }}>
+      {/* Reuse the new Text component for consistent typography */}
+      <Text as="span" preset="caption" style={{ color: colors.fg }}>
         {children ?? status}
-      </TextRole>
+      </Text>
     </div>
   );
 }
