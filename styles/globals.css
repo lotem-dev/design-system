@@ -29,6 +29,16 @@
 
   --letter-spacing-default: 0;
   --letter-spacing-caps: 0.04em;
+
+/* Link behavior helpers (no colors here) */
+a[data-underline-hover="true"]:hover {
+  text-decoration: underline;
+}
+
+/* Basic keyboard focus visibility (no colors here either) */
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 /* Optional: if you want to ensure font is applied globally */
