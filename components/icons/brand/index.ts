@@ -22,7 +22,7 @@ export { LogoMonday } from "./LogoMonday";
 export { LogoNpm } from "./LogoNpm";
 export { LogoOrca } from "./LogoOrca";
 export { LogoSemgrepPro } from "./LogoSemgrepPro";
-export { LogoServiceNow } from "./ServiceNow";
+export { LogoServiceNow } from "./LogoServiceNow";
 export { LogoShortcut } from "./LogoShortcut";
 export { LogoSlack } from "./LogoSlack";
 export { LogoSplunk } from "./LogoSplunk";
