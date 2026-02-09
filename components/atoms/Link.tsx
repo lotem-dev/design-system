@@ -1,66 +1,54 @@
-import React from "react";
-import { Text } from "../typography/Text";
-import type { TypographyPreset } from "../typography/tokens";
+import * as React from "react";
 
-export type LinkProps = {
+// Strict Link props:
+// - href: required
+// - children: required (usually a <Text role="...">...</Text>)
+// - colorToken: optional design token for text color (the text inherits it)
+// - external: optional; if true, opens in a new tab safely
+type LinkProps = {
   href: string;
-  preset?: TypographyPreset;
-  underline?: "auto" | "always" | "hover";
-  newTab?: boolean;
-  className?: string;
-  style?: React.CSSProperties;
   children: React.ReactNode;
-} & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "children" | "color">;
 
-export function Link({
-  href,
-  preset = "body-md",
-  underline = "auto",
-  newTab = false,
-  className,
-  style,
-  children,
-  ...rest
-}: LinkProps) {
-  const [isHover, setIsHover] = React.useState(false);
+  // We allow color control, but only as a token string.
+  // Example: "var(--brand-primary)" or "var(--text-primary)"
+  colorToken?: string;
 
-  const shouldUnderline =
-    underline === "always" || (underline === "hover" && isHover);
+  // If true:
+  // - opens in a new browser tab
+  // - adds rel="noopener noreferrer" for security
+  external?: boolean;
+};
 
-  const target = newTab ? "_blank" : rest.target;
-  const rel = newTab
-    ? [rest.rel, "noopener", "noreferrer"].filter(Boolean).join(" ")
-    : rest.rel;
-
+export function Link({ href, children, colorToken, external }: LinkProps) {
   return (
     <a
       href={href}
-      className={className}
-      target={target}
-      rel={rel}
+      // When external is true, open in a new tab.
+      target={external ? "_blank" : undefined}
+      // Security best practice for target="_blank".
+      rel={external ? "noopener noreferrer" : undefined}
+      // Link controls interaction + semantics.
+      // Color is set here so the text inside inherits it.
+      style={{
+        color: colorToken,
+        textDecoration: "none",
+      }}
+      // Hover underline (mouse users)
       onMouseEnter={(e) => {
-        if (underline === "hover") setIsHover(true);
-        rest.onMouseEnter?.(e);
+        e.currentTarget.style.textDecoration = "underline";
       }}
       onMouseLeave={(e) => {
-        if (underline === "hover") setIsHover(false);
-        rest.onMouseLeave?.(e);
+        e.currentTarget.style.textDecoration = "none";
       }}
-      style={{
-        // Important: do NOT force a color, just inherit
-        color: "inherit",
-
-        // Underline behavior
-        textDecoration: shouldUnderline ? "underline" : "none",
-        textDecorationColor: "currentColor",
-
-        ...style,
+      // Focus underline (keyboard users)
+      onFocus={(e) => {
+        e.currentTarget.style.textDecoration = "underline";
       }}
-      {...rest}
+      onBlur={(e) => {
+        e.currentTarget.style.textDecoration = "none";
+      }}
     >
-      <Text as="span" preset={preset}>
-        {children}
-      </Text>
+      {children}
     </a>
   );
 }
