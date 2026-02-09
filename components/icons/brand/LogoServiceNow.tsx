@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function IconServiceNow(props: React.SVGProps<SVGSVGElement>) {
+export function LogoServiceNow(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 28 28"
