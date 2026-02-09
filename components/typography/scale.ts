@@ -11,36 +11,35 @@
 import type React from "react";
 
 export type TypographyScale =
-  | "title-lg"
-  | "title-md"
-  | "body-md"
-  | "caption";
+  | "headline"
+  | "title"
+  | "medium"
+  | "body"
+  | "label"
+  | "xs";
 
 type TextStyle = React.CSSProperties;
 
 // Actual CSS styles for each scale preset.
 export const typographyScale: Record<TypographyScale, TextStyle> = {
-  "title-lg": {
+  "headline": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-2xl)",
     lineHeight: "var(--line-height-2xl)",
-    fontWeight: "var(--font-weight-bold)" as React.CSSProperties["fontWeight"],
     letterSpacing: "var(--letter-spacing-default)",
   },
 
-  "title-md": {
+  "title": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-xl)",
     lineHeight: "var(--line-height-xl)",
-    fontWeight: "var(--font-weight-bold)" as React.CSSProperties["fontWeight"],
     letterSpacing: "var(--letter-spacing-default)",
   },
 
-  "body-md": {
+  "medium": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-md)",
     lineHeight: "var(--line-height-md)",
-    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
     letterSpacing: "var(--letter-spacing-default)",
   },
 
