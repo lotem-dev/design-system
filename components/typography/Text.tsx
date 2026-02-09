@@ -7,7 +7,7 @@
 // This is the ONLY place where text styling should be decided.
 
 import React from "react";
-import { typographyPresets, type TypographyPreset } from "./typography/tokens";
+import { typographyPresets, type TypographyPreset } from "./tokens";
 
 // Allowed HTML tags for the Text component
 type TextTag =
