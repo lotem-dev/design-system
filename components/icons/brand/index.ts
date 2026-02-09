@@ -31,4 +31,3 @@ export { LogoTraceable } from "./LogoTraceable";
 export { LogoVanta } from "./LogoVanta";
 export { LogoWiz } from "./LogoWiz";
 export { LogoUpwind } from "./LogoUpwind";
-export { LogoCrowdStrike } from "./CrowdStrike";
