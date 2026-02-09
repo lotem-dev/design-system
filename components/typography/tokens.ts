@@ -1,47 +1,82 @@
-import type * as React from "react";
+// typography/tokens.ts
+// This file defines ALL text styles used in the app.
+//
+// Think of it as the code version of Figma Text Styles.
+// Each "preset" here = one text style in Figma (body-md, title-lg, etc).
+//
+// The goal:
+// - Keep typography consistent
+// - Avoid writing font-size / line-height all over the app
+// - Make code + Figma match 1:1
 
-// Single source of truth for typography tokens.
-// Atoms should consume these mappings instead of hardcoding values.
+import type React from "react";
 
-export type TextVariant = "XS" | "Label" | "Body" | "Medium" | "Title" | "Headline";
-export type TextWeight = "regular" | "bold";
-export type TextDecoration = "none" | "underline";
-export type TextTransform = "none" | "uppercase";
-export type TextColor = "primary" | "secondary" | "brand" | "invert";
+// All allowed typography presets
+export type TypographyPreset =
+  | "title-lg"
+  | "title-md"
+  | "body-lg"
+  | "body-md"
+  | "body-sm"
+  | "caption";
 
-export const TEXT_BASE_STYLE: React.CSSProperties = {
-  fontFamily: "var(--font-sans)",
-  letterSpacing: "var(--letter-spacing-default)",
-};
+// A shortcut type for text styles in React
+type TextStyle = React.CSSProperties;
 
-export const TEXT_VARIANT_STYLE: Record<TextVariant, React.CSSProperties> = {
-  XS: { fontSize: "var(--font-size-xs)", lineHeight: "var(--line-height-xs)" },
-  Label: { fontSize: "var(--font-size-sm)", lineHeight: "var(--line-height-sm)" },
-  Body: { fontSize: "var(--font-size-base)", lineHeight: "var(--line-height-base)" },
-  Medium: { fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-lg)" },
-  Title: { fontSize: "var(--font-size-xl)", lineHeight: "var(--line-height-xl)" },
-  Headline: { fontSize: "var(--font-size-2xl)", lineHeight: "var(--line-height-2xl)" },
-};
+// Map between a preset name and its actual CSS styles
+export const typographyPresets: Record<TypographyPreset, TextStyle> = {
+  "title-lg": {
+    // Font family token (defined in globals.css)
+    fontFamily: "var(--font-family-default)",
 
-export const TEXT_WEIGHT_STYLE: Record<TextWeight, React.CSSProperties> = {
-  // NOTE: CSS vars are stringy; cast to satisfy React.CSSProperties.
-  regular: { fontWeight: "var(--font-weight-regular)" as any },
-  bold: { fontWeight: "var(--font-weight-bold)" as any },
-};
+    // Size + spacing tokens
+    fontSize: "var(--font-size-title-lg)",
+    lineHeight: "var(--line-height-title-lg)",
 
-export const TEXT_DECORATION_STYLE: Record<TextDecoration, React.CSSProperties> = {
-  none: { textDecoration: "none" },
-  underline: { textDecoration: "underline", textUnderlineOffset: "2px" },
-};
+    // Weight token
+    fontWeight: "var(--font-weight-bold)" as React.CSSProperties["fontWeight"],
 
-export const TEXT_TRANSFORM_STYLE: Record<TextTransform, React.CSSProperties> = {
-  none: { textTransform: "none" },
-  uppercase: { textTransform: "uppercase", letterSpacing: "var(--letter-spacing-caps)" },
-};
+    // Letter spacing token
+    letterSpacing: "var(--letter-spacing-default)",
+  },
 
-export const TEXT_COLOR_STYLE: Record<TextColor, React.CSSProperties> = {
-  primary: { color: "var(--text-primary)" },
-  secondary: { color: "var(--text-secondary)" },
-  brand: { color: "var(--text-brand)" },
-  invert: { color: "var(--text-invert)" },
+  "title-md": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-title-md)",
+    lineHeight: "var(--line-height-title-md)",
+    fontWeight: "var(--font-weight-bold)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+  "body-lg": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-body-lg)",
+    lineHeight: "var(--line-height-body-lg)",
+    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+  "body-md": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-body-md)",
+    lineHeight: "var(--line-height-body-md)",
+    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+  "body-sm": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-body-sm)",
+    lineHeight: "var(--line-height-body-sm)",
+    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+  caption: {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-caption)",
+    lineHeight: "var(--line-height-caption)",
+    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
 };
