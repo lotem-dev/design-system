@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function IconSemgrepPro(props: React.SVGProps<SVGSVGElement>) {
+export function LogoSemgrepPro(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 30 28"
