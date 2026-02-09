@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TextRole } from "../typography/TextRole";
+import { Text } from "./Text";
 
 export type BadgeStatus = "open" | "fixed" | "ignored";
 
@@ -43,9 +43,9 @@ export function BadgeStatus({ status, children, className, style }: BadgeStatusP
         ...style,
       }}
     >
-      <TextRole role="badgeStatus" style={{ color: colors.fg }}>
+      <Text as="span" role="badgeStatus" style={{ color: colors.fg }}>
         {children ?? status}
-      </TextRole>
+      </Text>
     </div>
   );
 }
