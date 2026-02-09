@@ -27,7 +27,7 @@
   --line-height-sm: 16px;  /* Label 12/16 */
   --line-height-xs: 14px;  /* XS 10/14 */
 
-  --letter-spacing-default: 0%;
+  --letter-spacing-default: 0;
   --letter-spacing-caps: 0.04em;
 }
 
