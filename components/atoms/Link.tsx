@@ -22,8 +22,8 @@ function cx(...parts: Array<string | undefined | false>) {
 export function Link({
   href,
   children,
-  textVariant = "Body",
-  weight = "regular",
+  textVariant,
+  weight,
   external = false,
   disabled = false,
   className,
@@ -33,6 +33,7 @@ export function Link({
     <Text
       as="a"
       href={disabled ? undefined : href}
+      role="link"
       variant={textVariant}
       weight={weight}
       className={cx("ds-link", className)}

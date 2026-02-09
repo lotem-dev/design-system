@@ -1,13 +1,26 @@
 import * as React from "react";
+import {
+  TEXT_BASE_STYLE,
+  TEXT_VARIANT_STYLE,
+  TEXT_WEIGHT_STYLE,
+  TEXT_DECORATION_STYLE,
+  TEXT_TRANSFORM_STYLE,
+  TEXT_COLOR_STYLE,
+  type TextVariant,
+  type TextWeight,
+  type TextDecoration,
+  type TextTransform,
+  type TextColor,
+} from "../typography/tokens";
+import { TEXT_ROLES, type TextRole as TextRoleName } from "../typography/roles";
 
-export type TextVariant = "XS" | "Label" | "Body" | "Medium" | "Title" | "Headline";
-export type TextWeight = "regular" | "bold";
-export type TextDecoration = "none" | "underline";
-export type TextTransform = "none" | "uppercase";
-export type TextColor = "primary" | "secondary" | "brand" | "invert";
+export type { TextVariant, TextWeight, TextDecoration, TextTransform, TextColor } from "../typography/tokens";
 
 type TextProps<T extends React.ElementType> = {
   as?: T;
+  /** Use a semantic role preset (recommended). */
+  role?: TextRoleName;
+  /** Optional overrides for the role preset. */
   variant?: TextVariant;
   weight?: TextWeight;
   decoration?: TextDecoration;
@@ -19,48 +32,18 @@ type TextProps<T extends React.ElementType> = {
   style?: React.CSSProperties;
 } & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "color" | "style">;
 
-const variantStyles: Record<TextVariant, React.CSSProperties> = {
-  XS: { fontSize: "var(--font-size-xs)", lineHeight: "var(--line-height-xs)" },
-  Label: { fontSize: "var(--font-size-sm)", lineHeight: "var(--line-height-sm)" },
-  Body: { fontSize: "var(--font-size-base)", lineHeight: "var(--line-height-base)" },
-  Medium: { fontSize: "var(--font-size-lg)", lineHeight: "var(--line-height-lg)" },
-  Title: { fontSize: "var(--font-size-xl)", lineHeight: "var(--line-height-xl)" },
-  Headline: { fontSize: "var(--font-size-2xl)", lineHeight: "var(--line-height-2xl)" },
-};
-
-const weightStyles: Record<TextWeight, React.CSSProperties> = {
-  regular: { fontWeight: "var(--font-weight-regular)" as any },
-  bold: { fontWeight: "var(--font-weight-bold)" as any },
-};
-
-const decorationStyles: Record<TextDecoration, React.CSSProperties> = {
-  none: { textDecoration: "none" },
-  underline: { textDecoration: "underline", textUnderlineOffset: "2px" },
-};
-
-const transformStyles: Record<TextTransform, React.CSSProperties> = {
-  none: { textTransform: "none" },
-  uppercase: { textTransform: "uppercase", letterSpacing: "var(--letter-spacing-caps)" },
-};
-
-const colorStyles: Record<TextColor, React.CSSProperties> = {
-  primary: { color: "var(--text-primary)" },
-  secondary: { color: "var(--text-secondary)" },
-  brand: { color: "var(--text-brand)" },
-  invert: { color: "var(--text-invert)" },
-};
-
 function cx(...parts: Array<string | undefined | false>) {
   return parts.filter(Boolean).join(" ");
 }
 
 export function Text<T extends React.ElementType = "p">({
   as,
-  variant = "Body",
-  weight = "regular",
-  decoration = "none",
-  transform = "none",
-  color = "primary",
+  role,
+  variant,
+  weight,
+  decoration,
+  transform,
+  color,
   truncate = false,
   className,
   style,
@@ -69,14 +52,21 @@ export function Text<T extends React.ElementType = "p">({
 }: TextProps<T>) {
   const Comp = (as ?? "p") as React.ElementType;
 
+  const preset = role ? TEXT_ROLES[role] : undefined;
+  const resolvedVariant: TextVariant = preset?.variant ?? variant ?? "Body";
+  const resolvedWeight: TextWeight = (weight ?? preset?.weight ?? "regular") as TextWeight;
+  const resolvedDecoration: TextDecoration =
+    (decoration ?? preset?.decoration ?? "none") as TextDecoration;
+  const resolvedTransform: TextTransform = (transform ?? preset?.transform ?? "none") as TextTransform;
+  const resolvedColor: TextColor = (color ?? preset?.color ?? "primary") as TextColor;
+
   const mergedStyle: React.CSSProperties = {
-    fontFamily: "var(--font-sans)",
-    letterSpacing: "var(--letter-spacing-default)",
-    ...variantStyles[variant],
-    ...weightStyles[weight],
-    ...decorationStyles[decoration],
-    ...transformStyles[transform],
-    ...colorStyles[color],
+    ...TEXT_BASE_STYLE,
+    ...TEXT_VARIANT_STYLE[resolvedVariant],
+    ...TEXT_WEIGHT_STYLE[resolvedWeight],
+    ...TEXT_DECORATION_STYLE[resolvedDecoration],
+    ...TEXT_TRANSFORM_STYLE[resolvedTransform],
+    ...TEXT_COLOR_STYLE[resolvedColor],
     ...(truncate
       ? { overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }
       : null),
