@@ -38,16 +38,29 @@ export const typographyScale: Record<TypographyScale, TextStyle> = {
 
   "medium": {
     fontFamily: "var(--font-family-default)",
-    fontSize: "var(--font-size-md)",
-    lineHeight: "var(--line-height-md)",
+    fontSize: "var(--font-size-lg)",
+    lineHeight: "var(--line-height-lg)",
     letterSpacing: "var(--letter-spacing-default)",
   },
 
-  caption: {
+  "body": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-base)",
+    lineHeight: "var(--line-height-base)",
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+    "label": {
     fontFamily: "var(--font-family-default)",
     fontSize: "var(--font-size-sm)",
     lineHeight: "var(--line-height-sm)",
-    fontWeight: "var(--font-weight-regular)" as React.CSSProperties["fontWeight"],
+    letterSpacing: "var(--letter-spacing-default)",
+  },
+
+    "xs": {
+    fontFamily: "var(--font-family-default)",
+    fontSize: "var(--font-size-xs)",
+    lineHeight: "var(--line-height-xs)",
     letterSpacing: "var(--letter-spacing-default)",
   },
 };
