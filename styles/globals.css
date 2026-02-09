@@ -29,6 +29,7 @@
 
   --letter-spacing-default: 0;
   --letter-spacing-caps: 0.04em;
+}
 
 /* Link behavior helpers (no colors here) */
 a[data-underline-hover="true"]:hover {
