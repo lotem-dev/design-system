@@ -63,7 +63,7 @@ export function Link({
     <a
       href={href}
       className={className}
-      style={{ ...underlineStyle, ...style }}
+      style={{ color: "inherit",...underlineStyle, ...style }}
       data-underline-hover={dataUnderlineHover}
       target={target}
       rel={rel}
