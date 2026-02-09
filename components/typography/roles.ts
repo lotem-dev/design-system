@@ -1,7 +1,8 @@
-import type { TextVariant, TextWeight, TextDecoration, TextTransform, TextColor } from "../atoms/Text";
+import type { TextVariant, TextWeight, TextDecoration, TextTransform, TextColor } from "./tokens";
 
 export type TextRole =
-  | "badgeStatus"; // אפשר להוסיף בהמשך: pageTitle, sectionTitle וכו'
+  | "badgeStatus"
+  | "link"; // אפשר להוסיף בהמשך: pageTitle, sectionTitle וכו'
 
 export const TEXT_ROLES: Record<
   TextRole,
@@ -18,5 +19,12 @@ export const TEXT_ROLES: Record<
     weight: "bold",
     decoration: "none",
     transform: "none",
+  },
+  link: {
+    variant: "Body",
+    weight: "regular",
+    decoration: "underline",
+    transform: "none",
+    color: "brand",
   },
 };
