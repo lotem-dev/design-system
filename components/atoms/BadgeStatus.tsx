@@ -41,11 +41,11 @@ export function BadgeStatus({ status, children, className, style }: BadgeStatusP
         justifyContent: "center",
 
         // Reuse existing spacing tokens (no badge-specific tokens)
-        paddingInline: "var(--space-xs)",
-        paddingBlock: "var(--space-2xs)",
+        paddingInline: "var(--space-sm)",
+        paddingBlock: "var(--space-sm)",
 
         // Reuse existing radius token
-        borderRadius: "var(--radius-round)",
+        borderRadius: "var(--radius-base)",
 
         border: "1px solid var(--stroke-primary)",
         backgroundColor: colors.bg,
