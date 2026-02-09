@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function IconUpwind(props: React.SVGProps<SVGSVGElement>) {
+export function LogoUpwind(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 28 28"
