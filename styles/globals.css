@@ -173,7 +173,6 @@ html, body {
   --fill-tooltip: var(--neutral-900);
   --fill-sidebar-hover: var(--white-05);
   --fill-sidebar-selection: var(--white-10);
-  --fill-sidebar-selection-soft: var(--white-05);
 
   /* Brand */
   --brand-primary: var(--purple-500);
@@ -187,7 +186,7 @@ html, body {
 
   /* Divider */
   --divider-primary: var(--neutral-200);
-  --divider-secondary: var(--neutral-200);
+  --divider-secondary: var(--neutral-600);
 
   /* Text */
   --text-brand: var(--purple-500);
@@ -198,7 +197,7 @@ html, body {
   /* Stroke */
   --stroke-brand: var(--purple-500);
   --stroke-primary: var(--neutral-500);
-  --stroke-secondary: var(--neutral-300);
+  --stroke-secondary: var(--neutral-200);
   --stroke-invert: var(--white-100);
   --stroke-invert-soft: var(--white-15);
 
@@ -214,30 +213,30 @@ html, body {
   --warning-secondary: var(--yellow-50);
 
   --error-primary: var(--red-400);
-  --error-secondary: var(--red-50);
+  --error-secondary: var(--red-100);
 
   /* Statuses */
   --status-open-primary: var(--red-500);
   --status-open-secondary: var(--red-200);
 
-  --status-fixed-primary: var(--green-500);
-  --status-fixed-secondary: var(--green-200);
+  --status-resolved-primary: var(--green-500);
+  --status-resolved-secondary: var(--green-100);
 
   --status-ignored-primary: var(--neutral-400);
   --status-ignored-secondary: var(--neutral-50);
 
-  /* Priority */
-  --priority-critical-primary: var(--red-500);
-  --priority-critical-secondary: var(--red-200);
+  /* Scale */
+  --scale-critical-primary: var(--red-500);
+  --scale-critical-secondary: var(--red-200);
 
-  --priority-high-primary: var(--orange-600);
-  --priority-high-secondary: var(--orange-200);
+  --scale-high-primary: var(--orange-600);
+  --scale-high-secondary: var(--orange-200);
 
-  --priority-medium-primary: var(--yellow-500);
-  --priority-medium-secondary: var(--yellow-100);
+  --scale-medium-primary: var(--yellow-500);
+  --scale-medium-secondary: var(--yellow-100);
 
-  --priority-new-primary: var(--purple-900);
-  --priority-new-secondary: var(--purple-100);
+  --scale-low-primary: var(--green-500);
+  --scale-low-secondary: var(--green-100);
 }
 
 /* -----------------------------
@@ -255,9 +254,9 @@ html, body {
   --fill-sidebar-selection: var(--white-10);
 
   /* Brand */
-  --brand-primary: var(--purple-200);
-  --brand-secondary: var(--purple-300);
-  --brand-tertiary: var(--purple-50);
+  --brand-primary: var(--purple-300);
+  --brand-secondary: var(--purple-400);
+  --brand-tertiary: var(--purple-100);
 
   /* Surface */
   --surface-primary: var(--neutral-800);
@@ -265,7 +264,7 @@ html, body {
   --surface-tertiary: var(--neutral-600);
 
   /* Divider */
-  --divider-primary: var(--neutral-500);
+  --divider-primary: var(--neutral-800);
   --divider-secondary: var(--neutral-600);
 
   /* Text */
@@ -289,32 +288,32 @@ html, body {
   --success-primary: var(--green-700);
   --success-secondary: var(--green-300);
 
-  --warning-primary: var(--yellow-700);
+  --warning-primary: var(--yellow-500);
   --warning-secondary: var(--yellow-200);
 
   --error-primary: var(--red-600);
   --error-secondary: var(--red-200);
 
   /* Statuses */
-  --status-open-primary: var(--red-500);
-  --status-open-secondary: var(--red-300);
+  --status-open-primary: var(--red-600);
+  --status-open-secondary: var(--red-200);
 
   --status-fixed-primary: var(--green-500);
-  --status-fixed-secondary: var(--green-100);
+  --status-fixed-secondary: var(--green-200);
 
   --status-ignored-primary: var(--neutral-400);
   --status-ignored-secondary: var(--neutral-100);
 
-  /* Priority */
-  --priority-critical-primary: var(--red-500);
-  --priority-critical-secondary: var(--red-200);
+  /* Scale */
+  --scale-critical-primary: var(--red-500);
+  --scale-critical-secondary: var(--red-200);
 
-  --priority-high-primary: var(--orange-600);
-  --priority-high-secondary: var(--orange-200);
+  --scale-high-primary: var(--orange-600);
+  --scale-high-secondary: var(--orange-200);
 
-  --priority-medium-primary: var(--yellow-500);
-  --priority-medium-secondary: var(--yellow-100);
+  --scale-medium-primary: var(--yellow-500);
+  --scale-medium-secondary: var(--yellow-100);
 
-  --priority-new-primary: var(--purple-900);
-  --priority-new-secondary: var(--purple-200);
+  --scale-low-primary: var(--green-500);
+  --scale-low-secondary: var(--green-100);
 }
