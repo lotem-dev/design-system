@@ -10,6 +10,8 @@
     --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
     Roboto, Helvetica, Arial;
 
+  --font-family-default: var(--font-sans);
+
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 
@@ -219,8 +221,8 @@ html, body {
   --status-open-primary: var(--red-500);
   --status-open-secondary: var(--red-200);
 
-  --status-resolved-primary: var(--green-500);
-  --status-resolved-secondary: var(--green-100);
+  --status-fixed-primary: var(--green-500);
+  --status-fixed-secondary: var(--green-100);
 
   --status-ignored-primary: var(--neutral-400);
   --status-ignored-secondary: var(--neutral-50);

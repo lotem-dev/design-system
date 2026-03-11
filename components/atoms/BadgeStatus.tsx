@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Text } from "../typography/Text";
 
 export type BadgeStatus = "open" | "fixed" | "ignored";

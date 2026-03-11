@@ -1,3 +1,5 @@
+export { Button } from "./Button";
+
 export { BadgeStatus } from "./BadgeStatus";
 export type { BadgeStatus as BadgeStatusType } from "./BadgeStatus";
 
