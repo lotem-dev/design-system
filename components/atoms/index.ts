@@ -17,6 +17,7 @@ export { Link } from "./Link";
 export { TextInput } from "./TextInput";
 export { SelectInput } from "./SelectInput";
 export { SearchInput } from "./SearchInput";
+export { Tooltip } from "./Tooltip";
 
 
 
