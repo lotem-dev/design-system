@@ -7,6 +7,8 @@ import { SpacingSection }       from "./sections/SpacingSection";
 import { RadiusSection }        from "./sections/RadiusSection";
 import { IconCategorySection }  from "./sections/IconCategorySection";
 import { BadgeStatusSection }   from "./sections/BadgeStatusSection";
+import { BadgeSeveritySection } from "./sections/BadgeSeveritySection";
+import { BadgePrioritySection } from "./sections/BadgePrioritySection";
 import { ButtonSection }        from "./sections/ButtonSection";
 import { DividerSection }       from "./sections/DividerSection";
 import { TextInputSection }     from "./sections/TextInputSection";
@@ -46,8 +48,10 @@ export function CatalogApp() {
       case "icons-brand":
         return <IconCategorySection categoryId={active} />;
 
-      // Atoms
-      case "badge-status":  return <BadgeStatusSection />;
+      // Atoms — Badges
+      case "badge-status":    return <BadgeStatusSection />;
+      case "badge-severity":  return <BadgeSeveritySection />;
+      case "badge-priority":  return <BadgePrioritySection />;
       case "button":        return <ButtonSection />;
       case "divider":       return <DividerSection />;
       case "fields-text":   return <TextInputSection />;

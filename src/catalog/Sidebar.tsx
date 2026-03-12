@@ -9,8 +9,10 @@ export type SectionId =
   // Icons — one page per category
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
+  // Badges (sub-group of Atoms)
+  | "badge-status" | "badge-severity" | "badge-priority"
   // Atoms
-  | "badge-status" | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
+  | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
   // Fields (sub-group of Atoms)
   | "fields-text" | "fields-select" | "fields-search"
   // Molecules
@@ -58,7 +60,15 @@ const NAV: NavGroup[] = [
     label: "Atoms",
     emoji: "⚛️",
     items: [
-      { kind: "item", id: "badge-status", label: "BadgeStatus" },
+      {
+        kind: "branch",
+        label: "Badges",
+        children: [
+          { kind: "item", id: "badge-status",   label: "BadgeStatus" },
+          { kind: "item", id: "badge-severity", label: "BadgeSeverity" },
+          { kind: "item", id: "badge-priority", label: "BadgePriority" },
+        ],
+      },
       { kind: "item", id: "button",       label: "Button" },
       { kind: "item", id: "divider",      label: "Divider" },
       {
@@ -134,7 +144,7 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
     Object.fromEntries(NAV.map(g => [g.label, true]))
   );
   // All branches open by default
-  const [openBranches, setOpenBranches] = useState<Record<string, boolean>>({ Fields: true });
+  const [openBranches, setOpenBranches] = useState<Record<string, boolean>>({ Badges: true, Fields: true });
 
   function toggleGroup(label: string) {
     setOpenGroups(prev => ({ ...prev, [label]: !prev[label] }));

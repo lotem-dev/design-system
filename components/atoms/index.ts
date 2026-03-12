@@ -3,6 +3,12 @@ export { Button } from "./Button";
 export { BadgeStatus } from "./BadgeStatus";
 export type { BadgeStatus as BadgeStatusType } from "./BadgeStatus";
 
+export { BadgeSeverity } from "./BadgeSeverity";
+export type { SeverityScale, SeveritySize } from "./BadgeSeverity";
+
+export { BadgePriority } from "./BadgePriority";
+export type { PriorityScore } from "./BadgePriority";
+
 export { BrandLogoWrapper } from "./BrandLogoWrapper";
 export type { BrandLogoSize } from "./BrandLogoWrapper";
 
