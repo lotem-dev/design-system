@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { SectionBlock } from "../ui/SectionBlock";
+import { useState, useRef, useLayoutEffect } from "react";
 import { SplitPage } from "../ui/SplitPage";
 
 import globalsCss from "../../../styles/globals.css?raw";
@@ -32,6 +31,16 @@ const SEMANTIC: { group: string; tokens: { name: string; pointsTo: string }[] }[
   { group: "Alerts",  tokens: [{ name: "--success-primary", pointsTo: "--green-600" },{ name: "--success-secondary", pointsTo: "--green-200" },{ name: "--warning-primary", pointsTo: "--yellow-500" },{ name: "--warning-secondary", pointsTo: "--yellow-50" },{ name: "--error-primary", pointsTo: "--red-400" },{ name: "--error-secondary", pointsTo: "--red-100" }] },
 ];
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function rgbToHex(rgb: string): string {
+  const m = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (!m) return "—";
+  return "#" + [m[1], m[2], m[3]]
+    .map(x => parseInt(x).toString(16).padStart(2, "0"))
+    .join("").toUpperCase();
+}
+
 // ─── Components ───────────────────────────────────────────────────────────────
 
 function Swatch({ name, value }: { name: string; value: string }) {
@@ -44,14 +53,39 @@ function Swatch({ name, value }: { name: string; value: string }) {
   );
 }
 
-function SemanticRow({ name, pointsTo }: { name: string; pointsTo: string }) {
+const HEADER_STYLE: React.CSSProperties = {
+  fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
+  textTransform: "uppercase", letterSpacing: "0.06em",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+};
+
+function SemanticTableHeader() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "6px 0 10px", borderBottom: "2px solid #E4E4E7", marginBottom: "2px" }}>
+      <span style={{ ...HEADER_STYLE, width: "236px", flexShrink: 0 }}>Semantic Token</span>
+      <span style={{ ...HEADER_STYLE, width: "160px", flexShrink: 0 }}>Primitive</span>
+      <span style={{ ...HEADER_STYLE }}>Hex</span>
+    </div>
+  );
+}
+
+function SemanticRow({ name, pointsTo, theme }: { name: string; pointsTo: string; theme: string }) {
+  const swatchRef = useRef<HTMLDivElement>(null);
+  const [hex, setHex] = useState("—");
+
+  useLayoutEffect(() => {
+    if (swatchRef.current) {
+      const color = getComputedStyle(swatchRef.current).backgroundColor;
+      setHex(rgbToHex(color));
+    }
+  }, [theme, name]);
+
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "10px 0", borderBottom: "1px solid #F4F4F5" }}>
-      {/* Swatch uses CSS var directly - updates when parent data-theme changes */}
-      <div style={{ width: "20px", height: "20px", borderRadius: "4px", backgroundColor: `var(${name})`, border: "1px solid rgba(0,0,0,0.1)", flexShrink: 0 }} />
+      <div ref={swatchRef} style={{ width: "20px", height: "20px", borderRadius: "4px", backgroundColor: `var(${name})`, border: "1px solid rgba(0,0,0,0.1)", flexShrink: 0 }} />
       <code style={{ fontSize: "12px", color: "#18181B", width: "220px", flexShrink: 0, fontFamily: "monospace" }}>{name}</code>
-      <span style={{ fontSize: "11px", color: "#A1A1AA" }}>→</span>
-      <code style={{ fontSize: "12px", color: "#52525B", fontFamily: "monospace" }}>{pointsTo}</code>
+      <code style={{ fontSize: "12px", color: "#52525B", width: "160px", flexShrink: 0, fontFamily: "monospace" }}>{pointsTo}</code>
+      <code style={{ fontSize: "12px", color: "#A1A1AA", fontFamily: "monospace" }}>{hex}</code>
     </div>
   );
 }
@@ -67,8 +101,60 @@ function PrimitiveGroup({ family, shades }: { family: string; shades: { name: st
   );
 }
 
+function AccordionSection({ title, open, onToggle, children }: {
+  title: string;
+  open: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div style={{
+      marginBottom: "16px",
+      border: "1px solid #E4E4E7",
+      borderRadius: "8px",
+      overflow: "hidden",
+    }}>
+      <button
+        onClick={onToggle}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          width: "100%", padding: "16px 20px",
+          background: hovered ? "#F4F4F5" : "#FAFAFA",
+          border: "none", cursor: "pointer", textAlign: "left",
+          transition: "background 0.15s",
+        }}
+      >
+        <span style={{
+          fontSize: "13px", fontWeight: 600, color: "#3F3F46",
+          textTransform: "uppercase", letterSpacing: "0.08em",
+          fontFamily: "'Open Sans', system-ui, sans-serif",
+        }}>
+          {title}
+        </span>
+        <svg
+          width="16" height="16" viewBox="0 0 16 16" fill="none"
+          style={{ flexShrink: 0, transform: open ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+        >
+          <path d="M6 4l4 4-4 4" stroke="#71717A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div style={{ padding: "20px" }}>
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ColorsSection() {
-  const [semanticTheme, setSemanticTheme] = useState<"light" | "dark">("light");
+  const [primitivesOpen, setPrimitivesOpen] = useState(false);
+  const [semanticOpen,   setSemanticOpen]   = useState(false);
+  const [semanticTheme,  setSemanticTheme]  = useState<"light" | "dark">("light");
 
   return (
     <SplitPage files={sources}>
@@ -76,49 +162,50 @@ export function ColorsSection() {
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🪨 Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Colors</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          The color system has two layers. <strong>Primitives</strong> are raw hex values - never used directly in components.
-          <strong> Semantic tokens</strong> point to primitives and carry meaning. Always use semantic tokens.
-          Switch the theme on the semantic section below to see how tokens remap in dark mode.
+          <strong>Primitives</strong> are the full color palette — every available color, named by hue and shade (<code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--purple-500</code>, <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--neutral-200</code>). They are fixed: <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--purple-500</code> is always <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>#5E32FF</code>, in every theme, no exceptions.
+          <br /><br />
+          <strong>Semantic tokens</strong> are named by their role in the UI, not their color (<code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--brand-primary</code>, <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--text-secondary</code>). They point to a primitive, and that mapping can change per theme — in dark mode, <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--brand-primary</code> might point to a different shade. Always use semantic tokens in components, never primitives directly, and of course, never raw hex values.
         </p>
       </div>
 
-      <SectionBlock title="Color Primitives">
-        {PRIMITIVES.map(p => <PrimitiveGroup key={p.family} family={p.family} shades={p.shades} />)}
-      </SectionBlock>
+      <AccordionSection title="Color Primitives" open={primitivesOpen} onToggle={() => setPrimitivesOpen(o => !o)}>
+        {PRIMITIVES.map(p => (
+          <PrimitiveGroup key={p.family} family={p.family} shades={p.shades} />
+        ))}
+      </AccordionSection>
 
-      <SectionBlock title="Semantic Tokens">
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
-          <p style={{ margin: 0, fontSize: "13px", color: "#71717A" }}>
-            Toggle the theme below to see the swatches remap live.
-          </p>
-          <button
-            onClick={() => setSemanticTheme(t => t === "light" ? "dark" : "light")}
-            style={{
-              padding: "3px 10px",
-              fontSize: "11px",
-              fontFamily: "'Open Sans', system-ui, sans-serif",
-              fontWeight: 500,
-              cursor: "pointer",
-              border: "1px solid",
-              borderColor: semanticTheme === "dark" ? "#3F3F46" : "#E4E4E7",
-              borderRadius: "999px",
-              backgroundColor: semanticTheme === "dark" ? "#27272A" : "#FFFFFF",
-              color: semanticTheme === "dark" ? "#D4D4D8" : "#71717A",
-              flexShrink: 0,
-            }}
-          >
-            {semanticTheme === "light" ? "☾ Dark" : "☀ Light"}
-          </button>
+      <AccordionSection title="Semantic Tokens" open={semanticOpen} onToggle={() => setSemanticOpen(o => !o)}>
+        <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: "16px" }}>
+          <div style={{ display: "flex", gap: "2px", padding: "3px", backgroundColor: "#F4F4F5", borderRadius: "8px" }}>
+            {(["light", "dark"] as const).map(t => (
+              <button
+                key={t}
+                onClick={() => setSemanticTheme(t)}
+                style={{
+                  padding: "4px 12px", fontSize: "11px",
+                  fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 500,
+                  cursor: "pointer", border: "none", borderRadius: "6px",
+                  backgroundColor: semanticTheme === t ? "#FFFFFF" : "transparent",
+                  color: semanticTheme === t ? "#18181B" : "#71717A",
+                  boxShadow: semanticTheme === t ? "0 1px 3px rgba(0,0,0,0.1)" : "none",
+                  transition: "all 0.15s",
+                }}
+              >
+                {t === "light" ? "☀ Light" : "☾ Dark"}
+              </button>
+            ))}
+          </div>
         </div>
         <div data-theme={semanticTheme}>
+          <SemanticTableHeader />
           {SEMANTIC.map(({ group, tokens }) => (
             <div key={group} style={{ marginBottom: "24px" }}>
-              <p style={{ margin: "0 0 4px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{group}</p>
-              {tokens.map(t => <SemanticRow key={t.name} name={t.name} pointsTo={t.pointsTo} />)}
+              <p style={{ margin: "12px 0 4px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{group}</p>
+              {tokens.map(t => <SemanticRow key={t.name} name={t.name} pointsTo={t.pointsTo} theme={semanticTheme} />)}
             </div>
           ))}
         </div>
-      </SectionBlock>
+      </AccordionSection>
     </SplitPage>
   );
 }

@@ -60,11 +60,9 @@ export function CatalogApp() {
   }
 
   return (
-    <div style={{ display: "flex", height: "100vh", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+    <div style={{ fontFamily: "'Open Sans', system-ui, sans-serif" }}>
       <Sidebar active={active} onSelect={setActive} />
-      <main
-        style={{ flex: 1, overflow: "auto", backgroundColor: "#FAFAFA" }}
-      >
+      <main style={{ marginLeft: "220px", minHeight: "100vh", overflow: "auto", backgroundColor: "#FAFAFA" }}>
         {renderSection()}
       </main>
     </div>
