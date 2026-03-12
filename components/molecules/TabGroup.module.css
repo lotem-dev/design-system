@@ -1,0 +1,9 @@
+/* =========================================================
+   TabGroup — wraps multiple Tab items in a row
+   ========================================================= */
+
+.tabgroup {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
