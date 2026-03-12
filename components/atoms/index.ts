@@ -14,6 +14,10 @@ export type { IconSize } from "./IconWrapper";
 
 export { Link } from "./Link";
 
+export { TextInput } from "./TextInput";
+export { SelectInput } from "./SelectInput";
+export { SearchInput } from "./SearchInput";
+
 
 
 

@@ -1,0 +1,51 @@
+/* =========================================================
+   TextInput
+   ========================================================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--text-primary);
+}
+
+.input {
+  width: 100%;
+  height: 38px;
+  padding: var(--space-sm) var(--space-base);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--stroke-secondary);
+  background: var(--surface-primary);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  outline: none;
+  transition: border 120ms ease, box-shadow 120ms ease;
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input:focus {
+  border: 2px solid var(--stroke-brand);
+  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+}
+
+.input:disabled {
+  background: var(--surface-secondary);
+  border-color: var(--stroke-invert-soft);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}

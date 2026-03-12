@@ -1,0 +1,44 @@
+/* =========================================================
+   SearchInput
+   ========================================================= */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icon {
+  position: absolute;
+  left: var(--space-base);
+  color: var(--text-secondary);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input {
+  width: 100%;
+  height: 38px;
+  padding: var(--space-sm) var(--space-base);
+  padding-left: 40px; /* room for the search icon */
+  border-radius: var(--radius-base);
+  border: 1px solid var(--stroke-secondary);
+  background: var(--surface-primary);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  outline: none;
+  transition: border 120ms ease, box-shadow 120ms ease;
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input:focus {
+  border: 2px solid var(--stroke-brand);
+  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+}

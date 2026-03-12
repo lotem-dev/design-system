@@ -1,0 +1,65 @@
+/* =========================================================
+   SelectInput
+   ========================================================= */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--text-primary);
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+  height: 38px;
+  padding: var(--space-sm) var(--space-base);
+  padding-right: 32px; /* room for the chevron */
+  border-radius: var(--radius-base);
+  border: 1px solid var(--stroke-secondary);
+  background: var(--surface-primary);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  appearance: none; /* hides the native browser arrow */
+  outline: none;
+  cursor: pointer;
+  transition: border 120ms ease, box-shadow 120ms ease;
+}
+
+.select:focus {
+  border: 2px solid var(--stroke-brand);
+  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+}
+
+.select:disabled {
+  background: var(--surface-secondary);
+  border-color: var(--stroke-invert-soft);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+/* Custom chevron icon */
+.chevron {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* clicks pass through to the select */
+  color: var(--text-secondary);
+}
