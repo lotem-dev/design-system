@@ -152,11 +152,8 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
           variant="mono"
           style={{ width: "36px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "16px" }}
         />
-        <div style={{ fontSize: "12px", fontWeight: 700, color: "#E4E4E7", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "4px" }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: "#E4E4E7", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           Design System
-        </div>
-        <div style={{ fontSize: "11px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-          Component Catalog
         </div>
       </div>
 
