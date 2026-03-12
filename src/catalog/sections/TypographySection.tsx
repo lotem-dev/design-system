@@ -1,3 +1,4 @@
+import { PageWrapper } from "../ui/PageWrapper";
 import { Text } from "../../../components/typography/Text";
 import { typographyScale } from "../../../components/typography/scale";
 import { typographyRoleTokens, type TypographyRole } from "../../../components/typography/roles";
@@ -44,7 +45,7 @@ const ROLE_DETAILS: Record<TypographyRole, { tag: string; usage: string }> = {
 
 export function TypographySection() {
   return (
-    <div>
+    <PageWrapper>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Typography</h1>
@@ -123,6 +124,6 @@ export function TypographySection() {
           { property: "letter-spacing caps",  token: "--letter-spacing-caps",    value: "0.04em" },
         ]} />
       </SectionBlock>
-    </div>
+    </PageWrapper>
   );
 }

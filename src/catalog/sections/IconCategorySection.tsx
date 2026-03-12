@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
+import { PageWrapper } from "../ui/PageWrapper";
 import { IconWrapper } from "../../../components/atoms/IconWrapper";
 import { SectionBlock } from "../ui/SectionBlock";
 import { CodeBlock } from "../ui/CodeBlock";
@@ -54,7 +55,7 @@ export function IconCategorySection({ categoryId }: { categoryId: string }) {
   if (!cat) return null;
 
   return (
-    <div>
+    <PageWrapper>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icons</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{cat.label}</h1>
@@ -74,6 +75,6 @@ import { /* IconName */ } from "./components/icons/${categoryId.replace("icons-"
 
 <IconWrapper as={IconName} size="md" style={{ color: "var(--text-primary)" }} />`} />
       </SectionBlock>
-    </div>
+    </PageWrapper>
   );
 }

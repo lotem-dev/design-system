@@ -3,10 +3,17 @@ import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import dividerTsx from "../../../components/atoms/Divider.tsx?raw";
+
+const sources = [
+  { filename: "Divider.tsx", code: dividerTsx },
+];
 
 export function DividerSection() {
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Divider</h1>
@@ -66,6 +73,6 @@ export function DividerSection() {
           <CodeBlock code={`// Horizontal (default)\n<Divider />\n\n// Vertical\n<Divider orientation="vertical" />\n\n// Custom color\n<Divider color="var(--divider-secondary)" />`} />
         </div>
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

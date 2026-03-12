@@ -4,6 +4,13 @@ import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable, type TokenRow } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import badgeTsx from "../../../components/atoms/BadgeStatus.tsx?raw";
+
+const sources = [
+  { filename: "BadgeStatus.tsx", code: badgeTsx },
+];
 
 // All the CSS properties used by BadgeStatus, broken down per variant.
 // These values come directly from globals.css — hardcoded here so they're
@@ -63,7 +70,7 @@ export function BadgeStatusSection() {
   const [activeVariant, setActiveVariant] = useState<BadgeStatusType>("open");
 
   return (
-    <div>
+    <SplitPage files={sources}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
@@ -155,7 +162,6 @@ export function BadgeStatusSection() {
           ))}
         </div>
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }
-

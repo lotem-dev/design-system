@@ -1,5 +1,6 @@
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { PageWrapper } from "../ui/PageWrapper";
 
 const RADIUS = [
   { token: "--radius-xs",    value: "4px",   note: "Inputs, small chips" },
@@ -11,7 +12,7 @@ const RADIUS = [
 
 export function RadiusSection() {
   return (
-    <div>
+    <PageWrapper>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Radius</h1>
@@ -32,6 +33,6 @@ export function RadiusSection() {
         </div>
         <TokenTable rows={RADIUS.map(({ token, value, note }) => ({ property: "border-radius", token, value, note }))} />
       </SectionBlock>
-    </div>
+    </PageWrapper>
   );
 }

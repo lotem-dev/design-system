@@ -4,6 +4,15 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { CodeBlock } from "../ui/CodeBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import selectInputTsx from "../../../components/atoms/SelectInput.tsx?raw";
+import selectInputCss from "../../../components/atoms/SelectInput.module.css?raw";
+
+const sources = [
+  { filename: "SelectInput.tsx",        code: selectInputTsx },
+  { filename: "SelectInput.module.css", code: selectInputCss },
+];
 
 const OPTIONS = [
   { label: "Option A", value: "a" },
@@ -15,7 +24,7 @@ export function SelectInputSection() {
   const [value, setValue] = useState("");
 
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>SelectInput</h1>
@@ -77,6 +86,6 @@ export function SelectInputSection() {
 {/* Disabled */}
 <SelectInput label="Status" options={[]} placeholder="Select..." disabled />`} />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

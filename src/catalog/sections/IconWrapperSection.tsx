@@ -5,10 +5,17 @@ import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import iconWrapperTsx from "../../../components/atoms/IconWrapper.tsx?raw";
+
+const sources = [
+  { filename: "IconWrapper.tsx", code: iconWrapperTsx },
+];
 
 export function IconWrapperSection() {
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icon</h1>
@@ -77,6 +84,6 @@ import { IconSearch } from "./components/icons/usecases";
 // With accessible label (for standalone icons that need to be read by screen readers)
 <IconWrapper as={IconSearch} size="md" title="Search" />`} />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

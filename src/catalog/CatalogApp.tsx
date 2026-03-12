@@ -69,9 +69,7 @@ export function CatalogApp() {
         data-theme={theme}
         style={{ flex: 1, overflow: "auto", backgroundColor: theme === "dark" ? "#09090B" : "#FAFAFA" }}
       >
-        <div style={{ maxWidth: "800px", padding: "48px 48px" }}>
-          {renderSection()}
-        </div>
+        {renderSection()}
       </main>
     </div>
   );

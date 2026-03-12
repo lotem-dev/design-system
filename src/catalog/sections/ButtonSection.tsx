@@ -4,6 +4,15 @@ import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import buttonTsx from "../../../components/atoms/Button.tsx?raw";
+import buttonCss from "../../../components/atoms/Button.module.css?raw";
+
+const sources = [
+  { filename: "Button.tsx",        code: buttonTsx },
+  { filename: "Button.module.css", code: buttonCss },
+];
 
 const VARIANTS: ButtonVariant[] = ["primary", "ghost", "destructive"];
 const SIZES:    ButtonSize[]    = ["sm", "md"];
@@ -12,7 +21,7 @@ export function ButtonSection() {
   const [activeVariant, setActiveVariant] = useState<ButtonVariant>("primary");
 
   return (
-    <div>
+    <SplitPage files={sources}>
       {/* Title */}
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
@@ -114,6 +123,6 @@ export function ButtonSection() {
 // Disabled
 <Button variant="primary" disabled>Save changes</Button>`} />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

@@ -4,12 +4,21 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { CodeBlock } from "../ui/CodeBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import textInputTsx from "../../../components/atoms/TextInput.tsx?raw";
+import textInputCss from "../../../components/atoms/TextInput.module.css?raw";
+
+const sources = [
+  { filename: "TextInput.tsx",        code: textInputTsx },
+  { filename: "TextInput.module.css", code: textInputCss },
+];
 
 export function TextInputSection() {
   const [value, setValue] = useState("");
 
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>TextInput</h1>
@@ -68,6 +77,6 @@ export function TextInputSection() {
 {/* Disabled */}
 <TextInput label="Field Name" placeholder="Text" disabled />`} />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

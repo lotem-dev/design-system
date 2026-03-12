@@ -1,4 +1,5 @@
 import { SectionBlock } from "../ui/SectionBlock";
+import { PageWrapper } from "../ui/PageWrapper";
 
 // ─── Primitive palette (never change between themes) ──────────────────────────
 
@@ -72,7 +73,7 @@ function PrimitiveGroup({ family, shades }: { family: string; shades: { name: st
 export function ColorsSection({ theme }: { theme?: string }) {
   void theme;
   return (
-    <div>
+    <PageWrapper>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Colors</h1>
@@ -98,6 +99,6 @@ export function ColorsSection({ theme }: { theme?: string }) {
           </div>
         ))}
       </SectionBlock>
-    </div>
+    </PageWrapper>
   );
 }

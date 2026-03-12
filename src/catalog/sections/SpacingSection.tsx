@@ -1,5 +1,6 @@
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { PageWrapper } from "../ui/PageWrapper";
 
 const SPACING = [
   { token: "--space-2xs", value: "2px",  px: 2  },
@@ -12,7 +13,7 @@ const SPACING = [
 
 export function SpacingSection() {
   return (
-    <div>
+    <PageWrapper>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Spacing</h1>
@@ -33,6 +34,6 @@ export function SpacingSection() {
         </div>
         <TokenTable rows={SPACING.map(({ token, value }) => ({ property: "spacing", token, value }))} />
       </SectionBlock>
-    </div>
+    </PageWrapper>
   );
 }

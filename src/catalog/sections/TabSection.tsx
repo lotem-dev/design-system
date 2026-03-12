@@ -4,10 +4,23 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { CodeBlock } from "../ui/CodeBlock";
+import { SplitPage } from "../ui/SplitPage";
+
+import tabTsx    from "../../../components/molecules/Tab.tsx?raw";
+import tabCss    from "../../../components/molecules/Tab.module.css?raw";
+import groupTsx  from "../../../components/molecules/TabGroup.tsx?raw";
+import groupCss  from "../../../components/molecules/TabGroup.module.css?raw";
+
+const sources = [
+  { filename: "Tab.tsx",           code: tabTsx   },
+  { filename: "Tab.module.css",    code: tabCss   },
+  { filename: "TabGroup.tsx",      code: groupTsx },
+  { filename: "TabGroup.module.css", code: groupCss },
+];
 
 export function TabSection() {
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Molecule</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Tab / TabGroup</h1>
@@ -74,6 +87,6 @@ export function TabSection() {
   onChange={(index) => console.log("active tab:", index)}
 />`} />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }
