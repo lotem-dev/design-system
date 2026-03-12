@@ -2,7 +2,6 @@ import { BadgePriority, type PriorityScore } from "../../../components/atoms/Bad
 import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
-import { CodeBlock } from "../ui/CodeBlock";
 import { SplitPage } from "../ui/SplitPage";
 
 import badgePriorityTsx from "../../../components/atoms/BadgePriority.tsx?raw";
@@ -23,10 +22,14 @@ export function BadgePrioritySection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Badges</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atoms</span>
+          <span style={{ fontSize: "11px", color: "#D4D4D8" }}>/</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Badges</span>
+        </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>BadgePriority</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Displays a numeric priority score (0–100) inside a pill-shaped badge. The score range determines the severity tier — critical, high, or medium. Unlike BadgeSeverity, this badge always has a visible border and is fully rounded.
+          Displays a numeric priority score (0–100) inside a pill-shaped badge. The score range determines the severity tier - critical, high, or medium. Unlike BadgeSeverity, this badge always has a visible border and is fully rounded.
         </p>
       </div>
 
@@ -64,14 +67,6 @@ export function BadgePrioritySection() {
           { property: "medium bg",      token: "--scale-medium-secondary",        value: "var(--yellow-100)" },
           { property: "medium color",   token: "--scale-medium-primary",          value: "var(--yellow-500)" },
         ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { BadgePriority } from "./components/atoms";
-
-<BadgePriority priorityScore="critical" text="95" />
-<BadgePriority priorityScore="high"     text="62" />
-<BadgePriority priorityScore="medium"   text="28" />`} />
       </SectionBlock>
     </SplitPage>
   );

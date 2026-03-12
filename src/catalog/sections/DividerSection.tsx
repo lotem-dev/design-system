@@ -1,5 +1,4 @@
 import { Divider } from "../../../components/atoms/Divider";
-import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -15,7 +14,7 @@ export function DividerSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Divider</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A visual separator between sections of content. Supports horizontal (between rows) and vertical (between side-by-side elements).
@@ -66,12 +65,6 @@ export function DividerSection() {
           { property: "margin-inline",    token: "spacing prop",       value: "12px",    note: "Vertical only" },
           { property: "flex-shrink",      token: "—",                  value: "0",       note: "Prevents compression in flex" },
         ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <CodeBlock code={`// Horizontal (default)\n<Divider />\n\n// Vertical\n<Divider orientation="vertical" />\n\n// Custom color\n<Divider color="var(--divider-secondary)" />`} />
-        </div>
       </SectionBlock>
     </SplitPage>
   );

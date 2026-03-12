@@ -1,8 +1,12 @@
 import type { ComponentType, SVGProps } from "react";
 import { IconWrapper } from "../../../components/atoms/IconWrapper";
-import { CodeBlock } from "../ui/CodeBlock";
 import { SectionBlock } from "../ui/SectionBlock";
 import { TokenTable } from "../ui/TokenTable";
+import { SplitPage } from "../ui/SplitPage";
+
+import iconAddTsx from "../../../components/icons/usecases/IconAdd.tsx?raw";
+
+const sources = [{ filename: "IconAdd.tsx", code: iconAddTsx }];
 
 import * as UsecaseIcons   from "../../../components/icons/usecases/index";
 import * as ChevronIcons   from "../../../components/icons/chevrons/index";
@@ -44,9 +48,9 @@ function IconGrid({ icons, label }: { icons: IconNamespace; label: string }) {
 
 export function IconsSection() {
   return (
-    <div>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🔷 Icons</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icons</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           All icons are React SVG components. Use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>IconWrapper</code> to render
@@ -55,18 +59,11 @@ export function IconsSection() {
         </p>
       </div>
 
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { IconAdd } from "./components/icons/usecases";
-import { IconWrapper } from "./components/atoms/IconWrapper";
-
-<IconWrapper as={IconAdd} size="md" style={{ color: "var(--text-primary)" }} />`} />
-      </SectionBlock>
-
       <SectionBlock title="Size Scale">
         <TokenTable rows={[
           { property: "xs", token: "—", value: "12px", note: "Inline with very small text" },
           { property: "sm", token: "—", value: "16px", note: "Inline with label/body text" },
-          { property: "md", token: "—", value: "20px", note: "Default — most UI contexts" },
+          { property: "md", token: "—", value: "20px", note: "Default - most UI contexts" },
           { property: "lg", token: "—", value: "24px", note: "Standalone or large contexts" },
         ]} />
       </SectionBlock>
@@ -81,6 +78,6 @@ import { IconWrapper } from "./components/atoms/IconWrapper";
         <IconGrid icons={ResourceIcons} label="Resources" />
         <IconGrid icons={BrandIcons}    label="Brand Logos" />
       </SectionBlock>
-    </div>
+    </SplitPage>
   );
 }

@@ -1,10 +1,18 @@
-import { PageWrapper } from "../ui/PageWrapper";
+import { SplitPage } from "../ui/SplitPage";
 import { Text } from "../../../components/typography/Text";
 import { typographyScale } from "../../../components/typography/scale";
 import { typographyRoleTokens, type TypographyRole } from "../../../components/typography/roles";
 import { CodeBlock } from "../ui/CodeBlock";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+
+import textTsx    from "../../../components/typography/Text.tsx?raw";
+import globalsCss from "../../../styles/globals.css?raw";
+
+const sources = [
+  { filename: "Text.tsx",    code: textTsx },
+  { filename: "globals.css", code: globalsCss },
+];
 
 const SCALE_VALUES: Record<string, { fontSize: string; lineHeight: string }> = {
   headline: { fontSize: "30px", lineHeight: "36px" },
@@ -45,21 +53,21 @@ const ROLE_DETAILS: Record<TypographyRole, { tag: string; usage: string }> = {
 
 export function TypographySection() {
   return (
-    <PageWrapper>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🪨 Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Typography</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Two layers: the <strong>scale</strong> defines raw sizes (headline, body, label…).
           <strong> Roles</strong> give text semantic meaning and lock in the scale, weight, and HTML tag.
-          Always use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text role=\"...\">"}  </code> — never apply font styles manually.
+          Always use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text role=\"...\">"}  </code> - never apply font styles manually.
         </p>
       </div>
 
       {/* Type scale */}
       <SectionBlock title="Type Scale">
         <p style={{ margin: "0 0 16px", fontSize: "13px", color: "#71717A" }}>
-          These are the raw sizes. Don't use them directly in UI — use a Role instead.
+          These are the raw sizes. Don't use them directly in UI - use a Role instead.
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
           {(Object.keys(typographyScale) as Array<keyof typeof typographyScale>).map((scale) => {
@@ -124,6 +132,6 @@ export function TypographySection() {
           { property: "letter-spacing caps",  token: "--letter-spacing-caps",    value: "0.04em" },
         ]} />
       </SectionBlock>
-    </PageWrapper>
+    </SplitPage>
   );
 }

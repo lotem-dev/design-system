@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { BadgeStatus, type BadgeStatus as BadgeStatusType } from "../../../components/atoms/BadgeStatus";
-import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable, type TokenRow } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -13,7 +12,7 @@ const sources = [
 ];
 
 // All the CSS properties used by BadgeStatus, broken down per variant.
-// These values come directly from globals.css — hardcoded here so they're
+// These values come directly from globals.css - hardcoded here so they're
 // visible in the catalog without needing to parse CSS at runtime.
 const TOKEN_DATA: Record<BadgeStatusType, TokenRow[]> = {
   open: [
@@ -60,12 +59,6 @@ const VARIANT_DESCRIPTIONS: Record<BadgeStatusType, string> = {
   ignored: "The finding has been acknowledged and dismissed. Uses the neutral color scale.",
 };
 
-const USAGE_CODE: Record<BadgeStatusType, string> = {
-  open:    `<BadgeStatus status="open" />`,
-  fixed:   `<BadgeStatus status="fixed" />`,
-  ignored: `<BadgeStatus status="ignored" />`,
-};
-
 export function BadgeStatusSection() {
   const [activeVariant, setActiveVariant] = useState<BadgeStatusType>("open");
 
@@ -73,10 +66,10 @@ export function BadgeStatusSection() {
     <SplitPage files={sources}>
       {/* Header */}
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em" }}>
-            Atom
-          </span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "8px" }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atoms</span>
+          <span style={{ fontSize: "11px", color: "#D4D4D8" }}>/</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Badges</span>
         </div>
         <h1 style={{ margin: "0 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           BadgeStatus
@@ -88,7 +81,7 @@ export function BadgeStatusSection() {
         </p>
       </div>
 
-      {/* Live preview — all variants */}
+      {/* Live preview - all variants */}
       <SectionBlock title="Preview">
         <PreviewBox>
           <BadgeStatus status="open" />
@@ -147,20 +140,6 @@ export function BadgeStatusSection() {
         </p>
 
         <TokenTable rows={TOKEN_DATA[activeVariant]} />
-      </SectionBlock>
-
-      {/* Usage code */}
-      <SectionBlock title="Usage">
-        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          {(["open", "fixed", "ignored"] as BadgeStatusType[]).map((v) => (
-            <div key={v}>
-              <div style={{ marginBottom: "8px", display: "flex", alignItems: "center", gap: "8px" }}>
-                <BadgeStatus status={v} />
-              </div>
-              <CodeBlock code={USAGE_CODE[v]} />
-            </div>
-          ))}
-        </div>
       </SectionBlock>
     </SplitPage>
   );

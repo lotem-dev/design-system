@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { SectionBlock } from "../ui/SectionBlock";
-import { PageWrapper } from "../ui/PageWrapper";
+import { SplitPage } from "../ui/SplitPage";
+
+import globalsCss from "../../../styles/globals.css?raw";
+
+const sources = [{ filename: "globals.css", code: globalsCss }];
 
 // ─── Primitive palette (never change between themes) ──────────────────────────
 
@@ -27,11 +32,6 @@ const SEMANTIC: { group: string; tokens: { name: string; pointsTo: string }[] }[
   { group: "Alerts",  tokens: [{ name: "--success-primary", pointsTo: "--green-600" },{ name: "--success-secondary", pointsTo: "--green-200" },{ name: "--warning-primary", pointsTo: "--yellow-500" },{ name: "--warning-secondary", pointsTo: "--yellow-50" },{ name: "--error-primary", pointsTo: "--red-400" },{ name: "--error-secondary", pointsTo: "--red-100" }] },
 ];
 
-// Reads the live computed hex value from the current theme on document root
-function liveValue(tokenName: string): string {
-  return getComputedStyle(document.documentElement).getPropertyValue(tokenName).trim() || "—";
-}
-
 // ─── Components ───────────────────────────────────────────────────────────────
 
 function Swatch({ name, value }: { name: string; value: string }) {
@@ -47,13 +47,11 @@ function Swatch({ name, value }: { name: string; value: string }) {
 function SemanticRow({ name, pointsTo }: { name: string; pointsTo: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "10px 0", borderBottom: "1px solid #F4F4F5" }}>
-      {/* Swatch uses CSS var directly — auto-updates when theme changes */}
+      {/* Swatch uses CSS var directly - updates when parent data-theme changes */}
       <div style={{ width: "20px", height: "20px", borderRadius: "4px", backgroundColor: `var(${name})`, border: "1px solid rgba(0,0,0,0.1)", flexShrink: 0 }} />
       <code style={{ fontSize: "12px", color: "#18181B", width: "220px", flexShrink: 0, fontFamily: "monospace" }}>{name}</code>
       <span style={{ fontSize: "11px", color: "#A1A1AA" }}>→</span>
-      <code style={{ fontSize: "12px", color: "#52525B", width: "160px", flexShrink: 0, fontFamily: "monospace" }}>{pointsTo}</code>
-      {/* Live hex from getComputedStyle — updates on re-render when theme prop changes */}
-      <code style={{ fontSize: "12px", color: "#A1A1AA", fontFamily: "monospace" }}>{liveValue(name)}</code>
+      <code style={{ fontSize: "12px", color: "#52525B", fontFamily: "monospace" }}>{pointsTo}</code>
     </div>
   );
 }
@@ -69,18 +67,18 @@ function PrimitiveGroup({ family, shades }: { family: string; shades: { name: st
   );
 }
 
-// theme prop received just to trigger a re-render when theme changes
-export function ColorsSection({ theme }: { theme?: string }) {
-  void theme;
+export function ColorsSection() {
+  const [semanticTheme, setSemanticTheme] = useState<"light" | "dark">("light");
+
   return (
-    <PageWrapper>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🪨 Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Colors</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          The color system has two layers. <strong>Primitives</strong> are raw hex values — never used directly in components.
+          The color system has two layers. <strong>Primitives</strong> are raw hex values - never used directly in components.
           <strong> Semantic tokens</strong> point to primitives and carry meaning. Always use semantic tokens.
-          Semantic swatches and hex values update live when you switch themes.
+          Switch the theme on the semantic section below to see how tokens remap in dark mode.
         </p>
       </div>
 
@@ -88,17 +86,39 @@ export function ColorsSection({ theme }: { theme?: string }) {
         {PRIMITIVES.map(p => <PrimitiveGroup key={p.family} family={p.family} shades={p.shades} />)}
       </SectionBlock>
 
-      <SectionBlock title="Semantic Tokens — live for current theme">
-        <p style={{ margin: "0 0 16px", fontSize: "13px", color: "#71717A" }}>
-          Toggle the theme to see the swatch colors and hex values update in real time.
-        </p>
-        {SEMANTIC.map(({ group, tokens }) => (
-          <div key={group} style={{ marginBottom: "24px" }}>
-            <p style={{ margin: "0 0 4px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{group}</p>
-            {tokens.map(t => <SemanticRow key={t.name} name={t.name} pointsTo={t.pointsTo} />)}
-          </div>
-        ))}
+      <SectionBlock title="Semantic Tokens">
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+          <p style={{ margin: 0, fontSize: "13px", color: "#71717A" }}>
+            Toggle the theme below to see the swatches remap live.
+          </p>
+          <button
+            onClick={() => setSemanticTheme(t => t === "light" ? "dark" : "light")}
+            style={{
+              padding: "3px 10px",
+              fontSize: "11px",
+              fontFamily: "'Open Sans', system-ui, sans-serif",
+              fontWeight: 500,
+              cursor: "pointer",
+              border: "1px solid",
+              borderColor: semanticTheme === "dark" ? "#3F3F46" : "#E4E4E7",
+              borderRadius: "999px",
+              backgroundColor: semanticTheme === "dark" ? "#27272A" : "#FFFFFF",
+              color: semanticTheme === "dark" ? "#D4D4D8" : "#71717A",
+              flexShrink: 0,
+            }}
+          >
+            {semanticTheme === "light" ? "☾ Dark" : "☀ Light"}
+          </button>
+        </div>
+        <div data-theme={semanticTheme}>
+          {SEMANTIC.map(({ group, tokens }) => (
+            <div key={group} style={{ marginBottom: "24px" }}>
+              <p style={{ margin: "0 0 4px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{group}</p>
+              {tokens.map(t => <SemanticRow key={t.name} name={t.name} pointsTo={t.pointsTo} />)}
+            </div>
+          ))}
+        </div>
       </SectionBlock>
-    </PageWrapper>
+    </SplitPage>
   );
 }

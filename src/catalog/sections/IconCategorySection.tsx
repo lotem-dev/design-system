@@ -1,8 +1,27 @@
 import type { ComponentType, SVGProps } from "react";
-import { PageWrapper } from "../ui/PageWrapper";
+import { SplitPage } from "../ui/SplitPage";
 import { IconWrapper } from "../../../components/atoms/IconWrapper";
 import { SectionBlock } from "../ui/SectionBlock";
-import { CodeBlock } from "../ui/CodeBlock";
+
+import usecaseSampleTsx    from "../../../components/icons/usecases/IconAdd.tsx?raw";
+import chevronSampleTsx    from "../../../components/icons/chevrons/IconChevronDown.tsx?raw";
+import sortingSampleTsx    from "../../../components/icons/sorting/IconSortDefault.tsx?raw";
+import dropdownSampleTsx   from "../../../components/icons/dropdown/IconDropdownIndicator.tsx?raw";
+import findingSampleTsx    from "../../../components/icons/finding_type/IconCloudSecurity.tsx?raw";
+import sidebarSampleTsx    from "../../../components/icons/sidebar/IconFindings.tsx?raw";
+import resourceSampleTsx   from "../../../components/icons/resources_internal/IconApi.tsx?raw";
+import brandSampleTsx      from "../../../components/icons/brand/LogoJit.tsx?raw";
+
+const CATEGORY_SOURCES: Record<string, { filename: string; code: string }[]> = {
+  "icons-usecases":     [{ filename: "IconAdd.tsx",              code: usecaseSampleTsx }],
+  "icons-chevrons":     [{ filename: "IconChevronDown.tsx",      code: chevronSampleTsx }],
+  "icons-sorting":      [{ filename: "IconSortDefault.tsx",      code: sortingSampleTsx }],
+  "icons-dropdown":     [{ filename: "IconDropdownIndicator.tsx",code: dropdownSampleTsx }],
+  "icons-finding-type": [{ filename: "IconCloudSecurity.tsx",    code: findingSampleTsx }],
+  "icons-sidebar":      [{ filename: "IconFindings.tsx",         code: sidebarSampleTsx }],
+  "icons-resources":    [{ filename: "IconApi.tsx",              code: resourceSampleTsx }],
+  "icons-brand":        [{ filename: "LogoJit.tsx",              code: brandSampleTsx }],
+};
 
 import * as UsecaseIcons   from "../../../components/icons/usecases/index";
 import * as ChevronIcons   from "../../../components/icons/chevrons/index";
@@ -55,12 +74,12 @@ export function IconCategorySection({ categoryId }: { categoryId: string }) {
   if (!cat) return null;
 
   return (
-    <PageWrapper>
+    <SplitPage files={CATEGORY_SOURCES[categoryId] ?? []}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icons</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🔷 Icons</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{cat.label}</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          All icons are React SVG components that use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>currentColor</code> — they inherit color from their parent automatically.
+          All icons are React SVG components that use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>currentColor</code> - they inherit color from their parent automatically.
           Always render them through <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>IconWrapper</code>.
         </p>
       </div>
@@ -68,13 +87,6 @@ export function IconCategorySection({ categoryId }: { categoryId: string }) {
       <SectionBlock title={`${cat.label} Icons`}>
         <IconGrid icons={cat.icons} />
       </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { IconWrapper } from "./components/atoms/IconWrapper";
-import { /* IconName */ } from "./components/icons/${categoryId.replace("icons-", "")}";
-
-<IconWrapper as={IconName} size="md" style={{ color: "var(--text-primary)" }} />`} />
-      </SectionBlock>
-    </PageWrapper>
+    </SplitPage>
   );
 }

@@ -1,6 +1,10 @@
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
-import { PageWrapper } from "../ui/PageWrapper";
+import { SplitPage } from "../ui/SplitPage";
+
+import globalsCss from "../../../styles/globals.css?raw";
+
+const sources = [{ filename: "globals.css", code: globalsCss }];
 
 const RADIUS = [
   { token: "--radius-xs",    value: "4px",   note: "Inputs, small chips" },
@@ -12,9 +16,9 @@ const RADIUS = [
 
 export function RadiusSection() {
   return (
-    <PageWrapper>
+    <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🪨 Foundation</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Radius</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Border radius tokens control the roundness of components. Always use tokens instead of hardcoded values so the visual language stays consistent.
@@ -33,6 +37,6 @@ export function RadiusSection() {
         </div>
         <TokenTable rows={RADIUS.map(({ token, value, note }) => ({ property: "border-radius", token, value, note }))} />
       </SectionBlock>
-    </PageWrapper>
+    </SplitPage>
   );
 }

@@ -97,8 +97,6 @@ const NAV: NavGroup[] = [
 type SidebarProps = {
   active: SectionId;
   onSelect: (id: SectionId) => void;
-  theme: "light" | "dark";
-  onToggleTheme: () => void;
 };
 
 const LINK_STYLE = (isActive: boolean): React.CSSProperties => ({
@@ -138,7 +136,7 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
-export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps) {
+export function Sidebar({ active, onSelect }: SidebarProps) {
   // All groups open by default
   const [openGroups, setOpenGroups]   = useState<Record<string, boolean>>(() =>
     Object.fromEntries(NAV.map(g => [g.label, true]))
@@ -244,34 +242,6 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
         })}
       </nav>
 
-      {/* Theme Toggle */}
-      <div style={{ padding: "16px 20px", borderTop: "1px solid #27272A" }}>
-        <div style={{ fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "8px" }}>
-          Theme
-        </div>
-        <div style={{ display: "flex", gap: "6px" }}>
-          {(["light", "dark"] as const).map((t) => (
-            <button
-              key={t}
-              onClick={onToggleTheme}
-              style={{
-                flex: 1,
-                padding: "6px 0",
-                fontSize: "12px",
-                fontFamily: "'Open Sans', system-ui, sans-serif",
-                cursor: "pointer",
-                border: "none",
-                borderRadius: "4px",
-                background: theme === t ? "#FAFAFA" : "#27272A",
-                color: theme === t ? "#09090B" : "#71717A",
-                fontWeight: theme === t ? 600 : 400,
-              }}
-            >
-              {t === "light" ? "☀ Light" : "☾ Dark"}
-            </button>
-          ))}
-        </div>
-      </div>
     </aside>
   );
 }

@@ -5,7 +5,6 @@ import { SearchInput } from "../../../components/atoms/SearchInput";
 import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
-import { CodeBlock } from "../ui/CodeBlock";
 
 const SELECT_OPTIONS = [
   { label: "Option A", value: "a" },
@@ -21,10 +20,14 @@ export function FieldsSection() {
   return (
     <div>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atoms</span>
+          <span style={{ fontSize: "11px", color: "#D4D4D8" }}>/</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
+        </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Three input atoms for collecting user input — text, selection (dropdown), and search.
+          Three input atoms for collecting user input - text, selection (dropdown), and search.
           All share the same sizing, border, and focus ring behavior.
         </p>
       </div>
@@ -61,7 +64,7 @@ export function FieldsSection() {
 
       <SectionBlock title="Focus State">
         <p style={{ fontSize: "13px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "12px" }}>
-          Click into any field to see the focus ring — 2px brand border + purple glow.
+          Click into any field to see the focus ring - 2px brand border + purple glow.
         </p>
         <PreviewBox>
           <div style={{ width: "200px" }}>
@@ -83,33 +86,6 @@ export function FieldsSection() {
           { property: "text disabled",   token: "--text-secondary",    value: "var(--neutral-400)" },
           { property: "label font",      token: "--font-size-sm / --font-weight-bold", value: "12px / 700" },
         ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { TextInput, SelectInput, SearchInput } from "./components/atoms";
-
-<TextInput
-  label="Field Name"
-  placeholder="Enter text..."
-  value={value}
-  onChange={(val) => setValue(val)}
-/>
-
-<SelectInput
-  label="Status"
-  options={[
-    { label: "Open",   value: "open" },
-    { label: "Fixed",  value: "fixed" },
-  ]}
-  value={selected}
-  onChange={(val) => setSelected(val)}
-/>
-
-<SearchInput
-  placeholder="Search findings..."
-  value={query}
-  onChange={(val) => setQuery(val)}
-/>`} />
       </SectionBlock>
     </div>
   );

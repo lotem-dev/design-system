@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Sidebar, type SectionId } from "./Sidebar";
 
 import { ColorsSection }        from "./sections/ColorsSection";
@@ -21,18 +21,11 @@ import { TabSection }           from "./sections/TabSection";
 
 export function CatalogApp() {
   const [active, setActive] = useState<SectionId>("button");
-  const [theme, setTheme]   = useState<"light" | "dark">("light");
-
-  // Applies data-theme to the document root so all CSS variables
-  // (colors, backgrounds, etc.) update globally when the theme toggles.
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
 
   function renderSection() {
     switch (active) {
       // Foundation
-      case "colors":     return <ColorsSection theme={theme} />;
+      case "colors":     return <ColorsSection />;
       case "typography": return <TypographySection />;
       case "spacing":    return <SpacingSection />;
       case "radius":     return <RadiusSection />;
@@ -68,10 +61,9 @@ export function CatalogApp() {
 
   return (
     <div style={{ display: "flex", height: "100vh", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-      <Sidebar active={active} onSelect={setActive} theme={theme} onToggleTheme={() => setTheme(t => t === "light" ? "dark" : "light")} />
+      <Sidebar active={active} onSelect={setActive} />
       <main
-        data-theme={theme}
-        style={{ flex: 1, overflow: "auto", backgroundColor: theme === "dark" ? "#09090B" : "#FAFAFA" }}
+        style={{ flex: 1, overflow: "auto", backgroundColor: "#FAFAFA" }}
       >
         {renderSection()}
       </main>

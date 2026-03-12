@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button, type ButtonVariant, type ButtonSize } from "../../../components/atoms/Button";
-import { CodeBlock } from "../ui/CodeBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -24,7 +23,7 @@ export function ButtonSection() {
     <SplitPage files={sources}>
       {/* Title */}
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Button</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           The primary interactive element. Three variants cover the full range of action hierarchy —
@@ -33,7 +32,7 @@ export function ButtonSection() {
       </div>
 
       {/* Variant preview */}
-      <SectionBlock title="Preview — Variants">
+      <SectionBlock title="Preview - Variants">
         <div style={{ display: "flex", gap: "8px", marginBottom: "16px" }}>
           {VARIANTS.map((v) => (
             <button
@@ -63,7 +62,7 @@ export function ButtonSection() {
       </SectionBlock>
 
       {/* All variants side by side */}
-      <SectionBlock title="Preview — All Variants">
+      <SectionBlock title="Preview - All Variants">
         <PreviewBox>
           {VARIANTS.map((v) => (
             <Button key={v} variant={v} size="md">{v.charAt(0).toUpperCase() + v.slice(1)}</Button>
@@ -72,7 +71,7 @@ export function ButtonSection() {
       </SectionBlock>
 
       {/* Sizes */}
-      <SectionBlock title="Preview — Sizes">
+      <SectionBlock title="Sizes">
         <PreviewBox align="center">
           {SIZES.map((s) => (
             <div key={s} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
@@ -105,23 +104,6 @@ export function ButtonSection() {
           { property: "destructive background",   token: "--error-secondary",  value: "var(--red-100)" },
           { property: "destructive color",        token: "--error-primary",    value: "var(--red-400)" },
         ]} />
-      </SectionBlock>
-
-      {/* Usage */}
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { Button } from "./components/atoms/Button";
-
-// Primary — main CTA
-<Button variant="primary" size="md">Save changes</Button>
-
-// Ghost — secondary action
-<Button variant="ghost" size="md">Cancel</Button>
-
-// Destructive — dangerous action
-<Button variant="destructive" size="md">Delete</Button>
-
-// Disabled
-<Button variant="primary" disabled>Save changes</Button>`} />
       </SectionBlock>
     </SplitPage>
   );

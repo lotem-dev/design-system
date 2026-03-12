@@ -3,7 +3,6 @@ import { SearchInput } from "../../../components/atoms/SearchInput";
 import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
-import { CodeBlock } from "../ui/CodeBlock";
 import { SplitPage } from "../ui/SplitPage";
 
 import searchInputTsx from "../../../components/atoms/SearchInput.tsx?raw";
@@ -20,10 +19,14 @@ export function SearchInputSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atoms</span>
+          <span style={{ fontSize: "11px", color: "#D4D4D8" }}>/</span>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
+        </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>SearchInput</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A search field with an inline magnifying glass icon. No label — it's always visually obvious what it's for. Same sizing and focus ring as the other field atoms.
+          A search field with an inline magnifying glass icon. No label - it's always visually obvious what it's for. Same sizing and focus ring as the other field atoms.
         </p>
       </div>
 
@@ -57,16 +60,6 @@ export function SearchInputSection() {
           { property: "icon color",      token: "--text-secondary",          value: "var(--neutral-400)" },
           { property: "text color",      token: "--text-primary",            value: "var(--neutral-600)" },
         ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { SearchInput } from "./components/atoms";
-
-<SearchInput
-  placeholder="Search findings..."
-  value={query}
-  onChange={(val) => setQuery(val)}
-/>`} />
       </SectionBlock>
     </SplitPage>
   );

@@ -3,7 +3,6 @@ import { TabGroup } from "../../../components/molecules/TabGroup";
 import { SectionBlock } from "../ui/SectionBlock";
 import { PreviewBox } from "../ui/PreviewBox";
 import { TokenTable } from "../ui/TokenTable";
-import { CodeBlock } from "../ui/CodeBlock";
 import { SplitPage } from "../ui/SplitPage";
 
 import tabTsx    from "../../../components/molecules/Tab.tsx?raw";
@@ -22,15 +21,15 @@ export function TabSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Molecule</span>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🧬 Molecule</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Tab / TabGroup</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A single Tab item and a TabGroup that manages selection state.
-          Tabs can show an optional count badge. Use TabGroup in practice — Tab alone is the building block.
+          Tabs can show an optional count badge. Use TabGroup in practice - Tab alone is the building block.
         </p>
       </div>
 
-      <SectionBlock title="Tab — States">
+      <SectionBlock title="Tab - States">
         <PreviewBox>
           <Tab label="Default" />
           <Tab label="With count" count={12} />
@@ -72,20 +71,6 @@ export function TabSection() {
           { property: "font size",       token: "--font-size-base",  value: "14px" },
           { property: "badge font size", token: "--font-size-sm",    value: "12px" },
         ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Usage">
-        <CodeBlock code={`import { TabGroup } from "./components/molecules";
-
-<TabGroup
-  tabs={[
-    { label: "Open",    count: 14 },
-    { label: "Fixed" },
-    { label: "Ignored", count: 3 },
-  ]}
-  defaultSelected={0}
-  onChange={(index) => console.log("active tab:", index)}
-/>`} />
       </SectionBlock>
     </SplitPage>
   );
