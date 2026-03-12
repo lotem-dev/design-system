@@ -9,8 +9,8 @@ export function LinkSection() {
   return (
     <div>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>Atom</span>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "system-ui" }}>Link</h1>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Link</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A semantic anchor element. Link handles the interaction behavior (hover underline, focus ring, external tab safety)
           but does not control typography — wrap its children in a <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text>"}</code> component for that.
@@ -21,19 +21,19 @@ export function LinkSection() {
         <PreviewBox>
           <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div>
-              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "system-ui" }}>Brand color</p>
+              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Brand color</p>
               <Link href="#" colorToken="var(--brand-primary)">
                 <Text role="page-title">Visit the docs</Text>
               </Link>
             </div>
             <div>
-              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "system-ui" }}>Secondary text color</p>
+              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Secondary text color</p>
               <Link href="#" colorToken="var(--text-secondary)">
                 <Text role="badge-small">Learn more</Text>
               </Link>
             </div>
             <div>
-              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "system-ui" }}>External link (opens in new tab)</p>
+              <p style={{ margin: "0 0 8px", fontSize: "11px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif" }}>External link (opens in new tab)</p>
               <Link href="https://jit.io" colorToken="var(--brand-primary)" external>
                 <Text role="badge-small">jit.io ↗</Text>
               </Link>

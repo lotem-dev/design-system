@@ -19,7 +19,7 @@ function IconGrid({ icons, label }: { icons: IconNamespace; label: string }) {
   const entries = Object.entries(icons).filter(([, v]) => typeof v === "function");
   return (
     <div style={{ marginBottom: "32px" }}>
-      <p style={{ margin: "0 0 12px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>{label}</p>
+      <p style={{ margin: "0 0 12px", fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>{label}</p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
         {entries.map(([name, Icon]) => (
           <div
@@ -46,8 +46,8 @@ export function IconsSection() {
   return (
     <div>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>Foundation</span>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "system-ui" }}>Icons</h1>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Foundation</span>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icons</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           All icons are React SVG components. Use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>IconWrapper</code> to render
           them at a standard size. Icons use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>currentColor</code> so they

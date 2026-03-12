@@ -15,8 +15,8 @@ export function ButtonSection() {
     <div>
       {/* Title */}
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>Atom</span>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "system-ui" }}>Button</h1>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Button</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           The primary interactive element. Three variants cover the full range of action hierarchy —
           from the main CTA down to destructive actions. All variants share the same size scale and disabled behavior.
@@ -33,7 +33,7 @@ export function ButtonSection() {
               style={{
                 padding: "4px 10px",
                 fontSize: "12px",
-                fontFamily: "system-ui",
+                fontFamily: "'Open Sans', system-ui, sans-serif",
                 border: "none",
                 borderRadius: "4px",
                 cursor: "pointer",

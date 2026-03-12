@@ -71,7 +71,7 @@ export function BadgeStatusSection() {
             Atom
           </span>
         </div>
-        <h1 style={{ margin: "0 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "system-ui" }}>
+        <h1 style={{ margin: "0 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           BadgeStatus
         </h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
@@ -126,7 +126,7 @@ export function BadgeStatusSection() {
                 fontSize: "13px",
                 fontWeight: 500,
                 cursor: "pointer",
-                fontFamily: "system-ui",
+                fontFamily: "'Open Sans', system-ui, sans-serif",
               }}
             >
               {v.charAt(0).toUpperCase() + v.slice(1)}

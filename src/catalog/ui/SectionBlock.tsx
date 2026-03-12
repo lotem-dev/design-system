@@ -13,7 +13,7 @@ export function SectionBlock({ title, children }: { title: string; children: Rea
           color: "#71717A",
           textTransform: "uppercase",
           letterSpacing: "0.08em",
-          fontFamily: "system-ui",
+          fontFamily: "'Open Sans', system-ui, sans-serif",
         }}
       >
         {title}

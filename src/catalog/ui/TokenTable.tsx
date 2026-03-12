@@ -16,7 +16,7 @@ export function TokenTable({ rows }: TokenTableProps) {
         width: "100%",
         borderCollapse: "collapse",
         fontSize: "13px",
-        fontFamily: "system-ui, sans-serif",
+        fontFamily: "'Open Sans', system-ui, sans-serif",
       }}
     >
       <thead>

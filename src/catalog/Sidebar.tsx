@@ -1,42 +1,79 @@
+import type React from "react";
 import { LogoJit } from "../../components/icons/brand/LogoJit";
 
+// Every page that can be shown in the catalog
 export type SectionId =
-  | "colors" | "typography" | "spacing" | "icons"
-  | "badge-status" | "button" | "divider" | "icon-wrapper" | "link"
-  | "fields" | "tooltip"
+  // Foundation
+  | "colors" | "typography" | "spacing" | "radius"
+  // Icons — one page per category
+  | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
+  | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
+  // Atoms
+  | "badge-status" | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
+  // Fields (sub-group of Atoms)
+  | "fields-text" | "fields-select" | "fields-search"
+  // Molecules
   | "tab";
 
+// A flat link item
+type NavItem = { kind: "item"; id: SectionId; label: string };
+
+// A sub-group header with its own nested items (e.g. Fields inside Atoms)
+type NavBranch = { kind: "branch"; label: string; children: NavItem[] };
+
+// A top-level section (Foundation, Icons, Atoms, Molecules)
 type NavGroup = {
   label: string;
-  items: { id: SectionId; label: string }[];
+  items: (NavItem | NavBranch)[];
 };
 
 const NAV: NavGroup[] = [
   {
     label: "Foundation",
     items: [
-      { id: "colors",      label: "Colors" },
-      { id: "typography",  label: "Typography" },
-      { id: "spacing",     label: "Spacing & Radius" },
-      { id: "icons",       label: "Icons" },
+      { kind: "item", id: "colors",     label: "Colors" },
+      { kind: "item", id: "typography", label: "Typography" },
+      { kind: "item", id: "spacing",    label: "Spacing" },
+      { kind: "item", id: "radius",     label: "Radius" },
+    ],
+  },
+  {
+    label: "Icons",
+    items: [
+      { kind: "item", id: "icons-usecases",    label: "Use Cases" },
+      { kind: "item", id: "icons-chevrons",    label: "Chevrons" },
+      { kind: "item", id: "icons-sorting",     label: "Sorting" },
+      { kind: "item", id: "icons-dropdown",    label: "Dropdown" },
+      { kind: "item", id: "icons-finding-type",label: "Finding Types" },
+      { kind: "item", id: "icons-sidebar",     label: "Sidebar" },
+      { kind: "item", id: "icons-resources",   label: "Resources" },
+      { kind: "item", id: "icons-brand",       label: "Brand" },
     ],
   },
   {
     label: "Atoms",
     items: [
-      { id: "badge-status",  label: "BadgeStatus" },
-      { id: "button",        label: "Button" },
-      { id: "divider",       label: "Divider" },
-      { id: "fields",        label: "Fields" },
-      { id: "icon-wrapper",  label: "Icon" },
-      { id: "link",          label: "Link" },
-      { id: "tooltip",       label: "Tooltip" },
+      { kind: "item", id: "badge-status", label: "BadgeStatus" },
+      { kind: "item", id: "button",       label: "Button" },
+      { kind: "item", id: "divider",      label: "Divider" },
+      {
+        kind: "branch",
+        label: "Fields",
+        children: [
+          { kind: "item", id: "fields-text",   label: "TextInput" },
+          { kind: "item", id: "fields-select", label: "SelectInput" },
+          { kind: "item", id: "fields-search", label: "SearchInput" },
+        ],
+      },
+      { kind: "item", id: "icon-wrapper", label: "Icon" },
+      { kind: "item", id: "link",         label: "Link" },
+      { kind: "item", id: "tooltip",      label: "Tooltip" },
     ],
   },
   {
     label: "Molecules",
     items: [
-      { id: "tab", label: "Tab / TabGroup" },
+      { kind: "item", id: "tab", label: "Tab / TabGroup" },
     ],
   },
 ];
@@ -48,6 +85,27 @@ type SidebarProps = {
   onToggleTheme: () => void;
 };
 
+const LINK_STYLE = (isActive: boolean): React.CSSProperties => ({
+  display: "block",
+  width: "100%",
+  padding: "7px 20px",
+  background: isActive ? "#27272A" : "transparent",
+  border: "none",
+  borderLeft: isActive ? "2px solid #FAFAFA" : "2px solid transparent",
+  color: isActive ? "#FAFAFA" : "#A1A1AA",
+  fontSize: "13px",
+  textAlign: "left",
+  cursor: "pointer",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  fontWeight: isActive ? 500 : 400,
+});
+
+const CHILD_LINK_STYLE = (isActive: boolean): React.CSSProperties => ({
+  ...LINK_STYLE(isActive),
+  paddingLeft: "32px",
+  fontSize: "12px",
+});
+
 export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps) {
   return (
     <aside style={{ width: "220px", flexShrink: 0, height: "100vh", backgroundColor: "#111111", overflowY: "hidden", display: "flex", flexDirection: "column", padding: "24px 0" }}>
@@ -57,40 +115,40 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
           variant="mono"
           style={{ width: "48px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "12px" }}
         />
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>Design System</div>
-        <div style={{ fontSize: "10px", color: "#3F3F46", marginTop: "2px", fontFamily: "system-ui" }}>Component Catalog</div>
+        <div style={{ fontSize: "11px", fontWeight: 600, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Design System</div>
+        <div style={{ fontSize: "10px", color: "#3F3F46", marginTop: "2px", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Component Catalog</div>
       </div>
 
       {/* Nav */}
       <nav style={{ padding: "16px 0", flex: 1, minHeight: 0, overflowY: "auto" }}>
         {NAV.map((group) => (
           <div key={group.label} style={{ marginBottom: "24px" }}>
-            <div style={{ padding: "0 20px 8px", fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "system-ui" }}>
+            <div style={{ padding: "0 20px 8px", fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
               {group.label}
             </div>
-            {group.items.map((item) => {
-              const isActive = item.id === active;
+
+            {group.items.map((entry) => {
+              if (entry.kind === "item") {
+                return (
+                  <button key={entry.id} onClick={() => onSelect(entry.id)} style={LINK_STYLE(entry.id === active)}>
+                    {entry.label}
+                  </button>
+                );
+              }
+
+              // NavBranch — render a sub-header + indented children
+              const branchActive = entry.children.some(c => c.id === active);
               return (
-                <button
-                  key={item.id}
-                  onClick={() => onSelect(item.id)}
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    padding: "7px 20px",
-                    background: isActive ? "#27272A" : "transparent",
-                    border: "none",
-                    borderLeft: isActive ? "2px solid #FAFAFA" : "2px solid transparent",
-                    color: isActive ? "#FAFAFA" : "#A1A1AA",
-                    fontSize: "13px",
-                    textAlign: "left",
-                    cursor: "pointer",
-                    fontFamily: "system-ui",
-                    fontWeight: isActive ? 500 : 400,
-                  }}
-                >
-                  {item.label}
-                </button>
+                <div key={entry.label}>
+                  <div style={{ padding: "7px 20px", fontSize: "12px", color: branchActive ? "#71717A" : "#52525B", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
+                    {entry.label}
+                  </div>
+                  {entry.children.map((child) => (
+                    <button key={child.id} onClick={() => onSelect(child.id)} style={CHILD_LINK_STYLE(child.id === active)}>
+                      {child.label}
+                    </button>
+                  ))}
+                </div>
               );
             })}
           </div>
@@ -99,7 +157,7 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
 
       {/* Theme Toggle */}
       <div style={{ padding: "16px 20px", borderTop: "1px solid #27272A" }}>
-        <div style={{ fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "system-ui", marginBottom: "8px" }}>
+        <div style={{ fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "8px" }}>
           Theme
         </div>
         <div style={{ display: "flex", gap: "6px" }}>
@@ -111,7 +169,7 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
                 flex: 1,
                 padding: "6px 0",
                 fontSize: "12px",
-                fontFamily: "system-ui",
+                fontFamily: "'Open Sans', system-ui, sans-serif",
                 cursor: "pointer",
                 border: "none",
                 borderRadius: "4px",

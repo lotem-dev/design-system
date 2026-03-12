@@ -21,8 +21,8 @@ export function FieldsSection() {
   return (
     <div>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "system-ui" }}>Atom</span>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "system-ui" }}>Fields</h1>
+        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Atom</span>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Three input atoms for collecting user input — text, selection (dropdown), and search.
           All share the same sizing, border, and focus ring behavior.
@@ -60,7 +60,7 @@ export function FieldsSection() {
       </SectionBlock>
 
       <SectionBlock title="Focus State">
-        <p style={{ fontSize: "13px", color: "#71717A", fontFamily: "system-ui", marginBottom: "12px" }}>
+        <p style={{ fontSize: "13px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "12px" }}>
           Click into any field to see the focus ring — 2px brand border + purple glow.
         </p>
         <PreviewBox>
