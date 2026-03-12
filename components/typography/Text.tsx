@@ -24,12 +24,13 @@ export function Text({ role, children }: TextProps) {
 
   return (
     <Component
-      // Locked styling:
-      // - scaleStyles controls size/line-height/etc
-      // - fontWeight comes from role (semantic)
       style={{
         ...scaleStyles,
         fontWeight: roleTokens.weight,
+        ...(roleTokens.caps && {
+          textTransform: "uppercase",
+          letterSpacing: "var(--letter-spacing-caps)",
+        }),
       }}
     >
       {children}
