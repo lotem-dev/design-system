@@ -1,0 +1,68 @@
+/* =========================================================
+   Tab — single tab item
+   ========================================================= */
+
+.tab {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm);
+}
+
+/* ─── Label text ─────────────────────────────────────────── */
+
+.label {
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.tab--selected .label {
+  color: var(--text-brand);
+}
+
+/* ─── Count badge ────────────────────────────────────────── */
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-round);
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+}
+
+.tab--selected .badge {
+  background: var(--brand-primary);
+  color: var(--text-invert);
+}
+
+/* ─── Active indicator bar ───────────────────────────────── */
+
+.bar {
+  height: 2px;
+  width: 100%;
+  background: var(--divider-primary);
+}
+
+.tab--selected .bar {
+  background: var(--brand-primary);
+}
