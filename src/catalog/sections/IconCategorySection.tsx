@@ -184,7 +184,7 @@ function IconTable({ icons }: { icons: IconNamespace }) {
           >
             <td style={{ padding: "10px 12px", width: "60px" }}>
               <IconWrapper
-                as={Icon as ComponentType<SVGProps<SVGSVGElement>>}
+                icon={Icon as ComponentType<SVGProps<SVGSVGElement>>}
                 size="lg"
                 width={40}
                 height={40}

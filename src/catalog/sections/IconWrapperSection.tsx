@@ -17,7 +17,7 @@ export function IconWrapperSection() {
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icon</h1>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>IconWrapper</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A wrapper that renders any SVG icon component at a standard size. Icons use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>currentColor</code>,
           so they automatically inherit the text color from their parent - just set <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>color</code> on the wrapper or a parent element.
@@ -28,7 +28,7 @@ export function IconWrapperSection() {
         <PreviewBox align="center">
           {(["xs", "sm", "md", "lg"] as const).map((size) => (
             <div key={size} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-              <IconWrapper as={IconAdd} size={size} style={{ color: "#18181B" }} />
+              <IconWrapper icon={IconAdd} size={size} style={{ color: "#18181B" }} />
               <code style={{ fontSize: "10px", color: "#71717A", fontFamily: "monospace" }}>{size}</code>
             </div>
           ))}
@@ -48,7 +48,7 @@ export function IconWrapperSection() {
             { color: "var(--success-primary)",label: "success-primary" },
           ].map(({ color, label }) => (
             <div key={label} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-              <IconWrapper as={IconSearch} size="md" style={{ color }} />
+              <IconWrapper icon={IconSearch} size="md" style={{ color }} />
               <code style={{ fontSize: "10px", color: "#A1A1AA", fontFamily: "monospace" }}>{label}</code>
             </div>
           ))}

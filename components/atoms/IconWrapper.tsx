@@ -3,7 +3,7 @@ import * as React from "react";
 export type IconSize = "xs" | "sm" | "md" | "lg";
 
 type IconProps = {
-  as: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   size?: IconSize;
   className?: string;
   title?: string;
@@ -16,11 +16,7 @@ const sizeToPx: Record<IconSize, number> = {
   lg: 24,
 };
 
-function cx(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
-}
-
-export function IconWrapper({ as: Svg, size = "lg", className, title, ...props }: IconProps) {
+export function IconWrapper({ icon: Svg, size = "lg", className, title, ...props }: IconProps) {
   const px = sizeToPx[size];
 
   return (
@@ -29,7 +25,7 @@ export function IconWrapper({ as: Svg, size = "lg", className, title, ...props }
       height={px}
       aria-hidden={title ? undefined : true}
       role={title ? "img" : undefined}
-      className={cx("shrink-0", className)}
+      className={["shrink-0", className].filter(Boolean).join(" ")}
       {...props}
     >
       {title ? <title>{title}</title> : null}

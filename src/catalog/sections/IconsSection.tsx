@@ -54,7 +54,7 @@ function IconGrid({ icons, label }: { icons: IconNamespace; label: string }) {
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", padding: "12px", backgroundColor: "#FFFFFF", border: "1px solid #E4E4E7", borderRadius: "6px", width: "80px" }}
           >
             <IconWrapper
-              as={Icon as ComponentType<SVGProps<SVGSVGElement>>}
+              icon={Icon as ComponentType<SVGProps<SVGSVGElement>>}
               size="lg"
               style={{ color: "#18181B" }}
             />
