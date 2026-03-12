@@ -42,7 +42,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Icons",
-    emoji: "✦",
+    emoji: "🔷",
     items: [
       { kind: "item", id: "icons-usecases",    label: "Use Cases" },
       { kind: "item", id: "icons-chevrons",    label: "Chevrons" },
@@ -94,11 +94,11 @@ type SidebarProps = {
 const LINK_STYLE = (isActive: boolean): React.CSSProperties => ({
   display: "block",
   width: "100%",
-  padding: "7px 20px",
+  padding: "9px 20px",
   background: isActive ? "#27272A" : "transparent",
   border: "none",
   borderLeft: isActive ? "2px solid #FAFAFA" : "2px solid transparent",
-  color: isActive ? "#FAFAFA" : "#A1A1AA",
+  color: isActive ? "#FAFAFA" : "#C4C4C7",
   fontSize: "13px",
   textAlign: "left",
   cursor: "pointer",
@@ -117,8 +117,8 @@ function Chevron({ open }: { open: boolean }) {
     <span style={{
       display: "inline-block",
       marginLeft: "auto",
-      fontSize: "11px",
-      color: "#71717A",
+      fontSize: "12px",
+      color: "#A1A1AA",
       transform: open ? "rotate(90deg)" : "rotate(0deg)",
       transition: "transform 0.15s",
       lineHeight: 1,
@@ -170,15 +170,15 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
                   display: "flex",
                   alignItems: "center",
                   width: "100%",
-                  padding: "9px 20px",
+                  padding: "12px 20px",
                   background: "transparent",
                   border: "none",
                   cursor: "pointer",
                   marginBottom: "2px",
                 }}
               >
-                <span style={{ marginRight: "7px", fontSize: "13px", lineHeight: 1 }}>{group.emoji}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                <span style={{ marginRight: "8px", fontSize: "14px", lineHeight: 1 }}>{group.emoji}</span>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: "#D4D4D8", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
                   {group.label}
                 </span>
                 <Chevron open={isOpen} />
@@ -205,14 +205,14 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
                         display: "flex",
                         alignItems: "center",
                         width: "100%",
-                        padding: "7px 20px",
+                        padding: "9px 20px",
                         background: "transparent",
                         border: "none",
                         borderLeft: "2px solid transparent",
                         cursor: "pointer",
                       }}
                     >
-                      <span style={{ fontSize: "12px", color: branchActive ? "#A1A1AA" : "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
+                      <span style={{ fontSize: "12px", color: branchActive ? "#D4D4D8" : "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
                         {entry.label}
                       </span>
                       <Chevron open={branchOpen} />
