@@ -25,12 +25,14 @@ type NavBranch = { kind: "branch"; label: string; children: NavItem[] };
 // A top-level section (Foundation, Icons, Atoms, Molecules)
 type NavGroup = {
   label: string;
+  emoji: string;
   items: (NavItem | NavBranch)[];
 };
 
 const NAV: NavGroup[] = [
   {
     label: "Foundation",
+    emoji: "🪨",
     items: [
       { kind: "item", id: "colors",     label: "Colors" },
       { kind: "item", id: "typography", label: "Typography" },
@@ -40,6 +42,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Icons",
+    emoji: "✦",
     items: [
       { kind: "item", id: "icons-usecases",    label: "Use Cases" },
       { kind: "item", id: "icons-chevrons",    label: "Chevrons" },
@@ -53,6 +56,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Atoms",
+    emoji: "⚛️",
     items: [
       { kind: "item", id: "badge-status", label: "BadgeStatus" },
       { kind: "item", id: "button",       label: "Button" },
@@ -73,6 +77,7 @@ const NAV: NavGroup[] = [
   },
   {
     label: "Molecules",
+    emoji: "🧬",
     items: [
       { kind: "item", id: "tab", label: "Tab / TabGroup" },
     ],
@@ -112,8 +117,8 @@ function Chevron({ open }: { open: boolean }) {
     <span style={{
       display: "inline-block",
       marginLeft: "auto",
-      fontSize: "9px",
-      color: "#3F3F46",
+      fontSize: "11px",
+      color: "#71717A",
       transform: open ? "rotate(90deg)" : "rotate(0deg)",
       transition: "transform 0.15s",
       lineHeight: 1,
@@ -165,14 +170,15 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
                   display: "flex",
                   alignItems: "center",
                   width: "100%",
-                  padding: "6px 20px 6px",
+                  padding: "9px 20px",
                   background: "transparent",
                   border: "none",
                   cursor: "pointer",
-                  marginBottom: "4px",
+                  marginBottom: "2px",
                 }}
               >
-                <span style={{ fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                <span style={{ marginRight: "7px", fontSize: "13px", lineHeight: 1 }}>{group.emoji}</span>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
                   {group.label}
                 </span>
                 <Chevron open={isOpen} />
@@ -206,7 +212,7 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
                         cursor: "pointer",
                       }}
                     >
-                      <span style={{ fontSize: "12px", color: branchActive ? "#71717A" : "#52525B", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
+                      <span style={{ fontSize: "12px", color: branchActive ? "#A1A1AA" : "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
                         {entry.label}
                       </span>
                       <Chevron open={branchOpen} />
