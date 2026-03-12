@@ -3,6 +3,29 @@
    ========================================================= */
 
 /* -----------------------------
+   0) CSS Reset
+   Zeroes out browser defaults so our tokens are the only
+   thing that determines how elements look.
+   ----------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+/* -----------------------------
    1) Typography primitives
    ----------------------------- */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
