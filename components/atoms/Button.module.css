@@ -1,0 +1,100 @@
+/* =========================================================
+   Button — scoped styles
+   Using CSS Modules so we can use :hover, :active, :focus-visible
+   ========================================================= */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-default);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-base);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 120ms ease, filter 120ms ease;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ─── Sizes ──────────────────────────────────────────────── */
+
+.sm {
+  height: 32px;
+  padding: 0 var(--space-sm);
+  font-size: var(--font-size-sm);
+  gap: var(--space-sm);
+}
+
+.md {
+  height: 38px;
+  padding: 0 var(--space-sm);
+  font-size: var(--font-size-base);
+  gap: var(--space-base);
+}
+
+/* ─── Primary ────────────────────────────────────────────── */
+
+.primary {
+  background: var(--brand-primary);
+  color: var(--text-invert);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--brand-secondary);
+}
+
+.primary:active:not(:disabled) {
+  background: var(--brand-secondary);
+}
+
+.primary:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Ghost ──────────────────────────────────────────────── */
+
+.ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--stroke-secondary);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--surface-tertiary);
+}
+
+.ghost:active:not(:disabled) {
+  background: var(--surface-tertiary);
+}
+
+.ghost:focus-visible {
+  outline: 2px solid var(--stroke-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Destructive ────────────────────────────────────────── */
+
+.destructive {
+  background: var(--error-primary);
+  color: var(--text-invert);
+}
+
+.destructive:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+.destructive:active:not(:disabled) {
+  filter: brightness(0.82);
+}
+
+.destructive:focus-visible {
+  outline: 2px solid var(--error-primary);
+  outline-offset: 2px;
+}
