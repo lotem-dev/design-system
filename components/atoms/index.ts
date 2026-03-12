@@ -20,8 +20,6 @@ export type { IconSize } from "./IconWrapper";
 
 export { Link } from "./Link";
 
-export { Table, TableHead, TableBody, TableRow, TableHeaderCell, TableCell } from "./Table";
-
 export { TextInput } from "./TextInput";
 export { SelectInput } from "./SelectInput";
 export { SearchInput } from "./SearchInput";

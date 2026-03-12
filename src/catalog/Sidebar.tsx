@@ -12,7 +12,7 @@ export type SectionId =
   // Badges (sub-group of Atoms)
   | "badge-status" | "badge-severity" | "badge-priority"
   // Atoms
-  | "button" | "divider" | "icon-wrapper" | "link" | "table" | "tooltip"
+  | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
   // Fields (sub-group of Atoms)
   | "fields-text" | "fields-select" | "fields-search"
   // Molecules
@@ -82,7 +82,6 @@ const NAV: NavGroup[] = [
       },
       { kind: "item", id: "icon-wrapper", label: "Icon" },
       { kind: "item", id: "link",         label: "Link" },
-      { kind: "item", id: "table",        label: "Table" },
       { kind: "item", id: "tooltip",      label: "Tooltip" },
     ],
   },
