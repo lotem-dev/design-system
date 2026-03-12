@@ -1,4 +1,5 @@
 import type React from "react";
+import { useState } from "react";
 import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 // Every page that can be shown in the catalog
@@ -106,7 +107,38 @@ const CHILD_LINK_STYLE = (isActive: boolean): React.CSSProperties => ({
   fontSize: "12px",
 });
 
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <span style={{
+      display: "inline-block",
+      marginLeft: "auto",
+      fontSize: "9px",
+      color: "#3F3F46",
+      transform: open ? "rotate(90deg)" : "rotate(0deg)",
+      transition: "transform 0.15s",
+      lineHeight: 1,
+    }}>
+      ›
+    </span>
+  );
+}
+
 export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps) {
+  // All groups open by default
+  const [openGroups, setOpenGroups]   = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(NAV.map(g => [g.label, true]))
+  );
+  // All branches open by default
+  const [openBranches, setOpenBranches] = useState<Record<string, boolean>>({ Fields: true });
+
+  function toggleGroup(label: string) {
+    setOpenGroups(prev => ({ ...prev, [label]: !prev[label] }));
+  }
+
+  function toggleBranch(label: string) {
+    setOpenBranches(prev => ({ ...prev, [label]: !prev[label] }));
+  }
+
   return (
     <aside style={{ width: "220px", flexShrink: 0, height: "100vh", backgroundColor: "#111111", overflowY: "hidden", display: "flex", flexDirection: "column", padding: "24px 0" }}>
       {/* Header */}
@@ -121,38 +153,78 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
 
       {/* Nav */}
       <nav style={{ padding: "16px 0", flex: 1, minHeight: 0, overflowY: "auto" }}>
-        {NAV.map((group) => (
-          <div key={group.label} style={{ marginBottom: "24px" }}>
-            <div style={{ padding: "0 20px 8px", fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-              {group.label}
-            </div>
+        {NAV.map((group) => {
+          const isOpen = openGroups[group.label] ?? true;
+          return (
+            <div key={group.label} style={{ marginBottom: "4px" }}>
 
-            {group.items.map((entry) => {
-              if (entry.kind === "item") {
-                return (
-                  <button key={entry.id} onClick={() => onSelect(entry.id)} style={LINK_STYLE(entry.id === active)}>
-                    {entry.label}
-                  </button>
-                );
-              }
+              {/* Group header — clickable, toggles expand/collapse */}
+              <button
+                onClick={() => toggleGroup(group.label)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  padding: "6px 20px 6px",
+                  background: "transparent",
+                  border: "none",
+                  cursor: "pointer",
+                  marginBottom: "4px",
+                }}
+              >
+                <span style={{ fontSize: "10px", fontWeight: 700, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                  {group.label}
+                </span>
+                <Chevron open={isOpen} />
+              </button>
 
-              // NavBranch — render a sub-header + indented children
-              const branchActive = entry.children.some(c => c.id === active);
-              return (
-                <div key={entry.label}>
-                  <div style={{ padding: "7px 20px", fontSize: "12px", color: branchActive ? "#71717A" : "#52525B", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
-                    {entry.label}
-                  </div>
-                  {entry.children.map((child) => (
-                    <button key={child.id} onClick={() => onSelect(child.id)} style={CHILD_LINK_STYLE(child.id === active)}>
-                      {child.label}
+              {/* Group items — only shown when group is open */}
+              {isOpen && group.items.map((entry) => {
+                if (entry.kind === "item") {
+                  return (
+                    <button key={entry.id} onClick={() => onSelect(entry.id)} style={LINK_STYLE(entry.id === active)}>
+                      {entry.label}
                     </button>
-                  ))}
-                </div>
-              );
-            })}
-          </div>
-        ))}
+                  );
+                }
+
+                // NavBranch — collapsible sub-group
+                const branchOpen   = openBranches[entry.label] ?? true;
+                const branchActive = entry.children.some(c => c.id === active);
+                return (
+                  <div key={entry.label}>
+                    <button
+                      onClick={() => toggleBranch(entry.label)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                        padding: "7px 20px",
+                        background: "transparent",
+                        border: "none",
+                        borderLeft: "2px solid transparent",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <span style={{ fontSize: "12px", color: branchActive ? "#71717A" : "#52525B", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
+                        {entry.label}
+                      </span>
+                      <Chevron open={branchOpen} />
+                    </button>
+                    {branchOpen && entry.children.map((child) => (
+                      <button key={child.id} onClick={() => onSelect(child.id)} style={CHILD_LINK_STYLE(child.id === active)}>
+                        {child.label}
+                      </button>
+                    ))}
+                  </div>
+                );
+              })}
+
+              {/* Spacing between groups */}
+              <div style={{ height: "16px" }} />
+            </div>
+          );
+        })}
       </nav>
 
       {/* Theme Toggle */}
