@@ -18,6 +18,7 @@ import { IconWrapperSection }   from "./sections/IconWrapperSection";
 import { LinkSection }          from "./sections/LinkSection";
 import { TooltipSection }       from "./sections/TooltipSection";
 import { TabSection }           from "./sections/TabSection";
+import { TableSection }         from "./sections/TableSection";
 
 export function CatalogApp() {
   const [active, setActive] = useState<SectionId>("button");
@@ -59,6 +60,7 @@ export function CatalogApp() {
       case "fields-search": return <SearchInputSection />;
       case "icon-wrapper":  return <IconWrapperSection />;
       case "link":          return <LinkSection />;
+      case "table":         return <TableSection />;
       case "tooltip":       return <TooltipSection />;
 
       // Molecules
