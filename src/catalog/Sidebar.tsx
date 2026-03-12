@@ -147,13 +147,20 @@ export function Sidebar({ active, onSelect, theme, onToggleTheme }: SidebarProps
   return (
     <aside style={{ width: "220px", flexShrink: 0, height: "100vh", backgroundColor: "#111111", overflowY: "hidden", display: "flex", flexDirection: "column", padding: "24px 0" }}>
       {/* Header */}
-      <div style={{ padding: "0 20px 24px", borderBottom: "1px solid #27272A" }}>
+      <div style={{ padding: "0 20px 28px", borderBottom: "1px solid #27272A" }}>
         <LogoJit
           variant="mono"
-          style={{ width: "48px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "12px" }}
+          style={{ width: "52px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "16px" }}
         />
-        <div style={{ fontSize: "11px", fontWeight: 600, color: "#52525B", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Design System</div>
-        <div style={{ fontSize: "10px", color: "#3F3F46", marginTop: "2px", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Component Catalog</div>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: "#E4E4E7", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "8px" }}>
+          Design System
+        </div>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "5px", backgroundColor: "#1C1C1F", border: "1px solid #27272A", borderRadius: "4px", padding: "3px 8px" }}>
+          <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#5E32FF", flexShrink: 0, display: "block" }} />
+          <span style={{ fontSize: "10px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif", letterSpacing: "0.02em" }}>
+            Component Catalog
+          </span>
+        </div>
       </div>
 
       {/* Nav */}
