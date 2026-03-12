@@ -2,7 +2,9 @@ import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 export type SectionId =
   | "colors" | "typography" | "spacing" | "icons"
-  | "badge-status" | "button" | "divider" | "icon-wrapper" | "link";
+  | "badge-status" | "button" | "divider" | "icon-wrapper" | "link"
+  | "fields" | "tooltip"
+  | "tab";
 
 type NavGroup = {
   label: string;
@@ -25,8 +27,16 @@ const NAV: NavGroup[] = [
       { id: "badge-status",  label: "BadgeStatus" },
       { id: "button",        label: "Button" },
       { id: "divider",       label: "Divider" },
+      { id: "fields",        label: "Fields" },
       { id: "icon-wrapper",  label: "Icon" },
       { id: "link",          label: "Link" },
+      { id: "tooltip",       label: "Tooltip" },
+    ],
+  },
+  {
+    label: "Molecules",
+    items: [
+      { id: "tab", label: "Tab / TabGroup" },
     ],
   },
 ];

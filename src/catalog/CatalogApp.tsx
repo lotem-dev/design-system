@@ -9,9 +9,12 @@ import { DividerSection }      from "./sections/DividerSection";
 import { IconWrapperSection }  from "./sections/IconWrapperSection";
 import { LinkSection }         from "./sections/LinkSection";
 import { ButtonSection }       from "./sections/ButtonSection";
+import { FieldsSection }       from "./sections/FieldsSection";
+import { TooltipSection }      from "./sections/TooltipSection";
+import { TabSection }          from "./sections/TabSection";
 
 export function CatalogApp() {
-  const [active, setActive] = useState<SectionId>("badge-status");
+  const [active, setActive] = useState<SectionId>("button");
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   function renderSection() {
@@ -25,6 +28,9 @@ export function CatalogApp() {
       case "divider":      return <DividerSection />;
       case "icon-wrapper": return <IconWrapperSection />;
       case "link":         return <LinkSection />;
+      case "fields":       return <FieldsSection />;
+      case "tooltip":      return <TooltipSection />;
+      case "tab":          return <TabSection />;
     }
   }
 
