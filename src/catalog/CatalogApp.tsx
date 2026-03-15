@@ -18,6 +18,9 @@ import { IconWrapperSection }   from "./sections/IconWrapperSection";
 import { LinkSection }          from "./sections/LinkSection";
 import { TooltipSection }       from "./sections/TooltipSection";
 import { TabSection }           from "./sections/TabSection";
+import { CheckboxSection }      from "./sections/CheckboxSection";
+import { RadioSection }         from "./sections/RadioSection";
+import { ResourceItemSection }  from "./sections/ResourceItemSection";
 
 export function CatalogApp() {
   const [active, setActive] = useState<SectionId>("button");
@@ -47,9 +50,12 @@ export function CatalogApp() {
       case "badge-priority":  return <BadgePrioritySection />;
       case "button":        return <ButtonSection />;
       case "divider":       return <DividerSection />;
-      case "fields-text":   return <TextInputSection />;
-      case "fields-select": return <SelectInputSection />;
-      case "fields-search": return <SearchInputSection />;
+      case "fields-text":     return <TextInputSection />;
+      case "fields-select":   return <SelectInputSection />;
+      case "fields-search":   return <SearchInputSection />;
+      case "fields-checkbox":  return <CheckboxSection />;
+      case "fields-radio":     return <RadioSection />;
+      case "resource-item":    return <ResourceItemSection />;
       case "icon-wrapper":  return <IconWrapperSection />;
       case "link":          return <LinkSection />;
       case "tooltip":       return <TooltipSection />;
@@ -62,7 +68,7 @@ export function CatalogApp() {
   return (
     <div style={{ fontFamily: "'Open Sans', system-ui, sans-serif" }}>
       <Sidebar active={active} onSelect={setActive} />
-      <main style={{ marginLeft: "220px", height: "100vh", overflow: "auto", backgroundColor: "#FAFAFA" }}>
+      <main style={{ marginLeft: "244px", height: "100vh", overflow: "auto", backgroundColor: "#FAFAFA" }}>
         {renderSection()}
       </main>
     </div>

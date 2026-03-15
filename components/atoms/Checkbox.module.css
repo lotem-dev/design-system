@@ -1,0 +1,62 @@
+/* =========================================================
+   Checkbox — scoped styles
+   ========================================================= */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  user-select: none;
+}
+
+.wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Hide the native input visually but keep it accessible */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ─── Visual box ─────────────────────────────────────────── */
+
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--stroke-secondary);
+  background: var(--surface-primary);
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.box.checked {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+.wrapper:not(.disabled):hover .box:not(.checked) {
+  border-color: var(--stroke-primary);
+}
+
+.wrapper:focus-within .box {
+  box-shadow: 0 0 0 2px var(--brand-tertiary);
+}
+
+/* ─── Label ──────────────────────────────────────────────── */
+
+.label {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  line-height: 1;
+}

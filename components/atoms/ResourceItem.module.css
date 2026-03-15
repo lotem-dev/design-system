@@ -1,0 +1,125 @@
+/* =========================================================
+   ResourceItem — scoped styles
+   ========================================================= */
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
+  width: 243px;
+}
+
+/* ─── Icon ───────────────────────────────────────────────── */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  color: var(--text-secondary); /* for currentColor icons (Web, API, App) */
+}
+
+/* ─── Text block ─────────────────────────────────────────── */
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  min-width: 0; /* allows text truncation */
+}
+
+/* Main name — body/regular */
+.name {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Org prefix — XS/bold/secondary */
+.prefix {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Row containing optional badge + name */
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Branch / region detail — XS/regular/secondary */
+.detail {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Account row: name + id side by side */
+.accountRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  line-height: var(--line-height-xs);
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.accountName {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accountId {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── "New!" badge ───────────────────────────────────────── */
+
+.newBadge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 2px var(--space-xs);
+  border-radius: var(--radius-xs);
+  background: var(--purple-100);
+  color: var(--purple-900);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-sm);
+  white-space: nowrap;
+}

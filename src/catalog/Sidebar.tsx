@@ -9,6 +9,8 @@ export type SectionId =
   | "badge-status" | "badge-severity" | "badge-priority"
   | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
   | "fields-text" | "fields-select" | "fields-search"
+  | "fields-checkbox" | "fields-radio"
+  | "resource-item"
   | "tab";
 
 type NavItem   = { kind: "item";   id: SectionId; label: string };
@@ -41,11 +43,12 @@ const NAV: NavGroup[] = [
   {
     label: "Atoms", emoji: "⚛️",
     items: [
-      { kind: "item", id: "icon-wrapper", label: "IconWrapper" },
-      { kind: "item", id: "button",       label: "Button" },
-      { kind: "item", id: "link",         label: "Link" },
-      { kind: "item", id: "divider",      label: "Divider" },
-      { kind: "item", id: "tooltip",      label: "Tooltip" },
+      { kind: "item", id: "icon-wrapper",  label: "IconWrapper" },
+      { kind: "item", id: "button",        label: "Button" },
+      { kind: "item", id: "link",          label: "Link" },
+      { kind: "item", id: "divider",       label: "Divider" },
+      { kind: "item", id: "tooltip",       label: "Tooltip" },
+      { kind: "item", id: "resource-item", label: "ResourceItem" },
       {
         kind: "branch", label: "Badges",
         children: [
@@ -57,9 +60,11 @@ const NAV: NavGroup[] = [
       {
         kind: "branch", label: "Fields",
         children: [
-          { kind: "item", id: "fields-text",   label: "TextInput" },
-          { kind: "item", id: "fields-select", label: "SelectInput" },
-          { kind: "item", id: "fields-search", label: "SearchInput" },
+          { kind: "item", id: "fields-text",     label: "TextInput" },
+          { kind: "item", id: "fields-select",   label: "SelectInput" },
+          { kind: "item", id: "fields-search",   label: "SearchInput" },
+          { kind: "item", id: "fields-checkbox", label: "Checkbox" },
+          { kind: "item", id: "fields-radio",    label: "Radio" },
         ],
       },
     ],
@@ -79,23 +84,24 @@ type SidebarProps = {
 
 const ITEM_STYLE = (isActive: boolean, isHovered: boolean): React.CSSProperties => ({
   display: "block",
-  width: "100%",
-  padding: "9px 20px",
-  background: isActive ? "#27272A" : isHovered ? "rgba(255,255,255,0.06)" : "transparent",
+  width: "calc(100% - 16px)",
+  margin: "0 8px",
+  padding: "8px 12px",
+  background: isActive ? "#E4E4E7" : isHovered ? "#F4F4F5" : "transparent",
   border: "none",
-  borderLeft: isActive ? "2px solid #FAFAFA" : "2px solid transparent",
-  color: isActive ? "#FAFAFA" : isHovered ? "#E4E4E7" : "#C4C4C7",
+  borderRadius: "8px",
+  color: isActive ? "#18181B" : isHovered ? "#18181B" : "#52525B",
   fontSize: "13px",
   textAlign: "left",
   cursor: "pointer",
   fontFamily: "'Open Sans', system-ui, sans-serif",
-  fontWeight: isActive ? 500 : 400,
+  fontWeight: isActive ? 600 : 400,
   transition: "background 0.12s, color 0.12s",
 });
 
 const CHILD_STYLE = (isActive: boolean, isHovered: boolean): React.CSSProperties => ({
   ...ITEM_STYLE(isActive, isHovered),
-  paddingLeft: "32px",
+  paddingLeft: "24px",
   fontSize: "12px",
 });
 
@@ -105,7 +111,7 @@ function Chevron({ open }: { open: boolean }) {
       width="14" height="14" viewBox="0 0 24 24" fill="none"
       style={{ marginLeft: "auto", flexShrink: 0, transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
     >
-      <path d="M9 18l6-6-6-6" stroke="#52525B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9 18l6-6-6-6" stroke="#C4C4C7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -119,18 +125,20 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
 
   return (
     <aside style={{
-      position: "fixed", left: 0, top: 0,
-      width: "220px", height: "100vh", zIndex: 100,
-      backgroundColor: "#111111",
-      borderRight: "1px solid #27272A",
+      position: "fixed", left: "12px", top: "12px",
+      width: "220px", height: "calc(100vh - 24px)", zIndex: 100,
+      backgroundColor: "#FFFFFF",
+      border: "1px solid #E4E4E7",
+      borderRadius: "16px",
+      boxShadow: "0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)",
       display: "flex", flexDirection: "column",
       padding: "24px 0",
     }}>
 
       {/* Header */}
-      <div style={{ padding: "0 20px 28px", borderBottom: "1px solid #27272A" }}>
+      <div style={{ padding: "0 20px 24px", borderBottom: "1px solid #F4F4F5" }}>
         <LogoJit variant="mono" style={{ width: "36px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "16px" }} />
-        <div style={{ fontSize: "12px", fontWeight: 700, color: "#E4E4E7", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: "#18181B", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           Design System
         </div>
       </div>
@@ -148,14 +156,14 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                 {...h(`g-${group.label}`)}
                 style={{
                   display: "flex", alignItems: "center",
-                  width: "100%", padding: "12px 20px",
-                  background: hovered === `g-${group.label}` ? "rgba(255,255,255,0.04)" : "transparent",
-                  border: "none", cursor: "pointer", marginBottom: "2px",
+                  width: "calc(100% - 16px)", margin: "0 8px 2px", padding: "8px 12px",
+                  background: hovered === `g-${group.label}` ? "#F4F4F5" : "transparent",
+                  border: "none", borderRadius: "8px", cursor: "pointer",
                   transition: "background 0.12s",
                 }}
               >
                 <span style={{ marginRight: "8px", fontSize: "14px", lineHeight: 1 }}>{group.emoji}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, color: "#D4D4D8", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                <span style={{ fontSize: "11px", fontWeight: 700, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
                   {group.label}
                 </span>
                 <Chevron open={isOpen} />
@@ -180,13 +188,13 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                       {...h(`b-${entry.label}`)}
                       style={{
                         display: "flex", alignItems: "center",
-                        width: "100%", padding: "9px 20px",
-                        background: hovered === `b-${entry.label}` ? "rgba(255,255,255,0.06)" : "transparent",
-                        border: "none", borderLeft: "2px solid transparent",
+                        width: "calc(100% - 16px)", margin: "0 8px", padding: "8px 12px",
+                        background: hovered === `b-${entry.label}` ? "#F4F4F5" : "transparent",
+                        border: "none", borderRadius: "8px",
                         cursor: "pointer", transition: "background 0.12s",
                       }}
                     >
-                      <span style={{ fontSize: "12px", color: branchActive ? "#D4D4D8" : "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                      <span style={{ fontSize: "12px", color: branchActive ? "#18181B" : "#71717A", fontWeight: branchActive ? 600 : 400, fontFamily: "'Open Sans', system-ui, sans-serif" }}>
                         {entry.label}
                       </span>
                       <Chevron open={branchOpen} />
@@ -201,7 +209,7 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
                 );
               })}
 
-              <div style={{ height: "16px" }} />
+              <div style={{ height: "12px" }} />
             </div>
           );
         })}
