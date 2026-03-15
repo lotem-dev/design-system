@@ -1,15 +1,15 @@
 import { Text } from "../typography/Text";
 
-export type BadgeStatus = "open" | "fixed" | "ignored";
+export type BadgeStatusValue = "open" | "fixed" | "ignored";
 
 // Strict props: only status.
 // No children/className/style overrides.
 type BadgeStatusProps = {
-  status: BadgeStatus;
+  status: BadgeStatusValue;
 };
 
 // Colors per status (from existing CSS tokens).
-const STATUS_TOKENS: Record<BadgeStatus, { fg: string; bg: string }> = {
+const STATUS_TOKENS: Record<BadgeStatusValue, { fg: string; bg: string }> = {
   open: {
     fg: "var(--status-open-primary)",
     bg: "var(--status-open-secondary)",
@@ -25,7 +25,7 @@ const STATUS_TOKENS: Record<BadgeStatus, { fg: string; bg: string }> = {
 };
 
 // Locked label text (capitalized exactly).
-const STATUS_LABELS: Record<BadgeStatus, string> = {
+const STATUS_LABELS: Record<BadgeStatusValue, string> = {
   open: "Open",
   fixed: "Fixed",
   ignored: "Ignored",

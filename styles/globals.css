@@ -28,7 +28,7 @@ button, input, select, textarea {
 /* -----------------------------
    1) Typography primitives
    ----------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+/* Font loaded once via <link> in index.html (weights 400, 600, 700) */
 :root {
     --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
     Roboto, Helvetica, Arial;
@@ -36,6 +36,7 @@ button, input, select, textarea {
   --font-family-default: var(--font-sans);
 
   --font-weight-regular: 400;
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
   --font-size-2xl: 30px; /* Headline */
@@ -217,6 +218,7 @@ html, body {
   --text-brand: var(--purple-500);
   --text-primary: var(--neutral-600);
   --text-secondary: var(--neutral-400);
+  --text-tertiary: var(--neutral-300);
   --text-invert: var(--white-100);
 
   /* Stroke */
@@ -296,6 +298,7 @@ html, body {
   --text-brand: var(--purple-200);
   --text-primary: var(--neutral-200);
   --text-secondary: var(--neutral-400);
+  --text-tertiary: var(--neutral-500);
   --text-invert: var(--white-100);
 
   /* Stroke */

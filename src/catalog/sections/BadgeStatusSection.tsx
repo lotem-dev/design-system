@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BadgeStatus, type BadgeStatus as BadgeStatusType } from "../../../components/atoms/BadgeStatus";
+import { BadgeStatus } from "../../../components/atoms/BadgeStatus";
+import type { BadgeStatusValue as BadgeStatusType } from "../../../components/atoms/BadgeStatus";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";

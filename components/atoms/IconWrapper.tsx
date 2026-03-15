@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cx } from "../utils";
 
 export type IconSize = "xs" | "sm" | "md" | "lg";
 
@@ -25,7 +26,8 @@ export function IconWrapper({ icon: Svg, size = "lg", className, title, ...props
       height={px}
       aria-hidden={title ? undefined : true}
       role={title ? "img" : undefined}
-      className={["shrink-0", className].filter(Boolean).join(" ")}
+      className={cx(className)}
+      style={{ flexShrink: 0 }}
       {...props}
     >
       {title ? <title>{title}</title> : null}

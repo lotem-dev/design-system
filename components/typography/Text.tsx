@@ -2,16 +2,14 @@ import * as React from "react";
 import { typographyScale } from "./scale";
 import { typographyRoleTokens, type TypographyRole } from "./roles";
 
-// Strict Text props:
-// - role is REQUIRED (semantic meaning)
-// - children is REQUIRED (text content)
-// No style/className/as/color props -> no overrides.
 type TextProps = {
   role: TypographyRole;
   children: React.ReactNode;
+  /** Optional color override as a token string — e.g. "var(--text-secondary)" */
+  color?: string;
 };
 
-export function Text({ role, children }: TextProps) {
+export function Text({ role, children, color }: TextProps) {
   // 1) Get the DS rules for this role (scale + weight + HTML tag).
   const roleTokens = typographyRoleTokens[role];
 
@@ -31,6 +29,7 @@ export function Text({ role, children }: TextProps) {
           textTransform: "uppercase",
           letterSpacing: "var(--letter-spacing-caps)",
         }),
+        ...(color && { color }),
       }}
     >
       {children}

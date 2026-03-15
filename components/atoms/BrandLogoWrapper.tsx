@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cx } from "../utils";
 
 export type BrandLogoSize = "xs" | "sm" | "md" | "lg";
 
@@ -16,10 +17,6 @@ const sizeToPx: Record<BrandLogoSize, number> = {
   lg: 32,
 };
 
-function cx(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
-}
-
 export function BrandLogoWrapper({ as: Logo, size = "md", className, title, ...props }: BrandLogoProps) {
   const px = sizeToPx[size];
 
@@ -29,7 +26,8 @@ export function BrandLogoWrapper({ as: Logo, size = "md", className, title, ...p
       height={px}
       role="img"
       aria-label={title}
-      className={cx("shrink-0", className)}
+      className={cx(className)}
+      style={{ flexShrink: 0 }}
       {...props}
     />
   );

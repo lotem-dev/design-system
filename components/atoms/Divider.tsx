@@ -1,4 +1,5 @@
 import * as React from "react";
+import { cx } from "../utils";
 
 export type DividerOrientation = "horizontal" | "vertical";
 
@@ -21,10 +22,6 @@ type DividerProps = {
   className?: string;
   style?: React.CSSProperties;
 };
-
-function cx(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
-}
 
 export function Divider({
   orientation = "horizontal",
