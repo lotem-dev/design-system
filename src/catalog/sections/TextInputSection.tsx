@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { TextInput } from "../../../components/atoms/TextInput";
 import { SectionBlock } from "../ui/SectionBlock";
-import { PreviewBox } from "../ui/PreviewBox";
-import { TokenTable } from "../ui/TokenTable";
 import { SplitPage } from "../ui/SplitPage";
+import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
 import textInputTsx from "../../../components/atoms/TextInput.tsx?raw";
 import textInputCss from "../../../components/atoms/TextInput.module.css?raw";
@@ -13,9 +12,28 @@ const sources = [
   { filename: "TextInput.module.css", code: textInputCss },
 ];
 
-export function TextInputSection() {
-  const [value, setValue] = useState("");
+function Playground() {
+  const [value, setValue]       = useState("");
+  const [disabled, setDisabled] = useState(false);
 
+  return (
+    <PlaygroundShell
+      preview={
+        <div style={{ width: "200px" }}>
+          <TextInput label="Field Name" placeholder="Text" value={value} onChange={setValue} disabled={disabled} />
+        </div>
+      }
+      controls={
+        <ControlRow label="State">
+          <Pill active={!disabled} onClick={() => setDisabled(false)}>default</Pill>
+          <Pill active={disabled}  onClick={() => setDisabled(true)}>disabled</Pill>
+        </ControlRow>
+      }
+    />
+  );
+}
+
+export function TextInputSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
@@ -26,45 +44,12 @@ export function TextInputSection() {
         </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>TextInput</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A single-line text field. Has an optional label above it. States: default, focused (purple ring), and disabled.
+          A single-line text field with an optional label. States: default, focused (purple ring), and disabled.
         </p>
       </div>
 
-      <SectionBlock title="Default &amp; Disabled">
-        <PreviewBox>
-          <div style={{ width: "200px" }}>
-            <TextInput label="Field Name" placeholder="Text" value={value} onChange={setValue} />
-          </div>
-          <div style={{ width: "200px" }}>
-            <TextInput label="Field Name" placeholder="Text" disabled />
-          </div>
-        </PreviewBox>
-      </SectionBlock>
-
-      <SectionBlock title="Focus State">
-        <p style={{ fontSize: "13px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "12px" }}>
-          Click the field below to see the focus ring - 2px brand border + purple glow.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "200px" }}>
-            <TextInput label="Click me" placeholder="Focus me" />
-          </div>
-        </PreviewBox>
-      </SectionBlock>
-
-      <SectionBlock title="Tokens">
-        <TokenTable rows={[
-          { property: "height",          token: "—",                        value: "38px" },
-          { property: "padding",         token: "--space-sm / --space-base", value: "8px 12px" },
-          { property: "border radius",   token: "--radius-base",             value: "8px" },
-          { property: "border default",  token: "--stroke-secondary",        value: "var(--neutral-200)" },
-          { property: "border focused",  token: "--stroke-brand",            value: "var(--purple-500)" },
-          { property: "bg default",      token: "--surface-primary",         value: "white" },
-          { property: "bg disabled",     token: "--surface-secondary",       value: "var(--neutral-50)" },
-          { property: "text color",      token: "--text-primary",            value: "var(--neutral-600)" },
-          { property: "text disabled",   token: "--text-secondary",          value: "var(--neutral-400)" },
-          { property: "label font",      token: "--font-size-sm / --font-weight-bold", value: "12px / 700" },
-        ]} />
+      <SectionBlock title="Playground">
+        <Playground />
       </SectionBlock>
     </SplitPage>
   );

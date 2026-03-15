@@ -56,7 +56,7 @@
 
 .md {
   height: 38px;
-  padding: 0 var(--space-md);
+  padding: 0 var(--space-base);
   font-size: var(--font-size-base);
   gap: var(--space-sm);
 }
@@ -81,10 +81,6 @@
   color: var(--text-invert);
 }
 
-.primary:hover:not(:disabled) {
-  background: var(--brand-secondary);
-}
-
 .primary:active:not(:disabled) {
   background: var(--brand-secondary);
   filter: brightness(0.92);
@@ -100,7 +96,6 @@
 .ghost {
   background: transparent;
   color: var(--text-primary);
-  border-color: var(--stroke-secondary);
 }
 
 .ghost:hover:not(:disabled) {
@@ -122,10 +117,6 @@
 .destructive {
   background: var(--error-primary);
   color: var(--text-invert);
-}
-
-.destructive:hover:not(:disabled) {
-  filter: brightness(0.9);
 }
 
 .destructive:active:not(:disabled) {

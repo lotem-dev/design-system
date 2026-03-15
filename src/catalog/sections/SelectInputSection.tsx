@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { SelectInput } from "../../../components/atoms/SelectInput";
 import { SectionBlock } from "../ui/SectionBlock";
-import { PreviewBox } from "../ui/PreviewBox";
-import { TokenTable } from "../ui/TokenTable";
 import { SplitPage } from "../ui/SplitPage";
+import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
 import selectInputTsx from "../../../components/atoms/SelectInput.tsx?raw";
 import selectInputCss from "../../../components/atoms/SelectInput.module.css?raw";
@@ -19,9 +18,28 @@ const OPTIONS = [
   { label: "Option C", value: "c" },
 ];
 
-export function SelectInputSection() {
-  const [value, setValue] = useState("");
+function Playground() {
+  const [value, setValue]       = useState("");
+  const [disabled, setDisabled] = useState(false);
 
+  return (
+    <PlaygroundShell
+      preview={
+        <div style={{ width: "200px" }}>
+          <SelectInput label="Field Name" options={OPTIONS} placeholder="Select..." value={value} onChange={setValue} disabled={disabled} />
+        </div>
+      }
+      controls={
+        <ControlRow label="State">
+          <Pill active={!disabled} onClick={() => setDisabled(false)}>default</Pill>
+          <Pill active={disabled}  onClick={() => setDisabled(true)}>disabled</Pill>
+        </ControlRow>
+      }
+    />
+  );
+}
+
+export function SelectInputSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
@@ -36,40 +54,8 @@ export function SelectInputSection() {
         </p>
       </div>
 
-      <SectionBlock title="Default &amp; Disabled">
-        <PreviewBox>
-          <div style={{ width: "200px" }}>
-            <SelectInput label="Field Name" options={OPTIONS} placeholder="Select..." value={value} onChange={setValue} />
-          </div>
-          <div style={{ width: "200px" }}>
-            <SelectInput label="Field Name" options={OPTIONS} placeholder="Select..." disabled />
-          </div>
-        </PreviewBox>
-      </SectionBlock>
-
-      <SectionBlock title="Focus State">
-        <p style={{ fontSize: "13px", color: "#71717A", fontFamily: "'Open Sans', system-ui, sans-serif", marginBottom: "12px" }}>
-          Click to open - the same purple focus ring as TextInput applies.
-        </p>
-        <PreviewBox>
-          <div style={{ width: "200px" }}>
-            <SelectInput label="Click me" options={OPTIONS} placeholder="Select..." />
-          </div>
-        </PreviewBox>
-      </SectionBlock>
-
-      <SectionBlock title="Tokens">
-        <TokenTable rows={[
-          { property: "height",          token: "—",                        value: "38px" },
-          { property: "padding",         token: "--space-sm / --space-base", value: "8px 12px" },
-          { property: "border radius",   token: "--radius-base",             value: "8px" },
-          { property: "border default",  token: "--stroke-secondary",        value: "var(--neutral-200)" },
-          { property: "border focused",  token: "--stroke-brand",            value: "var(--purple-500)" },
-          { property: "bg default",      token: "--surface-primary",         value: "white" },
-          { property: "bg disabled",     token: "--surface-secondary",       value: "var(--neutral-50)" },
-          { property: "text color",      token: "--text-primary",            value: "var(--neutral-600)" },
-          { property: "chevron color",   token: "--text-secondary",          value: "var(--neutral-400)" },
-        ]} />
+      <SectionBlock title="Playground">
+        <Playground />
       </SectionBlock>
     </SplitPage>
   );
