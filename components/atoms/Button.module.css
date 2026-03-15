@@ -14,12 +14,35 @@
   white-space: nowrap;
   line-height: 1;
   cursor: pointer;
-  transition: background 120ms ease, filter 120ms ease;
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    filter 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+/* ─── Content wrappers ───────────────────────────────────── */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon svg {
+  display: block;
 }
 
 /* ─── Sizes ──────────────────────────────────────────────── */
@@ -33,9 +56,22 @@
 
 .md {
   height: 38px;
-  padding: 0 var(--space-sm);
+  padding: 0 var(--space-md);
   font-size: var(--font-size-base);
-  gap: var(--space-base);
+  gap: var(--space-sm);
+}
+
+/* icon-only: square, no horizontal padding */
+.sm.iconOnly {
+  width: 32px;
+  padding: 0;
+  gap: 0;
+}
+
+.md.iconOnly {
+  width: 38px;
+  padding: 0;
+  gap: 0;
 }
 
 /* ─── Primary ────────────────────────────────────────────── */
@@ -51,6 +87,7 @@
 
 .primary:active:not(:disabled) {
   background: var(--brand-secondary);
+  filter: brightness(0.92);
 }
 
 .primary:focus-visible {
@@ -72,6 +109,7 @@
 
 .ghost:active:not(:disabled) {
   background: var(--surface-tertiary);
+  filter: brightness(0.95);
 }
 
 .ghost:focus-visible {
