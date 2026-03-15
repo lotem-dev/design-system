@@ -83,7 +83,7 @@ export function ControlRow({ label, children }: { label: string; children: React
       }}>
         {label}
       </span>
-      <div style={{ display: "flex", gap: "4px" }}>{children}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>{children}</div>
     </div>
   );
 }

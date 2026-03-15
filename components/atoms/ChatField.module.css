@@ -1,0 +1,248 @@
+/* =========================================================
+   ChatField — scoped styles
+   ========================================================= */
+
+/* ─── Root wrapper ────────────────────────────────────────── */
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  min-width: 320px;
+  /* Extra space at the bottom so the strip can peek out */
+  padding-bottom: 15px;
+}
+
+/* ─── Main input card ─────────────────────────────────────── */
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* Negative margin pulls the strip up so it slides behind the card */
+  margin-bottom: -15px;
+  background: var(--surface-primary);
+  border: 1px solid var(--stroke-brand);
+  border-radius: var(--radius-lg);
+  /* Brand glow ring */
+  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-base);
+  padding: var(--space-base);
+  overflow: hidden;
+}
+
+/* ─── Text area row ───────────────────────────────────────── */
+
+.textRow {
+  padding: 0 var(--space-base);
+}
+
+.textarea {
+  width: 100%;
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-base);
+  line-height: 22px;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 0;
+  margin: 0;
+  min-height: 22px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: block;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+/* ─── Toolbar ─────────────────────────────────────────────── */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.toolbarBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: var(--space-sm);
+  border: none;
+  border-radius: var(--radius-base);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.toolbarBtn:hover {
+  background: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+/* ─── Send button ─────────────────────────────────────────── */
+
+.sendBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: var(--space-sm);
+  border: none;
+  border-radius: var(--radius-base);
+  color: var(--text-invert, white);
+  transition: background 120ms ease;
+}
+
+.sendActive {
+  background: var(--brand-primary);
+  cursor: pointer;
+}
+
+.sendIdle {
+  background: var(--brand-tertiary);
+  cursor: default;
+}
+
+/* ─── Spinner (processing state) ─────────────────────────── */
+
+.spinner {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: var(--radius-round);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Connectors strip ────────────────────────────────────── */
+
+/* Outer wrapper: sits behind the card (z-index 1), indented 20px
+   on each side so the card's rounded corners show at the edges */
+.stripOuter {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.strip {
+  width: 100%;
+  background: var(--surface-secondary);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  /* pt-lg pushes content below the card overlap; pb-base, px-base for spacing */
+  padding: var(--space-lg) var(--space-base) var(--space-base);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ─── Strip — left (label + count + info) ─────────────────── */
+
+.stripLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.stripLabel {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: 16px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.stripCount {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.infoIcon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* ─── Strip — right (avatars + chevron) ───────────────────── */
+
+.stripRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Avatar stack — overlapping circles */
+.avatarRow {
+  display: flex;
+  align-items: center;
+  padding-right: 4px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 23px;
+  height: 23px;
+  border-radius: var(--radius-round);
+  border: 0.5px solid var(--stroke-secondary);
+  background: var(--surface-primary);
+  overflow: hidden;
+  padding: var(--space-xs);
+  /* Each avatar overlaps the next by 4px */
+  margin-right: -4px;
+  flex-shrink: 0;
+}
+
+/* "+N" label after the avatar stack */
+.overflow {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 16px;
+  color: var(--text-primary);
+  padding-left: var(--space-base);
+  white-space: nowrap;
+}
+
+.chevron {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}

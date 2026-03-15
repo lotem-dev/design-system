@@ -10,7 +10,8 @@ export type SectionId =
   | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
   | "fields-text" | "fields-select" | "fields-search"
   | "fields-checkbox" | "fields-radio"
-  | "resource-item"
+  | "resource-item" | "findings-breakdown" | "priority-gauge"
+  | "table-header-cell" | "chat-field"
   | "tab";
 
 type NavItem   = { kind: "item";   id: SectionId; label: string };
@@ -48,7 +49,11 @@ const NAV: NavGroup[] = [
       { kind: "item", id: "link",          label: "Link" },
       { kind: "item", id: "divider",       label: "Divider" },
       { kind: "item", id: "tooltip",       label: "Tooltip" },
-      { kind: "item", id: "resource-item", label: "ResourceItem" },
+      { kind: "item", id: "resource-item",       label: "ResourceItem" },
+      { kind: "item", id: "findings-breakdown",  label: "FindingsBreakdown" },
+      { kind: "item", id: "priority-gauge",      label: "PriorityGauge" },
+      { kind: "item", id: "table-header-cell",   label: "TableHeaderCell" },
+      { kind: "item", id: "chat-field",          label: "ChatField" },
       {
         kind: "branch", label: "Badges",
         children: [

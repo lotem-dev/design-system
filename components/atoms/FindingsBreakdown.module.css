@@ -1,0 +1,68 @@
+/* =========================================================
+   FindingsBreakdown — scoped styles
+   ========================================================= */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-xs);
+  width: 121px;
+}
+
+/* ─── Bar ────────────────────────────────────────────────── */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  width: 100%;
+  height: 6px;
+}
+
+.segment {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  min-width: 4px; /* always visible even at small percentages */
+}
+
+.critical { background: var(--scale-critical-primary); }
+.high     { background: var(--scale-high-primary); }
+.medium   { background: var(--warning-primary); }
+.low      { background: var(--text-secondary); }
+.empty    { background: var(--stroke-secondary); }
+
+/* ─── Counts ─────────────────────────────────────────────── */
+
+.counts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.criticalCount {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-xs);
+  color: var(--text-primary);
+}
+
+.otherCounts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-xs);
+  color: var(--text-primary);
+}
+
+.slash {
+  color: var(--text-secondary);
+}

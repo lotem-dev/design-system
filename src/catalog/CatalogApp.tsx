@@ -20,7 +20,11 @@ import { TooltipSection }       from "./sections/TooltipSection";
 import { TabSection }           from "./sections/TabSection";
 import { CheckboxSection }      from "./sections/CheckboxSection";
 import { RadioSection }         from "./sections/RadioSection";
-import { ResourceItemSection }  from "./sections/ResourceItemSection";
+import { ResourceItemSection }        from "./sections/ResourceItemSection";
+import { FindingsBreakdownSection }   from "./sections/FindingsBreakdownSection";
+import { PriorityGaugeSection }       from "./sections/PriorityGaugeSection";
+import { TableHeaderCellSection }     from "./sections/TableHeaderCellSection";
+import { ChatFieldSection }           from "./sections/ChatFieldSection";
 
 export function CatalogApp() {
   const [active, setActive] = useState<SectionId>("button");
@@ -55,7 +59,11 @@ export function CatalogApp() {
       case "fields-search":   return <SearchInputSection />;
       case "fields-checkbox":  return <CheckboxSection />;
       case "fields-radio":     return <RadioSection />;
-      case "resource-item":    return <ResourceItemSection />;
+      case "resource-item":       return <ResourceItemSection />;
+      case "findings-breakdown":  return <FindingsBreakdownSection />;
+      case "priority-gauge":      return <PriorityGaugeSection />;
+      case "table-header-cell":   return <TableHeaderCellSection />;
+      case "chat-field":          return <ChatFieldSection />;
       case "icon-wrapper":  return <IconWrapperSection />;
       case "link":          return <LinkSection />;
       case "tooltip":       return <TooltipSection />;

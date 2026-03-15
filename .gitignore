@@ -4,6 +4,10 @@ node_modules/
 # Build output
 dist/
 
+# TypeScript compiled output (we use Vite, not tsc for output)
+components/**/*.js
+src/**/*.js
+
 # Mac system files
 .DS_Store
 

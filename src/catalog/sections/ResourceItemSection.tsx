@@ -55,9 +55,22 @@ function Playground() {
       controls={
         <>
           <ControlRow label="Type">
-            {ALL_TYPES.map(t => (
-              <Pill key={t} active={type === t} onClick={() => setType(t)}>{t}</Pill>
-            ))}
+            <select
+              value={type}
+              onChange={e => setType(e.target.value as ResourceType)}
+              style={{
+                fontFamily: "'Open Sans', system-ui, sans-serif",
+                fontSize: "12px",
+                padding: "4px 8px",
+                border: "1px solid #E4E4E7",
+                borderRadius: "6px",
+                background: "#FFFFFF",
+                color: "#52525B",
+                cursor: "pointer",
+              }}
+            >
+              {ALL_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
           </ControlRow>
           <ControlRow label="Badge">
             <Pill active={!isNew} onClick={() => setIsNew(false)}>none</Pill>
