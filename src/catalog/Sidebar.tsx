@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 export type SectionId =
@@ -181,6 +181,13 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
+const WORKSPACES = [
+  { id: "design-system",  label: "Design System",  available: true  },
+  { id: "decisions-hub",  label: "Decisions Hub",  available: false },
+  { id: "playground",     label: "Playground",     available: false },
+  { id: "dev-handoffs",   label: "Dev Handoffs",   available: false },
+];
+
 export function Sidebar({ active, onSelect }: SidebarProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [openGroups, setOpenGroups] = useState<Set<string>>(
@@ -188,6 +195,8 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
   );
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [workspaceOpen, setWorkspaceOpen] = useState(false);
+  const workspaceTimer = useRef<ReturnType<typeof setTimeout>>();
 
   function toggleGroup(label: string) {
     setOpenGroups(prev => {
@@ -196,6 +205,12 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       else next.add(label);
       return next;
     });
+  }
+
+  const allOpen = NAV.every(g => openGroups.has(g.label));
+  function toggleAll() {
+    if (allOpen) setOpenGroups(new Set());
+    else setOpenGroups(new Set(NAV.map(g => g.label)));
   }
 
   const trimmed = query.trim().toLowerCase();
@@ -220,15 +235,89 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
     }}>
 
       {/* Header */}
-      <div style={{ padding: "20px 20px 14px", flexShrink: 0 }}>
-        <LogoJit variant="mono" style={{ width: "32px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "14px" }} />
-        <div style={{ fontSize: "11px", fontWeight: 700, color: "#18181B", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-          Design System
+      <div style={{ padding: "14px 14px 12px", flexShrink: 0 }}>
+
+        {/* Tenant row: avatar + workspace dropdown */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+
+          {/* Jit tenant avatar */}
+          <div style={{
+            width: "36px", height: "36px", borderRadius: "50%", flexShrink: 0,
+            backgroundColor: "#FFFFFF",
+            border: "1.5px solid #E4E4E7",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 1px 4px rgba(0,0,0,0.08)",
+          }}>
+            <LogoJit variant="mono" style={{ width: "20px", height: "auto", color: "var(--jit-primary)", display: "block" }} />
+          </div>
+
+          {/* Workspace dropdown trigger */}
+          <div style={{ flex: 1, position: "relative" }}>
+            <button
+              onClick={() => setWorkspaceOpen(o => !o)}
+              onBlur={() => { workspaceTimer.current = setTimeout(() => setWorkspaceOpen(false), 150); }}
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                width: "100%", background: "none", border: "none", cursor: "pointer",
+                padding: "3px 6px", borderRadius: "6px",
+                transition: "background 0.1s",
+                backgroundColor: workspaceOpen ? "#F4F4F5" : "transparent",
+              }}
+              onMouseEnter={e => { if (!workspaceOpen) e.currentTarget.style.backgroundColor = "#F4F4F5"; }}
+              onMouseLeave={e => { if (!workspaceOpen) e.currentTarget.style.backgroundColor = "transparent"; }}
+            >
+              <span style={{ fontSize: "12px", fontWeight: 600, color: "#18181B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                Design System
+              </span>
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                style={{ flexShrink: 0, transform: workspaceOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.15s", color: "#A1A1AA" }}>
+                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {/* Workspace dropdown panel */}
+            {workspaceOpen && (
+              <div
+                onMouseDown={e => e.preventDefault()}
+                style={{
+                  position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0,
+                  backgroundColor: "#FFFFFF", border: "1px solid #E4E4E7", borderRadius: "10px",
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06)",
+                  padding: "4px", zIndex: 200,
+                }}
+              >
+                {WORKSPACES.map(ws => (
+                  <div
+                    key={ws.id}
+                    style={{
+                      display: "flex", alignItems: "center", justifyContent: "space-between",
+                      padding: "7px 10px", borderRadius: "6px",
+                      backgroundColor: ws.id === "design-system" ? "#F4F4F5" : "transparent",
+                      cursor: ws.available ? "pointer" : "default",
+                      opacity: ws.available ? 1 : 0.45,
+                    }}
+                  >
+                    <span style={{ fontSize: "12px", fontWeight: ws.id === "design-system" ? 600 : 400, color: "#18181B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+                      {ws.label}
+                    </span>
+                    {ws.id === "design-system" && (
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                        <path d="M1.5 5L3.8 7.5L8.5 2.5" stroke="#18181B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                    {!ws.available && (
+                      <span style={{ fontSize: "9px", fontWeight: 600, color: "#A1A1AA", fontFamily: "'Open Sans', sans-serif", textTransform: "uppercase", letterSpacing: "0.06em" }}>Soon</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Search */}
-      <div style={{ padding: "0 12px 10px", flexShrink: 0 }}>
+      <div style={{ padding: "0 12px 6px", flexShrink: 0 }}>
         <div style={{ position: "relative" }}>
           <svg
             width="13" height="13" viewBox="0 0 13 13" fill="none"
@@ -260,6 +349,38 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
           />
         </div>
       </div>
+
+      {/* Collapse / Expand all icon button */}
+      {!trimmed && (
+        <div style={{ padding: "2px 16px 6px", flexShrink: 0, display: "flex", justifyContent: "flex-end" }}>
+          <button
+            onClick={toggleAll}
+            title={allOpen ? "Collapse all" : "Expand all"}
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              padding: "4px 5px", borderRadius: "5px",
+              color: "#C4C4C8", transition: "color 0.1s, background 0.1s",
+              display: "flex", alignItems: "center",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = "#71717A"; e.currentTarget.style.background = "#F4F4F5"; }}
+            onMouseLeave={e => { e.currentTarget.style.color = "#C4C4C8"; e.currentTarget.style.background = "none"; }}
+          >
+            {allOpen ? (
+              // Collapse all: two chevrons pointing up (fold everything)
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 8.5L7 4.5L11 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M3 12L11 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            ) : (
+              // Expand all: two chevrons pointing down (unfold everything)
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 2L11 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            )}
+          </button>
+        </div>
+      )}
 
       {/* Nav */}
       <nav style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "4px 0 16px" }}>

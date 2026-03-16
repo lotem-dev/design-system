@@ -34,7 +34,7 @@ function Playground() {
           {!visible && (
             <button
               onClick={() => setVisible(true)}
-              style={{ fontSize: "13px", color: "#5E32FF", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Open Sans', system-ui, sans-serif" }}
+              style={{ fontSize: "13px", color: "#18181B", background: "none", border: "none", cursor: "pointer", padding: 0, fontFamily: "'Open Sans', system-ui, sans-serif" }}
             >
               Show again
             </button>

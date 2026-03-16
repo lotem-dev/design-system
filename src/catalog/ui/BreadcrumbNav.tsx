@@ -236,7 +236,7 @@ export function BreadcrumbNav({
       display: "flex",
       alignItems: "center",
       gap: "1px",
-      padding: "16px 48px 12px",
+      padding: "14px 32px 10px",
     }}>
       {path.map((seg, i) => {
         const isLast = i === path.length - 1;

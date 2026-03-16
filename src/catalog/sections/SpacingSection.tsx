@@ -1,5 +1,4 @@
 import { TokenTable } from "../ui/TokenTable";
-import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 
 import spacingCss from "../../../styles/tokens/spacing.css?raw";
@@ -25,18 +24,18 @@ export function SpacingSection() {
         </p>
       </div>
 
-      <SectionBlock title="Spacing Scale">
+      <div>
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
           {SPACING.map(({ token, value, px }) => (
             <div key={token} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <code style={{ fontSize: "12px", color: "#18181B", width: "140px", flexShrink: 0, fontFamily: "monospace" }}>{token}</code>
-              <div style={{ width: `${px * 2}px`, height: "20px", backgroundColor: "#5E32FF", borderRadius: "3px", flexShrink: 0 }} />
+              <div style={{ width: `${px * 2}px`, height: "20px", backgroundColor: "#18181B", borderRadius: "3px", flexShrink: 0 }} />
               <code style={{ fontSize: "12px", color: "#71717A", fontFamily: "monospace" }}>{value}</code>
             </div>
           ))}
         </div>
         <TokenTable rows={SPACING.map(({ token, value }) => ({ property: "spacing", token, value }))} />
-      </SectionBlock>
+      </div>
     </SplitPage>
   );
 }

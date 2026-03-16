@@ -41,14 +41,14 @@ export function PropsTable({ source }: PropsTableProps) {
           {props.map((p, i) => (
             <tr
               key={p.name}
-              style={{ borderBottom: "1px solid #F4F4F5", backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA" }}
+              style={{ borderBottom: "1px solid #F4F4F5" }}
             >
               <Td>
                 <code style={{
                   fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                   fontSize: "12px",
-                  color: "#5E32FF",
-                  backgroundColor: "#F3F0FF",
+                  color: "#18181B",
+                  backgroundColor: "#F4F4F5",
                   padding: "2px 6px",
                   borderRadius: "4px",
                 }}>
@@ -93,13 +93,14 @@ function Th({ children }: { children: React.ReactNode }) {
   return (
     <th style={{
       textAlign: "left",
-      padding: "8px 12px",
+      padding: "6px 12px 10px",
       fontSize: "11px",
       fontWeight: 600,
-      color: "#71717A",
+      color: "#A1A1AA",
       textTransform: "uppercase",
       letterSpacing: "0.06em",
       whiteSpace: "nowrap",
+      fontFamily: "'Open Sans', system-ui, sans-serif",
     }}>
       {children}
     </th>
