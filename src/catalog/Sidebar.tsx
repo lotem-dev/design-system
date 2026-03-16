@@ -39,9 +39,9 @@ const NAV: NavGroup[] = [
     items: [
       { id: "globals-css", label: "globals.css" },
       { id: "colors",      label: "Colors" },
+      { id: "typography",  label: "Typography" },
       { id: "spacing",     label: "Spacing" },
       { id: "radius",      label: "Radius" },
-      { id: "typography",  label: "typography.css" },
     ],
   },
   {
