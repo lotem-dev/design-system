@@ -1,0 +1,19 @@
+/* =========================================================
+   Card
+   ========================================================= */
+
+.root {
+  background: var(--surface-primary);
+  border: 1px solid var(--stroke-secondary);
+  border-radius: var(--radius-lg);
+}
+
+/* Padding sizes */
+.sm { padding: 12px; }
+.md { padding: 20px; }
+.lg { padding: 32px; }
+
+/* Optional shadow */
+.shadow {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}

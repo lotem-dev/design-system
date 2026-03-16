@@ -3,6 +3,7 @@ import { Button, type ButtonVariant, type ButtonSize } from "../../../components
 import { IconWrapper } from "../../../components/atoms/IconWrapper";
 import { IconAdd } from "../../../components/icons/usecases/IconAdd";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -81,17 +82,7 @@ export function ButtonSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "variant",      token: `"primary" | "ghost" | "destructive"`,  value: `"primary"`, note: "Visual style" },
-          { property: "size",         token: `"sm" | "md"`,                           value: `"md"`,      note: "Height + padding + font size" },
-          { property: "disabled",     token: "boolean",                               value: "false",     note: "Reduces opacity, blocks click" },
-          { property: "icon",         token: "ReactNode",                             value: "—",         note: "Icon element, typically <IconWrapper>" },
-          { property: "iconPosition", token: `"start" | "end"`,                       value: `"start"`,   note: "Icon before or after the label" },
-          { property: "ariaLabel",    token: "string",                                value: "—",         note: "Optional with children; required without" },
-          { property: "type",         token: `"button" | "submit" | "reset"`,         value: `"button"`,  note: "HTML button type — use submit inside forms" },
-          { property: "onClick",      token: "(e: MouseEvent) => void",               value: "—",         note: "Click callback" },
-          { property: "children",     token: "ReactNode",                             value: "—",         note: "Label text — optional when icon is provided" },
-        ]} />
+        <PropsTable source={buttonTsx} />
       </SectionBlock>
 
       <SectionBlock title="Variant Tokens">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ResourceItem, type ResourceType } from "../../../components/atoms/ResourceItem";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -99,15 +100,7 @@ export function ResourceItemSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "type",        token: "ResourceType",  value: "—",     note: "Determines icon and text layout" },
-          { property: "name",        token: "string",        value: "—",     note: "Main display name" },
-          { property: "prefix",      token: "string",        value: "—",     note: "Org prefix shown above name (repos)" },
-          { property: "detail",      token: "string",        value: "—",     note: "Branch name (repos) or region (cloud services)" },
-          { property: "accountName", token: "string",        value: "—",     note: "Cloud account name" },
-          { property: "accountId",   token: "string",        value: "—",     note: "Cloud account ID, shown in parens" },
-          { property: "isNew",       token: "boolean",       value: "false", note: 'Shows a purple "New!" badge' },
-        ]} />
+        <PropsTable source={resourceItemTsx} />
       </SectionBlock>
 
       <SectionBlock title="Resource Types">

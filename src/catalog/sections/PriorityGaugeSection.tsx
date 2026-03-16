@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PriorityGauge } from "../../../components/atoms/PriorityGauge";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -73,10 +74,7 @@ export function PriorityGaugeSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "score",    token: "number (0–100)", value: "—",    note: "Controls needle position and displayed number" },
-          { property: "priority", token: '"P1" | "P2" | "P3"', value: "—", note: "Label shown below the score" },
-        ]} />
+        <PropsTable source={priorityGaugeTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

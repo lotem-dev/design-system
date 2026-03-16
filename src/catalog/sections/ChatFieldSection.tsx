@@ -6,6 +6,7 @@ import { LogoSlack }    from "../../../components/icons/brand/LogoSlack";
 import { LogoShortcut } from "../../../components/icons/brand/LogoShortcut";
 import { LogoJira }     from "../../../components/icons/brand/LogoJira";
 import { TokenTable }   from "../ui/TokenTable";
+import { PropsTable }   from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage }    from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -100,18 +101,7 @@ export function ChatFieldSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "value",            token: "string",                                value: '""',          note: "Controlled text value" },
-          { property: "onChange",         token: "(value: string) => void",               value: "—",           note: "Called on every keystroke" },
-          { property: "onSend",           token: "() => void",                            value: "—",           note: "Called when Enter is pressed or send button clicked" },
-          { property: "onAttach",         token: "() => void",                            value: "—",           note: "Paperclip button click" },
-          { property: "onOptions",        token: "() => void",                            value: "—",           note: "Sliders button click" },
-          { property: "connectors",       token: "ConnectorLogo[]",                       value: "[]",          note: "Logo components shown in the strip (up to 4 visible)" },
-          { property: "connectorCount",   token: "number",                                value: "connectors.length", note: "Total count — used to compute the overflow +N label" },
-          { property: "onConnectorsClick",token: "() => void",                            value: "—",           note: "Click on the connectors strip" },
-          { property: "placeholder",      token: "string",                                value: '"Ask anything…"', note: "Textarea placeholder text" },
-          { property: "isProcessing",     token: "boolean",                               value: "false",       note: "Shows a spinner in the send button" },
-        ]} />
+        <PropsTable source={chatFieldTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

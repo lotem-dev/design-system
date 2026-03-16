@@ -205,6 +205,9 @@ html, body {
   --brand-secondary: var(--purple-600);
   --brand-tertiary: var(--purple-200);
 
+  /* Focus */
+  --focus-ring: color-mix(in srgb, var(--brand-primary) 25%, transparent);
+
   /* Surface */
   --surface-primary: var(--white-100);
   --surface-secondary: var(--neutral-50);
@@ -344,4 +347,13 @@ html, body {
 
   --scale-low-primary: var(--green-500);
   --scale-low-secondary: var(--green-100);
+}
+
+/* ─────────────────────────────────────────────
+   highlight.js overrides
+   The theme sets its own background; we override
+   it so the code panel stays our dark #111111.
+   ───────────────────────────────────────────── */
+.hljs {
+  background: transparent !important;
 }

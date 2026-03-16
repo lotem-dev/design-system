@@ -1,0 +1,57 @@
+/* =========================================================
+   Toggle
+   ========================================================= */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.track {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  border-radius: var(--radius-round);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 150ms ease;
+  flex-shrink: 0;
+}
+
+.on  { background: var(--brand-primary); }
+.off { background: var(--stroke-secondary); }
+
+.disabled .track {
+  cursor: not-allowed;
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--surface-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: left 150ms ease;
+}
+
+.thumbOn  { left: 26px; }
+.thumbOff { left: 2px; }
+
+.label {
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  line-height: var(--line-height-base);
+  user-select: none;
+}

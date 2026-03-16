@@ -33,7 +33,7 @@ export function SplitPage({ children, files }: SplitPageProps) {
         top: 0,
         height: "100vh",
         overflow: "hidden",
-        borderLeft: "1px solid #27272A",
+        borderLeft: "1px solid #E4E4E7",
       }}>
         <SourcePanel files={files} />
       </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TableHeaderCell, type SortDirection, type TableHeaderCellColumn } from "../../../components/atoms/TableHeaderCell";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -88,14 +89,7 @@ export function TableHeaderCellSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "column",   token: '"checkbox" | "first" | "regular" | "last" | "actions"', value: '"regular"', note: "Sets padding and content type" },
-          { property: "label",    token: "string",                                                 value: '"Column"',  note: "Uppercase column heading text" },
-          { property: "sort",     token: '"none" | "asc" | "desc"',                               value: '"none"',    note: "Controls which sort icon is shown" },
-          { property: "onSort",   token: "() => void",                                            value: "—",         note: "Click handler — adds pointer cursor when provided" },
-          { property: "checked",  token: "boolean",                                                value: "false",     note: "Checkbox column only" },
-          { property: "onCheck",  token: "(checked: boolean) => void",                            value: "—",         note: "Checkbox column only" },
-        ]} />
+        <PropsTable source={tableHeaderCellTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

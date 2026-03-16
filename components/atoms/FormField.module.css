@@ -1,0 +1,39 @@
+/* =========================================================
+   FormField
+   ========================================================= */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-family: var(--font-family-default);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: var(--line-height-sm);
+}
+
+.asterisk {
+  color: var(--error-primary);
+}
+
+.input {
+  /* Children are rendered here — no extra styles needed */
+}
+
+.hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-sm);
+  margin: 0;
+}
+
+.error {
+  font-size: var(--font-size-sm);
+  color: var(--error-primary);
+  line-height: var(--line-height-sm);
+  margin: 0;
+}

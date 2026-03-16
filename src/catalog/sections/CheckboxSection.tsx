@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Checkbox } from "../../../components/atoms/Checkbox";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -69,12 +70,7 @@ export function CheckboxSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "checked",  token: "boolean",                    value: "—",     note: "Whether the checkbox is checked" },
-          { property: "onChange", token: "(checked: boolean) => void", value: "—",     note: "Called when the user toggles it" },
-          { property: "label",    token: "string",                     value: "—",     note: "Optional text label shown to the right" },
-          { property: "disabled", token: "boolean",                    value: "false", note: "Reduces opacity, blocks interaction" },
-        ]} />
+        <PropsTable source={checkboxTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

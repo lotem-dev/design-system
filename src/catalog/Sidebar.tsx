@@ -3,81 +3,140 @@ import { useState } from "react";
 import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 export type SectionId =
+  // Foundation
   | "colors" | "typography" | "spacing" | "radius"
+  // Icons
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
-  | "badge-status" | "badge-severity" | "badge-priority"
-  | "button" | "divider" | "icon-wrapper" | "link" | "tooltip"
+  // Actions
+  | "button" | "link"
+  // Inputs
   | "fields-text" | "fields-select" | "fields-search"
   | "fields-checkbox" | "fields-radio"
-  | "resource-item" | "findings-breakdown" | "priority-gauge"
-  | "table-header-cell" | "chat-field"
-  | "tab";
+  | "toggle" | "textarea" | "form-field"
+  // Display
+  | "avatar" | "tag"
+  | "badge-status" | "badge-severity" | "badge-priority"
+  | "icon-wrapper"
+  // Data
+  | "findings-breakdown" | "priority-gauge" | "resource-item"
+  | "table-header-cell" | "table" | "pagination"
+  // Feedback
+  | "alert" | "toast" | "spinner" | "skeleton" | "progress" | "empty-state"
+  // Overlay
+  | "tooltip" | "dropdown-menu" | "modal"
+  // Navigation
+  | "tab" | "breadcrumb" | "divider"
+  // Layout
+  | "card" | "chat-field";
 
-type NavItem   = { kind: "item";   id: SectionId; label: string };
-type NavBranch = { kind: "branch"; label: string; children: NavItem[] };
-type NavGroup  = { label: string; emoji: string; items: (NavItem | NavBranch)[] };
+type NavItem  = { id: SectionId; label: string };
+type NavGroup = { label: string; items: NavItem[] };
 
 const NAV: NavGroup[] = [
   {
-    label: "Foundation", emoji: "🪨",
+    label: "Foundation",
     items: [
-      { kind: "item", id: "colors",     label: "Colors" },
-      { kind: "item", id: "typography", label: "Typography" },
-      { kind: "item", id: "spacing",    label: "Spacing" },
-      { kind: "item", id: "radius",     label: "Radius" },
+      { id: "colors",     label: "Colors" },
+      { id: "typography", label: "Typography" },
+      { id: "spacing",    label: "Spacing" },
+      { id: "radius",     label: "Radius" },
     ],
   },
   {
-    label: "Icons", emoji: "🔷",
+    label: "Icons",
     items: [
-      { kind: "item", id: "icons-usecases",     label: "Use Cases" },
-      { kind: "item", id: "icons-chevrons",     label: "Chevrons" },
-      { kind: "item", id: "icons-sorting",      label: "Sorting" },
-      { kind: "item", id: "icons-dropdown",     label: "Dropdown" },
-      { kind: "item", id: "icons-finding-type", label: "Finding Types" },
-      { kind: "item", id: "icons-sidebar",      label: "Sidebar" },
-      { kind: "item", id: "icons-resources",    label: "Resources" },
-      { kind: "item", id: "icons-brand",        label: "Brand" },
+      { id: "icons-usecases",     label: "Use Cases" },
+      { id: "icons-chevrons",     label: "Chevrons" },
+      { id: "icons-sorting",      label: "Sorting" },
+      { id: "icons-dropdown",     label: "Dropdown" },
+      { id: "icons-finding-type", label: "Finding Types" },
+      { id: "icons-sidebar",      label: "Sidebar" },
+      { id: "icons-resources",    label: "Resources" },
+      { id: "icons-brand",        label: "Brand" },
     ],
   },
   {
-    label: "Atoms", emoji: "⚛️",
+    label: "Actions",
     items: [
-      { kind: "item", id: "icon-wrapper",  label: "IconWrapper" },
-      { kind: "item", id: "button",        label: "Button" },
-      { kind: "item", id: "link",          label: "Link" },
-      { kind: "item", id: "divider",       label: "Divider" },
-      { kind: "item", id: "tooltip",       label: "Tooltip" },
-      { kind: "item", id: "resource-item",       label: "ResourceItem" },
-      { kind: "item", id: "findings-breakdown",  label: "FindingsBreakdown" },
-      { kind: "item", id: "priority-gauge",      label: "PriorityGauge" },
-      { kind: "item", id: "table-header-cell",   label: "TableHeaderCell" },
-      { kind: "item", id: "chat-field",          label: "ChatField" },
-      {
-        kind: "branch", label: "Badges",
-        children: [
-          { kind: "item", id: "badge-status",   label: "BadgeStatus" },
-          { kind: "item", id: "badge-severity", label: "BadgeSeverity" },
-          { kind: "item", id: "badge-priority", label: "BadgePriority" },
-        ],
-      },
-      {
-        kind: "branch", label: "Fields",
-        children: [
-          { kind: "item", id: "fields-text",     label: "TextInput" },
-          { kind: "item", id: "fields-select",   label: "SelectInput" },
-          { kind: "item", id: "fields-search",   label: "SearchInput" },
-          { kind: "item", id: "fields-checkbox", label: "Checkbox" },
-          { kind: "item", id: "fields-radio",    label: "Radio" },
-        ],
-      },
+      { id: "button", label: "Button" },
+      { id: "link",   label: "Link" },
     ],
   },
   {
-    label: "Molecules", emoji: "🧬",
+    // "Inputs" = all form controls, including ChatField which is an input pattern
+    label: "Inputs",
     items: [
-      { kind: "item", id: "tab", label: "Tab / TabGroup" },
+      { id: "fields-text",     label: "Text Input" },
+      { id: "fields-select",   label: "Select" },
+      { id: "fields-search",   label: "Search" },
+      { id: "fields-checkbox", label: "Checkbox" },
+      { id: "fields-radio",    label: "Radio" },
+      { id: "toggle",          label: "Toggle" },
+      { id: "textarea",        label: "Textarea" },
+      { id: "chat-field",      label: "Chat Field" },
+      { id: "form-field",      label: "Form Field" },
+    ],
+  },
+  {
+    // "Status & Labels" = things that communicate a state, level, or category (Atlassian calls this "Status indicators")
+    label: "Status & Labels",
+    items: [
+      { id: "badge-status",   label: "Badge Status" },
+      { id: "badge-severity", label: "Badge Severity" },
+      { id: "badge-priority", label: "Badge Priority" },
+      { id: "tag",            label: "Tag" },
+    ],
+  },
+  {
+    // "Feedback" = system responses to user actions: alerts, notifications, loading states, empty states
+    label: "Feedback",
+    items: [
+      { id: "alert",       label: "Alert" },
+      { id: "toast",       label: "Toast" },
+      { id: "empty-state", label: "Empty State" },
+      { id: "spinner",     label: "Spinner" },
+      { id: "skeleton",    label: "Skeleton" },
+      { id: "progress",    label: "Progress" },
+    ],
+  },
+  {
+    // "Data & Tables" = structured data presentation, specific to Jit's domain
+    label: "Data & Tables",
+    items: [
+      { id: "table",              label: "Table" },
+      { id: "table-header-cell",  label: "Table Header Cell" },
+      { id: "findings-breakdown", label: "Findings Breakdown" },
+      { id: "priority-gauge",     label: "Priority Gauge" },
+      { id: "resource-item",      label: "Resource Item" },
+    ],
+  },
+  {
+    // "Overlays" = floating UI that appears above the page
+    label: "Overlays",
+    items: [
+      { id: "modal",         label: "Modal" },
+      { id: "dropdown-menu", label: "Dropdown Menu" },
+      { id: "tooltip",       label: "Tooltip" },
+    ],
+  },
+  {
+    // "Navigation" = components that move users between pages or sections
+    label: "Navigation",
+    items: [
+      { id: "tab",        label: "Tabs" },
+      { id: "breadcrumb", label: "Breadcrumb" },
+      { id: "pagination", label: "Pagination" },
+    ],
+  },
+  {
+    // "Layout" = structural containers and display primitives (Avatar, IconWrapper live here alongside Polaris "Images and icons" pattern)
+    label: "Layout",
+    items: [
+      { id: "card",        label: "Card" },
+      { id: "divider",     label: "Divider" },
+      { id: "avatar",      label: "Avatar" },
+      { id: "icon-wrapper", label: "Icon Wrapper" },
     ],
   },
 ];
@@ -87,46 +146,28 @@ type SidebarProps = {
   onSelect: (id: SectionId) => void;
 };
 
-const ITEM_STYLE = (isActive: boolean, isHovered: boolean): React.CSSProperties => ({
-  display: "block",
-  width: "calc(100% - 16px)",
-  margin: "0 8px",
-  padding: "8px 12px",
-  background: isActive ? "#E4E4E7" : isHovered ? "#F4F4F5" : "transparent",
-  border: "none",
-  borderRadius: "8px",
-  color: isActive ? "#18181B" : isHovered ? "#18181B" : "#52525B",
-  fontSize: "13px",
-  textAlign: "left",
-  cursor: "pointer",
-  fontFamily: "'Open Sans', system-ui, sans-serif",
-  fontWeight: isActive ? 600 : 400,
-  transition: "background 0.12s, color 0.12s",
-});
-
-const CHILD_STYLE = (isActive: boolean, isHovered: boolean): React.CSSProperties => ({
-  ...ITEM_STYLE(isActive, isHovered),
-  paddingLeft: "24px",
-  fontSize: "12px",
-});
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="14" height="14" viewBox="0 0 24 24" fill="none"
-      style={{ marginLeft: "auto", flexShrink: 0, transition: "transform 0.15s", transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
-    >
-      <path d="M9 18l6-6-6-6" stroke="#C4C4C7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+function itemStyle(isActive: boolean, isHovered: boolean): React.CSSProperties {
+  return {
+    display: "block",
+    width: "calc(100% - 16px)",
+    margin: "0 8px",
+    padding: "7px 12px",
+    background: isActive ? "#F3F0FF" : isHovered ? "#F4F4F5" : "transparent",
+    border: "none",
+    borderRadius: "6px",
+    color: isActive ? "#5E32FF" : isHovered ? "#18181B" : "#52525B",
+    fontSize: "13px",
+    textAlign: "left",
+    cursor: "pointer",
+    fontFamily: "'Open Sans', system-ui, sans-serif",
+    fontWeight: isActive ? 600 : 400,
+    transition: "background 0.1s, color 0.1s",
+    letterSpacing: "0.01em",
+  };
 }
 
 export function Sidebar({ active, onSelect }: SidebarProps) {
-  const [openGroups, setOpenGroups]     = useState<Record<string, boolean>>(() => Object.fromEntries(NAV.map(g => [g.label, true])));
-  const [openBranches, setOpenBranches] = useState<Record<string, boolean>>({ Badges: true, Fields: true });
-  const [hovered, setHovered]           = useState<string | null>(null);
-
-  const h = (id: string) => ({ onMouseEnter: () => setHovered(id), onMouseLeave: () => setHovered(null) });
+  const [hovered, setHovered] = useState<string | null>(null);
 
   return (
     <aside style={{
@@ -137,87 +178,48 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       borderRadius: "16px",
       boxShadow: "0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)",
       display: "flex", flexDirection: "column",
-      padding: "24px 0",
     }}>
 
       {/* Header */}
-      <div style={{ padding: "0 20px 24px", borderBottom: "1px solid #F4F4F5" }}>
-        <LogoJit variant="mono" style={{ width: "36px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "16px" }} />
-        <div style={{ fontSize: "12px", fontWeight: 700, color: "#18181B", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+      <div style={{ padding: "20px 20px 18px", borderBottom: "1px solid #F4F4F5", flexShrink: 0 }}>
+        <LogoJit variant="mono" style={{ width: "32px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "14px" }} />
+        <div style={{ fontSize: "11px", fontWeight: 700, color: "#18181B", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           Design System
         </div>
       </div>
 
       {/* Nav */}
-      <nav style={{ padding: "16px 0", flex: 1, minHeight: 0, overflowY: "auto" }}>
-        {NAV.map((group) => {
-          const isOpen = openGroups[group.label] ?? true;
-          return (
-            <div key={group.label} style={{ marginBottom: "4px" }}>
+      <nav style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "12px 0 16px" }}>
+        {NAV.map((group, gi) => (
+          <div key={group.label} style={{ marginBottom: gi < NAV.length - 1 ? "4px" : 0 }}>
 
-              {/* Group header */}
-              <button
-                onClick={() => setOpenGroups(p => ({ ...p, [group.label]: !p[group.label] }))}
-                {...h(`g-${group.label}`)}
-                style={{
-                  display: "flex", alignItems: "center",
-                  width: "calc(100% - 16px)", margin: "0 8px 2px", padding: "8px 12px",
-                  background: hovered === `g-${group.label}` ? "#F4F4F5" : "transparent",
-                  border: "none", borderRadius: "8px", cursor: "pointer",
-                  transition: "background 0.12s",
-                }}
-              >
-                <span style={{ marginRight: "8px", fontSize: "14px", lineHeight: 1 }}>{group.emoji}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.1em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-                  {group.label}
-                </span>
-                <Chevron open={isOpen} />
-              </button>
-
-              {isOpen && group.items.map((entry) => {
-                if (entry.kind === "item") {
-                  return (
-                    <button key={entry.id} onClick={() => onSelect(entry.id)} {...h(entry.id)}
-                      style={ITEM_STYLE(entry.id === active, hovered === entry.id && entry.id !== active)}>
-                      {entry.label}
-                    </button>
-                  );
-                }
-
-                const branchOpen   = openBranches[entry.label] ?? true;
-                const branchActive = entry.children.some(c => c.id === active);
-                return (
-                  <div key={entry.label}>
-                    <button
-                      onClick={() => setOpenBranches(p => ({ ...p, [entry.label]: !p[entry.label] }))}
-                      {...h(`b-${entry.label}`)}
-                      style={{
-                        display: "flex", alignItems: "center",
-                        width: "calc(100% - 16px)", margin: "0 8px", padding: "8px 12px",
-                        background: hovered === `b-${entry.label}` ? "#F4F4F5" : "transparent",
-                        border: "none", borderRadius: "8px",
-                        cursor: "pointer", transition: "background 0.12s",
-                      }}
-                    >
-                      <span style={{ fontSize: "12px", color: branchActive ? "#18181B" : "#71717A", fontWeight: branchActive ? 600 : 400, fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-                        {entry.label}
-                      </span>
-                      <Chevron open={branchOpen} />
-                    </button>
-                    {branchOpen && entry.children.map((child) => (
-                      <button key={child.id} onClick={() => onSelect(child.id)} {...h(child.id)}
-                        style={CHILD_STYLE(child.id === active, hovered === child.id && child.id !== active)}>
-                        {child.label}
-                      </button>
-                    ))}
-                  </div>
-                );
-              })}
-
-              <div style={{ height: "12px" }} />
+            {/* Section label */}
+            <div style={{
+              padding: "10px 20px 4px",
+              fontSize: "10px",
+              fontWeight: 700,
+              color: "#A1A1AA",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              fontFamily: "'Open Sans', system-ui, sans-serif",
+            }}>
+              {group.label}
             </div>
-          );
-        })}
+
+            {/* Items */}
+            {group.items.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => onSelect(item.id)}
+                onMouseEnter={() => setHovered(item.id)}
+                onMouseLeave={() => setHovered(null)}
+                style={itemStyle(item.id === active, hovered === item.id && item.id !== active)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        ))}
       </nav>
 
     </aside>

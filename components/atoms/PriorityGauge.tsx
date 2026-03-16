@@ -1,13 +1,21 @@
+// PriorityGauge — a semicircular gauge that visualizes the numeric priority score of a finding.
+// The arc is divided into three color zones (yellow, orange, red) from low to high priority.
+// A needle points to the exact score position, and the score number plus priority label appear below the arc.
+// Used in finding detail panels to communicate at a glance how urgent a finding is.
 import styles from "./PriorityGauge.module.css";
 
 export type PriorityGaugeProps = {
-  /** 0–100. Controls needle position and displayed number. */
+  // A number from 0 to 100 — controls where the needle points and the number displayed below the arc.
   score: number;
+  // The priority tier label shown below the score number — "P1", "P2", or "P3".
   priority: "P1" | "P2" | "P3";
 };
 
 // ─── SVG geometry ─────────────────────────────────────────
 
+// The gauge is drawn on a 100×52 SVG canvas.
+// The center point of the arc circle is at (50, 50) — which sits just below the visible area,
+// so only the top half of the circle (the semicircle) is visible in the 52px tall viewport.
 const CX = 50;          // circle center x
 const CY = 50;          // circle center y (sits below visible area)
 const R_OUTER = 46;
@@ -51,10 +59,11 @@ const ARC_RED    = arcSeg(359, 301); // high score zone
 // ─── Component ────────────────────────────────────────────
 
 export function PriorityGauge({ score, priority }: PriorityGaugeProps) {
+  // Clamp the score between 0 and 100 so out-of-range values don't break the needle.
   const s = Math.max(0, Math.min(100, score));
 
-  // Needle angle: score 0 → SVG 180° (left), score 100 → SVG 360°/0° (right)
-  // Travelling counterclockwise through the top of the arc.
+  // Maps the 0–100 score to an SVG angle along the semicircle.
+  // Score 0 points to the far left (180°) and score 100 points to the far right (360°).
   const needleAngle = 180 + s * 1.8;
   const [nx, ny] = polar(NEEDLE_R, needleAngle);
 

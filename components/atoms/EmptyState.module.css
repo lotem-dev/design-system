@@ -1,0 +1,38 @@
+/* =========================================================
+   EmptyState
+   ========================================================= */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  font-family: var(--font-family-default);
+  gap: var(--space-sm);
+}
+
+.illustration {
+  margin-bottom: var(--space-sm);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  line-height: var(--line-height-lg);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  line-height: var(--line-height-base);
+  margin: 0;
+  max-width: 360px;
+}
+
+.action {
+  margin-top: var(--space-sm);
+}

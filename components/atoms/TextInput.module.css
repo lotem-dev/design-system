@@ -40,7 +40,7 @@
 
 .input:focus {
   border: 2px solid var(--stroke-brand);
-  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .input:disabled {

@@ -1,11 +1,19 @@
 import { useState } from "react";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import css from "highlight.js/lib/languages/css";
+
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("css", css);
 
 type CodeBlockProps = {
   code: string;
+  language?: "typescript" | "css";
 };
 
-export function CodeBlock({ code }: CodeBlockProps) {
+export function CodeBlock({ code, language = "typescript" }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const highlighted = hljs.highlight(code, { language }).value;
 
   function handleCopy() {
     navigator.clipboard.writeText(code).then(() => {
@@ -20,8 +28,7 @@ export function CodeBlock({ code }: CodeBlockProps) {
         style={{
           margin: 0,
           padding: "16px",
-          backgroundColor: "#18181B",
-          color: "#E4E4E7",
+          backgroundColor: "#FFFFFF",
           fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
           fontSize: "13px",
           lineHeight: "1.6",
@@ -29,7 +36,7 @@ export function CodeBlock({ code }: CodeBlockProps) {
           whiteSpace: "pre",
         }}
       >
-        <code>{code}</code>
+        <code dangerouslySetInnerHTML={{ __html: highlighted }} />
       </pre>
       <button
         onClick={handleCopy}

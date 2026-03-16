@@ -1,42 +1,41 @@
-// typography/roles.ts
-// This file defines SEMANTIC roles.
-// A role describes "what this text is" (page title, badge text),
-// NOT "what size it is".
+// roles.ts — maps every named text role in the design system to its visual settings.
+// A "role" describes what a piece of text IS (e.g. "page-title", "body-regular", "badge-small").
+// Each role points to a scale size, a font weight, the correct HTML tag, and whether it's uppercase.
+// This is the single source of truth for typography decisions — change a role here to update every screen that uses it.
 
 import type React from "react";
 import type { TypographyScale } from "./scale";
 
-// These are the ONLY text roles allowed in the app.
-// Developers must pick one of these.
+// Every text role available in the app — pass one of these to the Text component's "role" setting.
 export type TypographyRole =
-  // ── Kept from before (already in use) ──
-  | "page-title"
-  | "badge-small"
-  // ── Headline (30/36) ──
+  // Legacy roles already in use across the app
+  | "page-title"        // The main title at the top of a page
+  | "badge-small"       // Text inside small badges (e.g. status, severity badges)
+  // Large headings (~30px)
   | "headline-regular"
   | "headline-bold"
-  // ── Title (26/32) ──
+  // Section headings (~26px)
   | "title-regular"
   | "title-bold"
-  // ── Medium (18/25) ──
+  // Prominent body or subheadings (~18px)
   | "medium-regular"
   | "medium-bold"
-  // ── Body (14/22) ──
+  // Default reading text (~14px)
   | "body-regular"
   | "body-bold"
-  // ── Label (12/16) ──
+  // Small labels and metadata (~12px)
   | "label-regular"
   | "label-bold"
-  | "label-caps"
-  // ── XS (10/14) ──
+  | "label-caps"        // Same as label-bold but rendered in uppercase with wider spacing
+  // Tiny text (~10px)
   | "xs-regular"
   | "xs-bold";
 
-// We store the tokens we want each role to use.
-// - scale: which size/line-height preset from scale.ts
-// - weight: bold/regular
-// - as: which HTML tag we render
-// - caps: optional — renders uppercase with wider letter spacing
+// The settings stored for each role:
+// - scale: which size preset to use (from scale.ts)
+// - weight: how heavy the font is (regular or bold)
+// - as: the HTML element to render — e.g. h1 for headings, p for paragraphs, span for inline text
+// - caps: if true, renders the text in uppercase with wider letter spacing
 export type RoleTokens = {
   scale: TypographyScale;
   weight: React.CSSProperties["fontWeight"];
@@ -44,8 +43,8 @@ export type RoleTokens = {
   caps?: true;
 };
 
-// This is the central decision table for typography.
-// If design changes, update THIS map (not 100 screens).
+// The central lookup table for all text roles.
+// To change how any text looks across the entire app, update the entry here.
 export const typographyRoleTokens: Record<TypographyRole, RoleTokens> = {
   // ── Kept from before ────────────────────────────────────────
   "page-title": {

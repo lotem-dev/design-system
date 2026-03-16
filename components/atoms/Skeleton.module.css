@@ -1,0 +1,30 @@
+/* =========================================================
+   Skeleton
+   ========================================================= */
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+.root {
+  display: block;
+  background-color: var(--surface-tertiary);
+}
+
+/* Shape variants */
+.text   { border-radius: var(--radius-xs); }
+.circle { border-radius: 50%; }
+.rect   { border-radius: 0; }
+
+/* Shimmer animation */
+.animated {
+  background-image: linear-gradient(
+    90deg,
+    var(--surface-tertiary) 0px,
+    var(--surface-secondary) 160px,
+    var(--surface-tertiary) 320px
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}

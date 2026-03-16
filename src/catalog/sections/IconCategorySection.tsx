@@ -245,22 +245,11 @@ export function IconCategorySection({ categoryId }: { categoryId: string }) {
         >
           {cat.label}
         </h1>
-        <p style={{ margin: "0 0 8px", fontSize: "12px", color: "#A1A1AA", lineHeight: "1.5" }}>
-          All icons are React SVG components. They use{" "}
-          <code style={{ backgroundColor: "#F4F4F5", padding: "1px 4px", borderRadius: "3px", fontSize: "11px" }}>currentColor</code>
-          {" "}and should always be rendered through{" "}
-          <code style={{ backgroundColor: "#F4F4F5", padding: "1px 4px", borderRadius: "3px", fontSize: "11px" }}>IconWrapper</code>.
-        </p>
-        <p
-          style={{
-            margin: "0 0 32px",
-            fontSize: "15px",
-            color: "#52525B",
-            lineHeight: "1.6",
-            maxWidth: "600px",
-          }}
-        >
-          {CATEGORY_DESCRIPTIONS[categoryId]}
+        <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
+          {CATEGORY_DESCRIPTIONS[categoryId]} All icons are React SVG components that use{" "}
+          <code style={{ backgroundColor: "#F4F4F5", padding: "1px 4px", borderRadius: "3px", fontSize: "13px" }}>currentColor</code>
+          {" "}and should be rendered through{" "}
+          <code style={{ backgroundColor: "#F4F4F5", padding: "1px 4px", borderRadius: "3px", fontSize: "13px" }}>IconWrapper</code>.
         </p>
       </div>
 

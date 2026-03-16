@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Radio } from "../../../components/atoms/Radio";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -68,14 +69,7 @@ export function RadioSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "checked",  token: "boolean",                    value: "—",     note: "Whether this option is selected" },
-          { property: "onChange", token: "(checked: boolean) => void", value: "—",     note: "Called when the user selects this option" },
-          { property: "label",    token: "string",                     value: "—",     note: "Optional text label shown to the right" },
-          { property: "name",     token: "string",                     value: "—",     note: "Groups radios together — same name = one selection" },
-          { property: "value",    token: "string",                     value: "—",     note: "The value this option represents" },
-          { property: "disabled", token: "boolean",                    value: "false", note: "Reduces opacity, blocks interaction" },
-        ]} />
+        <PropsTable source={radioTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

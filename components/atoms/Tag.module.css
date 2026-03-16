@@ -1,0 +1,67 @@
+/* =========================================================
+   Tag
+   ========================================================= */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-round);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-sm);
+  white-space: nowrap;
+}
+
+/* Color variants */
+.default {
+  background: var(--surface-tertiary);
+  color: var(--text-primary);
+}
+
+.brand {
+  background: var(--brand-tertiary);
+  color: var(--brand-primary);
+}
+
+.success {
+  background: var(--success-secondary);
+  color: var(--success-primary);
+}
+
+.warning {
+  background: var(--warning-secondary);
+  color: var(--warning-primary);
+}
+
+.error {
+  background: var(--error-secondary);
+  color: var(--error-primary);
+}
+
+.label {
+  line-height: 1;
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0.6;
+  padding: 0;
+  transition: opacity 120ms ease;
+}
+
+.remove:hover {
+  opacity: 1;
+}

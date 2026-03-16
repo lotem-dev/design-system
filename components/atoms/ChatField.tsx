@@ -1,3 +1,7 @@
+// ChatField — the AI chat input component at the bottom of the Jit assistant panel.
+// It includes a growing text area, a toolbar with attach and options buttons, a send button,
+// and a connectors strip below that shows which integrations are active.
+// Used on the AI assistant screen as the primary way for users to ask security questions.
 import * as React from "react";
 import { useRef } from "react";
 import { IconSend }         from "../icons/usecases/IconSend";
@@ -33,24 +37,33 @@ function IconSliders(props: React.SVGProps<SVGSVGElement>) {
 
 // ─── Types ────────────────────────────────────────────────
 
+// A logo SVG component — used to pass brand logos into the connectors strip.
 export type ConnectorLogo = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
 export type ChatFieldProps = {
+  // The current text typed into the field.
   value: string;
+  // Called every time the user types — receives the updated text.
   onChange: (value: string) => void;
+  // Called when the user clicks Send or presses Enter.
   onSend: () => void;
+  // Called when the user clicks the attach (paperclip) button.
   onAttach?: () => void;
+  // Called when the user clicks the options (sliders) button.
   onOptions?: () => void;
-  /** Logo components to show in the connectors strip (up to 4 shown) */
+  // Logo components to show in the connectors strip — only up to 4 are displayed.
   connectors?: ConnectorLogo[];
-  /** Total number of connected integrations */
+  // Total number of connected integrations — used to show the count label; falls back to the logos array length.
   connectorCount?: number;
+  // Called when the user clicks the connectors strip to manage integrations.
   onConnectorsClick?: () => void;
+  // Placeholder text shown when the field is empty.
   placeholder?: string;
-  /** Show a spinner in the send button instead of the send arrow */
+  // When true, the send button shows a loading spinner instead of the send icon.
   isProcessing?: boolean;
 };
 
+// Only up to 4 connector logos are shown; the rest are counted as overflow.
 const MAX_VISIBLE = 4;
 
 // ─── Component ────────────────────────────────────────────
@@ -68,9 +81,13 @@ export function ChatField({
   isProcessing = false,
 }: ChatFieldProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  // True only when there is actual text in the field (ignoring whitespace).
   const hasText     = value.trim().length > 0;
+  // Use the explicit count if provided, otherwise count the logos array.
   const totalCount  = connectorCount ?? connectors.length;
+  // The logos to render — capped at MAX_VISIBLE.
   const visible     = connectors.slice(0, MAX_VISIBLE);
+  // How many connectors are not shown as logos — displayed as "+N".
   const overflow    = totalCount - visible.length;
 
   // Auto-grow the textarea to fit its content

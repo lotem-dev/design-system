@@ -1,5 +1,10 @@
+// BadgeStatus — a small colored label that shows the current state of a finding.
+// The three states are: Open (active issue), Fixed (resolved), and Ignored (dismissed).
+// Each state has its own background and border color pulled from the design token set.
+// Used in findings tables and detail panels wherever a status needs to be visible at a glance.
 import { Text } from "../typography/Text";
 
+// The three possible status values — matches the "Status" options in Figma.
 export type BadgeStatusValue = "open" | "fixed" | "ignored";
 
 // Strict props: only status.

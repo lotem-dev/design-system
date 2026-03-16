@@ -1,3 +1,7 @@
+// ResourceItem — displays a single connected resource with its logo and relevant metadata.
+// The layout adapts based on the resource type: git repos show a prefix, name, and branch;
+// cloud services show a name, account, and region; web/API apps show just a name.
+// Used in resource lists, integration panels, and anywhere connected assets are listed.
 import type { SVGProps } from "react";
 import styles from "./ResourceItem.module.css";
 
@@ -22,23 +26,25 @@ export type ResourceType =
   | "Web App"                 | "API"                     | "Application";
 
 export type ResourceItemProps = {
+  // The kind of resource — controls which logo is shown and how the metadata is laid out.
   type: ResourceType;
-  /** Main name: repo name, service name, org name, app URL, etc. */
+  // The primary name of the resource — repo name, service name, org name, or app URL.
   name?: string;
-  /** Org prefix shown above the name, e.g. "github-org/" */
+  // An org or workspace prefix shown above the name, e.g. "github-org/".
   prefix?: string;
-  /** Branch name (repos) or cloud region (cloud services) */
+  // A secondary detail line — the branch name for repos, or the cloud region for services.
   detail?: string;
-  /** Cloud account name */
+  // The cloud account name this resource belongs to (used for cloud services and accounts).
   accountName?: string;
-  /** Cloud account ID, shown in parens next to account name */
+  // The cloud account ID — shown in parentheses next to the account name.
   accountId?: string;
-  /** Show a "New!" badge next to the name */
+  // When true, a "New!" badge is shown next to the resource name.
   isNew?: boolean;
 };
 
 // ─── Icon map ────────────────────────────────────────────
 
+// A reusable shorthand for any SVG logo or icon component.
 type IconComponent = (props: SVGProps<SVGSVGElement>) => JSX.Element;
 
 const ICON_MAP: Record<ResourceType, IconComponent> = {
@@ -63,6 +69,7 @@ const ICON_MAP: Record<ResourceType, IconComponent> = {
 
 // ─── Helpers ─────────────────────────────────────────────
 
+// These sets are used to determine which layout to render based on the resource type.
 const GIT_REPOS = new Set<ResourceType>([
   "GitHub Repository", "GitLab Project", "BitBucket Repository", "Azure DevOps Repository",
 ]);

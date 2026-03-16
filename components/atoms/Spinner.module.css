@@ -1,0 +1,13 @@
+/* =========================================================
+   Spinner
+   ========================================================= */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  display: block;
+  flex-shrink: 0;
+  animation: spin 0.75s linear infinite;
+}

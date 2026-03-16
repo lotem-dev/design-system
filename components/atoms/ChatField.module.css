@@ -28,7 +28,7 @@
   border: 1px solid var(--stroke-brand);
   border-radius: var(--radius-lg);
   /* Brand glow ring */
-  box-shadow: 0 0 0 3px rgba(94, 50, 255, 0.25);
+  box-shadow: 0 0 0 3px var(--focus-ring);
   display: flex;
   flex-direction: column;
   gap: var(--space-base);

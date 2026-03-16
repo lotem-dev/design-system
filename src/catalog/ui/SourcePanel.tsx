@@ -1,4 +1,15 @@
 import { useState } from "react";
+import hljs from "highlight.js/lib/core";
+import typescript from "highlight.js/lib/languages/typescript";
+import css from "highlight.js/lib/languages/css";
+
+hljs.registerLanguage("typescript", typescript);
+hljs.registerLanguage("css", css);
+
+function highlight(code: string, filename: string): string {
+  const lang = filename.endsWith(".css") ? "css" : "typescript";
+  return hljs.highlight(code, { language: lang }).value;
+}
 
 export type SourceFile = { filename: string; code: string };
 
@@ -39,8 +50,8 @@ type LayoutProps = {
 function TabLayout({ files, active, setActive, copied, onCopy }: LayoutProps) {
   const file = files[active];
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#111111" }}>
-      <div style={{ display: "flex", alignItems: "stretch", justifyContent: "space-between", borderBottom: "1px solid #27272A", flexShrink: 0 }}>
+    <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#FFFFFF" }}>
+      <div style={{ display: "flex", alignItems: "stretch", justifyContent: "space-between", borderBottom: "1px solid #E4E4E7", flexShrink: 0 }}>
         <div style={{ display: "flex" }}>
           {files.map((f, i) => (
             <button
@@ -51,7 +62,7 @@ function TabLayout({ files, active, setActive, copied, onCopy }: LayoutProps) {
                 background: "transparent",
                 border: "none",
                 borderBottom: i === active ? "2px solid #5E32FF" : "2px solid transparent",
-                color: i === active ? "#E4E4E7" : "#52525B",
+                color: i === active ? "#18181B" : "#A1A1AA",
                 fontSize: "12px",
                 cursor: "pointer",
                 fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
@@ -64,7 +75,7 @@ function TabLayout({ files, active, setActive, copied, onCopy }: LayoutProps) {
         </div>
         <CopyButton copied={copied} onCopy={onCopy} />
       </div>
-      <CodeArea code={file.code} />
+      <CodeArea code={file.code} filename={file.filename} />
     </div>
   );
 }
@@ -74,11 +85,11 @@ function TabLayout({ files, active, setActive, copied, onCopy }: LayoutProps) {
 function FileListLayout({ files, active, setActive, copied, onCopy }: LayoutProps) {
   const file = files[active];
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#111111" }}>
+    <div style={{ height: "100%", display: "flex", flexDirection: "column", backgroundColor: "#FFFFFF" }}>
 
       {/* Top bar: active filename + copy */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #27272A", flexShrink: 0, padding: "0 0 0 0" }}>
-        <span style={{ padding: "10px 16px", color: "#A1A1AA", fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #E4E4E7", flexShrink: 0 }}>
+        <span style={{ padding: "10px 16px", color: "#71717A", fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {file.filename}
         </span>
         <CopyButton copied={copied} onCopy={onCopy} />
@@ -88,7 +99,7 @@ function FileListLayout({ files, active, setActive, copied, onCopy }: LayoutProp
       <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
 
         {/* File list */}
-        <div style={{ width: "180px", flexShrink: 0, borderRight: "1px solid #27272A", overflowY: "auto" }}>
+        <div style={{ width: "180px", flexShrink: 0, borderRight: "1px solid #E4E4E7", overflowY: "auto", backgroundColor: "#F8F8F8" }}>
           {files.map((f, i) => (
             <button
               key={f.filename}
@@ -97,10 +108,10 @@ function FileListLayout({ files, active, setActive, copied, onCopy }: LayoutProp
                 display: "block",
                 width: "100%",
                 padding: "7px 12px",
-                background: i === active ? "#1C1C1C" : "transparent",
+                background: i === active ? "#FFFFFF" : "transparent",
                 border: "none",
                 borderLeft: i === active ? "2px solid #5E32FF" : "2px solid transparent",
-                color: i === active ? "#E4E4E7" : "#52525B",
+                color: i === active ? "#18181B" : "#71717A",
                 fontSize: "11px",
                 cursor: "pointer",
                 textAlign: "left",
@@ -121,14 +132,13 @@ function FileListLayout({ files, active, setActive, copied, onCopy }: LayoutProp
           <pre style={{
             margin: 0,
             padding: "24px",
-            backgroundColor: "#111111",
-            color: "#E4E4E7",
+            backgroundColor: "#FFFFFF",
             fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
             fontSize: "12px",
             lineHeight: "1.7",
             whiteSpace: "pre",
           }}>
-            <code>{file.code}</code>
+            <code dangerouslySetInnerHTML={{ __html: highlight(file.code, file.filename) }} />
           </pre>
         </div>
       </div>
@@ -146,8 +156,8 @@ function CopyButton({ copied, onCopy }: { copied: boolean; onCopy: () => void })
         padding: "8px 16px",
         background: "transparent",
         border: "none",
-        borderLeft: "1px solid #27272A",
-        color: copied ? "#22C55E" : "#52525B",
+        borderLeft: "1px solid #E4E4E7",
+        color: copied ? "#16A34A" : "#A1A1AA",
         fontSize: "11px",
         cursor: "pointer",
         fontFamily: "'Open Sans', system-ui, sans-serif",
@@ -160,20 +170,19 @@ function CopyButton({ copied, onCopy }: { copied: boolean; onCopy: () => void })
   );
 }
 
-function CodeArea({ code }: { code: string }) {
+function CodeArea({ code, filename }: { code: string; filename: string }) {
   return (
     <div style={{ flex: 1, overflow: "auto" }}>
       <pre style={{
         margin: 0,
         padding: "24px",
-        backgroundColor: "#111111",
-        color: "#E4E4E7",
+        backgroundColor: "#FFFFFF",
         fontFamily: "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
         fontSize: "12px",
         lineHeight: "1.7",
         whiteSpace: "pre",
       }}>
-        <code>{code}</code>
+        <code dangerouslySetInnerHTML={{ __html: highlight(code, filename) }} />
       </pre>
     </div>
   );

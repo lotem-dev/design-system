@@ -4,6 +4,7 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow } from "../ui/PlaygroundShell";
 import { TokenTable } from "../ui/TokenTable";
+import { PropsTable } from "../ui/PropsTable";
 
 import findingsBreakdownTsx from "../../../components/atoms/FindingsBreakdown.tsx?raw";
 import findingsBreakdownCss from "../../../components/atoms/FindingsBreakdown.module.css?raw";
@@ -73,12 +74,7 @@ export function FindingsBreakdownSection() {
       </SectionBlock>
 
       <SectionBlock title="Props">
-        <TokenTable rows={[
-          { property: "critical", token: "number", value: "0", note: "Critical severity count" },
-          { property: "high",     token: "number", value: "0", note: "High severity count" },
-          { property: "medium",   token: "number", value: "0", note: "Medium severity count" },
-          { property: "low",      token: "number", value: "0", note: "Low severity count" },
-        ]} />
+        <PropsTable source={findingsBreakdownTsx} />
       </SectionBlock>
 
       <SectionBlock title="Tokens">

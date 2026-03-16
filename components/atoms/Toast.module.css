@@ -1,0 +1,69 @@
+/* =========================================================
+   Toast
+   ========================================================= */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-base);
+  border-radius: var(--radius-base);
+  background: var(--surface-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-family-default);
+  font-size: var(--font-size-base);
+  min-width: 260px;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--divider-primary);
+}
+
+/* Left colored accent bar */
+.accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: var(--radius-base) 0 0 var(--radius-base);
+}
+
+/* Type variants — accent bar color and icon color */
+.info .accent    { background: var(--brand-primary); }
+.success .accent { background: var(--success-primary); }
+.warning .accent { background: var(--warning-primary); }
+.error .accent   { background: var(--error-primary); }
+
+.info .icon    { color: var(--brand-primary); }
+.success .icon { color: var(--success-primary); }
+.warning .icon { color: var(--warning-primary); }
+.error .icon   { color: var(--error-primary); }
+
+.icon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-left: var(--space-xs);
+}
+
+.message {
+  flex: 1;
+  color: var(--text-primary);
+  line-height: var(--line-height-base);
+}
+
+.close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text-secondary);
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 120ms ease;
+}
+
+.close:hover {
+  color: var(--text-primary);
+}
