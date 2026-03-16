@@ -21,49 +21,37 @@ type IconMode = "none" | "start" | "end" | "only";
 
 const ICON_SM = <IconWrapper icon={IconAdd} size="sm" />;
 
-// ─── Code snippet generator ───────────────────────────────────────────────────
+// ─── Code snippet ─────────────────────────────────────────────────────────────
 
-function generateSnippet(
-  variant: ButtonVariant,
-  size: ButtonSize,
-  disabled: boolean,
-  iconMode: IconMode,
-): string {
+function generateSnippet(variant: ButtonVariant, size: ButtonSize, disabled: boolean, iconMode: IconMode): string {
   const props: string[] = [];
-
-  if (variant !== "primary")   props.push(`variant="${variant}"`);
-  if (size !== "md")           props.push(`size="${size}"`);
-  if (disabled)                props.push("disabled");
-
+  if (variant !== "primary") props.push(`variant="${variant}"`);
+  if (size !== "md")         props.push(`size="${size}"`);
+  if (disabled)              props.push("disabled");
   if (iconMode === "only") {
-    props.push(`icon={<IconAdd />}`);
-    props.push(`ariaLabel="Action"`);
-    const inline = props.join(" ");
-    return `<Button ${inline} />`;
+    props.push(`icon={<IconAdd />}`, `ariaLabel="Action"`);
+    return `<Button ${props.join(" ")} />`;
   }
-
-  if (iconMode === "start")    props.push(`icon={<IconAdd />}`);
-  if (iconMode === "end") {
-    props.push(`icon={<IconAdd />}`);
-    props.push(`iconPosition="end"`);
-  }
-
-  const propsStr = props.length ? " " + props.join(" ") : "";
-  return `<Button${propsStr}>\n  Label\n</Button>`;
+  if (iconMode === "start") props.push(`icon={<IconAdd />}`);
+  if (iconMode === "end")   props.push(`icon={<IconAdd />}`, `iconPosition="end"`);
+  const p = props.length ? " " + props.join(" ") : "";
+  return `<Button${p}>\n  Label\n</Button>`;
 }
 
 // ─── Playground ───────────────────────────────────────────────────────────────
 
-function Playground() {
-  const [variant, setVariant]   = useState<ButtonVariant>("primary");
-  const [size, setSize]         = useState<ButtonSize>("md");
-  const [disabled, setDisabled] = useState(false);
-  const [iconMode, setIconMode] = useState<IconMode>("none");
-  const [copied, setCopied]     = useState(false);
+type PlaygroundProps = {
+  variant: ButtonVariant; onVariant: (v: ButtonVariant) => void;
+  size: ButtonSize;       onSize:    (s: ButtonSize)    => void;
+  disabled: boolean;      onDisabled:(d: boolean)       => void;
+  iconMode: IconMode;     onIconMode:(m: IconMode)       => void;
+};
 
+function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, iconMode, onIconMode }: PlaygroundProps) {
+  const [copied, setCopied] = useState(false);
   const snippet = generateSnippet(variant, size, disabled, iconMode);
 
-  function copySnippet() {
+  function copy() {
     navigator.clipboard.writeText(snippet);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
@@ -81,64 +69,49 @@ function Playground() {
     </Button>
   );
 
-  const controls = (
-    <>
-      <ControlRow label="Variant">
-        {VARIANTS.map(v => <Pill key={v} active={variant === v} onClick={() => setVariant(v)}>{v}</Pill>)}
-      </ControlRow>
-      <ControlRow label="Size">
-        {SIZES.map(s => <Pill key={s} active={size === s} onClick={() => setSize(s)}>{s}</Pill>)}
-      </ControlRow>
-      <ControlRow label="State">
-        <Pill active={!disabled} onClick={() => setDisabled(false)}>default</Pill>
-        <Pill active={disabled}  onClick={() => setDisabled(true)}>disabled</Pill>
-      </ControlRow>
-      <ControlRow label="Icon">
-        {(["none", "start", "end", "only"] as IconMode[]).map(m => (
-          <Pill key={m} active={iconMode === m} onClick={() => setIconMode(m)}>{m}</Pill>
-        ))}
-      </ControlRow>
-    </>
-  );
-
   return (
     <>
-      <PlaygroundShell preview={preview} controls={controls} />
+      <PlaygroundShell
+        preview={preview}
+        controls={
+          <>
+            <ControlRow label="Variant">
+              {VARIANTS.map(v => <Pill key={v} active={variant === v} onClick={() => onVariant(v)}>{v}</Pill>)}
+            </ControlRow>
+            <ControlRow label="Size">
+              {SIZES.map(s => <Pill key={s} active={size === s} onClick={() => onSize(s)}>{s}</Pill>)}
+            </ControlRow>
+            <ControlRow label="State">
+              <Pill active={!disabled} onClick={() => onDisabled(false)}>default</Pill>
+              <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
+            </ControlRow>
+            <ControlRow label="Icon">
+              {(["none", "start", "end", "only"] as IconMode[]).map(m => (
+                <Pill key={m} active={iconMode === m} onClick={() => onIconMode(m)}>{m}</Pill>
+              ))}
+            </ControlRow>
+          </>
+        }
+      />
 
       {/* Live code output */}
       <div style={{ marginTop: "12px", position: "relative" }}>
         <pre style={{
-          margin: 0,
-          padding: "14px 48px 14px 16px",
-          backgroundColor: "#18181B",
-          borderRadius: "8px",
-          fontSize: "12px",
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-          color: "#E4E4E7",
-          lineHeight: "1.7",
-          overflowX: "auto",
-          whiteSpace: "pre",
+          margin: 0, padding: "14px 52px 14px 16px",
+          backgroundColor: "#18181B", borderRadius: "8px",
+          fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
         }}>
           {snippet}
         </pre>
-        <button
-          onClick={copySnippet}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            padding: "3px 10px",
-            fontSize: "11px",
-            fontFamily: "'Open Sans', system-ui, sans-serif",
-            fontWeight: 600,
-            color: copied ? "#A1A1AA" : "#71717A",
-            backgroundColor: "#27272A",
-            border: "1px solid #3F3F46",
-            borderRadius: "5px",
-            cursor: "pointer",
-            transition: "color 0.15s",
-          }}
-        >
+        <button onClick={copy} style={{
+          position: "absolute", top: "10px", right: "10px",
+          padding: "3px 10px", fontSize: "11px",
+          fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+          color: copied ? "#A1A1AA" : "#71717A",
+          backgroundColor: "#27272A", border: "1px solid #3F3F46",
+          borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+        }}>
           {copied ? "Copied!" : "Copy"}
         </button>
       </div>
@@ -146,114 +119,146 @@ function Playground() {
   );
 }
 
-// ─── CSS breakdown ────────────────────────────────────────────────────────────
+// ─── Style Reference ──────────────────────────────────────────────────────────
+// A single connected table: TypeScript prop → value → CSS class → CSS properties.
+// Rows matching the current playground state are highlighted so you see exactly
+// what CSS is applied to the component as you interact with it.
 
-const HEADER: React.CSSProperties = {
-  fontSize: "11px",
-  fontWeight: 600,
-  color: "#A1A1AA",
-  textTransform: "uppercase",
-  letterSpacing: "0.06em",
+type StyleRow = {
+  prop:       string;
+  value:      string;
+  cssClass:   string;
+  properties: string[];
+};
+
+const STYLE_ROWS: StyleRow[] = [
+  // variant
+  { prop: "variant", value: "primary",     cssClass: ".primary",     properties: ["background: var(--brand-primary)", "color: var(--text-invert)", "focus ring: var(--brand-primary)"] },
+  { prop: "variant", value: "ghost",       cssClass: ".ghost",       properties: ["background: transparent", "color: var(--text-primary)", "hover bg: var(--surface-tertiary)", "focus ring: var(--stroke-primary)"] },
+  { prop: "variant", value: "destructive", cssClass: ".destructive", properties: ["background: var(--error-primary)", "color: var(--text-invert)", "focus ring: var(--error-primary)"] },
+  // size
+  { prop: "size", value: "sm", cssClass: ".sm", properties: ["height: 32px", "padding: 0 var(--space-sm)", "font-size: var(--font-size-sm)"] },
+  { prop: "size", value: "md", cssClass: ".md", properties: ["height: 38px", "padding: 0 var(--space-base)", "font-size: var(--font-size-base)"] },
+  // disabled
+  { prop: "disabled", value: "true", cssClass: ":disabled", properties: ["opacity: 0.5", "cursor: not-allowed"] },
+];
+
+// Groups rows by prop so we can use rowSpan for a clean visual grouping.
+const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
+  const last = acc[acc.length - 1];
+  if (last && last.prop === row.prop) { last.rows.push(row); }
+  else { acc.push({ prop: row.prop, rows: [row] }); }
+  return acc;
+}, []);
+
+const TH: React.CSSProperties = {
+  textAlign: "left", padding: "6px 12px 10px",
+  fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
+  textTransform: "uppercase", letterSpacing: "0.06em",
   fontFamily: "'Open Sans', system-ui, sans-serif",
-  padding: "6px 12px 10px",
-  textAlign: "left",
-  whiteSpace: "nowrap",
-  borderBottom: "2px solid #E4E4E7",
+  whiteSpace: "nowrap", borderBottom: "2px solid #E4E4E7",
 };
 
-const CELL: React.CSSProperties = {
-  padding: "9px 12px",
-  fontSize: "12px",
-  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+const TD: React.CSSProperties = {
+  padding: "10px 12px", verticalAlign: "top",
   borderBottom: "1px solid #F4F4F5",
-  verticalAlign: "top",
 };
 
-function CssTable({ rows }: { rows: { property: string; value: string }[] }) {
-  return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={HEADER}>Property</th>
-            <th style={HEADER}>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ property, value }) => (
-            <tr key={property}>
-              <td style={{ ...CELL, color: "#3F3F46" }}>{property}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+type ActiveState = { variant: ButtonVariant; size: ButtonSize; disabled: boolean };
+
+function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
+  if (prop === "variant")  return value === state.variant;
+  if (prop === "size")     return value === state.size;
+  if (prop === "disabled") return value === "true" && state.disabled;
+  return false;
 }
 
-function SizeCompare() {
-  const rows: { label: string; sm: string; md: string }[] = [
-    { label: "height",      sm: "32px",               md: "38px" },
-    { label: "padding",     sm: "0 var(--space-sm)",   md: "0 var(--space-base)" },
-    { label: "font-size",   sm: "var(--font-size-sm)", md: "var(--font-size-base)" },
-    { label: "gap",         sm: "var(--space-sm)",     md: "var(--space-sm)" },
-  ];
-
+function StyleReference(state: ActiveState) {
   return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={HEADER}>Property</th>
-            <th style={HEADER}>sm</th>
-            <th style={HEADER}>md</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ label, sm, md }) => (
-            <tr key={label}>
-              <td style={{ ...CELL, color: "#3F3F46" }}>{label}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{sm}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{md}</td>
+    <div>
+      {/* Base styles — always applied, no prop controls these */}
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Base — always applied regardless of props.
+      </p>
+      <div style={{ overflowX: "auto", marginBottom: "28px" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function VariantCompare() {
-  const rows: { label: string; primary: string; ghost: string; destructive: string }[] = [
-    { label: "background", primary: "var(--brand-primary)",  ghost: "transparent",           destructive: "var(--error-primary)"  },
-    { label: "color",      primary: "var(--text-invert)",    ghost: "var(--text-primary)",   destructive: "var(--text-invert)"    },
-    { label: "hover bg",   primary: "—",                     ghost: "var(--surface-tertiary)", destructive: "—"                   },
-    { label: "focus ring", primary: "var(--brand-primary)",  ghost: "var(--stroke-primary)", destructive: "var(--error-primary)"  },
-  ];
-
-  return (
-    <div style={{ overflowX: "auto" }}>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={HEADER}>Property</th>
-            <th style={HEADER}>primary</th>
-            <th style={HEADER}>ghost</th>
-            <th style={HEADER}>destructive</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map(({ label, primary, ghost, destructive }) => (
-            <tr key={label}>
-              <td style={{ ...CELL, color: "#3F3F46" }}>{label}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{primary}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{ghost}</td>
-              <td style={{ ...CELL, color: "#18181B" }}>{destructive}</td>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.button</code>
+              </td>
+              <td style={TD}>
+                {["border-radius: var(--radius-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-family-default)", "transition: background / border-color / color — 120ms ease"].map(p => (
+                  <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
+                ))}
+              </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Prop-driven styles — connected to playground state */}
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Prop-driven — updates as you interact with the playground above.
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Prop</th>
+              <th style={TH}>Value</th>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            {STYLE_GROUPS.map(({ prop, rows }) =>
+              rows.map((row, i) => {
+                const active = isActive(row, state);
+                return (
+                  <tr key={`${prop}-${row.value}`} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
+
+                    {/* Prop — spans the whole group */}
+                    {i === 0 && (
+                      <td rowSpan={rows.length} style={{ ...TD, borderRight: "1px solid #F4F4F5", verticalAlign: "middle" }}>
+                        <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>{prop}</code>
+                      </td>
+                    )}
+
+                    {/* Value */}
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>
+                        {row.value}
+                      </span>
+                    </td>
+
+                    {/* CSS class */}
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>
+                        {row.cssClass}
+                      </code>
+                    </td>
+
+                    {/* CSS properties — stacked lines */}
+                    <td style={TD}>
+                      {row.properties.map(p => (
+                        <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", lineHeight: "1.9" }}>{p}</div>
+                      ))}
+                    </td>
+
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -261,6 +266,12 @@ function VariantCompare() {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export function ButtonSection() {
+  // State lives here — shared between the playground and the style reference.
+  const [variant, setVariant]   = useState<ButtonVariant>("primary");
+  const [size, setSize]         = useState<ButtonSize>("md");
+  const [disabled, setDisabled] = useState(false);
+  const [iconMode, setIconMode] = useState<IconMode>("none");
+
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
@@ -272,29 +283,20 @@ export function ButtonSection() {
       </div>
 
       <SectionBlock title="Playground">
-        <Playground />
+        <Playground
+          variant={variant} onVariant={setVariant}
+          size={size}       onSize={setSize}
+          disabled={disabled} onDisabled={setDisabled}
+          iconMode={iconMode} onIconMode={setIconMode}
+        />
       </SectionBlock>
 
       <SectionBlock title="Props">
         <PropsTable source={buttonTsx} />
       </SectionBlock>
 
-      <SectionBlock title="Base Styles">
-        <CssTable rows={[
-          { property: "border-radius", value: "var(--radius-base)" },
-          { property: "font-weight",   value: "var(--font-weight-bold)" },
-          { property: "font-family",   value: "var(--font-family-default)" },
-          { property: "transition",    value: "background 120ms, border-color 120ms, color 120ms" },
-          { property: "disabled",      value: "opacity: 0.5, cursor: not-allowed" },
-        ]} />
-      </SectionBlock>
-
-      <SectionBlock title="Sizes">
-        <SizeCompare />
-      </SectionBlock>
-
-      <SectionBlock title="Variants">
-        <VariantCompare />
+      <SectionBlock title="Style Reference">
+        <StyleReference variant={variant} size={size} disabled={disabled} />
       </SectionBlock>
     </SplitPage>
   );
