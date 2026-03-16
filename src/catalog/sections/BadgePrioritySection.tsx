@@ -13,13 +13,13 @@ const sources = [
 ];
 
 const SCORES: { priorityScore: PriorityScore; text: string }[] = [
-  { priorityScore: "critical", text: "95" },
-  { priorityScore: "high",     text: "62" },
-  { priorityScore: "medium",   text: "28" },
+  { priorityScore: "p1", text: "95" },
+  { priorityScore: "p2", text: "62" },
+  { priorityScore: "p3", text: "28" },
 ];
 
 function Playground() {
-  const [score, setScore] = useState<PriorityScore>("critical");
+  const [score, setScore] = useState<PriorityScore>("p1");
   const entry = SCORES.find(s => s.priorityScore === score)!;
 
   return (
@@ -49,7 +49,7 @@ export function BadgePrioritySection() {
         </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>BadgePriority</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Displays a numeric priority score (0–100) inside a pill-shaped badge. The score range determines the severity tier — critical, high, or medium.
+          Displays a numeric priority score inside a pill-shaped badge. Three tiers: P1 (highest), P2, and P3 (lowest) — each with a distinct color.
         </p>
       </div>
 

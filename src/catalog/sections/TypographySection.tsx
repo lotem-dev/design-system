@@ -7,11 +7,11 @@ import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
 
 import textTsx    from "../../../components/typography/Text.tsx?raw";
-import globalsCss from "../../../styles/globals.css?raw";
+import typographyCss from "../../../styles/tokens/typography.css?raw";
 
 const sources = [
-  { filename: "Text.tsx",    code: textTsx },
-  { filename: "globals.css", code: globalsCss },
+  { filename: "Text.tsx",        code: textTsx },
+  { filename: "typography.css",  code: typographyCss },
 ];
 
 const SCALE_VALUES: Record<string, { fontSize: string; lineHeight: string }> = {

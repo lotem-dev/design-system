@@ -15,7 +15,7 @@ export type SectionId =
   | "fields-checkbox" | "fields-radio"
   | "toggle" | "textarea" | "form-field"
   // Display
-  | "avatar" | "tag"
+  | "avatar"
   | "badge-status" | "badge-severity" | "badge-priority"
   | "icon-wrapper"
   // Data
@@ -85,7 +85,6 @@ const NAV: NavGroup[] = [
       { id: "badge-status",   label: "Badge Status" },
       { id: "badge-severity", label: "Badge Severity" },
       { id: "badge-priority", label: "Badge Priority" },
-      { id: "tag",            label: "Tag" },
     ],
   },
   {

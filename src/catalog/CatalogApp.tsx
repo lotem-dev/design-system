@@ -20,7 +20,6 @@ import { TextareaSection }         from "./sections/TextareaSection";
 import { FormFieldSection }        from "./sections/FormFieldSection";
 
 import { AvatarSection }           from "./sections/AvatarSection";
-import { TagSection }              from "./sections/TagSection";
 import { BadgeStatusSection }      from "./sections/BadgeStatusSection";
 import { BadgeSeveritySection }    from "./sections/BadgeSeveritySection";
 import { BadgePrioritySection }    from "./sections/BadgePrioritySection";
@@ -89,7 +88,6 @@ export function CatalogApp() {
 
       // Display
       case "avatar":         return <AvatarSection />;
-      case "tag":            return <TagSection />;
       case "badge-status":   return <BadgeStatusSection />;
       case "badge-severity": return <BadgeSeveritySection />;
       case "badge-priority": return <BadgePrioritySection />;

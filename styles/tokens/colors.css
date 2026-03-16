@@ -1,0 +1,254 @@
+/* =========================================================
+   Jit Design System — Color Tokens
+   =========================================================
+   Two layers:
+   1) Primitives — fixed hex values, named by hue + shade
+   2) Semantic   — named by role, point to a primitive,
+                   and can change between themes (light/dark)
+   ========================================================= */
+
+/* ─── Color primitives (palette) ──────────────────────────── */
+:root {
+  /* Neutrals */
+  --neutral-50:  #F8FAFC;
+  --neutral-100: #F1F5F9;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CBD5E1;
+  --neutral-400: #94A3B8;
+  --neutral-500: #64748B;
+  --neutral-600: #475569;
+  --neutral-700: #2B3749;
+  --neutral-800: #192232;
+  --neutral-900: #0C1324;
+
+  /* Pink */
+  --pink-50:  #FEEBF5;
+  --pink-100: #FACAE6;
+  --pink-200: #E4A3C8;
+  --pink-300: #DD88B8;
+  --pink-400: #D56EA9;
+  --pink-500: #CD5499;
+  --pink-600: #C63989;
+  --pink-700: #AB3277;
+  --pink-800: #912A65;
+  --pink-900: #772252;
+
+  /* Purple */
+  --purple-50:  #F3F0FF;
+  --purple-100: #C8BBF9;
+  --purple-200: #A187FF;
+  --purple-300: #7E5BFF;
+  --purple-400: #6C44FF;
+  --purple-500: #5E32FF;
+  --purple-600: #3C18C3;
+  --purple-700: #2A0D95;
+  --purple-800: #1F0779;
+  --purple-900: #140061;
+
+  /* Yellow */
+  --yellow-50:  #FFFBEA;
+  --yellow-100: #FEF3C7;
+  --yellow-200: #FDE68A;
+  --yellow-300: #FCD34D;
+  --yellow-400: #FBBF24;
+  --yellow-500: #DCA600;
+  --yellow-600: #B78C00;
+  --yellow-700: #947300;
+  --yellow-800: #755B00;
+  --yellow-900: #574300;
+
+  /* Orange */
+  --orange-50:  #FFF6ED;
+  --orange-100: #FFEAD5;
+  --orange-200: #FDD1AA;
+  --orange-300: #FCB37E;
+  --orange-400: #FD9B5F;
+  --orange-500: #FE8235;
+  --orange-600: #DE6D25;
+  --orange-700: #C4622B;
+  --orange-800: #A14F22;
+  --orange-900: #7E3D1A;
+
+  /* Red */
+  --red-50:  #FFF5F5;
+  --red-100: #FFE3E6;
+  --red-200: #FFBBC0;
+  --red-300: #FF8A8E;
+  --red-400: #F64E56;
+  --red-500: #D1002A;
+  --red-600: #B00025;
+  --red-700: #8E0021;
+  --red-800: #6C001A;
+  --red-900: #4C0012;
+
+  /* Green */
+  --green-50:  #ECFDF8;
+  --green-100: #C6F7EE;
+  --green-200: #93E8DA;
+  --green-300: #5ED2AB;
+  --green-400: #2EB792;
+  --green-500: #0A8A6C;
+  --green-600: #066F5E;
+  --green-700: #045855;
+  --green-800: #033F3D;
+  --green-900: #022C2A;
+
+  /* White overlays */
+  --white-100: #FFFFFF;
+  --white-05: rgba(255, 255, 255, 0.05);
+  --white-10: rgba(255, 255, 255, 0.10);
+  --white-15: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Semantic tokens — Light (default) ───────────────────── */
+:root {
+  /* Fill */
+  --fill-background: var(--neutral-100);
+  --fill-sidebar: var(--neutral-700);
+  --fill-tooltip: var(--neutral-900);
+  --fill-sidebar-hover: var(--white-05);
+  --fill-sidebar-selection: var(--white-10);
+
+  /* Brand */
+  --brand-primary: var(--purple-500);
+  --brand-secondary: var(--purple-600);
+  --brand-tertiary: var(--purple-200);
+
+  /* Focus */
+  --focus-ring: color-mix(in srgb, var(--brand-primary) 25%, transparent);
+
+  /* Surface */
+  --surface-primary: var(--white-100);
+  --surface-secondary: var(--neutral-50);
+  --surface-tertiary: var(--neutral-200);
+
+  /* Divider */
+  --divider-primary: var(--neutral-200);
+  --divider-secondary: var(--neutral-600);
+
+  /* Text */
+  --text-brand: var(--purple-500);
+  --text-primary: var(--neutral-600);
+  --text-secondary: var(--neutral-400);
+  --text-tertiary: var(--neutral-300);
+  --text-invert: var(--white-100);
+
+  /* Stroke */
+  --stroke-brand: var(--purple-500);
+  --stroke-primary: var(--neutral-500);
+  --stroke-secondary: var(--neutral-200);
+  --stroke-invert: var(--white-100);
+  --stroke-invert-soft: var(--white-15);
+
+  /* Semantic - Jit */
+  --jit-primary: var(--pink-500);
+  --jit-secondary: var(--pink-50);
+
+  /* Alerts */
+  --success-primary: var(--green-600);
+  --success-secondary: var(--green-200);
+
+  --warning-primary: var(--yellow-500);
+  --warning-secondary: var(--yellow-50);
+
+  --error-primary: var(--red-400);
+  --error-secondary: var(--red-100);
+
+  /* Statuses */
+  --status-open-primary: var(--red-500);
+  --status-open-secondary: var(--red-200);
+
+  --status-fixed-primary: var(--green-500);
+  --status-fixed-secondary: var(--green-100);
+
+  --status-ignored-primary: var(--neutral-400);
+  --status-ignored-secondary: var(--neutral-50);
+
+  /* Scale */
+  --scale-critical-primary: var(--red-500);
+  --scale-critical-secondary: var(--red-200);
+
+  --scale-high-primary: var(--orange-600);
+  --scale-high-secondary: var(--orange-200);
+
+  --scale-medium-primary: var(--yellow-500);
+  --scale-medium-secondary: var(--yellow-100);
+
+  --scale-low-primary: var(--green-500);
+  --scale-low-secondary: var(--green-100);
+}
+
+/* ─── Semantic tokens — Dark ───────────────────────────────── */
+[data-theme="dark"] {
+  /* Fill */
+  --fill-background: var(--neutral-900);
+  --fill-sidebar: var(--neutral-700);
+  --fill-tooltip: var(--neutral-900);
+  --fill-sidebar-hover: var(--white-05);
+  --fill-sidebar-selection: var(--white-10);
+
+  /* Brand */
+  --brand-primary: var(--purple-300);
+  --brand-secondary: var(--purple-400);
+  --brand-tertiary: var(--purple-100);
+
+  /* Surface */
+  --surface-primary: var(--neutral-800);
+  --surface-secondary: var(--neutral-700);
+  --surface-tertiary: var(--neutral-600);
+
+  /* Divider */
+  --divider-primary: var(--neutral-800);
+  --divider-secondary: var(--neutral-600);
+
+  /* Text */
+  --text-brand: var(--purple-200);
+  --text-primary: var(--neutral-200);
+  --text-secondary: var(--neutral-400);
+  --text-tertiary: var(--neutral-500);
+  --text-invert: var(--white-100);
+
+  /* Stroke */
+  --stroke-brand: var(--purple-200);
+  --stroke-primary: var(--neutral-400);
+  --stroke-secondary: var(--neutral-600);
+  --stroke-invert: var(--white-100);
+  --stroke-invert-soft: var(--white-15);
+
+  /* Semantic - Jit */
+  --jit-primary: var(--pink-600);
+  --jit-secondary: var(--pink-200);
+
+  /* Alerts */
+  --success-primary: var(--green-700);
+  --success-secondary: var(--green-300);
+
+  --warning-primary: var(--yellow-500);
+  --warning-secondary: var(--yellow-200);
+
+  --error-primary: var(--red-600);
+  --error-secondary: var(--red-200);
+
+  /* Statuses */
+  --status-open-primary: var(--red-600);
+  --status-open-secondary: var(--red-200);
+
+  --status-fixed-primary: var(--green-500);
+  --status-fixed-secondary: var(--green-200);
+
+  --status-ignored-primary: var(--neutral-400);
+  --status-ignored-secondary: var(--neutral-100);
+
+  /* Scale */
+  --scale-critical-primary: var(--red-500);
+  --scale-critical-secondary: var(--red-200);
+
+  --scale-high-primary: var(--orange-600);
+  --scale-high-secondary: var(--orange-200);
+
+  --scale-medium-primary: var(--yellow-500);
+  --scale-medium-secondary: var(--yellow-100);
+
+  --scale-low-primary: var(--green-500);
+  --scale-low-secondary: var(--green-100);
+}

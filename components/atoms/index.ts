@@ -46,7 +46,6 @@ export { TextInput } from "./TextInput";
 export { Tooltip } from "./Tooltip";
 
 export { Avatar } from "./Avatar";
-export { Tag } from "./Tag";
 export { Toggle } from "./Toggle";
 export { Textarea } from "./Textarea";
 export { Spinner } from "./Spinner";

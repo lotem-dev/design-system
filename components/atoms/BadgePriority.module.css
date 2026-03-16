@@ -13,19 +13,19 @@
   min-width: 48px;
 }
 
-.critical {
+.p1 {
   background-color: var(--scale-critical-secondary);
   color: var(--scale-critical-primary);
   border-color: var(--scale-critical-primary);
 }
 
-.high {
+.p2 {
   background-color: var(--scale-high-secondary);
   color: var(--scale-high-primary);
   border-color: var(--scale-high-primary);
 }
 
-.medium {
+.p3 {
   background-color: var(--scale-medium-secondary);
   color: var(--scale-medium-primary);
   border-color: var(--scale-medium-primary);

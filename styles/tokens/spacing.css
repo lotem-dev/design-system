@@ -1,0 +1,15 @@
+/* =========================================================
+   Jit Design System — Spacing Tokens
+   =========================================================
+   Six steps from 2px to 40px. Use these everywhere you
+   need margins, padding, or gap — never raw pixel values.
+   ========================================================= */
+
+:root {
+  --space-2xs: 2px;
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-base: 12px;
+  --space-lg:  20px;
+  --space-xl:  40px;
+}

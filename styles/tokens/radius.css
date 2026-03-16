@@ -1,0 +1,19 @@
+/* =========================================================
+   Jit Design System — Radius Tokens
+   =========================================================
+   Five steps from 4px to 999px (fully round).
+   Pick the step that matches the component's visual weight:
+   xs → small inputs and chips
+   sm → buttons and dropdowns
+   base → cards and panels
+   lg → modals and large containers
+   round → pills, avatars, badges
+   ========================================================= */
+
+:root {
+  --radius-xs:    4px;
+  --radius-sm:    6px;
+  --radius-base:  8px;
+  --radius-lg:   15px;
+  --radius-round: 999px;
+}

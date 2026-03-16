@@ -2,9 +2,9 @@ import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 
-import globalsCss from "../../../styles/globals.css?raw";
+import radiusCss from "../../../styles/tokens/radius.css?raw";
 
-const sources = [{ filename: "globals.css", code: globalsCss }];
+const sources = [{ filename: "radius.css", code: radiusCss }];
 
 const RADIUS = [
   { token: "--radius-xs",    value: "4px",   note: "Inputs, small chips" },

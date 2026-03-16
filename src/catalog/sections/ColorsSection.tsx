@@ -1,9 +1,9 @@
 import { useState, useRef, useLayoutEffect } from "react";
 import { SplitPage } from "../ui/SplitPage";
 
-import globalsCss from "../../../styles/globals.css?raw";
+import colorsCss from "../../../styles/tokens/colors.css?raw";
 
-const sources = [{ filename: "globals.css", code: globalsCss }];
+const sources = [{ filename: "colors.css", code: colorsCss }];
 
 // ─── Primitive palette (never change between themes) ──────────────────────────
 

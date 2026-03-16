@@ -2,9 +2,9 @@ import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 
-import globalsCss from "../../../styles/globals.css?raw";
+import spacingCss from "../../../styles/tokens/spacing.css?raw";
 
-const sources = [{ filename: "globals.css", code: globalsCss }];
+const sources = [{ filename: "spacing.css", code: spacingCss }];
 
 const SPACING = [
   { token: "--space-2xs", value: "2px",  px: 2  },

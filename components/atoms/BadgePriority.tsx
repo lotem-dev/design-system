@@ -1,11 +1,11 @@
 // BadgePriority — a small colored label that shows a numeric priority score for a finding.
-// The background color reflects the priority tier: Critical, High, or Medium.
+// The background color reflects the priority tier: P1 (highest), P2, or P3 (lowest).
 // Unlike BadgeSeverity, this badge displays a number (e.g. "87") rather than a word.
 // Used in findings tables where a score-based priority ranking is shown alongside severity.
 import styles from "./BadgePriority.module.css";
 
 // The three priority tiers — controls the badge color. Matches the "Priority" options in Figma.
-export type PriorityScore = "critical" | "high" | "medium";
+export type PriorityScore = "p1" | "p2" | "p3";
 
 type BadgePriorityProps = {
   // Which priority tier to show — controls the badge background color.
