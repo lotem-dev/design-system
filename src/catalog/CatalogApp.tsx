@@ -5,6 +5,7 @@ import { BreadcrumbNav } from "./ui/BreadcrumbNav";
 import { GlobalsCssSection }       from "./sections/GlobalsCssSection";
 import { ColorsSection }           from "./sections/ColorsSection";
 import { TypographySection }       from "./sections/TypographySection";
+import { TextSection }             from "./sections/TextSection";
 import { SpacingSection }          from "./sections/SpacingSection";
 import { RadiusSection }           from "./sections/RadiusSection";
 import { IconCategorySection }     from "./sections/IconCategorySection";
@@ -80,6 +81,7 @@ export function CatalogApp() {
       case "illustrations": return <IllustrationsSection />;
 
       // Foundation
+      case "text":    return <TextSection />;
       case "link":    return <LinkSection />;
       case "divider": return <DividerSection />;
 

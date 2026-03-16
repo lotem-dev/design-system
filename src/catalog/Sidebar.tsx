@@ -4,9 +4,9 @@ import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 export type SectionId =
   // Styles
-  | "globals-css" | "colors" | "spacing" | "radius"
+  | "globals-css" | "colors" | "spacing" | "radius" | "typography"
   // Foundation
-  | "typography" | "link" | "divider"
+  | "text" | "link" | "divider"
   // Icons
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
@@ -41,13 +41,14 @@ const NAV: NavGroup[] = [
       { id: "colors",      label: "Colors" },
       { id: "spacing",     label: "Spacing" },
       { id: "radius",      label: "Radius" },
+      { id: "typography",  label: "typography.css" },
     ],
   },
   {
     label: "Foundation",
     items: [
-      { id: "typography", label: "Text" },
-      { id: "link",       label: "Link" },
+      { id: "text", label: "Text" },
+      { id: "link", label: "Link" },
       { id: "divider",    label: "Divider" },
     ],
   },

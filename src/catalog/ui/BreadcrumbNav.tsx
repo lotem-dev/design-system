@@ -9,9 +9,10 @@ const PATHS: Record<SectionId, string[]> = {
   "colors":      ["styles", "tokens", "colors.css"],
   "spacing":     ["styles", "tokens", "spacing.css"],
   "radius":      ["styles", "tokens", "radius.css"],
+  "typography":  ["styles", "tokens", "typography.css"],
   // foundation/
-  "typography": ["foundation", "Text.tsx"],
-  "link":       ["foundation", "Link.tsx"],
+  "text":   ["foundation", "Text.tsx"],
+  "link":   ["foundation", "Link.tsx"],
   "divider":    ["foundation", "Divider.tsx"],
   // icons/
   "icons-usecases":     ["icons", "usecases"],
