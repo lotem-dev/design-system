@@ -3,9 +3,17 @@
    =========================================================
    This file pulls in all token layers in order.
    Each file corresponds to a Foundation page in the catalog.
+
+   IMPORTANT: @import must come before any other CSS rules.
    ========================================================= */
 
-/* ─── CSS Reset ────────────────────────────────────────────── */
+/* ─── Token layers ─────────────────────────────────────────── */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+
+/* ─── CSS Reset ─────────────────────────────────────────────── */
 /* Zeroes out browser defaults so our tokens are the only
    thing that determines how elements look. */
 *, *::before, *::after {
@@ -25,12 +33,6 @@ button, input, select, textarea {
   background: none;
   border: none;
 }
-
-/* ─── Token layers ─────────────────────────────────────────── */
-@import "./tokens/colors.css";
-@import "./tokens/typography.css";
-@import "./tokens/spacing.css";
-@import "./tokens/radius.css";
 
 /* ─── highlight.js override ────────────────────────────────── */
 /* The hljs theme sets its own background; we clear it so the
