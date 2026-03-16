@@ -38,7 +38,7 @@ export function PropsTable({ source }: PropsTableProps) {
           </tr>
         </thead>
         <tbody>
-          {props.map((p, i) => (
+          {props.map((p) => (
             <tr
               key={p.name}
               style={{ borderBottom: "1px solid #F4F4F5" }}
