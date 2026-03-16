@@ -282,21 +282,27 @@ export function ButtonSection() {
         </p>
       </div>
 
-      <SectionBlock title="Playground">
-        <Playground
-          variant={variant} onVariant={setVariant}
-          size={size}       onSize={setSize}
-          disabled={disabled} onDisabled={setDisabled}
-          iconMode={iconMode} onIconMode={setIconMode}
-        />
-      </SectionBlock>
+      {/* Side-by-side: Playground + Style Reference in one viewport */}
+      <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
+        <div style={{ flex: "0 0 52%", minWidth: 0 }}>
+          <SectionBlock title="Playground">
+            <Playground
+              variant={variant} onVariant={setVariant}
+              size={size}       onSize={setSize}
+              disabled={disabled} onDisabled={setDisabled}
+              iconMode={iconMode} onIconMode={setIconMode}
+            />
+          </SectionBlock>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <SectionBlock title="Style Reference">
+            <StyleReference variant={variant} size={size} disabled={disabled} />
+          </SectionBlock>
+        </div>
+      </div>
 
       <SectionBlock title="Props">
         <PropsTable source={buttonTsx} />
-      </SectionBlock>
-
-      <SectionBlock title="Style Reference">
-        <StyleReference variant={variant} size={size} disabled={disabled} />
       </SectionBlock>
     </SplitPage>
   );
