@@ -1,42 +1,43 @@
-// Text — the single component used for all text rendering in the design system.
-// Instead of choosing a font size directly, you pick a "role" that describes what the text is (e.g. page title, body copy, badge label).
-// The role automatically determines the size, weight, letter spacing, and the correct HTML heading or paragraph tag.
-// Never use raw HTML text tags (h1, p, span) elsewhere in the app — always use this component.
+// Text — renders any text in the design system using a named role.
+// A role locks in the size, weight, line-height, and correct HTML tag.
+// Never apply font styles manually in components — always use <Text role="...">.
 import * as React from "react";
-import { typographyScale } from "./scale";
-import { typographyRoleTokens, type TypographyRole } from "./roles";
+import styles from "./Text.module.css";
+
+// Role → HTML tag. The tag is part of the role's meaning:
+// headings get h1/h2, paragraphs get p, inline text gets span.
+const ROLE_TAG = {
+  "headline-regular": "h1",
+  "headline-bold":    "h1",
+  "title-regular":    "h2",
+  "title-bold":       "h2",
+  "medium-regular":   "p",
+  "medium-bold":      "p",
+  "body-regular":     "p",
+  "body-bold":        "p",
+  "label-regular":    "span",
+  "label-bold":       "span",
+  "label-caps":       "span",
+  "xs-regular":       "span",
+  "xs-bold":          "span",
+} as const;
+
+export type TypographyRole = keyof typeof ROLE_TAG;
 
 type TextProps = {
-  // The semantic role of this text — controls size, weight, HTML tag, and casing. See roles.ts for all options.
+  // Which text role to apply — controls size, weight, line-height, and HTML tag.
   role: TypographyRole;
-  // The text content (or any nested elements) to render.
   children: React.ReactNode;
-  // Optional color override using a design token — e.g. "var(--text-secondary)". Only use when the role's default color isn't right.
+  // Optional color override using a design token, e.g. "var(--text-secondary)".
   color?: string;
 };
 
 export function Text({ role, children, color }: TextProps) {
-  // Look up the role definition — this tells us which scale, weight, HTML tag, and whether to use caps.
-  const roleTokens = typographyRoleTokens[role];
-
-  // Look up the base CSS styles (font size, line height) for the scale this role uses.
-  const scaleStyles = typographyScale[roleTokens.scale];
-
-  // The HTML element to render (e.g. h1, p, span) — determined by the role, not the caller.
-  const Component = roleTokens.as;
-
+  const Component = ROLE_TAG[role];
   return (
     <Component
-      style={{
-        ...scaleStyles,
-        fontWeight: roleTokens.weight,
-        // If the role uses caps (e.g. "label-caps"), apply uppercase styling and wider letter spacing.
-        ...(roleTokens.caps && {
-          textTransform: "uppercase",
-          letterSpacing: "var(--letter-spacing-caps)",
-        }),
-        ...(color && { color }),
-      }}
+      className={`${styles.root} ${styles[role]}`}
+      style={color ? { color } : undefined}
     >
       {children}
     </Component>

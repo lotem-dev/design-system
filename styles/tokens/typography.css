@@ -1,11 +1,18 @@
 /* =========================================================
    Jit Design System — Typography Tokens
    =========================================================
-   Font family, size scale, weights, line heights, and
-   letter spacing — all defined as CSS custom properties.
-   The font itself is loaded via <link> in index.html.
+   Two layers, same pattern as colors.css:
+
+   Layer 1 — Primitives: raw scale values, named by size.
+             Only referenced by Layer 2 — never used directly
+             in components.
+
+   Layer 2 — Semantic roles: named by purpose (headline,
+             label, etc.). These are what component CSS
+             modules should reference.
    ========================================================= */
 
+/* ─── Layer 1: Primitive scale ────────────────────────────── */
 :root {
   --font-sans: "Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
     Roboto, Helvetica, Arial;
@@ -16,36 +23,58 @@
   --font-weight-semibold: 600;
   --font-weight-bold:     700;
 
-  --font-size-2xl:  30px; /* Headline */
-  --font-size-xl:   26px; /* Title    */
-  --font-size-lg:   18px; /* Medium   */
-  --font-size-base: 14px; /* Body     */
-  --font-size-sm:   12px; /* Label    */
-  --font-size-xs:   10px; /* XS       */
+  --font-size-2xl:  1.875rem; /* 30px — Headline */
+  --font-size-xl:   1.625rem; /* 26px — Title    */
+  --font-size-lg:   1.125rem; /* 18px — Medium   */
+  --font-size-base: 0.875rem; /* 14px — Body     */
+  --font-size-sm:   0.75rem;  /* 12px — Label    */
+  --font-size-xs:   0.625rem; /* 10px — XS       */
 
-  --line-height-2xl:  36px; /* Headline 30/36 */
-  --line-height-xl:   32px; /* Title    26/32 */
-  --line-height-lg:   25px; /* Medium   18/25 */
-  --line-height-base: 22px; /* Body     14/22 */
-  --line-height-sm:   16px; /* Label    12/16 */
-  --line-height-xs:   14px; /* XS       10/14 */
+  --line-height-2xl:  2.25rem;  /* 36px */
+  --line-height-xl:   2rem;     /* 32px */
+  --line-height-lg:   1.5625rem;/* 25px */
+  --line-height-base: 1.375rem; /* 22px */
+  --line-height-sm:   1rem;     /* 16px */
+  --line-height-xs:   0.875rem; /* 14px */
 
   --letter-spacing-default: 0;
   --letter-spacing-caps:    0.04em;
 }
 
-/* Apply the default font globally */
+/* ─── Layer 2: Semantic role tokens ───────────────────────── */
+/* These point to primitives above. Use these in component
+   CSS modules — never the primitives directly.
+   If the headline size ever changes, update one line here. */
+:root {
+  --font-headline-size:        var(--font-size-2xl);
+  --font-headline-line-height: var(--line-height-2xl);
+
+  --font-title-size:           var(--font-size-xl);
+  --font-title-line-height:    var(--line-height-xl);
+
+  --font-medium-size:          var(--font-size-lg);
+  --font-medium-line-height:   var(--line-height-lg);
+
+  --font-body-size:            var(--font-size-base);
+  --font-body-line-height:     var(--line-height-base);
+
+  --font-label-size:           var(--font-size-sm);
+  --font-label-line-height:    var(--line-height-sm);
+
+  --font-xs-size:              var(--font-size-xs);
+  --font-xs-line-height:       var(--line-height-xs);
+}
+
+/* ─── Global application ───────────────────────────────────── */
 html, body {
   font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 
-/* Link underline on hover */
 a[data-underline-hover="true"]:hover {
   text-decoration: underline;
 }
 
-/* Keyboard focus ring */
 a:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;

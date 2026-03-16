@@ -63,7 +63,7 @@ export function BadgeStatus({ status }: BadgeStatusProps) {
       }}
     >
       {/* Text controls typography ONLY (size/weight/tag) */}
-      <Text role="badge-small">{label}</Text>
+      <Text role="label-bold">{label}</Text>
     </div>
   );
 }

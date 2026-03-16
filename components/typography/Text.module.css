@@ -1,0 +1,93 @@
+/* =========================================================
+   Text — role classes
+   =========================================================
+   One class per role. Each class is a complete, self-contained
+   text style — size + line-height + weight in one place.
+   All values come from the semantic tokens in typography.css.
+
+   Usage: <Text role="headline-bold"> applies .headline-bold
+   ========================================================= */
+
+.root {
+  font-family: var(--font-family-default);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* ─── Headline (30px / 36px) ─────────────────────────────── */
+.headline-regular {
+  font-size: var(--font-headline-size);
+  line-height: var(--font-headline-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.headline-bold {
+  font-size: var(--font-headline-size);
+  line-height: var(--font-headline-line-height);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Title (26px / 32px) ────────────────────────────────── */
+.title-regular {
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.title-bold {
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Medium (18px / 25px) ───────────────────────────────── */
+.medium-regular {
+  font-size: var(--font-medium-size);
+  line-height: var(--font-medium-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.medium-bold {
+  font-size: var(--font-medium-size);
+  line-height: var(--font-medium-line-height);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Body (14px / 22px) ─────────────────────────────────── */
+.body-regular {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.body-bold {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ─── Label (12px / 16px) ────────────────────────────────── */
+.label-regular {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.label-bold {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-bold);
+}
+.label-caps {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-caps);
+}
+
+/* ─── XS (10px / 14px) ───────────────────────────────────── */
+.xs-regular {
+  font-size: var(--font-xs-size);
+  line-height: var(--font-xs-line-height);
+  font-weight: var(--font-weight-regular);
+}
+.xs-bold {
+  font-size: var(--font-xs-size);
+  line-height: var(--font-xs-line-height);
+  font-weight: var(--font-weight-bold);
+}
