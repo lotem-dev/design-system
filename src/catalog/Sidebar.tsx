@@ -187,6 +187,7 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
     () => new Set(NAV.map(g => g.label))
   );
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
   function toggleGroup(label: string) {
     setOpenGroups(prev => {
@@ -196,6 +197,16 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       return next;
     });
   }
+
+  const trimmed = query.trim().toLowerCase();
+  const filteredNav = trimmed
+    ? NAV.map(group => ({
+        ...group,
+        items: group.items.filter(item =>
+          item.label.toLowerCase().includes(trimmed)
+        ),
+      })).filter(group => group.items.length > 0)
+    : NAV;
 
   return (
     <aside style={{
@@ -209,19 +220,53 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
     }}>
 
       {/* Header */}
-      <div style={{ padding: "20px 20px 18px", borderBottom: "1px solid #F4F4F5", flexShrink: 0 }}>
+      <div style={{ padding: "20px 20px 14px", flexShrink: 0 }}>
         <LogoJit variant="mono" style={{ width: "32px", height: "auto", color: "var(--jit-primary)", display: "block", marginBottom: "14px" }} />
         <div style={{ fontSize: "11px", fontWeight: 700, color: "#18181B", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
           Design System
         </div>
       </div>
 
+      {/* Search */}
+      <div style={{ padding: "0 12px 10px", flexShrink: 0 }}>
+        <div style={{ position: "relative" }}>
+          <svg
+            width="13" height="13" viewBox="0 0 13 13" fill="none"
+            style={{ position: "absolute", left: "9px", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#A1A1AA" }}
+          >
+            <circle cx="5.5" cy="5.5" r="4" stroke="currentColor" strokeWidth="1.4" />
+            <path d="M9 9L11.5 11.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "6px 10px 6px 28px",
+              fontSize: "12px",
+              fontFamily: "'Open Sans', system-ui, sans-serif",
+              color: "#18181B",
+              backgroundColor: "#F4F4F5",
+              border: "1px solid transparent",
+              borderRadius: "7px",
+              outline: "none",
+              boxSizing: "border-box",
+              transition: "border-color 0.1s",
+            }}
+            onFocus={e => { e.currentTarget.style.borderColor = "#D4D4D8"; e.currentTarget.style.backgroundColor = "#FFFFFF"; }}
+            onBlur={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.backgroundColor = "#F4F4F5"; }}
+          />
+        </div>
+      </div>
+
       {/* Nav */}
-      <nav style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "12px 0 16px" }}>
-        {NAV.map((group, gi) => {
-          const isOpen = openGroups.has(group.label);
+      <nav style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "4px 0 16px" }}>
+        {filteredNav.map((group, gi) => {
+          const isOpen = trimmed ? true : openGroups.has(group.label);
           return (
-            <div key={group.label} style={{ marginBottom: gi < NAV.length - 1 ? "2px" : 0 }}>
+            <div key={group.label} style={{ marginBottom: gi < filteredNav.length - 1 ? "2px" : 0 }}>
 
               {/* Section label — clickable to toggle */}
               <button
