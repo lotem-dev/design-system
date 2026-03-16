@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Tab } from "../../../components/molecules/Tab";
-import { TabGroup } from "../../../components/molecules/TabGroup";
+import { Tab } from "../../../components/navigation/Tab";
+import { TabGroup } from "../../../components/navigation/TabGroup";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import tabTsx    from "../../../components/molecules/Tab.tsx?raw";
-import tabCss    from "../../../components/molecules/Tab.module.css?raw";
-import groupTsx  from "../../../components/molecules/TabGroup.tsx?raw";
-import groupCss  from "../../../components/molecules/TabGroup.module.css?raw";
+import tabTsx    from "../../../components/navigation/Tab.tsx?raw";
+import tabCss    from "../../../components/navigation/Tab.module.css?raw";
+import groupTsx  from "../../../components/navigation/TabGroup.tsx?raw";
+import groupCss  from "../../../components/navigation/TabGroup.module.css?raw";
 
 const sources = [
   { filename: "Tab.tsx",             code: tabTsx   },
@@ -73,7 +73,6 @@ export function TabSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🧬 Molecule</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Tab / TabGroup</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A single Tab item and a TabGroup that manages selection state. Tabs can show an optional count badge. Use TabGroup in practice — Tab alone is the building block.

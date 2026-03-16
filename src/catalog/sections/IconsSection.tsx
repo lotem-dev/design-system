@@ -1,5 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
-import { IconWrapper } from "../../../components/atoms/IconWrapper";
+import { IconWrapper } from "../../../components/layout/IconWrapper";
 import { SectionBlock } from "../ui/SectionBlock";
 import { TokenTable } from "../ui/TokenTable";
 import { SplitPage } from "../ui/SplitPage";
@@ -72,7 +72,6 @@ export function IconsSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>🔷 Icons</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Icons</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           All icons are React SVG components drawn on a 24x24 grid. They use{" "}

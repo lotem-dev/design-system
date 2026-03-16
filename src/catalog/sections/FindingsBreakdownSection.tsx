@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { FindingsBreakdown } from "../../../components/atoms/FindingsBreakdown";
+import { FindingsBreakdown } from "../../../components/visualization/FindingsBreakdown";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow } from "../ui/PlaygroundShell";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
 
-import findingsBreakdownTsx from "../../../components/atoms/FindingsBreakdown.tsx?raw";
-import findingsBreakdownCss from "../../../components/atoms/FindingsBreakdown.module.css?raw";
+import findingsBreakdownTsx from "../../../components/visualization/FindingsBreakdown.tsx?raw";
+import findingsBreakdownCss from "../../../components/visualization/FindingsBreakdown.module.css?raw";
 
 const sources = [
   { filename: "FindingsBreakdown.tsx",        code: findingsBreakdownTsx },
@@ -61,7 +61,6 @@ export function FindingsBreakdownSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>FindingsBreakdown</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A compact severity breakdown — a proportional segmented bar with counts below it.

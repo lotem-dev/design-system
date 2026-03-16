@@ -22,7 +22,7 @@ export function SplitPage({ children, files }: SplitPageProps) {
     <div style={{ display: "flex", width: "100%" }}>
 
       {/* Left — spec content */}
-      <div style={{ flex: "0 0 55%", minWidth: 0, padding: "48px" }}>
+      <div style={{ flex: "0 0 55%", minWidth: 0, padding: "28px 48px 48px" }}>
         {children}
       </div>
 

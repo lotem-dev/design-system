@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Progress } from "../../../components/atoms/Progress";
+import { Progress } from "../../../components/visualization/Progress";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import progressTsx from "../../../components/atoms/Progress.tsx?raw";
-import progressCss from "../../../components/atoms/Progress.module.css?raw";
+import progressTsx from "../../../components/visualization/Progress.tsx?raw";
+import progressCss from "../../../components/visualization/Progress.module.css?raw";
 
 const sources = [
   { filename: "Progress.tsx",        code: progressTsx },
@@ -59,7 +59,6 @@ export function ProgressSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Feedback</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Progress</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Shows how far along a task is from 0% to 100%. Four semantic color variants and two bar heights for different visual weight needs.

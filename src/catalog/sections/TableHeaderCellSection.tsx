@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { TableHeaderCell, type SortDirection, type TableHeaderCellColumn } from "../../../components/atoms/TableHeaderCell";
+import { TableHeaderCell, type SortDirection, type TableHeaderCellColumn } from "../../../components/tables/TableHeaderCell";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import tableHeaderCellTsx from "../../../components/atoms/TableHeaderCell.tsx?raw";
-import tableHeaderCellCss from "../../../components/atoms/TableHeaderCell.module.css?raw";
+import tableHeaderCellTsx from "../../../components/tables/TableHeaderCell.tsx?raw";
+import tableHeaderCellCss from "../../../components/tables/TableHeaderCell.module.css?raw";
 
 const sources = [
   { filename: "TableHeaderCell.tsx",        code: tableHeaderCellTsx },
@@ -61,7 +61,6 @@ export function TableHeaderCellSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>TableHeaderCell</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A single <code>&lt;th&gt;</code> element for table headers. Supports five column roles — checkbox,

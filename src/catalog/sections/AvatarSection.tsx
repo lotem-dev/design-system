@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Avatar } from "../../../components/atoms/Avatar";
+import { Avatar } from "../../../components/layout/Avatar";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import avatarTsx from "../../../components/atoms/Avatar.tsx?raw";
-import avatarCss from "../../../components/atoms/Avatar.module.css?raw";
+import avatarTsx from "../../../components/layout/Avatar.tsx?raw";
+import avatarCss from "../../../components/layout/Avatar.module.css?raw";
 
 const sources = [
   { filename: "Avatar.tsx",        code: avatarTsx },
@@ -41,7 +41,6 @@ export function AvatarSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Display</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Avatar</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Shows a user's photo or auto-generated initials when no photo is available. Four sizes for different contexts — from compact table rows to larger profile areas.

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Spinner } from "../../../components/atoms/Spinner";
+import { Spinner } from "../../../components/visualization/Spinner";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import spinnerTsx from "../../../components/atoms/Spinner.tsx?raw";
-import spinnerCss from "../../../components/atoms/Spinner.module.css?raw";
+import spinnerTsx from "../../../components/visualization/Spinner.tsx?raw";
+import spinnerCss from "../../../components/visualization/Spinner.module.css?raw";
 
 const sources = [
   { filename: "Spinner.tsx",        code: spinnerTsx },
@@ -35,7 +35,6 @@ export function SpinnerSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Feedback</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Spinner</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           An animated loading indicator for in-progress states. Use while content is fetching or an action hasn't resolved yet.

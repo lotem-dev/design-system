@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Sidebar, type SectionId } from "./Sidebar";
+import { BreadcrumbNav } from "./ui/BreadcrumbNav";
 
+import { GlobalsCssSection }       from "./sections/GlobalsCssSection";
 import { ColorsSection }           from "./sections/ColorsSection";
 import { TypographySection }       from "./sections/TypographySection";
 import { SpacingSection }          from "./sections/SpacingSection";
 import { RadiusSection }           from "./sections/RadiusSection";
 import { IconCategorySection }     from "./sections/IconCategorySection";
+import { IllustrationsSection }    from "./sections/IllustrationsSection";
 
 import { ButtonSection }           from "./sections/ButtonSection";
 import { LinkSection }             from "./sections/LinkSection";
@@ -55,11 +58,12 @@ export function CatalogApp() {
 
   function renderSection() {
     switch (active) {
-      // Foundation
-      case "colors":     return <ColorsSection />;
-      case "typography": return <TypographySection />;
-      case "spacing":    return <SpacingSection />;
-      case "radius":     return <RadiusSection />;
+      // Styles
+      case "globals-css": return <GlobalsCssSection />;
+      case "colors":      return <ColorsSection />;
+      case "typography":  return <TypographySection />;
+      case "spacing":     return <SpacingSection />;
+      case "radius":      return <RadiusSection />;
 
       // Icons
       case "icons-usecases":
@@ -72,56 +76,61 @@ export function CatalogApp() {
       case "icons-brand":
         return <IconCategorySection categoryId={active} />;
 
-      // Actions
-      case "button": return <ButtonSection />;
-      case "link":   return <LinkSection />;
+      // Illustrations
+      case "illustrations": return <IllustrationsSection />;
 
-      // Inputs
-      case "fields-text":     return <TextInputSection />;
-      case "fields-select":   return <SelectInputSection />;
-      case "fields-search":   return <SearchInputSection />;
+      // Foundation
+      case "link":    return <LinkSection />;
+      case "divider": return <DividerSection />;
+
+      // Interactions
+      case "button":          return <ButtonSection />;
       case "fields-checkbox": return <CheckboxSection />;
       case "fields-radio":    return <RadioSection />;
       case "toggle":          return <ToggleSection />;
-      case "textarea":        return <TextareaSection />;
-      case "form-field":      return <FormFieldSection />;
 
-      // Display
-      case "avatar":         return <AvatarSection />;
+      // Fields
+      case "fields-text":   return <TextInputSection />;
+      case "fields-select": return <SelectInputSection />;
+      case "fields-search": return <SearchInputSection />;
+      case "textarea":      return <TextareaSection />;
+      case "chat-field":    return <ChatFieldSection />;
+      case "form-field":    return <FormFieldSection />;
+
+      // Badges
       case "badge-status":   return <BadgeStatusSection />;
       case "badge-severity": return <BadgeSeveritySection />;
       case "badge-priority": return <BadgePrioritySection />;
-      case "icon-wrapper":   return <IconWrapperSection />;
 
-      // Data
+      // Tables
+      case "table":             return <TableSection />;
+      case "table-header-cell": return <TableHeaderCellSection />;
+      case "resource-item":     return <ResourceItemSection />;
+
+      // Visualization
       case "findings-breakdown": return <FindingsBreakdownSection />;
       case "priority-gauge":     return <PriorityGaugeSection />;
-      case "resource-item":      return <ResourceItemSection />;
-      case "table-header-cell":  return <TableHeaderCellSection />;
-      case "table":              return <TableSection />;
-      case "pagination":         return <PaginationSection />;
+      case "spinner":            return <SpinnerSection />;
+      case "skeleton":           return <SkeletonSection />;
+      case "progress":           return <ProgressSection />;
+      case "empty-state":        return <EmptyStateSection />;
 
-      // Feedback
-      case "alert":       return <AlertSection />;
-      case "toast":       return <ToastSection />;
-      case "spinner":     return <SpinnerSection />;
-      case "skeleton":    return <SkeletonSection />;
-      case "progress":    return <ProgressSection />;
-      case "empty-state": return <EmptyStateSection />;
-
-      // Overlay
+      // Overlays
       case "tooltip":       return <TooltipSection />;
       case "dropdown-menu": return <DropdownMenuSection />;
       case "modal":         return <ModalSection />;
+      case "alert":         return <AlertSection />;
+      case "toast":         return <ToastSection />;
 
       // Navigation
       case "tab":        return <TabSection />;
       case "breadcrumb": return <BreadcrumbSection />;
-      case "divider":    return <DividerSection />;
+      case "pagination": return <PaginationSection />;
 
       // Layout
-      case "card":       return <CardSection />;
-      case "chat-field": return <ChatFieldSection />;
+      case "card":         return <CardSection />;
+      case "avatar":       return <AvatarSection />;
+      case "icon-wrapper": return <IconWrapperSection />;
     }
   }
 
@@ -129,6 +138,8 @@ export function CatalogApp() {
     <div style={{ fontFamily: "'Open Sans', system-ui, sans-serif" }}>
       <Sidebar active={active} onSelect={setActive} />
       <main style={{ marginLeft: "244px", height: "100vh", overflow: "auto", backgroundColor: "#FFFFFF" }}>
+        <BreadcrumbNav active={active} onSelect={setActive} />
+        <div style={{ borderBottom: "1px solid #F4F4F5" }} />
         {renderSection()}
       </main>
     </div>

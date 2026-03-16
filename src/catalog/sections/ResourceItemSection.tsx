@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { ResourceItem, type ResourceType } from "../../../components/atoms/ResourceItem";
+import { ResourceItem, type ResourceType } from "../../../components/tables/ResourceItem";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import resourceItemTsx from "../../../components/atoms/ResourceItem.tsx?raw";
-import resourceItemCss from "../../../components/atoms/ResourceItem.module.css?raw";
+import resourceItemTsx from "../../../components/tables/ResourceItem.tsx?raw";
+import resourceItemCss from "../../../components/tables/ResourceItem.module.css?raw";
 
 const sources = [
   { filename: "ResourceItem.tsx",        code: resourceItemTsx },
@@ -87,7 +87,6 @@ export function ResourceItemSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>ResourceItem</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Displays a resource (repository, cloud service, web app, etc.) with its logo and relevant metadata.

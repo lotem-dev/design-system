@@ -100,9 +100,9 @@ export function Pill({ active, onClick, children }: { active: boolean; onClick: 
       style={{
         padding: "4px 10px", fontSize: "12px",
         fontFamily: "'Open Sans', system-ui, sans-serif",
-        border: active ? "1px solid #5E32FF" : "1px solid #E4E4E7",
+        border: active ? "1px solid #18181B" : "1px solid #E4E4E7",
         borderRadius: "6px", cursor: "pointer",
-        background: active ? "#5E32FF" : hovered ? "#F4F4F5" : "#FFFFFF",
+        background: active ? "#18181B" : hovered ? "#F4F4F5" : "#FFFFFF",
         color: active ? "#FFFFFF" : "#52525B",
         fontWeight: active ? 600 : 400,
         transition: "all 100ms ease",

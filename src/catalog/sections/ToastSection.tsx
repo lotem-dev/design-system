@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Toast } from "../../../components/atoms/Toast";
+import { Toast } from "../../../components/overlays/Toast";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import toastTsx from "../../../components/atoms/Toast.tsx?raw";
-import toastCss from "../../../components/atoms/Toast.module.css?raw";
+import toastTsx from "../../../components/overlays/Toast.tsx?raw";
+import toastCss from "../../../components/overlays/Toast.module.css?raw";
 
 const sources = [
   { filename: "Toast.tsx",        code: toastTsx },
@@ -60,7 +60,6 @@ export function ToastSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Feedback</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Toast</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A brief notification that floats over the UI. Unlike Alert, Toast is transient — use it for non-blocking feedback like "Saved", "Copied", or action confirmations.

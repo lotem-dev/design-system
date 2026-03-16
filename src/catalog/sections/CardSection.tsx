@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Card } from "../../../components/atoms/Card";
+import { Card } from "../../../components/layout/Card";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import cardTsx from "../../../components/atoms/Card.tsx?raw";
-import cardCss from "../../../components/atoms/Card.module.css?raw";
+import cardTsx from "../../../components/layout/Card.tsx?raw";
+import cardCss from "../../../components/layout/Card.module.css?raw";
 
 const sources = [
   { filename: "Card.tsx",        code: cardTsx },
@@ -53,7 +53,6 @@ export function CardSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Layout</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Card</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A white surface that groups related content together. The most basic layout container in the system — use it for forms, list items, panels, and any self-contained block.

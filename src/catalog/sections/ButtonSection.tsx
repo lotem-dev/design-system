@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button, type ButtonVariant, type ButtonSize } from "../../../components/atoms/Button";
-import { IconWrapper } from "../../../components/atoms/IconWrapper";
+import { Button, type ButtonVariant, type ButtonSize } from "../../../components/interactions/Button";
+import { IconWrapper } from "../../../components/layout/IconWrapper";
 import { IconAdd } from "../../../components/icons/usecases/IconAdd";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
@@ -8,8 +8,8 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import buttonTsx from "../../../components/atoms/Button.tsx?raw";
-import buttonCss from "../../../components/atoms/Button.module.css?raw";
+import buttonTsx from "../../../components/interactions/Button.tsx?raw";
+import buttonCss from "../../../components/interactions/Button.module.css?raw";
 
 const sources = [
   { filename: "Button.tsx",        code: buttonTsx },
@@ -69,7 +69,6 @@ export function ButtonSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Button</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           The primary interactive element. Three variants cover the full range of action hierarchy —

@@ -2,7 +2,7 @@
 // Five column roles are supported: checkbox (leftmost, select-all), first, regular, last (text columns), and actions (empty rightmost).
 // Text columns show the column label in uppercase and a sort icon that cycles between default, ascending, and descending.
 // Used inside table header rows wherever data needs to be labeled and optionally sorted.
-import { Checkbox } from "./Checkbox";
+import { Checkbox } from "../interactions/Checkbox";
 import { IconSortDefault }     from "../icons/sorting/IconSortDefault";
 import { IconSortAscending }   from "../icons/sorting/IconSortAscending";
 import { IconSortDescending }  from "../icons/sorting/IconSortDescending";

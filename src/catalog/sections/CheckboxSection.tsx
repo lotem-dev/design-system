@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Checkbox } from "../../../components/atoms/Checkbox";
+import { Checkbox } from "../../../components/interactions/Checkbox";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import checkboxTsx from "../../../components/atoms/Checkbox.tsx?raw";
-import checkboxCss from "../../../components/atoms/Checkbox.module.css?raw";
+import checkboxTsx from "../../../components/interactions/Checkbox.tsx?raw";
+import checkboxCss from "../../../components/interactions/Checkbox.module.css?raw";
 
 const sources = [
   { filename: "Checkbox.tsx",        code: checkboxTsx },
@@ -53,11 +53,6 @@ export function CheckboxSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atoms</span>
-          <span style={{ fontSize: "11px", color: "#D4D4D8" }}>/</span>
-          <span style={{ fontSize: "11px", fontWeight: 600, color: "#A1A1AA", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Fields</span>
-        </div>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Checkbox</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A binary toggle for a single option. Controlled component — the parent owns the checked state.

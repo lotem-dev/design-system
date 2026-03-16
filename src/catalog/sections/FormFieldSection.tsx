@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { FormField } from "../../../components/atoms/FormField";
-import { TextInput } from "../../../components/atoms/TextInput";
+import { FormField } from "../../../components/fields/FormField";
+import { TextInput } from "../../../components/fields/TextInput";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
 
-import formFieldTsx from "../../../components/atoms/FormField.tsx?raw";
-import formFieldCss from "../../../components/atoms/FormField.module.css?raw";
+import formFieldTsx from "../../../components/fields/FormField.tsx?raw";
+import formFieldCss from "../../../components/fields/FormField.module.css?raw";
 
 const sources = [
   { filename: "FormField.tsx",        code: formFieldTsx },
@@ -58,7 +58,6 @@ export function FormFieldSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Inputs</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Form Field</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           A wrapper that gives any input a consistent label, hint text, and error message. Wrap TextInput, SelectInput, Textarea, or any other input as children.

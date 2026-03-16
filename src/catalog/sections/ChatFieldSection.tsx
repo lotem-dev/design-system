@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChatField } from "../../../components/atoms/ChatField";
+import { ChatField } from "../../../components/fields/ChatField";
 import { LogoGitHub }   from "../../../components/icons/brand/LogoGitHub";
 import { LogoAWS }      from "../../../components/icons/brand/LogoAWS";
 import { LogoSlack }    from "../../../components/icons/brand/LogoSlack";
@@ -11,8 +11,8 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage }    from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import chatFieldTsx from "../../../components/atoms/ChatField.tsx?raw";
-import chatFieldCss from "../../../components/atoms/ChatField.module.css?raw";
+import chatFieldTsx from "../../../components/fields/ChatField.tsx?raw";
+import chatFieldCss from "../../../components/fields/ChatField.module.css?raw";
 
 const sources = [
   { filename: "ChatField.tsx",        code: chatFieldTsx },
@@ -69,7 +69,6 @@ export function ChatFieldSection() {
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
-        <span style={{ fontSize: "11px", fontWeight: 600, color: "#71717A", textTransform: "uppercase", letterSpacing: "0.08em", fontFamily: "'Open Sans', system-ui, sans-serif" }}>⚛️ Atom</span>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>ChatField</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           An AI chat input with a brand-colored border, glow ring, and a toolbar row

@@ -17,3 +17,6 @@ src/**/*.js
 # Local env files
 .env
 .env.local
+
+# Local Netlify folder
+.netlify

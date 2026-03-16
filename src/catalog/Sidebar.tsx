@@ -3,44 +3,52 @@ import { useState } from "react";
 import { LogoJit } from "../../components/icons/brand/LogoJit";
 
 export type SectionId =
+  // Styles
+  | "globals-css" | "colors" | "spacing" | "radius"
   // Foundation
-  | "colors" | "typography" | "spacing" | "radius"
+  | "typography" | "link" | "divider"
   // Icons
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
-  // Actions
-  | "button" | "link"
-  // Inputs
+  // Illustrations
+  | "illustrations"
+  // Interactions
+  | "button" | "fields-radio" | "toggle" | "fields-checkbox"
+  // Fields
   | "fields-text" | "fields-select" | "fields-search"
-  | "fields-checkbox" | "fields-radio"
-  | "toggle" | "textarea" | "form-field"
-  // Display
-  | "avatar"
+  | "textarea" | "chat-field" | "form-field"
+  // Badges
   | "badge-status" | "badge-severity" | "badge-priority"
-  | "icon-wrapper"
-  // Data
-  | "findings-breakdown" | "priority-gauge" | "resource-item"
-  | "table-header-cell" | "table" | "pagination"
-  // Feedback
-  | "alert" | "toast" | "spinner" | "skeleton" | "progress" | "empty-state"
-  // Overlay
-  | "tooltip" | "dropdown-menu" | "modal"
+  // Tables
+  | "table" | "table-header-cell" | "resource-item"
+  // Visualization
+  | "findings-breakdown" | "priority-gauge" | "progress" | "spinner" | "skeleton" | "empty-state"
+  // Overlays
+  | "modal" | "dropdown-menu" | "tooltip" | "alert" | "toast"
   // Navigation
-  | "tab" | "breadcrumb" | "divider"
+  | "tab" | "breadcrumb" | "pagination"
   // Layout
-  | "card" | "chat-field";
+  | "card" | "avatar" | "icon-wrapper";
 
 type NavItem  = { id: SectionId; label: string };
 type NavGroup = { label: string; items: NavItem[] };
 
 const NAV: NavGroup[] = [
   {
+    label: "Styles",
+    items: [
+      { id: "globals-css", label: "globals.css" },
+      { id: "colors",      label: "Colors" },
+      { id: "spacing",     label: "Spacing" },
+      { id: "radius",      label: "Radius" },
+    ],
+  },
+  {
     label: "Foundation",
     items: [
-      { id: "colors",     label: "Colors" },
-      { id: "typography", label: "Typography" },
-      { id: "spacing",    label: "Spacing" },
-      { id: "radius",     label: "Radius" },
+      { id: "typography", label: "Text" },
+      { id: "link",       label: "Link" },
+      { id: "divider",    label: "Divider" },
     ],
   },
   {
@@ -57,30 +65,33 @@ const NAV: NavGroup[] = [
     ],
   },
   {
-    label: "Actions",
+    label: "Illustrations",
     items: [
-      { id: "button", label: "Button" },
-      { id: "link",   label: "Link" },
+      { id: "illustrations", label: "Illustrations" },
     ],
   },
   {
-    // "Inputs" = all form controls, including ChatField which is an input pattern
-    label: "Inputs",
+    label: "Interactions",
     items: [
-      { id: "fields-text",     label: "Text Input" },
-      { id: "fields-select",   label: "Select" },
-      { id: "fields-search",   label: "Search" },
-      { id: "fields-checkbox", label: "Checkbox" },
+      { id: "button",          label: "Button" },
       { id: "fields-radio",    label: "Radio" },
       { id: "toggle",          label: "Toggle" },
-      { id: "textarea",        label: "Textarea" },
-      { id: "chat-field",      label: "Chat Field" },
-      { id: "form-field",      label: "Form Field" },
+      { id: "fields-checkbox", label: "Checkbox" },
     ],
   },
   {
-    // "Status & Labels" = things that communicate a state, level, or category (Atlassian calls this "Status indicators")
-    label: "Status & Labels",
+    label: "Fields",
+    items: [
+      { id: "fields-text",   label: "Text Input" },
+      { id: "fields-select", label: "Select" },
+      { id: "fields-search", label: "Search" },
+      { id: "textarea",      label: "Textarea" },
+      { id: "chat-field",    label: "Chat Field" },
+      { id: "form-field",    label: "Form Field" },
+    ],
+  },
+  {
+    label: "Badges",
     items: [
       { id: "badge-status",   label: "Badge Status" },
       { id: "badge-severity", label: "Badge Severity" },
@@ -88,39 +99,35 @@ const NAV: NavGroup[] = [
     ],
   },
   {
-    // "Feedback" = system responses to user actions: alerts, notifications, loading states, empty states
-    label: "Feedback",
+    label: "Tables",
     items: [
-      { id: "alert",       label: "Alert" },
-      { id: "toast",       label: "Toast" },
-      { id: "empty-state", label: "Empty State" },
-      { id: "spinner",     label: "Spinner" },
-      { id: "skeleton",    label: "Skeleton" },
-      { id: "progress",    label: "Progress" },
+      { id: "table",             label: "Table" },
+      { id: "table-header-cell", label: "Table Header Cell" },
+      { id: "resource-item",     label: "Resource Item" },
     ],
   },
   {
-    // "Data & Tables" = structured data presentation, specific to Jit's domain
-    label: "Data & Tables",
+    label: "Visualization",
     items: [
-      { id: "table",              label: "Table" },
-      { id: "table-header-cell",  label: "Table Header Cell" },
       { id: "findings-breakdown", label: "Findings Breakdown" },
       { id: "priority-gauge",     label: "Priority Gauge" },
-      { id: "resource-item",      label: "Resource Item" },
+      { id: "progress",           label: "Progress" },
+      { id: "spinner",            label: "Spinner" },
+      { id: "skeleton",           label: "Skeleton" },
+      { id: "empty-state",        label: "Empty State" },
     ],
   },
   {
-    // "Overlays" = floating UI that appears above the page
     label: "Overlays",
     items: [
       { id: "modal",         label: "Modal" },
       { id: "dropdown-menu", label: "Dropdown Menu" },
       { id: "tooltip",       label: "Tooltip" },
+      { id: "alert",         label: "Alert" },
+      { id: "toast",         label: "Toast" },
     ],
   },
   {
-    // "Navigation" = components that move users between pages or sections
     label: "Navigation",
     items: [
       { id: "tab",        label: "Tabs" },
@@ -129,12 +136,10 @@ const NAV: NavGroup[] = [
     ],
   },
   {
-    // "Layout" = structural containers and display primitives (Avatar, IconWrapper live here alongside Polaris "Images and icons" pattern)
     label: "Layout",
     items: [
-      { id: "card",        label: "Card" },
-      { id: "divider",     label: "Divider" },
-      { id: "avatar",      label: "Avatar" },
+      { id: "card",         label: "Card" },
+      { id: "avatar",       label: "Avatar" },
       { id: "icon-wrapper", label: "Icon Wrapper" },
     ],
   },
@@ -151,10 +156,10 @@ function itemStyle(isActive: boolean, isHovered: boolean): React.CSSProperties {
     width: "calc(100% - 16px)",
     margin: "0 8px",
     padding: "7px 12px",
-    background: isActive ? "#F3F0FF" : isHovered ? "#F4F4F5" : "transparent",
+    background: isActive ? "#F4F4F5" : isHovered ? "#F4F4F5" : "transparent",
     border: "none",
     borderRadius: "6px",
-    color: isActive ? "#5E32FF" : isHovered ? "#18181B" : "#52525B",
+    color: isActive ? "#18181B" : isHovered ? "#18181B" : "#52525B",
     fontSize: "13px",
     textAlign: "left",
     cursor: "pointer",
@@ -165,8 +170,32 @@ function itemStyle(isActive: boolean, isHovered: boolean): React.CSSProperties {
   };
 }
 
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="10" height="10" viewBox="0 0 10 10" fill="none"
+      style={{ flexShrink: 0, transform: open ? "rotate(0deg)" : "rotate(-90deg)", transition: "transform 0.15s ease" }}
+    >
+      <path d="M2 3.5L5 6.5L8 3.5" stroke="#A1A1AA" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function Sidebar({ active, onSelect }: SidebarProps) {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [openGroups, setOpenGroups] = useState<Set<string>>(
+    () => new Set(NAV.map(g => g.label))
+  );
+  const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
+
+  function toggleGroup(label: string) {
+    setOpenGroups(prev => {
+      const next = new Set(prev);
+      if (next.has(label)) next.delete(label);
+      else next.add(label);
+      return next;
+    });
+  }
 
   return (
     <aside style={{
@@ -189,36 +218,56 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
 
       {/* Nav */}
       <nav style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "12px 0 16px" }}>
-        {NAV.map((group, gi) => (
-          <div key={group.label} style={{ marginBottom: gi < NAV.length - 1 ? "4px" : 0 }}>
+        {NAV.map((group, gi) => {
+          const isOpen = openGroups.has(group.label);
+          return (
+            <div key={group.label} style={{ marginBottom: gi < NAV.length - 1 ? "2px" : 0 }}>
 
-            {/* Section label */}
-            <div style={{
-              padding: "10px 20px 4px",
-              fontSize: "10px",
-              fontWeight: 700,
-              color: "#A1A1AA",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              fontFamily: "'Open Sans', system-ui, sans-serif",
-            }}>
-              {group.label}
-            </div>
-
-            {/* Items */}
-            {group.items.map((item) => (
+              {/* Section label — clickable to toggle */}
               <button
-                key={item.id}
-                onClick={() => onSelect(item.id)}
-                onMouseEnter={() => setHovered(item.id)}
-                onMouseLeave={() => setHovered(null)}
-                style={itemStyle(item.id === active, hovered === item.id && item.id !== active)}
+                onClick={() => toggleGroup(group.label)}
+                onMouseEnter={() => setHoveredGroup(group.label)}
+                onMouseLeave={() => setHoveredGroup(null)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  padding: "8px 20px 4px",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: hoveredGroup === group.label ? "#71717A" : "#A1A1AA",
+                  fontFamily: "'Open Sans', system-ui, sans-serif",
+                  transition: "color 0.1s",
+                }}
               >
-                {item.label}
+                <span style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}>
+                  {group.label}
+                </span>
+                <Chevron open={isOpen} />
               </button>
-            ))}
-          </div>
-        ))}
+
+              {/* Items — shown only when group is open */}
+              {isOpen && group.items.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => onSelect(item.id)}
+                  onMouseEnter={() => setHovered(item.id)}
+                  onMouseLeave={() => setHovered(null)}
+                  style={itemStyle(item.id === active, hovered === item.id && item.id !== active)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          );
+        })}
       </nav>
 
     </aside>
