@@ -49,6 +49,7 @@ type PlaygroundProps = {
 
 function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, iconMode, onIconMode }: PlaygroundProps) {
   const [copied, setCopied] = useState(false);
+  const [codeOpen, setCodeOpen] = useState(false);
   const snippet = generateSnippet(variant, size, disabled, iconMode);
 
   function copy() {
@@ -94,26 +95,50 @@ function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, ic
         }
       />
 
-      {/* Live code output */}
-      <div style={{ marginTop: "12px", position: "relative" }}>
-        <pre style={{
-          margin: 0, padding: "14px 52px 14px 16px",
-          backgroundColor: "#18181B", borderRadius: "8px",
-          fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-          color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
-        }}>
-          {snippet}
-        </pre>
-        <button onClick={copy} style={{
-          position: "absolute", top: "10px", right: "10px",
-          padding: "3px 10px", fontSize: "11px",
-          fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
-          color: copied ? "#A1A1AA" : "#71717A",
-          backgroundColor: "#27272A", border: "1px solid #3F3F46",
-          borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
-        }}>
-          {copied ? "Copied!" : "Copy"}
+      {/* Code drawer */}
+      <div style={{ marginTop: "12px" }}>
+        <button
+          onClick={() => setCodeOpen(o => !o)}
+          style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            background: "none", border: "1px solid #E4E4E7", borderRadius: "6px",
+            padding: "5px 12px", cursor: "pointer",
+            fontSize: "12px", fontFamily: "'Open Sans', system-ui, sans-serif",
+            color: "#52525B", fontWeight: 500,
+            transition: "background 0.1s, border-color 0.1s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#F4F4F5"; e.currentTarget.style.borderColor = "#D4D4D8"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#E4E4E7"; }}
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M4 3.5L1.5 6.5L4 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 3.5L11.5 6.5L9 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          {codeOpen ? "Hide code" : "Show code"}
         </button>
+
+        {codeOpen && (
+          <div style={{ marginTop: "8px", position: "relative" }}>
+            <pre style={{
+              margin: 0, padding: "14px 52px 14px 16px",
+              backgroundColor: "#18181B", borderRadius: "8px",
+              fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+            }}>
+              {snippet}
+            </pre>
+            <button onClick={copy} style={{
+              position: "absolute", top: "10px", right: "10px",
+              padding: "3px 10px", fontSize: "11px",
+              fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+              color: copied ? "#A1A1AA" : "#71717A",
+              backgroundColor: "#27272A", border: "1px solid #3F3F46",
+              borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+            }}>
+              {copied ? "Copied!" : "Copy"}
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
