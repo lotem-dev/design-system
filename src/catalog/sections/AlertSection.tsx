@@ -16,43 +16,237 @@ const sources = [
 type AlertType = "info" | "success" | "warning" | "error";
 const TYPES: AlertType[] = ["info", "success", "warning", "error"];
 
-function Playground() {
-  const [type, setType]         = useState<AlertType>("info");
-  const [showTitle, setShowTitle] = useState(true);
-  const [closable, setClosable]   = useState(false);
+// ─── Style Reference ──────────────────────────────────────────────────────────
 
+const TH: React.CSSProperties = {
+  textAlign: "left", padding: "6px 12px 10px",
+  fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
+  textTransform: "uppercase", letterSpacing: "0.06em",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  whiteSpace: "nowrap", borderBottom: "2px solid #E4E4E7",
+};
+const TD: React.CSSProperties = {
+  padding: "10px 12px", verticalAlign: "top", borderBottom: "1px solid #F4F4F5",
+};
+
+type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
+
+const STYLE_ROWS: StyleRow[] = [
+  { prop: "type", value: "info",    cssClass: ".info",    properties: ["background: var(--brand-tertiary)", "border-color: var(--brand-primary)", "icon color: var(--brand-primary)"] },
+  { prop: "type", value: "success", cssClass: ".success", properties: ["background: var(--success-secondary)", "border-color: var(--success-primary)", "icon color: var(--success-primary)"] },
+  { prop: "type", value: "warning", cssClass: ".warning", properties: ["background: var(--warning-secondary)", "border-color: var(--warning-primary)", "icon color: var(--warning-primary)"] },
+  { prop: "type", value: "error",   cssClass: ".error",   properties: ["background: var(--error-secondary)", "border-color: var(--error-primary)", "icon color: var(--error-primary)"] },
+];
+
+const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
+  const last = acc[acc.length - 1];
+  if (last && last.prop === row.prop) { last.rows.push(row); }
+  else { acc.push({ prop: row.prop, rows: [row] }); }
+  return acc;
+}, []);
+
+type ActiveState = { type: AlertType };
+
+function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
+  if (prop === "type") return value === state.type;
+  return false;
+}
+
+function StyleReference({ type }: ActiveState) {
   return (
-    <PlaygroundShell
-      preview={
-        <div style={{ width: "340px" }}>
-          <Alert
-            type={type}
-            title={showTitle ? "Heads up" : undefined}
-            message="This is an inline alert message giving the user important context about the current state."
-            onClose={closable ? () => {} : undefined}
-          />
-        </div>
-      }
-      controls={
-        <>
-          <ControlRow label="Type">
-            {TYPES.map(t => <Pill key={t} active={type === t} onClick={() => setType(t)}>{t}</Pill>)}
-          </ControlRow>
-          <ControlRow label="Title">
-            <Pill active={showTitle}  onClick={() => setShowTitle(true)}>show</Pill>
-            <Pill active={!showTitle} onClick={() => setShowTitle(false)}>hide</Pill>
-          </ControlRow>
-          <ControlRow label="Closable">
-            <Pill active={!closable} onClick={() => setClosable(false)}>no</Pill>
-            <Pill active={closable}  onClick={() => setClosable(true)}>yes</Pill>
-          </ControlRow>
-        </>
-      }
-    />
+    <div>
+      {/* Base */}
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Base — always applied regardless of props.
+      </p>
+      <div style={{ overflowX: "auto", marginBottom: "28px" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.alert</code>
+              </td>
+              <td style={TD}>
+                {["display: flex", "gap: var(--space-sm)", "padding: var(--space-sm) var(--space-base)", "border-left: 3px solid", "border-radius: var(--radius-sm)"].map(p => (
+                  <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
+                ))}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Prop-driven */}
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Prop-driven — updates as you interact with the playground above.
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Prop</th>
+              <th style={TH}>Value</th>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            {STYLE_GROUPS.map(({ prop, rows }) =>
+              rows.map((row, i) => {
+                const active = isActive(row, { type });
+                return (
+                  <tr key={`${prop}-${row.value}`} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
+                    {i === 0 && (
+                      <td rowSpan={rows.length} style={{ ...TD, borderRight: "1px solid #F4F4F5", verticalAlign: "middle" }}>
+                        <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>{prop}</code>
+                      </td>
+                    )}
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>
+                        {row.value}
+                      </span>
+                    </td>
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>
+                        {row.cssClass}
+                      </code>
+                    </td>
+                    <td style={TD}>
+                      {row.properties.map(p => (
+                        <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", lineHeight: "1.9" }}>{p}</div>
+                      ))}
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
+// ─── Playground ───────────────────────────────────────────────────────────────
+
+type PlaygroundProps = {
+  type: AlertType; onType: (t: AlertType) => void;
+  showTitle: boolean; onShowTitle: (v: boolean) => void;
+  closable: boolean; onClosable: (v: boolean) => void;
+};
+
+function generateSnippet(type: AlertType, showTitle: boolean, closable: boolean): string {
+  const lines: string[] = [`<Alert`];
+  lines.push(`  type="${type}"`);
+  if (showTitle) lines.push(`  title="Heads up"`);
+  lines.push(`  message="This is an inline alert message giving the user important context about the current state."`);
+  if (closable) lines.push(`  onClose={() => {}}`);
+  lines.push(`/>`);
+  return lines.join("\n");
+}
+
+function Playground({ type, onType, showTitle, onShowTitle, closable, onClosable }: PlaygroundProps) {
+  const [copied, setCopied] = useState(false);
+  const [codeOpen, setCodeOpen] = useState(false);
+  const snippet = generateSnippet(type, showTitle, closable);
+
+  function copy() {
+    navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
+
+  return (
+    <>
+      <PlaygroundShell
+        preview={
+          <div style={{ width: "340px" }}>
+            <Alert
+              type={type}
+              title={showTitle ? "Heads up" : undefined}
+              message="This is an inline alert message giving the user important context about the current state."
+              onClose={closable ? () => {} : undefined}
+            />
+          </div>
+        }
+        controls={
+          <>
+            <ControlRow label="Type">
+              {TYPES.map(t => <Pill key={t} active={type === t} onClick={() => onType(t)}>{t}</Pill>)}
+            </ControlRow>
+            <ControlRow label="Title">
+              <Pill active={showTitle}  onClick={() => onShowTitle(true)}>show</Pill>
+              <Pill active={!showTitle} onClick={() => onShowTitle(false)}>hide</Pill>
+            </ControlRow>
+            <ControlRow label="Closable">
+              <Pill active={!closable} onClick={() => onClosable(false)}>no</Pill>
+              <Pill active={closable}  onClick={() => onClosable(true)}>yes</Pill>
+            </ControlRow>
+          </>
+        }
+      />
+
+      <div style={{ marginTop: "12px" }}>
+        <button
+          onClick={() => setCodeOpen(o => !o)}
+          style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            background: "none", border: "1px solid #E4E4E7", borderRadius: "6px",
+            padding: "5px 12px", cursor: "pointer",
+            fontSize: "12px", fontFamily: "'Open Sans', system-ui, sans-serif",
+            color: "#52525B", fontWeight: 500,
+            transition: "background 0.1s, border-color 0.1s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#F4F4F5"; e.currentTarget.style.borderColor = "#D4D4D8"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#E4E4E7"; }}
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M4 3.5L1.5 6.5L4 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 3.5L11.5 6.5L9 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          {codeOpen ? "Hide code" : "Show code"}
+        </button>
+
+        {codeOpen && (
+          <div style={{ marginTop: "8px", position: "relative" }}>
+            <pre style={{
+              margin: 0, padding: "14px 52px 14px 16px",
+              backgroundColor: "#18181B", borderRadius: "8px",
+              fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+            }}>
+              {snippet}
+            </pre>
+            <button onClick={copy} style={{
+              position: "absolute", top: "10px", right: "10px",
+              padding: "3px 10px", fontSize: "11px",
+              fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+              color: copied ? "#A1A1AA" : "#71717A",
+              backgroundColor: "#27272A", border: "1px solid #3F3F46",
+              borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+            }}>
+              {copied ? "Copied!" : "Copy"}
+            </button>
+          </div>
+        )}
+      </div>
+    </>
+  );
+}
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+
 export function AlertSection() {
+  const [type, setType]           = useState<AlertType>("info");
+  const [showTitle, setShowTitle] = useState(true);
+  const [closable, setClosable]   = useState(false);
+
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
@@ -61,9 +255,24 @@ export function AlertSection() {
           An inline message that stays visible on the page. Use for confirmations, warnings, and errors that the user needs to see and act on — unlike Toast, Alert doesn't disappear.
         </p>
       </div>
-      <SectionBlock title="Playground">
-        <Playground />
-      </SectionBlock>
+
+      <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
+        <div style={{ flex: "0 0 52%", minWidth: 0 }}>
+          <SectionBlock title="Playground">
+            <Playground
+              type={type} onType={setType}
+              showTitle={showTitle} onShowTitle={setShowTitle}
+              closable={closable} onClosable={setClosable}
+            />
+          </SectionBlock>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <SectionBlock title="Style Reference">
+            <StyleReference type={type} />
+          </SectionBlock>
+        </div>
+      </div>
+
       <SectionBlock title="Props">
         <PropsTable source={alertTsx} />
       </SectionBlock>

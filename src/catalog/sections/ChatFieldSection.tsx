@@ -5,7 +5,6 @@ import { LogoAWS }      from "../../../components/icons/brand/LogoAWS";
 import { LogoSlack }    from "../../../components/icons/brand/LogoSlack";
 import { LogoShortcut } from "../../../components/icons/brand/LogoShortcut";
 import { LogoJira }     from "../../../components/icons/brand/LogoJira";
-import { TokenTable }   from "../ui/TokenTable";
 import { PropsTable }   from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage }    from "../ui/SplitPage";
@@ -21,51 +20,255 @@ const sources = [
 
 const DEMO_CONNECTORS = [LogoGitHub, LogoAWS, LogoSlack, LogoShortcut, LogoJira];
 
-function Playground() {
-  const [value, setValue]           = useState("");
-  const [isProcessing, setProcess]  = useState(false);
-  const [showConnectors, setShow]   = useState(true);
+// ─── Code snippet ──────────────────────────────────────────────────────────────
+
+function generateSnippet(showConnectors: boolean, isProcessing: boolean): string {
+  const lines: string[] = ['<ChatField', '  value={value}', '  onChange={setValue}', '  onSend={handleSend}'];
+  if (isProcessing)    lines.push('  isProcessing');
+  if (showConnectors)  lines.push('  connectors={CONNECTORS}', '  connectorCount={8}');
+  lines.push('/>');
+  return lines.join('\n');
+}
+
+// ─── Playground ────────────────────────────────────────────────────────────────
+
+type PlaygroundProps = {
+  showConnectors: boolean; onShowConnectors: (v: boolean) => void;
+  isProcessing:   boolean; onIsProcessing:   (v: boolean) => void;
+};
+
+function Playground({ showConnectors, onShowConnectors, isProcessing, onIsProcessing }: PlaygroundProps) {
+  const [value, setValue] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [codeOpen, setCodeOpen] = useState(false);
+  const snippet = generateSnippet(showConnectors, isProcessing);
 
   function handleSend() {
-    setProcess(true);
+    onIsProcessing(true);
     setTimeout(() => {
       setValue("");
-      setProcess(false);
+      onIsProcessing(false);
     }, 1500);
   }
 
+  function copy() {
+    navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
+
   return (
-    <PlaygroundShell
-      preview={
-        <div style={{ width: "100%", maxWidth: "600px" }}>
-          <ChatField
-            value={value}
-            onChange={setValue}
-            onSend={handleSend}
-            isProcessing={isProcessing}
-            connectors={showConnectors ? DEMO_CONNECTORS : []}
-            connectorCount={showConnectors ? 8 : 0}
-          />
-        </div>
-      }
-      controls={
-        <>
-          <ControlRow label="Connectors">
-            <Pill active={showConnectors}  onClick={() => setShow(true)}>visible</Pill>
-            <Pill active={!showConnectors} onClick={() => setShow(false)}>hidden</Pill>
-          </ControlRow>
-          <ControlRow label="Button state">
-            <Pill active={!isProcessing && value === ""}  onClick={() => { setValue(""); setProcess(false); }}>idle</Pill>
-            <Pill active={!isProcessing && value !== ""}  onClick={() => { setValue("What are my open findings?"); setProcess(false); }}>has text</Pill>
-            <Pill active={isProcessing}                   onClick={() => setProcess(true)}>processing</Pill>
-          </ControlRow>
-        </>
-      }
-    />
+    <>
+      <PlaygroundShell
+        preview={
+          <div style={{ width: "100%", maxWidth: "600px" }}>
+            <ChatField
+              value={value}
+              onChange={setValue}
+              onSend={handleSend}
+              isProcessing={isProcessing}
+              connectors={showConnectors ? DEMO_CONNECTORS : []}
+              connectorCount={showConnectors ? 8 : 0}
+            />
+          </div>
+        }
+        controls={
+          <>
+            <ControlRow label="Connectors">
+              <Pill active={showConnectors}  onClick={() => onShowConnectors(true)}>visible</Pill>
+              <Pill active={!showConnectors} onClick={() => onShowConnectors(false)}>hidden</Pill>
+            </ControlRow>
+            <ControlRow label="Button state">
+              <Pill active={!isProcessing && value === ""}  onClick={() => { setValue(""); onIsProcessing(false); }}>idle</Pill>
+              <Pill active={!isProcessing && value !== ""}  onClick={() => { setValue("What are my open findings?"); onIsProcessing(false); }}>has text</Pill>
+              <Pill active={isProcessing}                   onClick={() => onIsProcessing(true)}>processing</Pill>
+            </ControlRow>
+          </>
+        }
+      />
+
+      <div style={{ marginTop: "12px" }}>
+        <button
+          onClick={() => setCodeOpen(o => !o)}
+          style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            background: "none", border: "1px solid #E4E4E7", borderRadius: "6px",
+            padding: "5px 12px", cursor: "pointer",
+            fontSize: "12px", fontFamily: "'Open Sans', system-ui, sans-serif",
+            color: "#52525B", fontWeight: 500,
+            transition: "background 0.1s, border-color 0.1s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#F4F4F5"; e.currentTarget.style.borderColor = "#D4D4D8"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#E4E4E7"; }}
+        >
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M4 3.5L1.5 6.5L4 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M9 3.5L11.5 6.5L9 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          {codeOpen ? "Hide code" : "Show code"}
+        </button>
+
+        {codeOpen && (
+          <div style={{ marginTop: "8px", position: "relative" }}>
+            <pre style={{
+              margin: 0, padding: "14px 52px 14px 16px",
+              backgroundColor: "#18181B", borderRadius: "8px",
+              fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+            }}>
+              {snippet}
+            </pre>
+            <button onClick={copy} style={{
+              position: "absolute", top: "10px", right: "10px",
+              padding: "3px 10px", fontSize: "11px",
+              fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+              color: copied ? "#A1A1AA" : "#71717A",
+              backgroundColor: "#27272A", border: "1px solid #3F3F46",
+              borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+            }}>
+              {copied ? "Copied!" : "Copy"}
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
+// ─── Style Reference ───────────────────────────────────────────────────────────
+
+type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
+
+const STYLE_ROWS: StyleRow[] = [
+  // showConnectors
+  { prop: "showConnectors", value: "true",  cssClass: ".strip",      properties: ["background: var(--surface-secondary)", "border-top: 1px solid var(--stroke-secondary)"] },
+  { prop: "showConnectors", value: "false", cssClass: ".stripOuter", properties: ["connectors strip is still rendered but contains no avatars"] },
+  // isProcessing / send button
+  { prop: "isProcessing", value: "false (has text)", cssClass: ".sendActive", properties: ["background: var(--brand-primary)", "cursor: pointer"] },
+  { prop: "isProcessing", value: "true",             cssClass: ".sendIdle",   properties: ["background: var(--brand-tertiary)", "cursor: default", "spinner shown instead of send icon"] },
+];
+
+const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
+  const last = acc[acc.length - 1];
+  if (last && last.prop === row.prop) { last.rows.push(row); }
+  else { acc.push({ prop: row.prop, rows: [row] }); }
+  return acc;
+}, []);
+
+const TH: React.CSSProperties = {
+  textAlign: "left", padding: "6px 12px 10px",
+  fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
+  textTransform: "uppercase", letterSpacing: "0.06em",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  whiteSpace: "nowrap", borderBottom: "2px solid #E4E4E7",
+};
+const TD: React.CSSProperties = {
+  padding: "10px 12px", verticalAlign: "top", borderBottom: "1px solid #F4F4F5",
+};
+
+type ActiveState = { showConnectors: boolean; isProcessing: boolean };
+
+function isActive(row: StyleRow, state: ActiveState): boolean {
+  if (row.prop === "showConnectors") {
+    return row.value === "true" ? state.showConnectors : !state.showConnectors;
+  }
+  if (row.prop === "isProcessing") {
+    if (row.value === "true")             return state.isProcessing;
+    if (row.value === "false (has text)") return !state.isProcessing;
+  }
+  return false;
+}
+
+function StyleReference(state: ActiveState) {
+  return (
+    <div>
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Base — always applied regardless of props.
+      </p>
+      <div style={{ overflowX: "auto", marginBottom: "28px" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.card</code>
+              </td>
+              <td style={TD}>
+                {[
+                  "border-radius: var(--radius-lg)",
+                  "border: 1px solid var(--stroke-brand)",
+                  "background: var(--surface-primary)",
+                  "box-shadow: 0 0 0 3px var(--focus-ring)",
+                ].map(p => (
+                  <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
+                ))}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
+        Prop-driven — updates as you interact with the playground above.
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={TH}>Prop</th>
+              <th style={TH}>Value</th>
+              <th style={TH}>Class</th>
+              <th style={TH}>Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            {STYLE_GROUPS.map(({ prop, rows }) =>
+              rows.map((row, i) => {
+                const active = isActive(row, state);
+                return (
+                  <tr key={`${prop}-${row.value}`} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
+                    {i === 0 && (
+                      <td rowSpan={rows.length} style={{ ...TD, borderRight: "1px solid #F4F4F5", verticalAlign: "middle" }}>
+                        <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>{prop}</code>
+                      </td>
+                    )}
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>
+                        {row.value}
+                      </span>
+                    </td>
+                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                      <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>
+                        {row.cssClass}
+                      </code>
+                    </td>
+                    <td style={TD}>
+                      {row.properties.map(p => (
+                        <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", lineHeight: "1.9" }}>{p}</div>
+                      ))}
+                    </td>
+                  </tr>
+                );
+              })
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ─── Section ───────────────────────────────────────────────────────────────────
+
 export function ChatFieldSection() {
+  const [showConnectors, setShowConnectors] = useState(true);
+  const [isProcessing, setIsProcessing]     = useState(false);
+
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
@@ -78,40 +281,24 @@ export function ChatFieldSection() {
         </p>
       </div>
 
-      <SectionBlock title="Playground">
-        <Playground />
-      </SectionBlock>
-
-      <SectionBlock title="States">
-        <div style={{ display: "flex", flexDirection: "column", gap: "24px", maxWidth: "600px" }}>
-          <div>
-            <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "8px", fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600 }}>Empty (idle)</div>
-            <ChatField value="" onChange={() => {}} onSend={() => {}} connectors={DEMO_CONNECTORS} connectorCount={8} />
-          </div>
-          <div>
-            <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "8px", fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600 }}>Has text (send active)</div>
-            <ChatField value="What are my top open findings?" onChange={() => {}} onSend={() => {}} connectors={DEMO_CONNECTORS} connectorCount={8} />
-          </div>
-          <div>
-            <div style={{ fontSize: "11px", color: "#71717A", marginBottom: "8px", fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600 }}>Processing</div>
-            <ChatField value="" onChange={() => {}} onSend={() => {}} isProcessing connectors={DEMO_CONNECTORS} connectorCount={8} />
-          </div>
+      <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
+        <div style={{ flex: "0 0 52%", minWidth: 0 }}>
+          <SectionBlock title="Playground">
+            <Playground
+              showConnectors={showConnectors} onShowConnectors={setShowConnectors}
+              isProcessing={isProcessing}     onIsProcessing={setIsProcessing}
+            />
+          </SectionBlock>
         </div>
-      </SectionBlock>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <SectionBlock title="Style Reference">
+            <StyleReference showConnectors={showConnectors} isProcessing={isProcessing} />
+          </SectionBlock>
+        </div>
+      </div>
 
       <SectionBlock title="Props">
         <PropsTable source={chatFieldTsx} />
-      </SectionBlock>
-
-      <SectionBlock title="Tokens">
-        <TokenTable rows={[
-          { property: "card border",      token: "--stroke-brand",     value: "var(--purple-500)" },
-          { property: "glow ring",        token: "rgba(94,50,255,.25)", value: "fixed value — matches brand primary at 25% opacity" },
-          { property: "send (active)",    token: "--brand-primary",    value: "var(--purple-500)" },
-          { property: "send (idle)",      token: "--brand-tertiary",   value: "var(--purple-200)" },
-          { property: "strip background", token: "--surface-secondary", value: "var(--neutral-50)" },
-          { property: "avatar border",    token: "--stroke-secondary", value: "var(--neutral-200)" },
-        ]} />
       </SectionBlock>
     </SplitPage>
   );
