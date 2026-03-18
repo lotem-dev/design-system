@@ -62,7 +62,8 @@ const HEADER_STYLE: React.CSSProperties = {
 function SemanticTableHeader() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "16px", padding: "6px 0 10px", borderBottom: "2px solid #E4E4E7", marginBottom: "2px" }}>
-      <span style={{ ...HEADER_STYLE, width: "236px", flexShrink: 0 }}>Semantic Token</span>
+      <div style={{ width: "20px", flexShrink: 0 }} />
+      <span style={{ ...HEADER_STYLE, width: "220px", flexShrink: 0 }}>Semantic Token</span>
       <span style={{ ...HEADER_STYLE, width: "160px", flexShrink: 0 }}>Primitive</span>
       <span style={{ ...HEADER_STYLE }}>Hex</span>
     </div>
