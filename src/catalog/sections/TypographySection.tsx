@@ -19,32 +19,6 @@ export function TypographySection() {
         </p>
       </div>
 
-      {/* Visual scale */}
-      <SectionBlock title="Type Scale">
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {[
-            { label: "headline", token: "--font-headline-size", px: "30px", lh: "36px" },
-            { label: "title",    token: "--font-title-size",    px: "26px", lh: "32px" },
-            { label: "medium",   token: "--font-medium-size",   px: "18px", lh: "25px" },
-            { label: "body",     token: "--font-body-size",     px: "14px", lh: "22px" },
-            { label: "label",    token: "--font-label-size",    px: "12px", lh: "16px" },
-            { label: "xs",       token: "--font-xs-size",       px: "10px", lh: "14px" },
-          ].map(({ label, token, px, lh }) => (
-            <div key={label} style={{ display: "flex", alignItems: "baseline", gap: "24px", padding: "14px 0", borderBottom: "1px solid #F4F4F5" }}>
-              <code style={{ width: "72px", flexShrink: 0, fontSize: "11px", color: "#A1A1AA", fontFamily: "monospace" }}>{label}</code>
-              <span style={{ fontSize: px, lineHeight: lh, fontFamily: "var(--font-family-default)", color: "#18181B", flex: 1 }}>
-                The quick brown fox
-              </span>
-              <div style={{ flexShrink: 0, textAlign: "right" }}>
-                <code style={{ fontSize: "11px", color: "#A1A1AA", fontFamily: "monospace" }}>{token}</code>
-                <span style={{ fontSize: "11px", color: "#D4D4D8", margin: "0 6px" }}>·</span>
-                <code style={{ fontSize: "11px", color: "#A1A1AA", fontFamily: "monospace" }}>{px} / {lh}</code>
-              </div>
-            </div>
-          ))}
-        </div>
-      </SectionBlock>
-
       {/* Layer 1 — same order as the CSS file */}
 
       <SectionBlock title="Font Family">
