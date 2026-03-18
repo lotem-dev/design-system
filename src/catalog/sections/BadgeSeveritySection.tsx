@@ -148,7 +148,6 @@ type PlaygroundProps = {
 
 function Playground({ scale, onScale, size, onSize }: PlaygroundProps) {
   const [copied, setCopied] = useState(false);
-  const [codeOpen, setCodeOpen] = useState(false);
   const snippet = `<BadgeSeverity scale="${scale}" size="${size}" />`;
 
   function copy() {
@@ -175,28 +174,7 @@ function Playground({ scale, onScale, size, onSize }: PlaygroundProps) {
       />
 
       <div style={{ marginTop: "12px" }}>
-        <button
-          onClick={() => setCodeOpen(o => !o)}
-          style={{
-            display: "flex", alignItems: "center", gap: "6px",
-            background: "none", border: "1px solid #E4E4E7", borderRadius: "6px",
-            padding: "5px 12px", cursor: "pointer",
-            fontSize: "12px", fontFamily: "'Open Sans', system-ui, sans-serif",
-            color: "#52525B", fontWeight: 500,
-            transition: "background 0.1s, border-color 0.1s",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#F4F4F5"; e.currentTarget.style.borderColor = "#D4D4D8"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.borderColor = "#E4E4E7"; }}
-        >
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M4 3.5L1.5 6.5L4 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M9 3.5L11.5 6.5L9 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          {codeOpen ? "Hide code" : "Show code"}
-        </button>
-
-        {codeOpen && (
-          <div style={{ marginTop: "8px", position: "relative" }}>
+          <div style={{ position: "relative" }}>
             <pre style={{
               margin: 0, padding: "14px 52px 14px 16px",
               backgroundColor: "#18181B", borderRadius: "8px",
@@ -216,7 +194,6 @@ function Playground({ scale, onScale, size, onSize }: PlaygroundProps) {
               {copied ? "Copied!" : "Copy"}
             </button>
           </div>
-        )}
       </div>
     </>
   );
