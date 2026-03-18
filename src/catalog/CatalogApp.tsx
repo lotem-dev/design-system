@@ -54,7 +54,14 @@ import { CardSection }             from "./sections/CardSection";
 import { ChatFieldSection }        from "./sections/ChatFieldSection";
 
 export function CatalogApp() {
-  const [active, setActive] = useState<SectionId>("button");
+  const [active, setActive] = useState<SectionId>(
+    () => (localStorage.getItem("catalog-active") as SectionId) ?? "globals-css"
+  );
+
+  function navigate(id: SectionId) {
+    setActive(id);
+    localStorage.setItem("catalog-active", id);
+  }
 
   function renderSection() {
     switch (active) {
@@ -138,9 +145,9 @@ export function CatalogApp() {
 
   return (
     <div style={{ fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-      <Sidebar active={active} onSelect={setActive} />
+      <Sidebar active={active} onSelect={navigate} />
       <main style={{ marginLeft: "244px", height: "100vh", overflow: "auto", backgroundColor: "#FFFFFF" }}>
-        <BreadcrumbNav active={active} onSelect={setActive} />
+        <BreadcrumbNav active={active} onSelect={navigate} />
         <div style={{ borderBottom: "1px solid #F4F4F5" }} />
         {renderSection()}
       </main>
