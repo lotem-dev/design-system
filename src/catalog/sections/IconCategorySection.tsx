@@ -149,69 +149,87 @@ function getDescription(name: string): string {
   return ICON_DESCRIPTIONS[name] ?? iconNameToLabel(name);
 }
 
+function IconTh({ children }: { children: React.ReactNode }) {
+  return (
+    <th style={{
+      textAlign: "left",
+      padding: "6px 12px 10px",
+      fontSize: "11px",
+      fontWeight: 600,
+      color: "#A1A1AA",
+      textTransform: "uppercase",
+      letterSpacing: "0.06em",
+      whiteSpace: "nowrap",
+      fontFamily: "'Open Sans', system-ui, sans-serif",
+    }}>
+      {children}
+    </th>
+  );
+}
+
+function IconTd({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+  return (
+    <td style={{ padding: "10px 12px", verticalAlign: "middle", ...style }}>
+      {children}
+    </td>
+  );
+}
+
 function IconTable({ icons }: { icons: IconNamespace }) {
   const entries = Object.entries(icons).filter(([, v]) => typeof v === "function");
   return (
-    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-      <thead>
-        <tr style={{ borderBottom: "1px solid #E4E4E7" }}>
-          {["Icon", "Name", "Description"].map((h) => (
-            <th
-              key={h}
-              style={{
-                textAlign: "left",
-                padding: "8px 12px",
-                color: "#71717A",
-                fontWeight: 500,
-                fontSize: "11px",
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-              }}
-            >
-              {h}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {entries.map(([name, Icon], i) => (
-          <tr
-            key={name}
-            style={{
-              borderBottom: "1px solid #F4F4F5",
-              backgroundColor: i % 2 === 0 ? "#FFFFFF" : "#FAFAFA",
-            }}
-          >
-            <td style={{ padding: "10px 12px", width: "60px" }}>
-              <IconWrapper
-                icon={Icon as ComponentType<SVGProps<SVGSVGElement>>}
-                size="lg"
-                width={40}
-                height={40}
-                style={{ color: "#18181B", display: "block" }}
-              />
-            </td>
-            <td style={{ padding: "10px 12px" }}>
-              <code
-                style={{
-                  backgroundColor: "#F4F4F5",
+    <div style={{ overflowX: "auto" }}>
+      <table style={{
+        width: "100%",
+        borderCollapse: "collapse",
+        fontSize: "13px",
+        fontFamily: "'Open Sans', system-ui, sans-serif",
+        tableLayout: "fixed",
+      }}>
+        <colgroup>
+          <col style={{ width: "56px" }} />
+          <col style={{ width: "240px" }} />
+          <col />
+        </colgroup>
+        <thead>
+          <tr style={{ borderBottom: "2px solid #E4E4E7" }}>
+            <IconTh>Icon</IconTh>
+            <IconTh>Name</IconTh>
+            <IconTh>Description</IconTh>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map(([name, Icon]) => (
+            <tr key={name} style={{ borderBottom: "1px solid #F4F4F5" }}>
+              <IconTd>
+                <IconWrapper
+                  icon={Icon as ComponentType<SVGProps<SVGSVGElement>>}
+                  size="md"
+                  width={20}
+                  height={20}
+                  style={{ color: "#18181B", display: "block" }}
+                />
+              </IconTd>
+              <IconTd>
+                <code style={{
+                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontSize: "12px",
                   color: "#18181B",
+                  backgroundColor: "#F4F4F5",
                   padding: "2px 6px",
                   borderRadius: "4px",
-                  fontSize: "12px",
-                  fontFamily: "monospace",
-                }}
-              >
-                {name}
-              </code>
-            </td>
-            <td style={{ padding: "10px 12px", color: "#52525B" }}>
-              {getDescription(name)}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                }}>
+                  {name}
+                </code>
+              </IconTd>
+              <IconTd style={{ color: "#52525B", lineHeight: "1.5" }}>
+                {getDescription(name)}
+              </IconTd>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -220,7 +238,7 @@ export function IconCategorySection({ categoryId }: { categoryId: string }) {
   if (!cat) return null;
 
   return (
-    <SplitPage files={CATEGORY_SOURCES[categoryId] ?? []}>
+    <SplitPage files={CATEGORY_SOURCES[categoryId] ?? []} alwaysOpen>
       <div style={{ marginBottom: "32px" }}>
         <h1
           style={{

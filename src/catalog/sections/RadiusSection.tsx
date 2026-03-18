@@ -15,7 +15,7 @@ const RADIUS = [
 
 export function RadiusSection() {
   return (
-    <SplitPage files={sources}>
+    <SplitPage files={sources} alwaysOpen>
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Radius</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>

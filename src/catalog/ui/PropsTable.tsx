@@ -28,7 +28,14 @@ export function PropsTable({ source }: PropsTableProps) {
         borderCollapse: "collapse",
         fontSize: "13px",
         fontFamily: "'Open Sans', system-ui, sans-serif",
+        tableLayout: "fixed",
       }}>
+        <colgroup>
+          <col style={{ width: "160px" }} />
+          <col style={{ width: "200px" }} />
+          <col style={{ width: "90px" }} />
+          <col />
+        </colgroup>
         <thead>
           <tr style={{ borderBottom: "2px solid #E4E4E7" }}>
             <Th>Prop</Th>
