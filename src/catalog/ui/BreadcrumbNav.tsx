@@ -1,6 +1,24 @@
 import { useState, useRef } from "react";
 import type { SectionId } from "../Sidebar";
 
+// ─── Sidebar order (must match NAV order in Sidebar.tsx) ───────────────────────
+
+const SIDEBAR_ORDER: SectionId[] = [
+  "globals-css", "colors", "typography", "spacing", "radius",
+  "text", "link", "divider",
+  "icons-usecases", "icons-chevrons", "icons-sorting", "icons-dropdown",
+  "icons-finding-type", "icons-sidebar", "icons-resources", "icons-brand", "icon-wrapper",
+  "illustrations",
+  "button", "fields-radio", "toggle", "fields-checkbox",
+  "fields-text", "fields-select", "fields-search", "textarea", "chat-field", "form-field",
+  "badge-status", "badge-severity", "badge-priority",
+  "table", "table-header-cell", "resource-item", "pagination",
+  "findings-breakdown", "priority-gauge", "progress", "spinner", "skeleton", "empty-state",
+  "modal", "dropdown-menu", "tooltip", "alert", "toast",
+  "tab", "breadcrumb",
+  "card",
+];
+
 // ─── File system paths (reflects actual repo structure post-reorganization) ───
 
 const PATHS: Record<SectionId, string[]> = {
@@ -71,20 +89,23 @@ const PATHS: Record<SectionId, string[]> = {
 
 // Returns sections that share the same path prefix through segmentIndex (for dropdown content).
 // Returns [] for the last segment (no dropdown) or when path has only 1 segment.
+// Results are sorted by sidebar order.
 function getDropdownItems(active: SectionId, segIndex: number, isLast: boolean): SectionId[] {
   if (isLast || PATHS[active].length === 1) return [];
   const prefix = PATHS[active].slice(0, segIndex + 1);
-  return (Object.keys(PATHS) as SectionId[]).filter(id =>
+  const matches = (Object.keys(PATHS) as SectionId[]).filter(id =>
     prefix.every((seg, i) => PATHS[id][i] === seg)
   );
+  return matches.sort((a, b) => SIDEBAR_ORDER.indexOf(a) - SIDEBAR_ORDER.indexOf(b));
 }
 
 // ─── Dropdown panel ───────────────────────────────────────────────────────────
 
 function DropdownPanel({
-  items, active, onSelect, onMouseEnter, onMouseLeave,
+  items, prefixLength, active, onSelect, onMouseEnter, onMouseLeave,
 }: {
   items: SectionId[];
+  prefixLength: number;
   active: SectionId;
   onSelect: (id: SectionId) => void;
   onMouseEnter: () => void;
@@ -109,7 +130,10 @@ function DropdownPanel({
       }}
     >
       {items.map(id => {
-        const label = PATHS[id][PATHS[id].length - 1];
+        const fullPath = PATHS[id];
+        const label = fullPath[fullPath.length - 1];
+        // Segments between the clicked prefix and the final filename
+        const intermediate = fullPath.slice(prefixLength, fullPath.length - 1);
         const isActive = id === active;
         const isHov = hovered === id;
         return (
@@ -145,6 +169,12 @@ function DropdownPanel({
                 </svg>
               )}
             </span>
+            {/* intermediate layer indicator e.g. "tokens/" */}
+            {intermediate.length > 0 && (
+              <span style={{ color: "#C4C4C8", fontWeight: 400 }}>
+                {intermediate.join("/")}/
+              </span>
+            )}
             {label}
           </button>
         );
@@ -156,11 +186,12 @@ function DropdownPanel({
 // ─── Single breadcrumb segment ────────────────────────────────────────────────
 
 function BreadcrumbSegment({
-  label, isLast, dropdownItems, active, onSelect,
+  label, isLast, dropdownItems, prefixLength, active, onSelect,
 }: {
   label: string;
   isLast: boolean;
   dropdownItems: SectionId[];
+  prefixLength: number;
   active: SectionId;
   onSelect: (id: SectionId) => void;
 }) {
@@ -213,6 +244,7 @@ function BreadcrumbSegment({
       {open && hasDropdown && (
         <DropdownPanel
           items={dropdownItems}
+          prefixLength={prefixLength}
           active={active}
           onSelect={(id) => { onSelect(id); setOpen(false); }}
           onMouseEnter={reveal}
@@ -260,6 +292,7 @@ export function BreadcrumbNav({
               label={seg}
               isLast={isLast}
               dropdownItems={dropdownItems}
+              prefixLength={i + 1}
               active={active}
               onSelect={onSelect}
             />

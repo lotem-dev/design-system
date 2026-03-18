@@ -38,19 +38,17 @@ export function GlobalsCssSection() {
         <p style={{ fontSize: "14px", color: "#52525B", lineHeight: "1.6", marginBottom: "20px" }}>
           These four files are the source of truth for every visual decision. Changing a value here changes it everywhere.
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {LAYERS.map(({ file, description }) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {LAYERS.map(({ file, description }, i) => (
             <div key={file} style={{
               display: "flex", gap: "16px", alignItems: "flex-start",
-              padding: "12px 16px",
-              background: "#F8F8F8",
-              borderRadius: "8px",
-              border: "1px solid #E4E4E7",
+              padding: "10px 0",
+              borderBottom: i < LAYERS.length - 1 ? "1px solid #F4F4F5" : "none",
             }}>
               <code style={{
                 fontSize: "12px", fontWeight: 600, color: "#18181B",
                 fontFamily: "monospace", whiteSpace: "nowrap", flexShrink: 0,
-                paddingTop: "1px",
+                paddingTop: "1px", minWidth: "120px",
               }}>
                 {file}
               </code>
