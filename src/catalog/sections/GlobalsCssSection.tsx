@@ -28,7 +28,7 @@ export function GlobalsCssSection() {
   return (
     <SplitPage files={sources} alwaysOpen>
       <div style={{ marginBottom: "32px" }}>
-        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>globals.css</h1>
+        <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Globals</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           The entry point for the entire design system. It does two things: imports all token layers in the correct order, and applies a CSS reset that zeroes out browser defaults so our tokens are the only thing influencing how elements look.
         </p>
