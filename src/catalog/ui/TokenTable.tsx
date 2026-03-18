@@ -32,8 +32,15 @@ export function TokenTable({ rows }: TokenTableProps) {
           borderCollapse: "collapse",
           fontSize: "13px",
           fontFamily: "'Open Sans', system-ui, sans-serif",
+          tableLayout: "fixed",
         }}
       >
+        <colgroup>
+          <col style={{ width: "160px" }} />
+          <col style={{ width: "260px" }} />
+          <col style={{ width: "220px" }} />
+          {hasNotes && <col />}
+        </colgroup>
         <thead>
           <tr style={{ borderBottom: "2px solid #E4E4E7" }}>
             <th style={HEADER_STYLE}>CSS Property</th>
