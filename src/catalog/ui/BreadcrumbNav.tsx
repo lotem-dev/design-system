@@ -148,10 +148,10 @@ function DropdownPanel({
               gap: "6px",
               width: "100%",
               padding: "7px 10px",
-              background: isActive ? "#F4F4F5" : isHov ? "#F8F8F8" : "transparent",
+              background: isActive ? "#F4F4F5" : isHov ? "#EBEBEC" : "transparent",
               border: "none",
               borderRadius: "6px",
-              color: isActive ? "#09090B" : "#3F3F46",
+              color: isActive ? "#18181B" : "#3F3F46",
               fontSize: "12px",
               textAlign: "left",
               cursor: "pointer",
@@ -165,7 +165,7 @@ function DropdownPanel({
             <span style={{ width: "14px", flexShrink: 0, display: "flex", alignItems: "center" }}>
               {isActive && (
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                  <path d="M1.5 5L3.8 7.5L8.5 2.5" stroke="#09090B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M1.5 5L3.8 7.5L8.5 2.5" stroke="#18181B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
             </span>
