@@ -69,6 +69,11 @@
 html, body {
   font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--text-brand);
 }
 
 a[data-underline-hover="true"]:hover {

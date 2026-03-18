@@ -5,17 +5,17 @@ import type { SectionId } from "../Sidebar";
 
 const SIDEBAR_ORDER: SectionId[] = [
   "globals-css", "colors", "typography", "spacing", "radius",
-  "text", "link", "divider",
+  "text", "divider",
   "icons-usecases", "icons-chevrons", "icons-sorting", "icons-dropdown",
   "icons-finding-type", "icons-sidebar", "icons-resources", "icons-brand", "icon-wrapper",
   "illustrations",
   "button", "fields-radio", "toggle", "fields-checkbox",
   "fields-text", "fields-select", "fields-search", "textarea", "chat-field", "form-field",
-  "badge-status", "badge-severity", "badge-priority",
-  "table", "table-header-cell", "resource-item", "pagination",
-  "findings-breakdown", "priority-gauge", "progress", "spinner", "skeleton", "empty-state",
+  "badge-status", "badge-severity", "badge-priority", "resource-item",
+  "table", "table-header-cell", "pagination",
+  "findings-breakdown", "priority-gauge", "spinner", "skeleton", "empty-state",
   "modal", "dropdown-menu", "tooltip", "alert", "toast",
-  "tab", "breadcrumb",
+  "tab",
   "card",
 ];
 
@@ -29,9 +29,8 @@ const PATHS: Record<SectionId, string[]> = {
   "radius":      ["styles", "tokens", "radius.css"],
   "typography":  ["styles", "tokens", "typography.css"],
   // foundation/
-  "text":   ["foundation", "Text.tsx"],
-  "link":   ["foundation", "Link.tsx"],
-  "divider":    ["foundation", "Divider.tsx"],
+  "text":    ["foundation", "Text.tsx"],
+  "divider": ["foundation", "Divider.tsx"],
   // icons/
   "icons-usecases":     ["icons", "usecases"],
   "icons-chevrons":     ["icons", "chevrons"],
@@ -59,14 +58,14 @@ const PATHS: Record<SectionId, string[]> = {
   "badge-status":   ["badges", "BadgeStatus.tsx"],
   "badge-severity": ["badges", "BadgeSeverity.tsx"],
   "badge-priority": ["badges", "BadgePriority.tsx"],
+  "resource-item":  ["badges", "ResourceItem.tsx"],
   // tables/
   "table":             ["tables", "Table.tsx"],
   "table-header-cell": ["tables", "TableHeaderCell.tsx"],
-  "resource-item":     ["tables", "ResourceItem.tsx"],
+  "pagination":        ["tables", "Pagination.tsx"],
   // visualization/
   "findings-breakdown": ["visualization", "FindingsBreakdown.tsx"],
   "priority-gauge":     ["visualization", "PriorityGauge.tsx"],
-  "progress":           ["visualization", "Progress.tsx"],
   "spinner":            ["visualization", "Spinner.tsx"],
   "skeleton":           ["visualization", "Skeleton.tsx"],
   "empty-state":        ["visualization", "EmptyState.tsx"],
@@ -77,10 +76,7 @@ const PATHS: Record<SectionId, string[]> = {
   "alert":         ["overlays", "Alert.tsx"],
   "toast":         ["overlays", "Toast.tsx"],
   // navigation/
-  "tab":        ["navigation", "Tab.tsx"],
-  "breadcrumb": ["navigation", "Breadcrumb.tsx"],
-  // tables (continued)/
-  "pagination": ["tables", "Pagination.tsx"],
+  "tab": ["navigation", "Tab.tsx"],
   // icons (continued)/
   "icon-wrapper": ["icons", "IconWrapper.tsx"],
   // card/

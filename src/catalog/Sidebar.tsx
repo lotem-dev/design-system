@@ -6,7 +6,7 @@ export type SectionId =
   // Styles
   | "globals-css" | "colors" | "spacing" | "radius" | "typography"
   // Foundation
-  | "text" | "link" | "divider"
+  | "text" | "divider"
   // Icons
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
@@ -19,15 +19,15 @@ export type SectionId =
   | "fields-text" | "fields-select" | "fields-search"
   | "textarea" | "chat-field" | "form-field"
   // Badges
-  | "badge-status" | "badge-severity" | "badge-priority"
+  | "badge-status" | "badge-severity" | "badge-priority" | "resource-item"
   // Tables
-  | "table" | "table-header-cell" | "resource-item" | "pagination"
+  | "table" | "table-header-cell" | "pagination"
   // Visualization
-  | "findings-breakdown" | "priority-gauge" | "progress" | "spinner" | "skeleton" | "empty-state"
+  | "findings-breakdown" | "priority-gauge" | "spinner" | "skeleton" | "empty-state"
   // Overlays
   | "modal" | "dropdown-menu" | "tooltip" | "alert" | "toast"
   // Navigation
-  | "tab" | "breadcrumb"
+  | "tab"
   // Card
   | "card";
 
@@ -49,7 +49,6 @@ const NAV: NavGroup[] = [
     label: "Foundation",
     items: [
       { id: "text",    label: "Text" },
-      { id: "link",    label: "Link" },
       { id: "divider", label: "Divider" },
     ],
   },
@@ -99,6 +98,7 @@ const NAV: NavGroup[] = [
       { id: "badge-status",   label: "Badge Status" },
       { id: "badge-severity", label: "Badge Severity" },
       { id: "badge-priority", label: "Badge Priority" },
+      { id: "resource-item",  label: "Resource Item" },
     ],
   },
   {
@@ -106,7 +106,6 @@ const NAV: NavGroup[] = [
     items: [
       { id: "table",             label: "Table" },
       { id: "table-header-cell", label: "Table Header Cell" },
-      { id: "resource-item",     label: "Resource Item" },
       { id: "pagination",        label: "Pagination" },
     ],
   },
@@ -115,7 +114,6 @@ const NAV: NavGroup[] = [
     items: [
       { id: "findings-breakdown", label: "Findings Breakdown" },
       { id: "priority-gauge",     label: "Priority Gauge" },
-      { id: "progress",           label: "Progress" },
       { id: "spinner",            label: "Spinner" },
       { id: "skeleton",           label: "Skeleton" },
       { id: "empty-state",        label: "Empty State" },
@@ -134,8 +132,7 @@ const NAV: NavGroup[] = [
   {
     label: "Navigation",
     items: [
-      { id: "tab",        label: "Tabs" },
-      { id: "breadcrumb", label: "Breadcrumb" },
+      { id: "tab", label: "Tabs" },
     ],
   },
   {

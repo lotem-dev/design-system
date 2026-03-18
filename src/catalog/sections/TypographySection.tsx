@@ -91,11 +91,13 @@ export function TypographySection() {
           These rules are applied directly in typography.css - not as tokens, but as global defaults on base elements.
         </p>
         <TokenTable rows={[
-          { property: "font-family",    token: "html, body",                       value: "var(--font-sans)"               },
-          { property: "letter-spacing", token: "html, body",                       value: "var(--letter-spacing-default)"  },
-          { property: "text-decoration", token: "a[data-underline-hover] :hover",  value: "underline"                      },
-          { property: "outline",         token: "a:focus-visible",                 value: "2px solid currentColor"         },
-          { property: "outline-offset",  token: "a:focus-visible",                 value: "2px"                            },
+          { property: "font-family",    token: "html, body",                        value: "var(--font-sans)"              },
+          { property: "letter-spacing", token: "html, body",                        value: "var(--letter-spacing-default)" },
+          { property: "color",          token: "html, body",                        value: "var(--text-primary)"           },
+          { property: "color",          token: "a",                                 value: "var(--text-brand)"             },
+          { property: "text-decoration", token: "a[data-underline-hover] :hover",   value: "underline"                     },
+          { property: "outline",         token: "a:focus-visible",                  value: "2px solid currentColor"        },
+          { property: "outline-offset",  token: "a:focus-visible",                  value: "2px"                           },
         ]} />
       </SectionBlock>
 

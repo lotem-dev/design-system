@@ -12,7 +12,6 @@ import { IconCategorySection }     from "./sections/IconCategorySection";
 import { IllustrationsSection }    from "./sections/IllustrationsSection";
 
 import { ButtonSection }           from "./sections/ButtonSection";
-import { LinkSection }             from "./sections/LinkSection";
 
 import { TextInputSection }        from "./sections/TextInputSection";
 import { SelectInputSection }      from "./sections/SelectInputSection";
@@ -39,7 +38,6 @@ import { AlertSection }            from "./sections/AlertSection";
 import { ToastSection }            from "./sections/ToastSection";
 import { SpinnerSection }          from "./sections/SpinnerSection";
 import { SkeletonSection }         from "./sections/SkeletonSection";
-import { ProgressSection }         from "./sections/ProgressSection";
 import { EmptyStateSection }       from "./sections/EmptyStateSection";
 
 import { TooltipSection }          from "./sections/TooltipSection";
@@ -47,7 +45,6 @@ import { DropdownMenuSection }     from "./sections/DropdownMenuSection";
 import { ModalSection }            from "./sections/ModalSection";
 
 import { TabSection }              from "./sections/TabSection";
-import { BreadcrumbSection }       from "./sections/BreadcrumbSection";
 import { DividerSection }          from "./sections/DividerSection";
 
 import { CardSection }             from "./sections/CardSection";
@@ -88,7 +85,6 @@ export function CatalogApp() {
 
       // Foundation
       case "text":    return <TextSection />;
-      case "link":    return <LinkSection />;
       case "divider": return <DividerSection />;
 
       // Interactions
@@ -111,16 +107,19 @@ export function CatalogApp() {
       case "badge-priority": return <BadgePrioritySection />;
 
       // Tables
+      // Badges
+      case "resource-item": return <ResourceItemSection />;
+
+      // Tables
       case "table":             return <TableSection />;
       case "table-header-cell": return <TableHeaderCellSection />;
-      case "resource-item":     return <ResourceItemSection />;
+      case "pagination":        return <PaginationSection />;
 
       // Visualization
       case "findings-breakdown": return <FindingsBreakdownSection />;
       case "priority-gauge":     return <PriorityGaugeSection />;
       case "spinner":            return <SpinnerSection />;
       case "skeleton":           return <SkeletonSection />;
-      case "progress":           return <ProgressSection />;
       case "empty-state":        return <EmptyStateSection />;
 
       // Overlays
@@ -131,9 +130,7 @@ export function CatalogApp() {
       case "toast":         return <ToastSection />;
 
       // Navigation
-      case "tab":        return <TabSection />;
-      case "breadcrumb": return <BreadcrumbSection />;
-      case "pagination": return <PaginationSection />;
+      case "tab": return <TabSection />;
 
       // Card
       case "card": return <CardSection />;
