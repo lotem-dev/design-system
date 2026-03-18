@@ -63,8 +63,8 @@ export function TableHeaderCellSection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>TableHeaderCell</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A single <code>&lt;th&gt;</code> element for table headers. Supports five column roles — checkbox,
-          first, regular, last, and actions — each with distinct padding. Text columns show a label and a
+          A single <code>&lt;th&gt;</code> element for table headers. Supports five column roles - checkbox,
+          first, regular, last, and actions - each with distinct padding. Text columns show a label and a
           sort icon that cycles through none → asc → desc.
         </p>
       </div>

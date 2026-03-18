@@ -136,7 +136,7 @@ function StyleReference({ size }: { size: IconSize }) {
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        IconWrapper uses inline styles — no CSS module classes. Sizes are set directly as <code style={{ fontFamily: "monospace", fontSize: "12px" }}>width</code> and <code style={{ fontFamily: "monospace", fontSize: "12px" }}>height</code> attributes on the SVG element.
+        IconWrapper uses inline styles - no CSS module classes. Sizes are set directly as <code style={{ fontFamily: "monospace", fontSize: "12px" }}>width</code> and <code style={{ fontFamily: "monospace", fontSize: "12px" }}>height</code> attributes on the SVG element.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -213,7 +213,7 @@ export function IconWrapperSection() {
   const [size, setSize]   = useState<IconSize>("md");
   const [color, setColor] = useState(COLORS[0].value);
 
-  // Suppress unused import warning — IconAdd is referenced in the snippet only
+  // Suppress unused import warning - IconAdd is referenced in the snippet only
   void IconAdd;
 
   return (
@@ -222,7 +222,7 @@ export function IconWrapperSection() {
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>IconWrapper</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           The single way to render any icon in the system. Takes an icon component and outputs it
-          at a standardized size. Never render icon SVGs directly — always go through IconWrapper.
+          at a standardized size. Never render icon SVGs directly - always go through IconWrapper.
         </p>
       </div>
 

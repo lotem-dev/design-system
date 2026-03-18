@@ -10,6 +10,7 @@ export type SectionId =
   // Icons
   | "icons-usecases" | "icons-chevrons" | "icons-sorting" | "icons-dropdown"
   | "icons-finding-type" | "icons-sidebar" | "icons-resources" | "icons-brand"
+  | "icon-wrapper"
   // Illustrations
   | "illustrations"
   // Interactions
@@ -20,15 +21,15 @@ export type SectionId =
   // Badges
   | "badge-status" | "badge-severity" | "badge-priority"
   // Tables
-  | "table" | "table-header-cell" | "resource-item"
+  | "table" | "table-header-cell" | "resource-item" | "pagination"
   // Visualization
   | "findings-breakdown" | "priority-gauge" | "progress" | "spinner" | "skeleton" | "empty-state"
   // Overlays
   | "modal" | "dropdown-menu" | "tooltip" | "alert" | "toast"
   // Navigation
-  | "tab" | "breadcrumb" | "pagination"
-  // Layout
-  | "card" | "avatar" | "icon-wrapper";
+  | "tab" | "breadcrumb"
+  // Card
+  | "card";
 
 type NavItem  = { id: SectionId; label: string };
 type NavGroup = { label: string; items: NavItem[] };
@@ -37,7 +38,7 @@ const NAV: NavGroup[] = [
   {
     label: "Styles",
     items: [
-      { id: "globals-css", label: "globals.css" },
+      { id: "globals-css", label: "Globals" },
       { id: "colors",      label: "Colors" },
       { id: "typography",  label: "Typography" },
       { id: "spacing",     label: "Spacing" },
@@ -47,9 +48,9 @@ const NAV: NavGroup[] = [
   {
     label: "Foundation",
     items: [
-      { id: "text", label: "Text" },
-      { id: "link", label: "Link" },
-      { id: "divider",    label: "Divider" },
+      { id: "text",    label: "Text" },
+      { id: "link",    label: "Link" },
+      { id: "divider", label: "Divider" },
     ],
   },
   {
@@ -63,6 +64,7 @@ const NAV: NavGroup[] = [
       { id: "icons-sidebar",      label: "Sidebar" },
       { id: "icons-resources",    label: "Resources" },
       { id: "icons-brand",        label: "Brand" },
+      { id: "icon-wrapper",       label: "Icon Wrapper" },
     ],
   },
   {
@@ -105,6 +107,7 @@ const NAV: NavGroup[] = [
       { id: "table",             label: "Table" },
       { id: "table-header-cell", label: "Table Header Cell" },
       { id: "resource-item",     label: "Resource Item" },
+      { id: "pagination",        label: "Pagination" },
     ],
   },
   {
@@ -133,15 +136,12 @@ const NAV: NavGroup[] = [
     items: [
       { id: "tab",        label: "Tabs" },
       { id: "breadcrumb", label: "Breadcrumb" },
-      { id: "pagination", label: "Pagination" },
     ],
   },
   {
-    label: "Layout",
+    label: "Card",
     items: [
-      { id: "card",         label: "Card" },
-      { id: "avatar",       label: "Avatar" },
-      { id: "icon-wrapper", label: "Icon Wrapper" },
+      { id: "card", label: "Card" },
     ],
   },
 ];
@@ -157,10 +157,10 @@ function itemStyle(isActive: boolean, isHovered: boolean): React.CSSProperties {
     width: "calc(100% - 16px)",
     margin: "0 8px",
     padding: "7px 12px",
-    background: isActive ? "#F4F4F5" : isHovered ? "#F4F4F5" : "transparent",
+    background: isActive ? "#F4F4F5" : isHovered ? "#ECFDF8" : "transparent",
     border: "none",
     borderRadius: "6px",
-    color: isActive ? "#18181B" : isHovered ? "#18181B" : "#52525B",
+    color: isActive ? "#18181B" : isHovered ? "#0A8A6C" : "#52525B",
     fontSize: "13px",
     textAlign: "left",
     cursor: "pointer",
@@ -353,7 +353,7 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
 
       {/* Collapse / Expand all icon button */}
       {!trimmed && (
-        <div style={{ padding: "2px 16px 6px", flexShrink: 0, display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ padding: "2px 16px 6px", flexShrink: 0, display: "flex", justifyContent: "flex-start" }}>
           <button
             onClick={toggleAll}
             title={allOpen ? "Collapse all" : "Expand all"}

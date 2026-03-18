@@ -61,11 +61,12 @@ const PATHS: Record<SectionId, string[]> = {
   // navigation/
   "tab":        ["navigation", "Tab.tsx"],
   "breadcrumb": ["navigation", "Breadcrumb.tsx"],
-  "pagination": ["navigation", "Pagination.tsx"],
-  // layout/
-  "card":         ["layout", "Card.tsx"],
-  "avatar":       ["layout", "Avatar.tsx"],
-  "icon-wrapper": ["layout", "IconWrapper.tsx"],
+  // tables (continued)/
+  "pagination": ["tables", "Pagination.tsx"],
+  // icons (continued)/
+  "icon-wrapper": ["icons", "IconWrapper.tsx"],
+  // card/
+  "card": ["layout", "Card.tsx"],
 };
 
 // Returns sections that share the same path prefix through segmentIndex (for dropdown content).

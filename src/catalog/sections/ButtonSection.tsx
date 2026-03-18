@@ -201,9 +201,9 @@ function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
 function StyleReference(state: ActiveState) {
   return (
     <div>
-      {/* Base styles — always applied, no prop controls these */}
+      {/* Base styles - always applied, no prop controls these */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Base — always applied regardless of props.
+        Base - always applied regardless of props.
       </p>
       <div style={{ overflowX: "auto", marginBottom: "28px" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -219,7 +219,7 @@ function StyleReference(state: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.button</code>
               </td>
               <td style={TD}>
-                {["border-radius: var(--radius-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-family-default)", "transition: background / border-color / color — 120ms ease"].map(p => (
+                {["border-radius: var(--radius-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-family-default)", "transition: background / border-color / color - 120ms ease"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>
@@ -228,9 +228,9 @@ function StyleReference(state: ActiveState) {
         </table>
       </div>
 
-      {/* Prop-driven styles — connected to playground state */}
+      {/* Prop-driven styles - connected to playground state */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Prop-driven — updates as you interact with the playground above.
+        Prop-driven - updates as you interact with the playground above.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -249,7 +249,7 @@ function StyleReference(state: ActiveState) {
                 return (
                   <tr key={`${prop}-${row.value}`} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
 
-                    {/* Prop — spans the whole group */}
+                    {/* Prop - spans the whole group */}
                     {i === 0 && (
                       <td rowSpan={rows.length} style={{ ...TD, borderRight: "1px solid #F4F4F5", verticalAlign: "middle" }}>
                         <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>{prop}</code>
@@ -270,7 +270,7 @@ function StyleReference(state: ActiveState) {
                       </code>
                     </td>
 
-                    {/* CSS properties — stacked lines */}
+                    {/* CSS properties - stacked lines */}
                     <td style={TD}>
                       {row.properties.map(p => (
                         <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", lineHeight: "1.9" }}>{p}</div>
@@ -291,7 +291,7 @@ function StyleReference(state: ActiveState) {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export function ButtonSection() {
-  // State lives here — shared between the playground and the style reference.
+  // State lives here - shared between the playground and the style reference.
   const [variant, setVariant]   = useState<ButtonVariant>("primary");
   const [size, setSize]         = useState<ButtonSize>("md");
   const [disabled, setDisabled] = useState(false);

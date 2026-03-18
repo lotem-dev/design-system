@@ -61,7 +61,7 @@ function StyleReference(state: ActiveState) {
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Base — always applied regardless of props.
+        Base - always applied regardless of props.
       </p>
       <div style={{ overflowX: "auto", marginBottom: "28px" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -87,7 +87,7 @@ function StyleReference(state: ActiveState) {
       </div>
 
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Prop-driven — updates as you interact with the playground above.
+        Prop-driven - updates as you interact with the playground above.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -227,7 +227,7 @@ export function BadgePrioritySection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>BadgePriority</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Displays a numeric priority score inside a pill-shaped badge. Three tiers: P1 (highest), P2, and P3 (lowest) — each with a distinct color.
+          Displays a numeric priority score inside a pill-shaped badge. Three tiers: P1 (highest), P2, and P3 (lowest) - each with a distinct color.
         </p>
       </div>
 

@@ -35,7 +35,7 @@ export function TextSection() {
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
           Renders any text using a named role. Each role locks in font-size, line-height, font-weight, and the correct HTML tag via{" "}
           <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>Text.module.css</code>.{" "}
-          Never apply font styles manually — always use{" "}
+          Never apply font styles manually - always use{" "}
           <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text role=\"...\">"}</code>.
         </p>
       </div>

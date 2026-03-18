@@ -23,7 +23,6 @@ import { ToggleSection }           from "./sections/ToggleSection";
 import { TextareaSection }         from "./sections/TextareaSection";
 import { FormFieldSection }        from "./sections/FormFieldSection";
 
-import { AvatarSection }           from "./sections/AvatarSection";
 import { BadgeStatusSection }      from "./sections/BadgeStatusSection";
 import { BadgeSeveritySection }    from "./sections/BadgeSeveritySection";
 import { BadgePrioritySection }    from "./sections/BadgePrioritySection";
@@ -129,9 +128,10 @@ export function CatalogApp() {
       case "breadcrumb": return <BreadcrumbSection />;
       case "pagination": return <PaginationSection />;
 
-      // Layout
-      case "card":         return <CardSection />;
-      case "avatar":       return <AvatarSection />;
+      // Card
+      case "card": return <CardSection />;
+
+      // Icons - wrapper
       case "icon-wrapper": return <IconWrapperSection />;
     }
   }

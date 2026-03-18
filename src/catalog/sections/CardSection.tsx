@@ -75,7 +75,7 @@ function Playground({ padding, onPadding, shadow, onShadow }: PlaygroundProps) {
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 <div style={{ fontWeight: 700, fontSize: "14px", color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Card title</div>
                 <div style={{ fontSize: "13px", color: "#71717A", lineHeight: "1.5", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-                  This is the card body. Any content can go inside — text, inputs, tables, or other components.
+                  This is the card body. Any content can go inside - text, inputs, tables, or other components.
                 </div>
               </div>
             </Card>
@@ -158,7 +158,7 @@ function StyleReference({ padding, shadow }: ActiveState) {
     <div>
       {/* Base styles */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Base — always applied regardless of props.
+        Base - always applied regardless of props.
       </p>
       <div style={{ overflowX: "auto", marginBottom: "28px" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -189,7 +189,7 @@ function StyleReference({ padding, shadow }: ActiveState) {
 
       {/* Prop-driven styles */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Prop-driven — updates as you interact with the playground above.
+        Prop-driven - updates as you interact with the playground above.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -249,7 +249,7 @@ export function CardSection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Card</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A white surface that groups related content together. The most basic layout container in the system — use it for forms, list items, panels, and any self-contained block.
+          A white surface that groups related content together. The most basic layout container in the system - use it for forms, list items, panels, and any self-contained block.
         </p>
       </div>
 

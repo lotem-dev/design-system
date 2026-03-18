@@ -55,7 +55,7 @@ export function PriorityGaugeSection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>PriorityGauge</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A semicircular gauge with three severity zones — yellow (low), orange (medium), red (high).
+          A semicircular gauge with three severity zones - yellow (low), orange (medium), red (high).
           The needle position is driven by a 0–100 score. Built entirely in SVG, no image assets.
         </p>
       </div>

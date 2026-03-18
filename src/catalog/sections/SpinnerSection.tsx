@@ -38,7 +38,7 @@ function StyleReference({ size }: ActiveState) {
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Base — always applied regardless of props.
+        Base - always applied regardless of props.
       </p>
       <div style={{ overflowX: "auto", marginBottom: "28px" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -64,7 +64,7 @@ function StyleReference({ size }: ActiveState) {
       </div>
 
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Size reference — controlled via inline style prop, not CSS classes.
+        Size reference - controlled via inline style prop, not CSS classes.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>

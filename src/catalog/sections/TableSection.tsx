@@ -43,7 +43,7 @@ export function TableSection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Table</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          A full-width data table with column headers and rows. Define your columns once and pass row data as plain objects. Cell values can be any React node — text, badges, buttons.
+          A full-width data table with column headers and rows. Define your columns once and pass row data as plain objects. Cell values can be any React node - text, badges, buttons.
         </p>
       </div>
       <SectionBlock title="Playground">

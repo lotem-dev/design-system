@@ -64,7 +64,7 @@ export function GlobalsCssSection() {
 
       <SectionBlock title="CSS Reset">
         <p style={{ fontSize: "14px", color: "#52525B", lineHeight: "1.6" }}>
-          After the token imports, globals.css applies a minimal reset. Every browser ships with its own default styles — margins, paddings, font sizes. The reset wipes all of that out so components look the same in every browser. It also sets <code style={{ fontFamily: "monospace", fontSize: "13px", background: "#F4F4F5", padding: "1px 5px", borderRadius: "4px" }}>box-sizing: border-box</code> globally, which means padding is included inside element widths rather than added on top.
+          After the token imports, globals.css applies a minimal reset. Every browser ships with its own default styles - margins, paddings, font sizes. The reset wipes all of that out so components look the same in every browser. It also sets <code style={{ fontFamily: "monospace", fontSize: "13px", background: "#F4F4F5", padding: "1px 5px", borderRadius: "4px" }}>box-sizing: border-box</code> globally, which means padding is included inside element widths rather than added on top.
         </p>
       </SectionBlock>
     </SplitPage>

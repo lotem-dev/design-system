@@ -11,11 +11,11 @@ export function TypographySection() {
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Typography</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Two layers — the same pattern as colors.css. <strong>Primitive tokens</strong> define the raw size scale
+          Two layers - the same pattern as colors.css. <strong>Primitive tokens</strong> define the raw size scale
           (<code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--font-size-sm</code>).{" "}
           <strong>Semantic role tokens</strong> point to primitives and carry intent
           (<code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>--font-label-size</code>).{" "}
-          CSS modules reference the semantic layer — never primitives directly.
+          CSS modules reference the semantic layer - never primitives directly.
         </p>
       </div>
 

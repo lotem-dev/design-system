@@ -47,7 +47,7 @@ function StyleReference() {
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
-        Base — styling is controlled by item data (destructive, disabled), not a top-level variant prop.
+        Base - styling is controlled by item data (destructive, disabled), not a top-level variant prop.
       </p>
       <div style={{ overflowX: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
