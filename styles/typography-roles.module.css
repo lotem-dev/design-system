@@ -1,0 +1,83 @@
+/* =========================================================
+   Typography role classes — shared across all components.
+   Import this file anywhere you need a type role without
+   using the <Text> component.
+
+   Each class is fully self-contained: size, line-height,
+   weight, and letter-spacing in one place.
+   font-family is NOT included here — it is either inherited
+   from the global html/body rule, or set by the component.
+   ========================================================= */
+
+/* ─── Headline (30px / 36px) ─────────────────────────────── */
+.headline {
+  font-size: var(--font-headline-size);
+  line-height: var(--font-headline-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* ─── Title (26px / 32px) ────────────────────────────────── */
+.title {
+  font-size: var(--font-title-size);
+  line-height: var(--font-title-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* ─── Medium (18px / 25px) ───────────────────────────────── */
+.medium {
+  font-size: var(--font-medium-size);
+  line-height: var(--font-medium-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* ─── Body (14px / 22px) ─────────────────────────────────── */
+.body {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
+}
+.body-bold {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}
+
+/* ─── Label (12px / 16px) ────────────────────────────────── */
+.label {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
+}
+.label-bold {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}
+.label-caps {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line-height);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-caps);
+}
+
+/* ─── Caption (10px / 14px) ──────────────────────────────── */
+.caption {
+  font-size: var(--font-xs-size);
+  line-height: var(--font-xs-line-height);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
+}
+.caption-bold {
+  font-size: var(--font-xs-size);
+  line-height: var(--font-xs-line-height);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
+}

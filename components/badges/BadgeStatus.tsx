@@ -2,7 +2,7 @@
 // The three states are: Open (active issue), Fixed (resolved), and Ignored (dismissed).
 // Each state has its own background and border color pulled from the design token set.
 // Used in findings tables and detail panels wherever a status needs to be visible at a glance.
-import { Text } from "../foundation/Text";
+import typeStyles from "../../styles/typography-roles.module.css";
 
 // The three possible status values — matches the "Status" options in Figma.
 export type BadgeStatusValue = "open" | "fixed" | "ignored";
@@ -47,23 +47,15 @@ export function BadgeStatus({ status }: BadgeStatusProps) {
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-
         paddingInline: "var(--space-sm)",
         paddingBlock: "var(--space-sm)",
-
         borderRadius: "var(--radius-base)",
-
         border: `1px solid ${colors.fg}`,
         backgroundColor: colors.bg,
-
-        // IMPORTANT:
-        // We set the text color on the wrapper.
-        // Text inside will inherit this color automatically.
         color: colors.fg,
       }}
     >
-      {/* Text controls typography ONLY (size/weight/tag) */}
-      <Text role="label-bold">{label}</Text>
+      <span className={typeStyles["label-bold"]}>{label}</span>
     </div>
   );
 }

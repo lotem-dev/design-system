@@ -32,7 +32,7 @@ const COLOR_OPTIONS: ColorOption[] = [
 // ─── Style reference data ──────────────────────────────────────────────────────
 
 const ROLE_TAG: Record<TypographyRole, string> = {
-  headline: "h1", title: "h2", medium: "p",
+  headline: "h1", title: "h2", medium: "h3",
   body: "p", "body-bold": "p",
   label: "span", "label-bold": "span", "label-caps": "span",
   caption: "span", "caption-bold": "span",

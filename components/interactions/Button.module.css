@@ -8,10 +8,10 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
   border-radius: var(--radius-base);
   border: 1px solid transparent;
   white-space: nowrap;
+  /* line-height: 1 keeps the button height controlled by padding/height, not text */
   line-height: 1;
   cursor: pointer;
   transition:
@@ -48,16 +48,16 @@
 /* ─── Sizes ──────────────────────────────────────────────── */
 
 .sm {
+  composes: label-bold from '../../styles/typography-roles.module.css';
   height: 32px;
   padding: 0 var(--space-sm);
-  font-size: var(--font-label-size);
   gap: var(--space-sm);
 }
 
 .md {
+  composes: body-bold from '../../styles/typography-roles.module.css';
   height: 38px;
   padding: 0 var(--space-base);
-  font-size: var(--font-body-size);
   gap: var(--space-sm);
 }
 
