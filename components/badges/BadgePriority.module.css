@@ -4,7 +4,7 @@
   justify-content: center;
   border-radius: 999px;
   border: 1px solid;
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);

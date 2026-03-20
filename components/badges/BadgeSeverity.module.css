@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-base);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }

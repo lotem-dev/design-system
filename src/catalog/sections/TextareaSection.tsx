@@ -158,7 +158,7 @@ function StyleReference(state: ActiveState) {
                 {[
                   "border-radius: var(--radius-base)",
                   "font-size: var(--font-size-base)",
-                  "font-family: var(--font-family-default)",
+                  "font-family: var(--font-sans)",
                   "resize: vertical",
                   "transition: border 120ms ease, box-shadow 120ms ease",
                   ".textarea:focus → border-color: var(--stroke-brand), box-shadow: var(--focus-ring)",

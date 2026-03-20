@@ -9,7 +9,7 @@
   border-radius: 50%;
   background: var(--brand-tertiary);
   color: var(--brand-primary);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   overflow: hidden;
   flex-shrink: 0;

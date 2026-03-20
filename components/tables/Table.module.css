@@ -7,7 +7,7 @@
   overflow-x: auto;
   border-radius: var(--radius-base);
   border: 1px solid var(--divider-primary);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
 }
 
 .table {

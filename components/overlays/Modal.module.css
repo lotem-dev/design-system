@@ -34,7 +34,7 @@
 }
 
 .title {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
@@ -63,7 +63,7 @@
   padding: var(--space-lg);
   overflow-y: auto;
   flex: 1;
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-base);
   color: var(--text-primary);
   line-height: var(--line-height-base);

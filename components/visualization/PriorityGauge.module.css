@@ -35,7 +35,7 @@
 }
 
 .score {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-lg);
@@ -43,7 +43,7 @@
 }
 
 .priority {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-sm);

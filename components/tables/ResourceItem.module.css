@@ -34,7 +34,7 @@
 
 /* Main name — body/regular */
 .name {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-base);
@@ -47,7 +47,7 @@
 
 /* Org prefix — XS/bold/secondary */
 .prefix {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-xs);
@@ -69,7 +69,7 @@
 
 /* Branch / region detail — XS/regular/secondary */
 .detail {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-xs);
@@ -88,7 +88,7 @@
 }
 
 .accountName {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
   color: var(--text-secondary);
@@ -98,7 +98,7 @@
 }
 
 .accountId {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   color: var(--text-secondary);
@@ -117,7 +117,7 @@
   border-radius: var(--radius-xs);
   background: var(--purple-100);
   color: var(--purple-900);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-sm);

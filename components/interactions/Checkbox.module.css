@@ -55,7 +55,7 @@
 /* ─── Label ──────────────────────────────────────────────── */
 
 .label {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-base);
   color: var(--text-primary);
   line-height: 1;

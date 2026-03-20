@@ -44,7 +44,7 @@
 
 .textarea {
   width: 100%;
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-base);
   line-height: 22px;
   color: var(--text-primary);
@@ -174,7 +174,7 @@
 }
 
 .stripLabel {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   line-height: 16px;
@@ -183,7 +183,7 @@
 }
 
 .stripCount {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   line-height: 16px;
@@ -233,7 +233,7 @@
 
 /* "+N" label after the avatar stack */
 .overflow {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
   line-height: 16px;

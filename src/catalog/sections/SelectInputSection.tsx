@@ -145,7 +145,7 @@ function StyleReference(state: ActiveState) {
                 {[
                   "border-radius: var(--radius-base)",
                   "appearance: none (hides native arrow)",
-                  "font-family: var(--font-family-default)",
+                  "font-family: var(--font-sans)",
                   "transition: border 120ms ease, box-shadow 120ms ease",
                   ".select:focus → border-color: var(--stroke-brand), box-shadow: var(--focus-ring)",
                 ].map(p => (

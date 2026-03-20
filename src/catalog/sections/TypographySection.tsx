@@ -23,8 +23,7 @@ export function TypographySection() {
 
       <SectionBlock title="Font Family">
         <TokenTable rows={[
-          { property: "font-family", token: "--font-sans",            value: '"Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' },
-          { property: "font-family", token: "--font-family-default",  value: "var(--font-sans)" },
+          { property: "font-family", token: "--font-sans", value: '"Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' },
         ]} />
       </SectionBlock>
 

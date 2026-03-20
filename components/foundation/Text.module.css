@@ -9,7 +9,7 @@
    ========================================================= */
 
 .root {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 

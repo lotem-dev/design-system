@@ -197,7 +197,7 @@ function StyleReference({ selected, count }: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.label</code>
               </td>
               <td style={TD}>
-                {["font-size: var(--font-size-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-family-default)", "white-space: nowrap"].map(p => (
+                {["font-size: var(--font-size-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-sans)", "white-space: nowrap"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

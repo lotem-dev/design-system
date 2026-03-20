@@ -22,7 +22,7 @@
 /* ─── Label text ─────────────────────────────────────────── */
 
 .label {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
@@ -42,7 +42,7 @@
   justify-content: center;
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-round);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);

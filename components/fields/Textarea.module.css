@@ -11,7 +11,7 @@
 }
 
 .label {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
@@ -24,7 +24,7 @@
   border-radius: var(--radius-base);
   border: 1px solid var(--stroke-secondary);
   background: var(--surface-primary);
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-base);
   line-height: var(--line-height-base);
@@ -61,7 +61,7 @@
 }
 
 .error {
-  font-family: var(--font-family-default);
+  font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   color: var(--error-primary);
   line-height: var(--line-height-sm);
