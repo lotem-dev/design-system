@@ -24,18 +24,22 @@ export function SpacingSection() {
         </p>
       </div>
 
-      <div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-          {SPACING.map(({ token, value, px }) => (
-            <div key={token} style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <code style={{ fontSize: "12px", color: "#18181B", width: "140px", flexShrink: 0, fontFamily: "monospace" }}>{token}</code>
-              <div style={{ width: `${px * 2}px`, height: "20px", backgroundColor: "#18181B", borderRadius: "3px", flexShrink: 0 }} />
-              <code style={{ fontSize: "12px", color: "#71717A", fontFamily: "monospace" }}>{value}</code>
-            </div>
-          ))}
-        </div>
-        <TokenTable rows={SPACING.map(({ token, value }) => ({ property: "spacing", token, value }))} />
-      </div>
+      <TokenTable
+        hideProperty
+        rows={SPACING.map(({ token, value, px }) => ({
+          property: "spacing",
+          token,
+          value,
+          example: (
+            <div style={{
+              width: `${px * 3}px`,
+              height: "16px",
+              backgroundColor: "#18181B",
+              borderRadius: "3px",
+            }} />
+          ),
+        }))}
+      />
     </SplitPage>
   );
 }

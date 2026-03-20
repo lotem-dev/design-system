@@ -23,18 +23,22 @@ export function RadiusSection() {
         </p>
       </div>
 
-      <div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "24px", marginBottom: "24px" }}>
-          {RADIUS.map(({ token, value }) => (
-            <div key={token} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px" }}>
-              <div style={{ width: "64px", height: "64px", backgroundColor: "#F4F4F5", border: "2px solid #18181B", borderRadius: value }} />
-              <code style={{ fontSize: "10px", color: "#52525B", textAlign: "center", fontFamily: "monospace" }}>{token}</code>
-              <code style={{ fontSize: "10px", color: "#A1A1AA", fontFamily: "monospace" }}>{value}</code>
-            </div>
-          ))}
-        </div>
-        <TokenTable rows={RADIUS.map(({ token, value }) => ({ property: "border-radius", token, value }))} />
-      </div>
+      <TokenTable
+        hideProperty
+        rows={RADIUS.map(({ token, value }) => ({
+          property: "border-radius",
+          token,
+          value,
+          example: (
+            <div style={{
+              width: "40px",
+              height: "40px",
+              backgroundColor: "#18181B",
+              borderRadius: value,
+            }} />
+          ),
+        }))}
+      />
     </SplitPage>
   );
 }

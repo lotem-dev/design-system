@@ -22,7 +22,7 @@ export function PropsTable({ source }: PropsTableProps) {
   }
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div>
       <table style={{
         width: "100%",
         borderCollapse: "collapse",
@@ -31,9 +31,9 @@ export function PropsTable({ source }: PropsTableProps) {
         tableLayout: "fixed",
       }}>
         <colgroup>
-          <col style={{ width: "160px" }} />
-          <col style={{ width: "200px" }} />
-          <col style={{ width: "90px" }} />
+          <col style={{ width: "18%" }} />
+          <col style={{ width: "25%" }} />
+          <col style={{ width: "10%" }} />
           <col />
         </colgroup>
         <thead>

@@ -5,6 +5,16 @@ import typographyCss from "../../../styles/tokens/typography.css?raw";
 
 const sources = [{ filename: "typography.css", code: typographyCss }];
 
+const SUBTITLE: React.CSSProperties = {
+  fontSize: "11px",
+  fontWeight: 600,
+  color: "#A1A1AA",
+  textTransform: "uppercase",
+  letterSpacing: "0.06em",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  margin: "0 0 6px",
+};
+
 export function TypographySection() {
   return (
     <SplitPage files={sources} alwaysOpen>
@@ -22,13 +32,13 @@ export function TypographySection() {
       {/* Layer 1 — same order as the CSS file */}
 
       <SectionBlock title="Font Family">
-        <TokenTable rows={[
+        <TokenTable hideProperty rows={[
           { property: "font-family", token: "--font-sans", value: '"Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' },
         ]} />
       </SectionBlock>
 
       <SectionBlock title="Font Weights">
-        <TokenTable rows={[
+        <TokenTable hideProperty rows={[
           { property: "font-weight", token: "--font-weight-regular",  value: "400" },
           { property: "font-weight", token: "--font-weight-semibold", value: "600" },
           { property: "font-weight", token: "--font-weight-bold",     value: "700" },
@@ -36,7 +46,7 @@ export function TypographySection() {
       </SectionBlock>
 
       <SectionBlock title="Font Sizes">
-        <TokenTable rows={[
+        <TokenTable hideProperty rows={[
           { property: "font-size", token: "--font-size-2xl",  value: "1.875rem", note: "30px - Headline" },
           { property: "font-size", token: "--font-size-xl",   value: "1.625rem", note: "26px - Title"    },
           { property: "font-size", token: "--font-size-lg",   value: "1.125rem", note: "18px - Medium"   },
@@ -47,7 +57,7 @@ export function TypographySection() {
       </SectionBlock>
 
       <SectionBlock title="Line Heights">
-        <TokenTable rows={[
+        <TokenTable hideProperty rows={[
           { property: "line-height", token: "--line-height-2xl",  value: "2.25rem",   note: "36px" },
           { property: "line-height", token: "--line-height-xl",   value: "2rem",      note: "32px" },
           { property: "line-height", token: "--line-height-lg",   value: "1.5625rem", note: "25px" },
@@ -58,27 +68,31 @@ export function TypographySection() {
       </SectionBlock>
 
       <SectionBlock title="Letter Spacing">
-        <TokenTable rows={[
+        <TokenTable hideProperty rows={[
           { property: "letter-spacing", token: "--letter-spacing-default", value: "0",      note: "Default for all text" },
           { property: "letter-spacing", token: "--letter-spacing-caps",    value: "0.04em", note: "Uppercase labels and tags" },
         ]} />
       </SectionBlock>
 
-      {/* Layer 2 */}
+      {/* Layer 2 — split by property type */}
 
       <SectionBlock title="Semantic Role Tokens">
-        <TokenTable rows={[
-          { property: "font-size",   token: "--font-headline-size",       value: "var(--font-size-2xl)"    },
+        <p style={SUBTITLE}>Font size</p>
+        <TokenTable hideProperty rows={[
+          { property: "font-size", token: "--font-headline-size", value: "var(--font-size-2xl)"  },
+          { property: "font-size", token: "--font-title-size",    value: "var(--font-size-xl)"   },
+          { property: "font-size", token: "--font-medium-size",   value: "var(--font-size-lg)"   },
+          { property: "font-size", token: "--font-body-size",     value: "var(--font-size-base)" },
+          { property: "font-size", token: "--font-label-size",    value: "var(--font-size-sm)"   },
+          { property: "font-size", token: "--font-xs-size",       value: "var(--font-size-xs)"   },
+        ]} />
+        <p style={{ ...SUBTITLE, marginTop: "20px" }}>Line height</p>
+        <TokenTable hideProperty rows={[
           { property: "line-height", token: "--font-headline-line-height", value: "var(--line-height-2xl)"  },
-          { property: "font-size",   token: "--font-title-size",           value: "var(--font-size-xl)"     },
           { property: "line-height", token: "--font-title-line-height",    value: "var(--line-height-xl)"   },
-          { property: "font-size",   token: "--font-medium-size",          value: "var(--font-size-lg)"     },
           { property: "line-height", token: "--font-medium-line-height",   value: "var(--line-height-lg)"   },
-          { property: "font-size",   token: "--font-body-size",            value: "var(--font-size-base)"   },
           { property: "line-height", token: "--font-body-line-height",     value: "var(--line-height-base)" },
-          { property: "font-size",   token: "--font-label-size",           value: "var(--font-size-sm)"     },
           { property: "line-height", token: "--font-label-line-height",    value: "var(--line-height-sm)"   },
-          { property: "font-size",   token: "--font-xs-size",              value: "var(--font-size-xs)"     },
           { property: "line-height", token: "--font-xs-line-height",       value: "var(--line-height-xs)"   },
         ]} />
       </SectionBlock>
@@ -90,13 +104,13 @@ export function TypographySection() {
           These rules are applied directly in typography.css - not as tokens, but as global defaults on base elements.
         </p>
         <TokenTable rows={[
-          { property: "font-family",    token: "html, body",                        value: "var(--font-sans)"              },
-          { property: "letter-spacing", token: "html, body",                        value: "var(--letter-spacing-default)" },
-          { property: "color",          token: "html, body",                        value: "var(--text-primary)"           },
-          { property: "color",          token: "a",                                 value: "var(--text-brand)"             },
-          { property: "text-decoration", token: "a[data-underline-hover] :hover",   value: "underline"                     },
-          { property: "outline",         token: "a:focus-visible",                  value: "2px solid currentColor"        },
-          { property: "outline-offset",  token: "a:focus-visible",                  value: "2px"                           },
+          { property: "font-family",     token: "html, body",                      value: "var(--font-sans)"              },
+          { property: "letter-spacing",  token: "html, body",                      value: "var(--letter-spacing-default)" },
+          { property: "color",           token: "html, body",                      value: "var(--text-primary)"           },
+          { property: "color",           token: "a",                               value: "var(--text-brand)"             },
+          { property: "text-decoration", token: "a[data-underline-hover] :hover",  value: "underline"                     },
+          { property: "outline",         token: "a:focus-visible",                 value: "2px solid currentColor"        },
+          { property: "outline-offset",  token: "a:focus-visible",                 value: "2px"                           },
         ]} />
       </SectionBlock>
 
