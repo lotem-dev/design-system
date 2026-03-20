@@ -25,6 +25,7 @@ export function PlaygroundShell({ preview, controls }: PlaygroundShellProps) {
           minHeight: "140px",
           display: "flex", alignItems: "center", justifyContent: "center",
           backgroundColor: theme === "light" ? "#FFFFFF" : "#09090B",
+          color: "var(--text-primary)",
           padding: "32px 24px",
         }}
       >
