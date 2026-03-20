@@ -1,6 +1,5 @@
-// Divider — a thin line used to separate sections of content.
+// Divider — a thin 1px line used to separate sections of content.
 // Can run horizontally (between stacked rows) or vertically (between side-by-side items).
-// Thickness, spacing, and color can all be adjusted, but the defaults match the design tokens.
 // Used in sidebars, cards, menus, and anywhere a visual separation is needed without a header.
 import * as React from "react";
 import { cx } from "../utils";
@@ -12,12 +11,6 @@ export type DividerOrientation = "horizontal" | "vertical";
 type DividerProps = {
   // Whether the line runs horizontally (default) or vertically.
   orientation?: DividerOrientation;
-  // How thick the line is, in pixels. Defaults to 1.
-  thickness?: number;
-  // How much space is added around the divider, in pixels.
-  // For a horizontal divider this adds space above and below; for vertical, left and right.
-  // Defaults to var(--space-base) = 12px.
-  spacing?: number;
   // The line color — defaults to the "divider-primary" design token. Override only when necessary.
   color?: string;
   className?: string;
@@ -26,8 +19,6 @@ type DividerProps = {
 
 export function Divider({
   orientation = "horizontal",
-  thickness = 1,
-  spacing,
   color,
   className,
   style,
@@ -37,11 +28,9 @@ export function Divider({
       aria-hidden="true"
       className={cx(styles.root, orientation === "horizontal" ? styles.horizontal : styles.vertical, className)}
       style={{
-        "--_thickness": `${thickness}px`,
-        ...(spacing !== undefined ? { "--_spacing": `${spacing}px` } : {}),
-        ...(color ? { "--_color": color } : {}),
+        ...(color ? { backgroundColor: color } : {}),
         ...style,
-      } as React.CSSProperties}
+      }}
     />
   );
 }
