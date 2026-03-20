@@ -121,7 +121,6 @@ function StyleReference({ size }: { size: IconSize }) {
             <tr>
               <th style={TH}>Size</th>
               <th style={TH}>Width × Height</th>
-              <th style={TH}>Typical use</th>
             </tr>
           </thead>
           <tbody>
@@ -137,14 +136,6 @@ function StyleReference({ size }: { size: IconSize }) {
                   <td style={{ ...TD, whiteSpace: "nowrap" }}>
                     <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>
                       {row.dimensions}
-                    </span>
-                  </td>
-                  <td style={TD}>
-                    <span style={{ fontSize: "12px", fontFamily: "'Open Sans', system-ui, sans-serif", color: active ? "#18181B" : "#A1A1AA", lineHeight: "1.6" }}>
-                      {row.size === "xs" && "Tight list rows, inline labels"}
-                      {row.size === "sm" && "Button icons, badges, dense UI"}
-                      {row.size === "md" && "Standard controls, form fields"}
-                      {row.size === "lg" && "Navigation, empty states, headers"}
                     </span>
                   </td>
                 </tr>
