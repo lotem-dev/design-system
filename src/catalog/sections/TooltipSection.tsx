@@ -28,10 +28,9 @@ const TD: React.CSSProperties = {
 
 function StyleReference() {
   const rows: { cssClass: string; properties: string[] }[] = [
-    { cssClass: ".tooltip", properties: ["background: var(--fill-tooltip)", "color: var(--text-invert)", "border-radius: var(--radius-sm)", "padding: var(--space-sm) var(--space-base)", "max-width: 280px"] },
-    { cssClass: ".text",    properties: ["font-size: var(--font-size-sm)", "line-height: 1.5"] },
-    { cssClass: ".secondary", properties: ["color: var(--text-secondary)", "font-size: var(--font-size-xs)"] },
-    { cssClass: ".link",    properties: ["color: var(--text-invert)", "text-decoration: underline on hover"] },
+    { cssClass: ".tooltip", properties: ["background: var(--fill-tooltip)", "border-radius: var(--radius-base)", "padding: var(--space-base)", "max-width: 240px"] },
+    { cssClass: ".text",    properties: ["composes: label", "color: var(--text-invert)"] },
+    { cssClass: ".link",    properties: ["composes: label", "color: var(--text-secondary)", "text-decoration: underline on hover"] },
   ];
 
   return (

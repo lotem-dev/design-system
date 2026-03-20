@@ -43,7 +43,6 @@ export type { TableHeaderCellColumn, SortDirection } from "../tables/TableHeader
 export { TextInput } from "../fields/TextInput";
 export { Tooltip } from "../overlays/Tooltip";
 
-export { Avatar } from "../layout/Avatar";
 export { Toggle } from "../interactions/Toggle";
 export { Textarea } from "../fields/Textarea";
 export { Spinner } from "../visualization/Spinner";

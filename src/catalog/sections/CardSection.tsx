@@ -33,9 +33,9 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
 
 const STYLE_ROWS: StyleRow[] = [
-  { prop: "padding", value: "sm", cssClass: ".sm", properties: ["padding: 12px"] },
-  { prop: "padding", value: "md", cssClass: ".md", properties: ["padding: 20px"] },
-  { prop: "padding", value: "lg", cssClass: ".lg", properties: ["padding: 32px"] },
+  { prop: "padding", value: "sm", cssClass: ".sm", properties: ["padding: var(--space-base)"] },
+  { prop: "padding", value: "md", cssClass: ".md", properties: ["padding: var(--space-lg)"] },
+  { prop: "padding", value: "lg", cssClass: ".lg", properties: ["padding: var(--space-xl)"] },
   { prop: "shadow",  value: "true",  cssClass: ".shadow", properties: ["box-shadow: 0 1px 4px rgba(0,0,0,0.06)"] },
   { prop: "shadow",  value: "false", cssClass: "(none)",  properties: ["no shadow applied"] },
 ];

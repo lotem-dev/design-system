@@ -6,7 +6,6 @@
   composes: caption-bold from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
   white-space: nowrap;
   border-bottom: 1px solid var(--stroke-secondary);
   background: var(--surface-secondary);

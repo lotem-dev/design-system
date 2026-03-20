@@ -19,7 +19,6 @@
 
 .title {
   composes: medium from '../../styles/typography-roles.module.css';
-  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   margin: 0;
 }

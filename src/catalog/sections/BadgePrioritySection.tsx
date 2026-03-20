@@ -77,7 +77,7 @@ function StyleReference(state: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.badge</code>
               </td>
               <td style={TD}>
-                {["display: inline-flex", "border-radius: 999px", "font-weight: bold", "font-size: var(--font-size-sm)", "padding: 2px 10px", "border: 1px solid"].map(p => (
+                {["display: inline-flex", "composes: label-bold", "border-radius: var(--radius-round)", "padding: var(--space-sm) var(--space-base)", "border: 1px solid"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

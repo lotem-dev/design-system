@@ -138,7 +138,7 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
 
 const STYLE_ROWS: StyleRow[] = [
-  { prop: "isNew", value: "true", cssClass: ".newBadge", properties: ["background: var(--purple-100)", "color: var(--purple-900)", "border-radius: var(--radius-xs)"] },
+  { prop: "isNew", value: "true", cssClass: ".newBadge", properties: ["background: var(--brand-tertiary)", "color: var(--brand-secondary)", "border-radius: var(--radius-xs)"] },
 ];
 
 function StyleReference({ isNew }: { isNew: boolean }) {
