@@ -1,37 +1,37 @@
 // Text — renders any text in the design system using a named role.
-// A role controls the scale (size + line-height + HTML tag).
-// A variant controls the weight (regular, bold, caps).
-// Never apply font styles manually in components — always use <Text role="..." variant="...">.
+// Each role is a complete, self-contained style: size, weight, line-height, and HTML tag.
+// Only color can be overridden. Never apply font styles manually — always use <Text role="...">.
 import * as React from "react";
 import styles from "./Text.module.css";
 
 const ROLE_TAG = {
-  "headline": "h1",
-  "title":    "h2",
-  "medium":   "p",
-  "body":     "p",
-  "label":    "span",
-  "xs":       "span",
+  "headline":   "h1",
+  "title":      "h2",
+  "medium":     "p",
+  "body":       "p",
+  "body-bold":  "p",
+  "label":      "span",
+  "label-bold": "span",
+  "label-caps": "span",
+  "caption":    "span",
+  "caption-bold": "span",
 } as const;
 
-export type TypographyRole    = keyof typeof ROLE_TAG;
-export type TypographyVariant = "regular" | "bold" | "caps";
+export type TypographyRole = keyof typeof ROLE_TAG;
 
 type TextProps = {
-  // The scale - controls font-size, line-height, and HTML tag.
+  // Which role to apply — fully locks in size, weight, line-height, and HTML tag.
   role: TypographyRole;
-  // The weight variant. "caps" is only meaningful on "label".
-  variant?: TypographyVariant;
   children: React.ReactNode;
   // Optional color override using a design token, e.g. "var(--text-secondary)".
   color?: string;
 };
 
-export function Text({ role, variant = "regular", children, color }: TextProps) {
+export function Text({ role, children, color }: TextProps) {
   const Component = ROLE_TAG[role];
   return (
     <Component
-      className={`${styles.root} ${styles[`${role}-${variant}`]}`}
+      className={`${styles.root} ${styles[role]}`}
       style={color ? { color } : undefined}
     >
       {children}

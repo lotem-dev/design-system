@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, type TypographyRole, type TypographyVariant } from "../../../components/foundation/Text";
+import { Text, type TypographyRole } from "../../../components/foundation/Text";
 import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
@@ -15,17 +15,12 @@ const sources = [
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const ROLES: TypographyRole[] = ["headline", "title", "medium", "body", "label", "xs"];
-
-// headline/title/medium only have bold; body/label/xs have regular + bold (label also has caps)
-const VARIANTS_FOR: Record<TypographyRole, TypographyVariant[]> = {
-  "headline": ["bold"],
-  "title":    ["bold"],
-  "medium":   ["bold"],
-  "body":     ["regular", "bold"],
-  "label":    ["regular", "bold", "caps"],
-  "xs":       ["regular", "bold"],
-};
+const ROLES: TypographyRole[] = [
+  "headline", "title", "medium",
+  "body", "body-bold",
+  "label", "label-bold", "label-caps",
+  "caption", "caption-bold",
+];
 
 type ColorOption = { label: string; value: string | undefined };
 const COLOR_OPTIONS: ColorOption[] = [
@@ -36,38 +31,34 @@ const COLOR_OPTIONS: ColorOption[] = [
 
 // ─── Style reference data ──────────────────────────────────────────────────────
 
-type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
-
 const ROLE_TAG: Record<TypographyRole, string> = {
-  headline: "h1", title: "h2", medium: "p", body: "p", label: "span", xs: "span",
+  headline: "h1", title: "h2", medium: "p",
+  body: "p", "body-bold": "p",
+  label: "span", "label-bold": "span", "label-caps": "span",
+  caption: "span", "caption-bold": "span",
 };
 
-const SIZE_MAP: Record<TypographyRole, string> = {
-  headline: "var(--font-headline-size) / var(--font-headline-line-height)",
-  title:    "var(--font-title-size) / var(--font-title-line-height)",
-  medium:   "var(--font-medium-size) / var(--font-medium-line-height)",
-  body:     "var(--font-body-size) / var(--font-body-line-height)",
-  label:    "var(--font-label-size) / var(--font-label-line-height)",
-  xs:       "var(--font-xs-size) / var(--font-xs-line-height)",
+type StyleRow = {
+  prop: string;
+  value: string;
+  cssClass: string;
+  properties: string[];
 };
 
-const STYLE_ROWS: StyleRow[] = [
-  // role rows
-  ...ROLES.map(role => ({
-    prop:       "role",
-    value:      role,
-    cssClass:   `<${ROLE_TAG[role]}>`,
-    properties: [`font: ${SIZE_MAP[role]}`],
-  })),
-  // variant rows
-  { prop: "variant", value: "regular", cssClass: `.${"{role}"}-regular`, properties: ["font-weight: var(--font-weight-regular)"] },
-  { prop: "variant", value: "bold",    cssClass: `.${"{role}"}-bold`,    properties: ["font-weight: var(--font-weight-bold)"]    },
-  { prop: "variant", value: "caps",    cssClass: `.label-caps`,          properties: ["font-weight: var(--font-weight-bold)", "text-transform: uppercase", "letter-spacing: var(--letter-spacing-caps)"] },
-  // color rows
+const ROLE_ROWS: StyleRow[] = ROLES.map(role => ({
+  prop:       "role",
+  value:      role,
+  cssClass:   `<${ROLE_TAG[role]}> .${role}`,
+  properties: [`see .${role} in Text.module.css`],
+}));
+
+const COLOR_ROWS: StyleRow[] = [
   { prop: "color", value: "undefined",             cssClass: "(none)",         properties: ["inherits var(--text-primary)"]  },
   { prop: "color", value: "var(--text-secondary)", cssClass: "style override", properties: ["color: var(--text-secondary)"] },
   { prop: "color", value: "var(--text-brand)",     cssClass: "style override", properties: ["color: var(--text-brand)"]     },
 ];
+
+const STYLE_ROWS: StyleRow[] = [...ROLE_ROWS, ...COLOR_ROWS];
 
 const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
   const last = acc[acc.length - 1];
@@ -76,17 +67,15 @@ const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((ac
   return acc;
 }, []);
 
-function isActive(row: StyleRow, role: TypographyRole, variant: TypographyVariant, color: string | undefined): boolean {
-  if (row.prop === "role")    return row.value === role;
-  if (row.prop === "variant") return row.value === variant;
-  if (row.prop === "color")   return row.value === (color ?? "undefined");
+function isActive(row: StyleRow, role: TypographyRole, color: string | undefined): boolean {
+  if (row.prop === "role")  return row.value === role;
+  if (row.prop === "color") return row.value === (color ?? "undefined");
   return false;
 }
 
-function generateSnippet(role: TypographyRole, variant: TypographyVariant, color: string | undefined): string {
-  const variantProp = variant !== "regular" ? `\n  variant="${variant}"` : "";
-  const colorProp   = color ? `\n  color="${color}"` : "";
-  return `<Text role="${role}"${variantProp}${colorProp}>\n  Sample text\n</Text>`;
+function generateSnippet(role: TypographyRole, color: string | undefined): string {
+  const colorProp = color ? `\n  color="${color}"` : "";
+  return `<Text role="${role}"${colorProp}>\n  Sample text\n</Text>`;
 }
 
 // ─── Table styles ─────────────────────────────────────────────────────────────
@@ -105,13 +94,12 @@ const TD: React.CSSProperties = {
 
 // ─── Playground ───────────────────────────────────────────────────────────────
 
-function Playground({ role, onRole, variant, onVariant, color, onColor }: {
-  role: TypographyRole;       onRole:    (r: TypographyRole)    => void;
-  variant: TypographyVariant; onVariant: (v: TypographyVariant) => void;
-  color: string | undefined;  onColor:   (c: string | undefined) => void;
+function Playground({ role, onRole, color, onColor }: {
+  role: TypographyRole;      onRole:  (r: TypographyRole)    => void;
+  color: string | undefined; onColor: (c: string | undefined) => void;
 }) {
   const [copied, setCopied] = useState(false);
-  const snippet = generateSnippet(role, variant, color);
+  const snippet = generateSnippet(role, color);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -122,23 +110,12 @@ function Playground({ role, onRole, variant, onVariant, color, onColor }: {
   return (
     <>
       <PlaygroundShell
-        preview={<Text role={role} variant={variant} color={color}>Sample text</Text>}
+        preview={<Text role={role} color={color}>Sample text</Text>}
         controls={
           <>
             <ControlRow label="Role">
               {ROLES.map(r => (
-                <Pill key={r} active={role === r} onClick={() => {
-                  onRole(r);
-                  // Reset variant if current one isn't available for new role
-                  if (!VARIANTS_FOR[r].includes(variant)) onVariant(VARIANTS_FOR[r][0]);
-                }}>
-                  {r}
-                </Pill>
-              ))}
-            </ControlRow>
-            <ControlRow label="Variant">
-              {VARIANTS_FOR[role].map(v => (
-                <Pill key={v} active={variant === v} onClick={() => onVariant(v)}>{v}</Pill>
+                <Pill key={r} active={role === r} onClick={() => onRole(r)}>{r}</Pill>
               ))}
             </ControlRow>
             <ControlRow label="Color">
@@ -180,7 +157,7 @@ function Playground({ role, onRole, variant, onVariant, color, onColor }: {
 
 // ─── Style Reference ──────────────────────────────────────────────────────────
 
-function StyleReference({ role, variant, color }: { role: TypographyRole; variant: TypographyVariant; color: string | undefined }) {
+function StyleReference({ role, color }: { role: TypographyRole; color: string | undefined }) {
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
@@ -213,14 +190,14 @@ function StyleReference({ role, variant, color }: { role: TypographyRole; varian
             <tr>
               <th style={TH}>Prop</th>
               <th style={TH}>Value</th>
-              <th style={TH}>Class</th>
+              <th style={TH}>Class / Tag</th>
               <th style={TH}>Properties</th>
             </tr>
           </thead>
           <tbody>
             {STYLE_GROUPS.map(({ prop, rows }) =>
               rows.map((row, i) => {
-                const active = isActive(row, role, variant, color);
+                const active = isActive(row, role, color);
                 return (
                   <tr key={`${prop}-${row.value}`} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
                     {i === 0 && (
@@ -253,29 +230,29 @@ function StyleReference({ role, variant, color }: { role: TypographyRole; varian
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export function TextSection() {
-  const [role,    setRole]    = useState<TypographyRole>("body");
-  const [variant, setVariant] = useState<TypographyVariant>("regular");
-  const [color,   setColor]   = useState<string | undefined>(undefined);
+  const [role,  setRole]  = useState<TypographyRole>("body");
+  const [color, setColor] = useState<string | undefined>(undefined);
 
   return (
     <SplitPage files={sources}>
       <div style={{ marginBottom: "32px" }}>
         <h1 style={{ margin: "8px 0 12px", fontSize: "28px", fontWeight: 700, color: "#09090B", fontFamily: "'Open Sans', system-ui, sans-serif" }}>Text</h1>
         <p style={{ margin: 0, fontSize: "15px", color: "#52525B", lineHeight: "1.6", maxWidth: "600px" }}>
-          Renders any text using a named role and variant. Role controls scale and HTML tag. Variant controls weight.
-          Never apply font styles manually - always use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text role=\"...\" variant=\"...\">"}</code>.
+          Renders any text using a named role. Each role locks in size, weight, line-height, and HTML tag.
+          Only color can be overridden - never apply font styles manually.
+          Always use <code style={{ backgroundColor: "#F4F4F5", padding: "1px 5px", borderRadius: "3px", fontSize: "13px" }}>{"<Text role=\"...\">"}</code>.
         </p>
       </div>
 
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
-            <Playground role={role} onRole={setRole} variant={variant} onVariant={setVariant} color={color} onColor={setColor} />
+            <Playground role={role} onRole={setRole} color={color} onColor={setColor} />
           </SectionBlock>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <SectionBlock title="Style Reference">
-            <StyleReference role={role} variant={variant} color={color} />
+            <StyleReference role={role} color={color} />
           </SectionBlock>
         </div>
       </div>
