@@ -18,6 +18,7 @@ const SUBTITLE: React.CSSProperties = {
 };
 
 export function TypographySection() {
+  const [globalOpen,     setGlobalOpen]     = useState(false);
   const [primitivesOpen, setPrimitivesOpen] = useState(false);
   const [semanticOpen,   setSemanticOpen]   = useState(false);
 
@@ -35,7 +36,7 @@ export function TypographySection() {
       </div>
 
       {/* Global application — first */}
-      <SectionBlock title="Global Application">
+      <AccordionSection title="Global Application" open={globalOpen} onToggle={() => setGlobalOpen(o => !o)}>
         <p style={{ fontSize: "14px", color: "#52525B", lineHeight: "1.6", marginBottom: "16px" }}>
           These rules are applied directly in typography.css - not as tokens, but as global defaults on base elements.
         </p>
@@ -48,7 +49,7 @@ export function TypographySection() {
           { property: "outline",         token: "a:focus-visible",                 value: "2px solid currentColor"        },
           { property: "outline-offset",  token: "a:focus-visible",                 value: "2px"                           },
         ]} />
-      </SectionBlock>
+      </AccordionSection>
 
       {/* Layer 1 — Primitives */}
       <AccordionSection title="Typography Primitives" open={primitivesOpen} onToggle={() => setPrimitivesOpen(o => !o)}>
