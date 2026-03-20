@@ -5,60 +5,85 @@
 .root {
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-lg);
 }
 
-.btn {
+/* ─── Meta text ("View N items per page", "Results: ...") ─── */
+
+.meta {
+  composes: label from '../../styles/typography-roles.module.css';
+  color: var(--text-secondary);
+}
+
+/* ─── Right section ──────────────────────────────────────── */
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* ─── Nav (chevrons + page numbers) ─────────────────────── */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
+}
+
+/* ─── Chevron buttons ────────────────────────────────────── */
+
+.chevronBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 32px;
-  height: 32px;
-  padding: 0 var(--space-xs);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--divider-primary);
-  background: var(--surface-primary);
+  background: none;
+  border: none;
+  padding: 0;
   color: var(--text-primary);
   cursor: pointer;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: 1;
-  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+  transition: color 120ms ease;
 }
 
-.btn:hover:not(:disabled):not(.active) {
-  background: var(--surface-secondary);
-  border-color: var(--stroke-primary, #64748B);
+.chevronBtn:hover:not(:disabled) {
+  color: var(--brand-primary);
 }
 
-.btn:disabled {
-  opacity: 0.35;
+.chevronBtn:disabled {
+  color: var(--text-secondary);
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-.btn.active {
-  background: var(--brand-primary);
-  border-color: var(--brand-primary);
-  color: var(--text-invert);
-  font-weight: var(--font-weight-semibold);
-  cursor: default;
+/* ─── Page number buttons ────────────────────────────────── */
+
+.pageBtn {
+  composes: label from '../../styles/typography-roles.module.css';
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color 120ms ease;
 }
 
-.arrow {
-  font-size: 18px;
-  font-weight: var(--font-weight-bold);
+.pageBtn:hover:not(.active) {
+  color: var(--brand-primary);
 }
+
+.pageBtn.active {
+  font-weight: var(--font-weight-bold);
+  color: var(--brand-primary);
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ─── Ellipsis ───────────────────────────────────────────── */
 
 .dots {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  height: 32px;
-  color: var(--text-secondary);
-  font-size: var(--font-size-base);
+  composes: label from '../../styles/typography-roles.module.css';
+  color: var(--text-primary);
   user-select: none;
 }
