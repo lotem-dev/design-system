@@ -21,12 +21,12 @@
   --font-weight-semibold: 600;
   --font-weight-bold:     700;
 
-  --font-size-2xl:  1.875rem; /* 30px — Headline */
-  --font-size-xl:   1.625rem; /* 26px — Title    */
-  --font-size-lg:   1.125rem; /* 18px — Medium   */
-  --font-size-base: 0.875rem; /* 14px — Body     */
-  --font-size-sm:   0.75rem;  /* 12px — Label    */
-  --font-size-xs:   0.625rem; /* 10px — XS       */
+  --font-size-2xl:  1.875rem;
+  --font-size-xl:   1.625rem;
+  --font-size-lg:   1.125rem;
+  --font-size-base: 0.875rem;
+  --font-size-sm:   0.75rem;
+  --font-size-xs:   0.625rem;
 
   --line-height-2xl:  2.25rem;  /* 36px */
   --line-height-xl:   2rem;     /* 32px */

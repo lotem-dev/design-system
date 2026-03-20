@@ -47,12 +47,12 @@ export function TypographySection() {
 
       <SectionBlock title="Font Sizes">
         <TokenTable hideProperty rows={[
-          { property: "font-size", token: "--font-size-2xl",  value: "1.875rem", note: "30px - Headline" },
-          { property: "font-size", token: "--font-size-xl",   value: "1.625rem", note: "26px - Title"    },
-          { property: "font-size", token: "--font-size-lg",   value: "1.125rem", note: "18px - Medium"   },
-          { property: "font-size", token: "--font-size-base", value: "0.875rem", note: "14px - Body"     },
-          { property: "font-size", token: "--font-size-sm",   value: "0.75rem",  note: "12px - Label"    },
-          { property: "font-size", token: "--font-size-xs",   value: "0.625rem", note: "10px - XS"       },
+          { property: "font-size", token: "--font-size-2xl",  value: "1.875rem" },
+          { property: "font-size", token: "--font-size-xl",   value: "1.625rem" },
+          { property: "font-size", token: "--font-size-lg",   value: "1.125rem" },
+          { property: "font-size", token: "--font-size-base", value: "0.875rem" },
+          { property: "font-size", token: "--font-size-sm",   value: "0.75rem"  },
+          { property: "font-size", token: "--font-size-xs",   value: "0.625rem" },
         ]} />
       </SectionBlock>
 
