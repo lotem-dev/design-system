@@ -37,7 +37,7 @@ const TD: React.CSSProperties = {
 function StyleReference() {
   const rows: { cssClass: string; properties: string[] }[] = [
     { cssClass: ".menu",          properties: ["background: var(--surface-primary)", "border: 1px solid var(--stroke-secondary)", "border-radius: var(--radius-base)", "box-shadow: 0 4px 16px rgba(0,0,0,0.1)", "padding: 4px"] },
-    { cssClass: ".item",          properties: ["border-radius: var(--radius-sm)", "padding: var(--space-sm) var(--space-base)", "color: var(--text-primary)", "font-size: var(--font-body-size)"] },
+    { cssClass: ".item",          properties: ["composes: body", "border-radius: var(--radius-sm)", "padding: var(--space-sm) var(--space-base)", "color: var(--text-primary)", "font-size: var(--font-body-size)"] },
     { cssClass: ".item:hover",    properties: ["background: var(--surface-secondary)"] },
     { cssClass: ".destructive",   properties: ["color: var(--error-primary)"] },
     { cssClass: ".destructive:hover", properties: ["background: var(--error-secondary)"] },

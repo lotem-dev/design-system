@@ -137,6 +137,7 @@ function StyleReference(state: ActiveState) {
               </td>
               <td style={TD}>
                 {[
+                  "composes: body",
                   "border-radius: var(--radius-base)",
                   "font-size: var(--font-body-size)",
                   "font-family: var(--font-sans)",

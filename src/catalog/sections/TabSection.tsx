@@ -44,7 +44,7 @@ const STYLE_ROWS: StyleRow[] = [
   { prop: "selected", value: "true",  cssClass: ".tab--selected .badge", properties: ["background: var(--brand-primary)", "color: var(--text-invert)"] },
   { prop: "selected", value: "true",  cssClass: ".tab--selected .bar",   properties: ["background: var(--brand-primary)"] },
   { prop: "count",    value: "undefined", cssClass: ".badge", properties: ["display: none (not rendered)"] },
-  { prop: "count",    value: "number",    cssClass: ".badge", properties: ["display: flex", "padding: var(--space-xs) var(--space-sm)", "border-radius: var(--radius-round)"] },
+  { prop: "count",    value: "number",    cssClass: ".badge", properties: ["composes: label-bold", "display: flex", "padding: var(--space-xs) var(--space-sm)", "border-radius: var(--radius-round)"] },
 ];
 
 const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
@@ -197,7 +197,7 @@ function StyleReference({ selected, count }: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.label</code>
               </td>
               <td style={TD}>
-                {["font-size: var(--font-size-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-sans)", "white-space: nowrap"].map(p => (
+                {["composes: body-bold", "font-size: var(--font-size-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-sans)", "white-space: nowrap"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

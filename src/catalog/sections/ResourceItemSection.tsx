@@ -138,7 +138,7 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
 
 const STYLE_ROWS: StyleRow[] = [
-  { prop: "isNew", value: "true", cssClass: ".newBadge", properties: ["background: var(--brand-tertiary)", "color: var(--brand-secondary)", "border-radius: var(--radius-xs)"] },
+  { prop: "isNew", value: "true", cssClass: ".newBadge", properties: ["composes: label", "background: var(--brand-tertiary)", "color: var(--brand-secondary)", "border-radius: var(--radius-xs)"] },
 ];
 
 function StyleReference({ isNew }: { isNew: boolean }) {
@@ -159,11 +159,11 @@ function StyleReference({ isNew }: { isNew: boolean }) {
             {[
               { cls: ".wrapper",     props: ["display: flex", "align-items: center", "gap: var(--space-base)"] },
               { cls: ".icon",        props: ["width: 28px", "height: 28px", "color: var(--text-secondary)"] },
-              { cls: ".name",        props: ["font-size: var(--font-body-size)", "color: var(--text-primary)", "text-overflow: ellipsis"] },
-              { cls: ".prefix",      props: ["font-size: var(--font-xs-size)", "font-weight: bold", "color: var(--text-secondary)"] },
-              { cls: ".detail",      props: ["font-size: var(--font-xs-size)", "color: var(--text-secondary)"] },
-              { cls: ".accountName", props: ["font-size: var(--font-xs-size)", "font-weight: bold", "color: var(--text-secondary)"] },
-              { cls: ".accountId",   props: ["font-size: var(--font-xs-size)", "color: var(--text-secondary)"] },
+              { cls: ".name",        props: ["composes: body", "color: var(--text-primary)", "text-overflow: ellipsis"] },
+              { cls: ".prefix",      props: ["composes: caption-bold", "color: var(--text-secondary)"] },
+              { cls: ".detail",      props: ["composes: caption", "color: var(--text-secondary)"] },
+              { cls: ".accountName", props: ["composes: caption-bold", "color: var(--text-secondary)"] },
+              { cls: ".accountId",   props: ["composes: caption", "color: var(--text-secondary)"] },
             ].map(({ cls, props }) => (
               <tr key={cls}>
                 <td style={{ ...TD, whiteSpace: "nowrap" }}>

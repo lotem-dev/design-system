@@ -124,7 +124,7 @@ function StyleReference() {
               },
               {
                 cls: ".input",
-                props: ["height: 38px", "padding-left: 40px", "border: 1px solid var(--stroke-secondary)", "background: var(--surface-primary)", "border-radius: var(--radius-base)"],
+                props: ["composes: body", "height: 38px", "padding-left: 40px", "border: 1px solid var(--stroke-secondary)", "background: var(--surface-primary)", "border-radius: var(--radius-base)"],
               },
               {
                 cls: ".input:focus",

@@ -140,8 +140,8 @@ const STYLE_ROWS: StyleRow[] = [
   { prop: "variant", value: "ghost",       cssClass: ".ghost",       properties: ["background: transparent", "color: var(--text-primary)", "hover bg: var(--surface-tertiary)", "focus ring: var(--stroke-primary)"] },
   { prop: "variant", value: "destructive", cssClass: ".destructive", properties: ["background: var(--error-primary)", "color: var(--text-invert)", "focus ring: var(--error-primary)"] },
   // size
-  { prop: "size", value: "sm", cssClass: ".sm", properties: ["height: 32px", "padding: 0 var(--space-sm)", "font-size: var(--font-size-sm)"] },
-  { prop: "size", value: "md", cssClass: ".md", properties: ["height: 38px", "padding: 0 var(--space-base)", "font-size: var(--font-size-base)"] },
+  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "height: 32px", "padding: 0 var(--space-sm)", "font-size: var(--font-size-sm)"] },
+  { prop: "size", value: "md", cssClass: ".md", properties: ["composes: body-bold", "height: 38px", "padding: 0 var(--space-base)", "font-size: var(--font-size-base)"] },
   // disabled
   { prop: "disabled", value: "true", cssClass: ":disabled", properties: ["opacity: 0.5", "cursor: not-allowed"] },
 ];

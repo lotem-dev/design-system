@@ -133,10 +133,10 @@ function StyleReference() {
           <tbody>
             {[
               { cls: ".root",    props: ["display: flex", "justify-content: space-between", "padding: var(--space-lg)"] },
-              { cls: ".meta",    props: ["font-size: var(--font-label-size)", "color: var(--text-secondary)"] },
+              { cls: ".meta",    props: ["composes: label", "font-size: var(--font-label-size)", "color: var(--text-secondary)"] },
               { cls: ".right",   props: ["display: flex", "gap: var(--space-xl)"] },
               { cls: ".nav",     props: ["display: flex", "gap: var(--space-base)"] },
-              { cls: ".pageBtn", props: ["background: none", "border: none", "color: var(--text-primary)"] },
+              { cls: ".pageBtn", props: ["composes: label", "background: none", "border: none", "color: var(--text-primary)"] },
               { cls: ".chevronBtn", props: ["background: none", "border: none", "color: var(--text-primary)"] },
             ].map(({ cls, props }) => (
               <tr key={cls}>

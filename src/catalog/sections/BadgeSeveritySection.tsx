@@ -29,8 +29,8 @@ const STYLE_ROWS: StyleRow[] = [
   { prop: "scale", value: "high",     cssClass: ".high",     properties: ["background: var(--scale-high-secondary)",     "color: var(--scale-high-primary)"] },
   { prop: "scale", value: "medium",   cssClass: ".medium",   properties: ["background: var(--scale-medium-secondary)",   "color: var(--scale-medium-primary)"] },
   { prop: "scale", value: "low",      cssClass: ".low",      properties: ["background: var(--scale-low-secondary)",      "color: var(--scale-low-primary)"] },
-  { prop: "size", value: "sm", cssClass: ".sm", properties: ["padding: 2px 8px", "font-size: var(--font-size-sm)"] },
-  { prop: "size", value: "lg", cssClass: ".lg", properties: ["padding: 4px 12px", "font-size: var(--font-size-base)"] },
+  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "padding: 2px 8px", "font-size: var(--font-size-sm)"] },
+  { prop: "size", value: "lg", cssClass: ".lg", properties: ["composes: body-bold", "padding: 4px 12px", "font-size: var(--font-size-base)"] },
 ];
 
 const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
