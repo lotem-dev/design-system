@@ -26,8 +26,6 @@ export type { FindingsBreakdownProps } from "../visualization/FindingsBreakdown"
 export { IconWrapper } from "../layout/IconWrapper";
 export type { IconSize } from "../layout/IconWrapper";
 
-export { Link } from "../foundation/Link";
-
 export { PriorityGauge } from "../visualization/PriorityGauge";
 export type { PriorityGaugeProps } from "../visualization/PriorityGauge";
 
@@ -49,7 +47,6 @@ export { Avatar } from "../layout/Avatar";
 export { Toggle } from "../interactions/Toggle";
 export { Textarea } from "../fields/Textarea";
 export { Spinner } from "../visualization/Spinner";
-export { Progress } from "../visualization/Progress";
 export { Skeleton } from "../visualization/Skeleton";
 export { Alert } from "../overlays/Alert";
 export type { AlertProps } from "../overlays/Alert";
@@ -69,9 +66,6 @@ export type { FormFieldProps } from "../fields/FormField";
 
 export { EmptyState } from "../visualization/EmptyState";
 export type { EmptyStateProps } from "../visualization/EmptyState";
-
-export { Breadcrumb } from "../navigation/Breadcrumb";
-export type { BreadcrumbProps, BreadcrumbItem } from "../navigation/Breadcrumb";
 
 export { Table } from "../tables/Table";
 export type { TableProps, TableColumn } from "../tables/Table";
