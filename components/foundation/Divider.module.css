@@ -1,0 +1,27 @@
+/* =========================================================
+   Divider
+   =========================================================
+   Structure and orientation are handled by CSS classes.
+   Dynamic values (thickness, spacing, color) are passed in
+   as CSS custom properties via inline style on the element.
+   ========================================================= */
+
+.root {
+  flex-shrink: 0;
+  background-color: var(--_color, var(--divider-primary));
+}
+
+/* ─── Orientation ─────────────────────────────────────── */
+
+.horizontal {
+  width: 100%;
+  height: var(--_thickness);
+  margin-block: var(--_spacing);
+}
+
+.vertical {
+  height: 100%;
+  width: var(--_thickness);
+  margin-inline: var(--_spacing);
+  align-self: stretch;
+}

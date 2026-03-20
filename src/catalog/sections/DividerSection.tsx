@@ -5,10 +5,12 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 
-import dividerTsx from "../../../components/foundation/Divider.tsx?raw";
+import dividerTsx       from "../../../components/foundation/Divider.tsx?raw";
+import dividerModuleCss from "../../../components/foundation/Divider.module.css?raw";
 
 const sources = [
-  { filename: "Divider.tsx", code: dividerTsx },
+  { filename: "Divider.tsx",        code: dividerTsx       },
+  { filename: "Divider.module.css", code: dividerModuleCss },
 ];
 
 // ─── Style reference data ──────────────────────────────────────────────────────
@@ -28,12 +30,12 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; properties: string[] };
 
 const BASE_ROWS: StyleRow[] = [
-  { prop: "(base)", value: "always", properties: ["backgroundColor: color", "flexShrink: 0"] },
+  { prop: "(base)", value: "always", properties: ["flex-shrink: 0", "background-color: var(--_color, var(--divider-primary))"] },
 ];
 
 const ORIENTATION_ROWS: StyleRow[] = [
-  { prop: "orientation", value: "horizontal", properties: ["width: 100%", "height: thickness", "marginBlock: spacing"] },
-  { prop: "orientation", value: "vertical",   properties: ["height: 100%", "width: thickness", "marginInline: spacing", "alignSelf: stretch"] },
+  { prop: "orientation", value: "horizontal", properties: ["width: 100%", "height: var(--_thickness)", "margin-block: var(--_spacing)"] },
+  { prop: "orientation", value: "vertical",   properties: ["height: 100%", "width: var(--_thickness)", "margin-inline: var(--_spacing)", "align-self: stretch"] },
 ];
 
 // ─── Playground ───────────────────────────────────────────────────────────────
@@ -104,13 +106,15 @@ function StyleReference({ orientation }: { orientation: "horizontal" | "vertical
         <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
           <colgroup>
             <col style={{ width: "16%" }} />
-            <col style={{ width: "24%" }} />
-            <col style={{ width: "60%" }} />
+            <col style={{ width: "22%" }} />
+            <col style={{ width: "22%" }} />
+            <col style={{ width: "40%" }} />
           </colgroup>
           <thead>
             <tr>
               <th style={TH}>Prop</th>
               <th style={TH}>Value</th>
+              <th style={TH}>Class</th>
               <th style={TH}>Properties</th>
             </tr>
           </thead>
@@ -126,6 +130,9 @@ function StyleReference({ orientation }: { orientation: "horizontal" | "vertical
                   )}
                   <td style={{ ...TD, wordBreak: "break-word" }}>
                     <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>{row.value}</span>
+                  </td>
+                  <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                    <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.{row.value}</code>
                   </td>
                   <td style={TD}>
                     {row.properties.map(p => (

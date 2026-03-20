@@ -4,6 +4,7 @@
 // Used in sidebars, cards, menus, and anywhere a visual separation is needed without a header.
 import * as React from "react";
 import { cx } from "../utils";
+import styles from "./Divider.module.css";
 
 // Whether the line runs left-to-right or top-to-bottom.
 export type DividerOrientation = "horizontal" | "vertical";
@@ -26,36 +27,20 @@ export function Divider({
   orientation = "horizontal",
   thickness = 1,
   spacing = 12,
-  color = "var(--divider-primary)",
+  color,
   className,
   style,
 }: DividerProps) {
-  const isHorizontal = orientation === "horizontal";
-
-  // Builds the size and spacing styles differently depending on orientation.
-  const baseStyle: React.CSSProperties = isHorizontal
-    ? {
-        width: "100%",
-        height: thickness,
-        marginBlock: spacing,
-      }
-    : {
-        height: "100%",
-        width: thickness,
-        marginInline: spacing,
-        alignSelf: "stretch",
-      };
-
   return (
     <div
       aria-hidden="true"
-      className={cx(className)}
+      className={cx(styles.root, orientation === "horizontal" ? styles.horizontal : styles.vertical, className)}
       style={{
-        backgroundColor: color,
-        flexShrink: 0,
-        ...baseStyle,
+        "--_thickness": `${thickness}px`,
+        "--_spacing": `${spacing}px`,
+        ...(color ? { "--_color": color } : {}),
         ...style,
-      }}
+      } as React.CSSProperties}
     />
   );
 }
