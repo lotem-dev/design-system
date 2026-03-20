@@ -24,11 +24,7 @@ export function PlaygroundShell({ preview, controls }: PlaygroundShellProps) {
           position: "relative",
           minHeight: "140px",
           display: "flex", alignItems: "center", justifyContent: "center",
-          backgroundColor: "var(--surface-primary)",
-          backgroundImage:
-            "linear-gradient(45deg, var(--surface-secondary) 25%, transparent 25%), linear-gradient(-45deg, var(--surface-secondary) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--surface-secondary) 75%), linear-gradient(-45deg, transparent 75%, var(--surface-secondary) 75%)",
-          backgroundSize: "16px 16px",
-          backgroundPosition: "0 0, 0 8px, 8px -8px, -8px 0px",
+          backgroundColor: theme === "light" ? "#FFFFFF" : "#09090B",
           padding: "32px 24px",
         }}
       >
