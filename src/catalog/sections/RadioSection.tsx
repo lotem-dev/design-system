@@ -259,7 +259,7 @@ export function RadioSection() {
 
       {/* Side-by-side: Playground + Style Reference in one viewport */}
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
-        <div style={{ flex: "0 0 52%", minWidth: 0 }}>
+        <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
             <Playground
               selected={selected}  onSelected={setSelected}
