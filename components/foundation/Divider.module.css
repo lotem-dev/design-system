@@ -16,12 +16,12 @@
 .horizontal {
   width: 100%;
   height: var(--_thickness);
-  margin-block: var(--_spacing);
+  margin-block: var(--_spacing, var(--space-base));
 }
 
 .vertical {
   height: 100%;
   width: var(--_thickness);
-  margin-inline: var(--_spacing);
+  margin-inline: var(--_spacing, var(--space-base));
   align-self: stretch;
 }

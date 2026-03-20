@@ -16,6 +16,7 @@ type DividerProps = {
   thickness?: number;
   // How much space is added around the divider, in pixels.
   // For a horizontal divider this adds space above and below; for vertical, left and right.
+  // Defaults to var(--space-base) = 12px.
   spacing?: number;
   // The line color — defaults to the "divider-primary" design token. Override only when necessary.
   color?: string;
@@ -26,7 +27,7 @@ type DividerProps = {
 export function Divider({
   orientation = "horizontal",
   thickness = 1,
-  spacing = 12,
+  spacing,
   color,
   className,
   style,
@@ -37,7 +38,7 @@ export function Divider({
       className={cx(styles.root, orientation === "horizontal" ? styles.horizontal : styles.vertical, className)}
       style={{
         "--_thickness": `${thickness}px`,
-        "--_spacing": `${spacing}px`,
+        ...(spacing !== undefined ? { "--_spacing": `${spacing}px` } : {}),
         ...(color ? { "--_color": color } : {}),
         ...style,
       } as React.CSSProperties}
