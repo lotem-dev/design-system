@@ -1,6 +1,7 @@
 // parseProps.ts
 // Reads a raw TypeScript component file and extracts prop names, types,
-// and the designer-friendly // comments that sit directly above each prop.
+// required flag, default values, and the designer-friendly // comments
+// that sit directly above each prop.
 // This is what powers the auto-generated Props tables in the catalog —
 // so that when a prop changes in the component file, the docs update automatically.
 
@@ -9,9 +10,12 @@ export type PropDef = {
   type: string;
   description: string;
   required: boolean;
+  defaultValue?: string;
 };
 
 export function parseProps(rawSource: string): PropDef[] {
+  const defaults = extractDefaults(rawSource);
+
   const props: PropDef[] = [];
   const seen = new Set<string>();
   const lines = rawSource.split("\n");
@@ -54,7 +58,6 @@ export function parseProps(rawSource: string): PropDef[] {
     // Accumulate comment lines that sit directly above a prop
     if (trimmed.startsWith("//")) {
       const commentText = trimmed.replace(/^\/\/\s*/, "");
-      // Append in case a prop has multiple comment lines
       pendingComment = pendingComment ? pendingComment + " " + commentText : commentText;
       continue;
     }
@@ -67,7 +70,13 @@ export function parseProps(rawSource: string): PropDef[] {
 
       if (!seen.has(name)) {
         seen.add(name);
-        props.push({ name, type, description: pendingComment, required: !optional });
+        props.push({
+          name,
+          type,
+          description: pendingComment,
+          required: !optional,
+          defaultValue: defaults[name],
+        });
       }
     }
 
@@ -78,4 +87,55 @@ export function parseProps(rawSource: string): PropDef[] {
   }
 
   return props;
+}
+
+// ─── Extract defaults from function destructuring ─────────────────────────────
+// Handles both single-line:  function Foo({ a = 1, b }: Props)
+// and multi-line:            function Foo({
+//                              a = 1,
+//                            }: Props)
+
+function extractDefaults(rawSource: string): Record<string, string> {
+  const defaults: Record<string, string> = {};
+  const lines = rawSource.split("\n");
+
+  let collecting = false;
+  const paramLines: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (!collecting) {
+      // Single-line destructuring: function Name({ a = 1, b }: Type)
+      const single = trimmed.match(/^(?:export\s+)?function\s+\w+\s*\(\s*\{(.+?)\}\s*:/);
+      if (single) {
+        extractFromString(single[1], defaults);
+        continue;
+      }
+      // Multi-line start: function Name({
+      if (/^(?:export\s+)?function\s+\w+\s*\(\s*\{/.test(trimmed)) {
+        collecting = true;
+        paramLines.length = 0;
+      }
+    } else {
+      // End of destructuring block
+      if (/^\}\s*:/.test(trimmed)) {
+        collecting = false;
+        extractFromString(paramLines.join(", "), defaults);
+      } else {
+        paramLines.push(trimmed);
+      }
+    }
+  }
+
+  return defaults;
+}
+
+function extractFromString(str: string, out: Record<string, string>) {
+  // Match: propName = "value" | 'value' | true | false | number
+  const re = /(\w+)\s*=\s*("[^"]*"|'[^']*'|true|false|null|undefined|-?\d[\d.]*)/g;
+  let m;
+  while ((m = re.exec(str)) !== null) {
+    out[m[1]] = m[2];
+  }
 }

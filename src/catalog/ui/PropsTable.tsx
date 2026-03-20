@@ -31,9 +31,10 @@ export function PropsTable({ source }: PropsTableProps) {
         tableLayout: "fixed",
       }}>
         <colgroup>
-          <col style={{ width: "18%" }} />
-          <col style={{ width: "25%" }} />
-          <col style={{ width: "10%" }} />
+          <col style={{ width: "16%" }} />
+          <col style={{ width: "22%" }} />
+          <col style={{ width: "8%" }} />
+          <col style={{ width: "14%" }} />
           <col />
         </colgroup>
         <thead>
@@ -41,6 +42,7 @@ export function PropsTable({ source }: PropsTableProps) {
             <Th>Prop</Th>
             <Th>Type</Th>
             <Th>Required</Th>
+            <Th>Default</Th>
             <Th>Description</Th>
           </tr>
         </thead>
@@ -84,6 +86,12 @@ export function PropsTable({ source }: PropsTableProps) {
                 }}>
                   {p.required ? "yes" : "no"}
                 </span>
+              </Td>
+              <Td>
+                {p.defaultValue
+                  ? <code style={{ fontFamily: "'JetBrains Mono', 'Fira Code', monospace", fontSize: "11px", color: "#52525B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>{p.defaultValue}</code>
+                  : <span style={{ color: "#D4D4D8" }}>—</span>
+                }
               </Td>
               <Td style={{ color: "#52525B", lineHeight: "1.5" }}>
                 {p.description || <span style={{ color: "#D4D4D8" }}>—</span>}
