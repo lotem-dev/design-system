@@ -48,7 +48,7 @@ function Playground({ checked, onChecked, disabled, onDisabled }: PlaygroundProp
             checked={checked}
             onChange={onChecked}
             disabled={disabled}
-            label="Enable feature"
+            ariaLabel="Enable feature"
           />
         }
         controls={

@@ -43,10 +43,8 @@
 }
 
 .textarea {
+  composes: body from '../../styles/typography-roles.module.css';
   width: 100%;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  line-height: 22px;
   color: var(--text-primary);
   background: transparent;
   border: none;
@@ -174,19 +172,13 @@
 }
 
 .stripLabel {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  line-height: 16px;
+  composes: label-bold from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
   white-space: nowrap;
 }
 
 .stripCount {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
   white-space: nowrap;
 }
@@ -233,10 +225,7 @@
 
 /* "+N" label after the avatar stack */
 .overflow {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  line-height: 16px;
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
   padding-left: var(--space-base);
   white-space: nowrap;

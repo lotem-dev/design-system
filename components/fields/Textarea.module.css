@@ -11,23 +11,17 @@
 }
 
 .label {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  composes: label-bold from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
 }
 
 .textarea {
+  composes: body from '../../styles/typography-roles.module.css';
   width: 100%;
   padding: var(--space-sm) var(--space-base);
   border-radius: var(--radius-base);
   border: 1px solid var(--stroke-secondary);
   background: var(--surface-primary);
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
   color: var(--text-primary);
   outline: none;
   resize: vertical;
@@ -61,8 +55,6 @@
 }
 
 .error {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--error-primary);
-  line-height: var(--line-height-sm);
 }

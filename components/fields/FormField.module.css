@@ -6,14 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  font-family: var(--font-sans);
 }
 
 .label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  composes: label-bold from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
-  line-height: var(--line-height-sm);
 }
 
 .asterisk {
@@ -25,15 +22,13 @@
 }
 
 .hint {
-  font-size: var(--font-size-sm);
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
-  line-height: var(--line-height-sm);
   margin: 0;
 }
 
 .error {
-  font-size: var(--font-size-sm);
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--error-primary);
-  line-height: var(--line-height-sm);
   margin: 0;
 }

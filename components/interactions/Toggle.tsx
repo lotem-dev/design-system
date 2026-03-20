@@ -11,11 +11,11 @@ type ToggleProps = {
   onChange: (checked: boolean) => void;
   // When true, the toggle can't be interacted with.
   disabled?: boolean;
-  // Optional text label shown next to the toggle.
-  label?: string;
+  // A description of what this toggle controls — required for screen readers.
+  ariaLabel: string;
 };
 
-export function Toggle({ checked, onChange, disabled = false, label }: ToggleProps) {
+export function Toggle({ checked, onChange, disabled = false, ariaLabel }: ToggleProps) {
   function handleClick() {
     if (!disabled) onChange(!checked);
   }
@@ -25,7 +25,7 @@ export function Toggle({ checked, onChange, disabled = false, label }: TogglePro
       <button
         role="switch"
         aria-checked={checked}
-        aria-label={label ?? "Toggle"}
+        aria-label={ariaLabel}
         className={`${styles.track} ${checked ? styles.on : styles.off}`}
         onClick={handleClick}
         disabled={disabled}
@@ -33,7 +33,6 @@ export function Toggle({ checked, onChange, disabled = false, label }: TogglePro
       >
         <span className={`${styles.thumb} ${checked ? styles.thumbOn : styles.thumbOff}`} />
       </button>
-      {label && <span className={styles.label}>{label}</span>}
     </label>
   );
 }

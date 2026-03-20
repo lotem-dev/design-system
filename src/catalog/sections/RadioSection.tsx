@@ -22,7 +22,6 @@ function generateSnippet(checked: boolean, disabled: boolean): string {
   const props: string[] = [];
   props.push(`checked={${checked}}`);
   if (disabled) props.push("disabled");
-  props.push(`label="Label"`);
   props.push(`onChange={() => {}}`);
   return `<Radio ${props.join(" ")} />`;
 }
@@ -54,7 +53,6 @@ function Playground({ selected, onSelected, disabled, onDisabled }: PlaygroundPr
                 key={opt}
                 checked={selected === opt}
                 onChange={() => onSelected(opt)}
-                label={opt}
                 disabled={disabled}
                 name="playground-radio"
                 value={opt}

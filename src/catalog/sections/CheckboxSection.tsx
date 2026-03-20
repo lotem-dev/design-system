@@ -19,7 +19,6 @@ function generateSnippet(checked: boolean, disabled: boolean): string {
   const props: string[] = [];
   props.push(`checked={${checked}}`);
   if (disabled) props.push("disabled");
-  props.push(`label="Label"`);
   props.push(`onChange={() => {}}`);
   return `<Checkbox ${props.join(" ")} />`;
 }
@@ -48,7 +47,6 @@ function Playground({ checked, onChecked, disabled, onDisabled }: PlaygroundProp
           <Checkbox
             checked={checked}
             onChange={onChecked}
-            label="Enable notifications"
             disabled={disabled}
           />
         }

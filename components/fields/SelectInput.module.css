@@ -11,10 +11,7 @@
 }
 
 .label {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  composes: label-bold from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
 }
 
@@ -24,6 +21,7 @@
 }
 
 .select {
+  composes: body from '../../styles/typography-roles.module.css';
   width: 100%;
   height: 38px;
   padding: var(--space-sm) var(--space-base);
@@ -31,10 +29,6 @@
   border-radius: var(--radius-base);
   border: 1px solid var(--stroke-secondary);
   background: var(--surface-primary);
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
   color: var(--text-primary);
   appearance: none; /* hides the native browser arrow */
   outline: none;
