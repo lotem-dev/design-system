@@ -15,45 +15,53 @@
   color: var(--text-primary);
 }
 
+/* Stretch the DropdownMenu container to fill the wrapper */
 .wrapper {
-  position: relative;
   width: 100%;
 }
 
-.select {
+.wrapper > div {
+  display: block;
+  width: 100%;
+}
+
+/* ─── Trigger button ──────────────────────────────────── */
+
+.trigger {
   composes: body from '../../styles/typography-roles.module.css';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 38px;
-  padding: var(--space-sm) var(--space-base);
-  padding-right: 32px; /* room for the chevron */
+  padding: 0 var(--space-base);
   border-radius: var(--radius-base);
   border: 1px solid var(--stroke-secondary);
   background: var(--surface-primary);
   color: var(--text-primary);
-  appearance: none; /* hides the native browser arrow */
-  outline: none;
   cursor: pointer;
+  text-align: left;
   transition: border 120ms ease, box-shadow 120ms ease;
 }
 
-.select:focus {
+.trigger:focus {
   border: 2px solid var(--stroke-brand);
   box-shadow: 0 0 0 3px var(--focus-ring);
+  outline: none;
 }
 
-.select:disabled {
+.trigger:disabled {
   background: var(--surface-secondary);
   border-color: var(--stroke-invert-soft);
   color: var(--text-secondary);
   cursor: not-allowed;
 }
 
-/* Custom chevron icon */
-.chevron {
-  position: absolute;
-  right: var(--space-sm);
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none; /* clicks pass through to the select */
+.placeholder {
   color: var(--text-secondary);
+}
+
+.icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
 }
