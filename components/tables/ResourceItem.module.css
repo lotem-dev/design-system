@@ -32,12 +32,9 @@
   min-width: 0; /* allows text truncation */
 }
 
-/* Main name — body/regular */
+/* Main name - body/regular */
 .name {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-base);
+  composes: body from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -45,12 +42,9 @@
   max-width: 100%;
 }
 
-/* Org prefix — XS/bold/secondary */
+/* Org prefix - XS/bold/secondary */
 .prefix {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-xs);
+  composes: caption-bold from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
@@ -67,12 +61,9 @@
   overflow: hidden;
 }
 
-/* Branch / region detail — XS/regular/secondary */
+/* Branch / region detail - XS/regular/secondary */
 .detail {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-xs);
+  composes: caption from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -88,9 +79,7 @@
 }
 
 .accountName {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  composes: caption-bold from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
@@ -98,9 +87,7 @@
 }
 
 .accountId {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
+  composes: caption from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
@@ -110,16 +97,13 @@
 /* ─── "New!" badge ───────────────────────────────────────── */
 
 .newBadge {
+  composes: label from '../../styles/typography-roles.module.css';
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  padding: 2px var(--space-xs);
+  padding: var(--space-2xs) var(--space-xs);
   border-radius: var(--radius-xs);
-  background: var(--purple-100);
-  color: var(--purple-900);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-sm);
+  background: var(--brand-tertiary);
+  color: var(--brand-secondary);
   white-space: nowrap;
 }

@@ -63,8 +63,7 @@
 /* ─── Label ──────────────────────────────────────────────── */
 
 .label {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
+  composes: body from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
   line-height: 1;
 }

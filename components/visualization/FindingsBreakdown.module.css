@@ -45,21 +45,15 @@
 }
 
 .criticalCount {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-xs);
+  composes: caption-bold from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
 }
 
 .otherCounts {
+  composes: caption from '../../styles/typography-roles.module.css';
   display: flex;
   align-items: center;
   gap: var(--space-xs);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-xs);
   color: var(--text-primary);
 }
 

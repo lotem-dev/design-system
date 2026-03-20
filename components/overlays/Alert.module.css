@@ -3,15 +3,13 @@
    ========================================================= */
 
 .root {
+  composes: body from '../../styles/typography-roles.module.css';
   display: flex;
   align-items: flex-start;
   gap: var(--space-sm);
   padding: var(--space-base) var(--space-lg);
   border-radius: var(--radius-base);
   border-left: 4px solid transparent;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
 }
 
 /* Type variants */
@@ -53,9 +51,7 @@
 }
 
 .title {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
+  composes: body-bold from '../../styles/typography-roles.module.css';
 }
 
 .message {

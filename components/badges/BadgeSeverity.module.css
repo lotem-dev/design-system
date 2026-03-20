@@ -3,22 +3,18 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-base);
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
   white-space: nowrap;
 }
 
 /* Sizes */
 .lg {
-  padding: 4px 12px;
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
+  composes: body-bold from '../../styles/typography-roles.module.css';
+  padding: var(--space-xs) var(--space-base);
 }
 
 .sm {
-  padding: 4px 8px;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  composes: label-bold from '../../styles/typography-roles.module.css';
+  padding: var(--space-xs) var(--space-sm);
 }
 
 /* Scale variants */

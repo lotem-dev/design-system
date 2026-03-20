@@ -11,9 +11,9 @@
 }
 
 .table {
+  composes: body from '../../styles/typography-roles.module.css';
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--font-size-base);
   color: var(--text-primary);
 }
 
@@ -25,14 +25,13 @@
 }
 
 .th {
+  composes: label from '../../styles/typography-roles.module.css';
   padding: var(--space-sm) var(--space-base);
   text-align: left;
-  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
   border-bottom: 1px solid var(--divider-primary);
   white-space: nowrap;
-  line-height: var(--line-height-sm);
 }
 
 .tr {

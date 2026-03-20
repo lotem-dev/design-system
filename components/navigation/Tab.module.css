@@ -22,10 +22,7 @@
 /* ─── Label text ─────────────────────────────────────────── */
 
 .label {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
+  composes: body-bold from '../../styles/typography-roles.module.css';
   white-space: nowrap;
   color: var(--text-secondary);
 }
@@ -37,15 +34,12 @@
 /* ─── Count badge ────────────────────────────────────────── */
 
 .badge {
+  composes: label-bold from '../../styles/typography-roles.module.css';
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-round);
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
   background: var(--surface-tertiary);
   color: var(--text-primary);
 }

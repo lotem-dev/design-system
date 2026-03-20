@@ -1,13 +1,10 @@
 .badge {
+  composes: label-bold from '../../styles/typography-roles.module.css';
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
+  border-radius: var(--radius-round);
   border: 1px solid;
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
   padding: var(--space-sm) var(--space-base);
   white-space: nowrap;
   min-width: 48px;

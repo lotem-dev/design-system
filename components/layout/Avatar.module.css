@@ -6,7 +6,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: var(--radius-round);
   background: var(--brand-tertiary);
   color: var(--brand-primary);
   font-family: var(--font-sans);

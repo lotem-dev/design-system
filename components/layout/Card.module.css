@@ -9,9 +9,9 @@
 }
 
 /* Padding sizes */
-.sm { padding: 12px; }
-.md { padding: 20px; }
-.lg { padding: 32px; }
+.sm { padding: var(--space-base); }
+.md { padding: var(--space-lg); }
+.lg { padding: var(--space-xl); }
 
 /* Optional shadow */
 .shadow {

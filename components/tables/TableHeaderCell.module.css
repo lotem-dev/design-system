@@ -3,16 +3,14 @@
    ========================================================= */
 
 .cell {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  composes: caption-bold from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   white-space: nowrap;
   border-bottom: 1px solid var(--stroke-secondary);
   background: var(--surface-secondary);
-  padding: 8px 12px;
+  padding: var(--space-sm) var(--space-base);
   text-align: left;
   vertical-align: middle;
 }
@@ -21,26 +19,26 @@
 
 .checkbox {
   width: 40px;
-  padding: 8px 12px;
+  padding: var(--space-sm) var(--space-base);
   text-align: center;
 }
 
 .first {
-  padding-left: 20px;
+  padding-left: var(--space-lg);
 }
 
 .regular {
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: var(--space-base);
+  padding-right: var(--space-base);
 }
 
 .last {
-  padding-right: 20px;
+  padding-right: var(--space-lg);
 }
 
 .actions {
   width: 48px;
-  padding: 8px 12px;
+  padding: var(--space-sm) var(--space-base);
 }
 
 /* ─── Inner row: label + sort icon ───────────────────── */
@@ -48,7 +46,7 @@
 .inner {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-xs);
 }
 
 .label {

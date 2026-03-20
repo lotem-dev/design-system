@@ -35,17 +35,11 @@
 }
 
 .score {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-lg);
+  composes: medium from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
 }
 
 .priority {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-sm);
+  composes: label-bold from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
 }

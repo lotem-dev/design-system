@@ -3,6 +3,7 @@
    ========================================================= */
 
 .root {
+  composes: body from '../../styles/typography-roles.module.css';
   display: inline-flex;
   align-items: center;
   gap: var(--space-sm);
@@ -10,8 +11,6 @@
   border-radius: var(--radius-base);
   background: var(--surface-primary);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.06);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
   min-width: 260px;
   max-width: 400px;
   position: relative;

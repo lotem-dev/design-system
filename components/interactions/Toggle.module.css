@@ -48,10 +48,7 @@
 .thumbOff { left: 2px; }
 
 .label {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
+  composes: body from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
-  line-height: var(--line-height-base);
   user-select: none;
 }

@@ -15,10 +15,7 @@
 }
 
 .text {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--text-invert);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -26,10 +23,7 @@
 }
 
 .link {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  composes: label from '../../styles/typography-roles.module.css';
   color: var(--text-secondary);
   text-decoration: none;
   white-space: nowrap;

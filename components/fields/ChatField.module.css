@@ -204,7 +204,7 @@
 .avatarRow {
   display: flex;
   align-items: center;
-  padding-right: 4px;
+  padding-right: var(--space-xs);
 }
 
 .avatar {

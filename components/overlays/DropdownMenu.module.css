@@ -30,18 +30,16 @@
 .alignRight { right: 0; }
 
 .item {
+  composes: body from '../../styles/typography-roles.module.css';
   display: block;
   width: 100%;
   padding: var(--space-sm) var(--space-base);
   background: transparent;
   border: none;
   text-align: left;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
   color: var(--text-primary);
   cursor: pointer;
   transition: background 100ms ease;
-  line-height: var(--line-height-base);
 }
 
 .item:hover:not(:disabled) {
@@ -58,5 +56,5 @@
 }
 
 .item.destructive:hover:not(:disabled) {
-  background: var(--error-secondary, #fff5f5);
+  background: var(--error-secondary);
 }

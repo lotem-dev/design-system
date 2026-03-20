@@ -34,11 +34,8 @@
 }
 
 .title {
-  font-family: var(--font-sans);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+  composes: medium from '../../styles/typography-roles.module.css';
   color: var(--text-primary);
-  line-height: var(--line-height-lg);
   margin: 0;
 }
 
@@ -60,11 +57,9 @@
 }
 
 .body {
+  composes: body from '../../styles/typography-roles.module.css';
   padding: var(--space-lg);
   overflow-y: auto;
   flex: 1;
-  font-family: var(--font-sans);
-  font-size: var(--font-size-base);
   color: var(--text-primary);
-  line-height: var(--line-height-base);
 }
