@@ -1,6 +1,6 @@
 // Button — the primary interactive element in the design system.
 // Comes in three visual styles (primary, ghost, destructive) and two sizes (sm, md).
-// Can show a text label, an icon, or both — with the icon placed before or after the label.
+// Can show a text label, an icon, or both — with icons at the start, end, or both sides.
 // Used anywhere the user needs to take an action: forms, dialogs, toolbars.
 import type { ReactNode, MouseEvent, ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
@@ -17,10 +17,10 @@ type BaseProps = {
   size?: ButtonSize;
   // When true, the button is grayed out and cannot be clicked.
   disabled?: boolean;
-  // An icon to display inside the button — pass any SVG icon component here.
+  // An icon at the start of the button (before the label).
   icon?: ReactNode;
-  // Whether the icon appears before or after the label text. Defaults to "start" (before).
-  iconPosition?: "start" | "end";
+  // An icon at the end of the button (after the label).
+  iconEnd?: ReactNode;
   // The function that runs when the button is clicked.
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   // The HTML behavior of the button — usually left as the default "button".
@@ -47,16 +47,15 @@ export function Button({
   size = "md",
   disabled = false,
   icon,
-  iconPosition = "start",
+  iconEnd,
   onClick,
   type = "button",
   children,
   ariaLabel,
 }: ButtonProps) {
-  // True when an icon is provided but there is no label text — triggers the icon-only layout.
+  // True when only an icon is provided with no label text — triggers the icon-only square layout.
   const isIconOnly = Boolean(icon) && !children;
 
-  // Builds the CSS class list by combining the base class, the chosen variant, size, and icon-only flag.
   const className = [
     styles.button,
     styles[variant],
@@ -74,7 +73,7 @@ export function Button({
       aria-label={ariaLabel}
       className={className}
     >
-      {icon && iconPosition === "start" && (
+      {icon && (
         <span className={styles.icon} aria-hidden="true">
           {icon}
         </span>
@@ -82,9 +81,9 @@ export function Button({
 
       {children && <span className={styles.label}>{children}</span>}
 
-      {icon && iconPosition === "end" && (
+      {iconEnd && (
         <span className={styles.icon} aria-hidden="true">
-          {icon}
+          {iconEnd}
         </span>
       )}
     </button>

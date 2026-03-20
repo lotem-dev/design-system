@@ -17,7 +17,7 @@ const sources = [
 
 const VARIANTS: ButtonVariant[] = ["primary", "ghost", "destructive"];
 const SIZES: ButtonSize[]       = ["sm", "md"];
-type IconMode = "none" | "start" | "end" | "only";
+type IconMode = "none" | "start" | "end" | "both" | "only";
 
 const ICON_SM = <IconWrapper icon={IconAdd} size="sm" />;
 
@@ -33,7 +33,8 @@ function generateSnippet(variant: ButtonVariant, size: ButtonSize, disabled: boo
     return `<Button ${props.join(" ")} />`;
   }
   if (iconMode === "start") props.push(`icon={<IconAdd />}`);
-  if (iconMode === "end")   props.push(`icon={<IconAdd />}`, `iconPosition="end"`);
+  if (iconMode === "end")   props.push(`iconEnd={<IconAdd />}`);
+  if (iconMode === "both")  props.push(`icon={<IconAdd />}`, `iconEnd={<IconAdd />}`);
   const p = props.length ? " " + props.join(" ") : "";
   return `<Button${p}>\n  Label\n</Button>`;
 }
@@ -62,8 +63,8 @@ function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, ic
   ) : (
     <Button
       variant={variant} size={size} disabled={disabled}
-      icon={iconMode !== "none" ? ICON_SM : undefined}
-      iconPosition={iconMode === "end" ? "end" : "start"}
+      icon={iconMode === "start" || iconMode === "both" ? ICON_SM : undefined}
+      iconEnd={iconMode === "end" || iconMode === "both" ? ICON_SM : undefined}
     >
       Label
     </Button>
@@ -86,7 +87,7 @@ function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, ic
               <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
             </ControlRow>
             <ControlRow label="Icon">
-              {(["none", "start", "end", "only"] as IconMode[]).map(m => (
+              {(["none", "start", "end", "both", "only"] as IconMode[]).map(m => (
                 <Pill key={m} active={iconMode === m} onClick={() => onIconMode(m)}>{m}</Pill>
               ))}
             </ControlRow>
@@ -196,7 +197,7 @@ function StyleReference(state: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.button</code>
               </td>
               <td style={TD}>
-                {["border-radius: var(--radius-base)", "line-height: 1", "transition: background / border-color / color - 120ms ease"].map(p => (
+                {["border-radius: var(--radius-base)", "transition: background / border-color / color - 120ms ease"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

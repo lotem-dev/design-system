@@ -10,8 +10,6 @@
   border-radius: var(--radius-base);
   border: 1px solid transparent;
   white-space: nowrap;
-  /* line-height: 1 keeps the button height controlled by padding/height, not text */
-  line-height: 1;
   cursor: pointer;
   transition:
     background 120ms ease,
