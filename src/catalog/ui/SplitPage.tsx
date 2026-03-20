@@ -16,7 +16,7 @@ export function SplitPage({ children, files, alwaysOpen = false }: SplitPageProp
     <div style={{ display: "flex", width: "100%" }}>
 
       {/* Left — spec content */}
-      <div style={{ flex: open ? "0 0 55%" : "1 1 100%", minWidth: 0, padding: "20px 32px 32px", overflowX: "auto" }}>
+      <div style={{ flex: open ? "0 0 55%" : "1 1 100%", minWidth: 0, padding: "20px 32px 32px" }}>
 
         {/* Source toggle — hidden when alwaysOpen */}
         {!alwaysOpen && (
