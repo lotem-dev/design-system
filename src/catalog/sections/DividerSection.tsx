@@ -30,12 +30,12 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; properties: string[] };
 
 const BASE_ROWS: StyleRow[] = [
-  { prop: "(base)", value: "always", properties: ["flex-shrink: 0", "background-color: var(--_color, var(--divider-primary))"] },
+  { prop: "(base)", value: "always", properties: ["flex-shrink: 0", "background-color: var(--divider-primary)"] },
 ];
 
 const ORIENTATION_ROWS: StyleRow[] = [
-  { prop: "orientation", value: "horizontal", properties: ["width: 100%", "height: var(--_thickness)", "margin-block: var(--_spacing)"] },
-  { prop: "orientation", value: "vertical",   properties: ["height: 100%", "width: var(--_thickness)", "margin-inline: var(--_spacing)", "align-self: stretch"] },
+  { prop: "orientation", value: "horizontal", properties: ["width: 100%", "height: 1px", "margin-block: var(--space-base)"] },
+  { prop: "orientation", value: "vertical",   properties: ["height: 100%", "width: 1px", "margin-inline: var(--space-base)", "align-self: stretch"] },
 ];
 
 // ─── Playground ───────────────────────────────────────────────────────────────
