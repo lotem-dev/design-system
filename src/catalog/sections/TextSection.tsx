@@ -185,7 +185,13 @@ function StyleReference({ role, color }: { role: TypographyRole; color: string |
         Prop-driven - updates as you interact with the playground above.
       </p>
       <div>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
+          <colgroup>
+            <col style={{ width: "14%" }} />
+            <col style={{ width: "26%" }} />
+            <col style={{ width: "30%" }} />
+            <col style={{ width: "30%" }} />
+          </colgroup>
           <thead>
             <tr>
               <th style={TH}>Prop</th>
@@ -205,10 +211,10 @@ function StyleReference({ role, color }: { role: TypographyRole; color: string |
                         <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>{prop}</code>
                       </td>
                     )}
-                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                    <td style={{ ...TD, wordBreak: "break-word" }}>
                       <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>{row.value}</span>
                     </td>
-                    <td style={{ ...TD, whiteSpace: "nowrap" }}>
+                    <td style={{ ...TD, wordBreak: "break-word" }}>
                       <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>{row.cssClass}</code>
                     </td>
                     <td style={TD}>
