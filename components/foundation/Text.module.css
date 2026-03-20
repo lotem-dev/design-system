@@ -14,11 +14,6 @@
 }
 
 /* ─── Headline (30px / 36px) ─────────────────────────────── */
-.headline-regular {
-  font-size: var(--font-headline-size);
-  line-height: var(--font-headline-line-height);
-  font-weight: var(--font-weight-regular);
-}
 .headline-bold {
   font-size: var(--font-headline-size);
   line-height: var(--font-headline-line-height);
@@ -26,11 +21,6 @@
 }
 
 /* ─── Title (26px / 32px) ────────────────────────────────── */
-.title-regular {
-  font-size: var(--font-title-size);
-  line-height: var(--font-title-line-height);
-  font-weight: var(--font-weight-regular);
-}
 .title-bold {
   font-size: var(--font-title-size);
   line-height: var(--font-title-line-height);
@@ -38,11 +28,6 @@
 }
 
 /* ─── Medium (18px / 25px) ───────────────────────────────── */
-.medium-regular {
-  font-size: var(--font-medium-size);
-  line-height: var(--font-medium-line-height);
-  font-weight: var(--font-weight-regular);
-}
 .medium-bold {
   font-size: var(--font-medium-size);
   line-height: var(--font-medium-line-height);
