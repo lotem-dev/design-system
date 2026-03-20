@@ -196,7 +196,7 @@ function StyleReference(state: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.button</code>
               </td>
               <td style={TD}>
-                {["border-radius: var(--radius-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-sans)", "transition: background / border-color / color - 120ms ease"].map(p => (
+                {["border-radius: var(--radius-base)", "line-height: 1", "transition: background / border-color / color - 120ms ease"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

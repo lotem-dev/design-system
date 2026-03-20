@@ -5,8 +5,6 @@
 
    Each class is fully self-contained: size, line-height,
    weight, and letter-spacing in one place.
-   font-family is NOT included here — it is either inherited
-   from the global html/body rule, or set by the component.
    ========================================================= */
 
 /* ─── Headline (30px / 36px) ─────────────────────────────── */
@@ -14,6 +12,7 @@
   font-size: var(--font-headline-size);
   line-height: var(--font-headline-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 
@@ -22,6 +21,7 @@
   font-size: var(--font-title-size);
   line-height: var(--font-title-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 
@@ -30,6 +30,7 @@
   font-size: var(--font-medium-size);
   line-height: var(--font-medium-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 
@@ -38,12 +39,14 @@
   font-size: var(--font-body-size);
   line-height: var(--font-body-line-height);
   font-weight: var(--font-weight-regular);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 .body-bold {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 
@@ -52,18 +55,21 @@
   font-size: var(--font-label-size);
   line-height: var(--font-label-line-height);
   font-weight: var(--font-weight-regular);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 .label-bold {
   font-size: var(--font-label-size);
   line-height: var(--font-label-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 .label-caps {
   font-size: var(--font-label-size);
   line-height: var(--font-label-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-caps);
 }
@@ -73,11 +79,13 @@
   font-size: var(--font-xs-size);
   line-height: var(--font-xs-line-height);
   font-weight: var(--font-weight-regular);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }
 .caption-bold {
   font-size: var(--font-xs-size);
   line-height: var(--font-xs-line-height);
   font-weight: var(--font-weight-bold);
+  font-family: var(--font-sans);
   letter-spacing: var(--letter-spacing-default);
 }

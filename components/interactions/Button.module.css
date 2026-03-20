@@ -7,7 +7,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-sans);
   border-radius: var(--radius-base);
   border: 1px solid transparent;
   white-space: nowrap;
