@@ -187,9 +187,9 @@ function IconTable({ icons }: { icons: IconNamespace }) {
         tableLayout: "fixed",
       }}>
         <colgroup>
-          <col style={{ width: "56px" }} />
-          <col style={{ width: "240px" }} />
-          <col />
+          <col style={{ width: "48px" }} />
+          <col style={{ width: "38%" }} />
+          <col style={{ width: "62%" }} />
         </colgroup>
         <thead>
           <tr style={{ borderBottom: "2px solid #E4E4E7" }}>
@@ -218,6 +218,8 @@ function IconTable({ icons }: { icons: IconNamespace }) {
                   backgroundColor: "#F4F4F5",
                   padding: "2px 6px",
                   borderRadius: "4px",
+                  wordBreak: "break-word",
+                  display: "inline-block",
                 }}>
                   {name}
                 </code>
