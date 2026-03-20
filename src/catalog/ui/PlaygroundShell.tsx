@@ -15,9 +15,9 @@ export function PlaygroundShell({ preview, controls }: PlaygroundShellProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   return (
-    <div style={{ border: "1px solid #E4E4E7", borderRadius: "12px", overflow: "hidden", marginBottom: "12px" }}>
+    <div style={{ border: "1px solid #E4E4E7", borderRadius: "12px", marginBottom: "12px" }}>
 
-      {/* Preview */}
+      {/* Preview — overflow:visible so absolutely-positioned children (e.g. DropdownMenu) are not clipped */}
       <div
         data-theme={theme}
         style={{
@@ -27,6 +27,7 @@ export function PlaygroundShell({ preview, controls }: PlaygroundShellProps) {
           backgroundColor: theme === "light" ? "#FFFFFF" : "#09090B",
           color: "var(--text-primary)",
           padding: "32px 24px",
+          borderRadius: controls ? "12px 12px 0 0" : "12px",
         }}
       >
         {/* Theme toggle */}
@@ -59,6 +60,7 @@ export function PlaygroundShell({ preview, controls }: PlaygroundShellProps) {
           borderTop: "1px solid #F4F4F5", padding: "16px 20px",
           display: "flex", flexWrap: "wrap", gap: "20px",
           backgroundColor: "#FFFFFF",
+          borderRadius: "0 0 12px 12px",
         }}>
           {controls}
         </div>
