@@ -2,6 +2,7 @@
 // Unlike Toast, Alert stays visible on the page and doesn't disappear automatically.
 // Four semantic types each have a distinct icon, color, and left-border accent.
 // Use for confirmations, warnings, validation errors, and contextual guidance.
+import { IconX } from "../icons/usecases/IconX";
 import styles from "./Alert.module.css";
 
 export type AlertProps = {
@@ -31,9 +32,7 @@ export function Alert({ type = "info", title, message, onClose }: AlertProps) {
         <p className={styles.message}>{message}</p>
       </div>
       {onClose && (
-        <button className={styles.close} onClick={onClose} aria-label="Dismiss">
-          ×
-        </button>
+        <button className={styles.close} onClick={onClose} aria-label="Dismiss"><IconX width={14} height={14} /></button>
       )}
     </div>
   );

@@ -2,6 +2,7 @@
 // The backdrop dims the rest of the UI so the user must deal with the modal before continuing.
 // Use for confirmations, forms, and tasks that need dedicated focus.
 import type { ReactNode } from "react";
+import { IconX } from "../icons/usecases/IconX";
 import styles from "./Modal.module.css";
 
 export type ModalProps = {
@@ -36,7 +37,7 @@ export function Modal({ open, onClose, title, children, size = "md" }: ModalProp
       <div className={styles.panel} style={{ maxWidth: SIZE_MAP[size] }}>
         <div className={styles.header}>
           {title && <h2 className={styles.title}>{title}</h2>}
-          <button className={styles.close} onClick={onClose} aria-label="Close modal">×</button>
+          <button className={styles.close} onClick={onClose} aria-label="Close modal"><IconX width={16} height={16} /></button>
         </div>
         <div className={styles.body}>{children}</div>
       </div>

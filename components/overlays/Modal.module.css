@@ -40,11 +40,12 @@
 }
 
 .close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
   color: var(--text-secondary);
   padding: 0;
   flex-shrink: 0;

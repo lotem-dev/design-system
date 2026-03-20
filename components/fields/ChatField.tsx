@@ -5,6 +5,7 @@
 import * as React from "react";
 import { useRef } from "react";
 import { IconSend }         from "../icons/usecases/IconSend";
+import { Spinner }          from "../visualization/Spinner";
 import { IconInformation }  from "../icons/usecases/IconInformation";
 import { IconChevronRight } from "../icons/chevrons/IconChevronRight";
 import styles from "./ChatField.module.css";
@@ -140,7 +141,7 @@ export function ChatField({
             aria-label="Send"
           >
             {isProcessing
-              ? <span className={styles.spinner} />
+              ? <Spinner size="sm" color="white" />
               : <IconSend width={20} height={20} />
             }
           </button>

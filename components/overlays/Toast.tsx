@@ -1,6 +1,7 @@
 // Toast — a brief notification that appears and can be dismissed.
 // Unlike Alert, Toast is transient: it floats over the UI and disappears.
 // Use for non-blocking feedback like "Saved", "Copied", or "Error saving".
+import { IconX } from "../icons/usecases/IconX";
 import styles from "./Toast.module.css";
 
 export type ToastProps = {
@@ -30,9 +31,7 @@ export function Toast({ message, type = "info", visible = true, onClose }: Toast
       <span className={styles.icon} aria-hidden="true">{ICONS[type]}</span>
       <span className={styles.message}>{message}</span>
       {onClose && (
-        <button className={styles.close} onClick={onClose} aria-label="Dismiss notification">
-          ×
-        </button>
+        <button className={styles.close} onClick={onClose} aria-label="Dismiss notification"><IconX width={14} height={14} /></button>
       )}
     </div>
   );
