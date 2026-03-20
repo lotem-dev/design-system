@@ -25,15 +25,15 @@ const TD: React.CSSProperties = {
   borderBottom: "1px solid #F4F4F5",
 };
 
-type StyleRow = { condition: string; properties: string[] };
+type StyleRow = { prop: string; value: string; properties: string[] };
 
 const BASE_ROWS: StyleRow[] = [
-  { condition: "always",               properties: ["backgroundColor: color", "flexShrink: 0"] },
+  { prop: "(base)", value: "always", properties: ["backgroundColor: color", "flexShrink: 0"] },
 ];
 
 const ORIENTATION_ROWS: StyleRow[] = [
-  { condition: 'orientation="horizontal"', properties: ["width: 100%", "height: thickness", "marginBlock: spacing"] },
-  { condition: 'orientation="vertical"',   properties: ["height: 100%", "width: thickness", "marginInline: spacing", "alignSelf: stretch"] },
+  { prop: "orientation", value: "horizontal", properties: ["width: 100%", "height: thickness", "marginBlock: spacing"] },
+  { prop: "orientation", value: "vertical",   properties: ["height: 100%", "width: thickness", "marginInline: spacing", "alignSelf: stretch"] },
 ];
 
 // ─── Playground ───────────────────────────────────────────────────────────────
@@ -79,12 +79,12 @@ function StyleReference({ orientation }: { orientation: "horizontal" | "vertical
       </p>
       <div style={{ marginBottom: "28px" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead><tr><th style={TH}>Condition</th><th style={TH}>Properties</th></tr></thead>
+          <thead><tr><th style={TH}>Class</th><th style={TH}>Properties</th></tr></thead>
           <tbody>
             {BASE_ROWS.map(row => (
-              <tr key={row.condition}>
+              <tr key={row.value}>
                 <td style={{ ...TD, whiteSpace: "nowrap" }}>
-                  <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>{row.condition}</code>
+                  <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.root</code>
                 </td>
                 <td style={TD}>
                   {row.properties.map(p => (
@@ -103,22 +103,29 @@ function StyleReference({ orientation }: { orientation: "horizontal" | "vertical
       <div>
         <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" }}>
           <colgroup>
-            <col style={{ width: "40%" }} />
+            <col style={{ width: "16%" }} />
+            <col style={{ width: "24%" }} />
             <col style={{ width: "60%" }} />
           </colgroup>
           <thead>
             <tr>
-              <th style={TH}>Condition</th>
+              <th style={TH}>Prop</th>
+              <th style={TH}>Value</th>
               <th style={TH}>Properties</th>
             </tr>
           </thead>
           <tbody>
-            {ORIENTATION_ROWS.map(row => {
-              const active = row.condition.includes(`"${orientation}"`);
+            {ORIENTATION_ROWS.map((row, i) => {
+              const active = row.value === orientation;
               return (
-                <tr key={row.condition} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
+                <tr key={row.value} style={{ backgroundColor: active ? "#F4F4F5" : "transparent" }}>
+                  {i === 0 && (
+                    <td rowSpan={ORIENTATION_ROWS.length} style={{ ...TD, borderRight: "1px solid #F4F4F5", verticalAlign: "middle" }}>
+                      <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#EBEBEB", padding: "2px 6px", borderRadius: "4px", whiteSpace: "nowrap" }}>orientation</code>
+                    </td>
+                  )}
                   <td style={{ ...TD, wordBreak: "break-word" }}>
-                    <code style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#18181B" : "#A1A1AA", backgroundColor: active ? "#E4E4E7" : "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>{row.condition}</code>
+                    <span style={{ fontSize: "12px", fontFamily: "monospace", color: active ? "#09090B" : "#71717A", fontWeight: active ? 700 : 400 }}>{row.value}</span>
                   </td>
                   <td style={TD}>
                     {row.properties.map(p => (
