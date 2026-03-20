@@ -1,37 +1,39 @@
 /* =========================================================
    Text — role classes
    =========================================================
-   One class per role. Each class is a complete, self-contained
-   text style — size + line-height + weight in one place.
+   One class per role. Each class is fully self-contained:
+   size, line-height, weight, and letter-spacing in one place.
    All values come from the semantic tokens in typography.css.
 
-   Usage: <Text role="headline-bold"> applies .headline-bold
+   Usage: <Text role="label-caps"> applies .root + .label-caps
    ========================================================= */
 
 .root {
   font-family: var(--font-sans);
-  letter-spacing: var(--letter-spacing-default);
 }
 
 /* ─── Headline (30px / 36px) ─────────────────────────────── */
-.headline-bold {
+.headline {
   font-size: var(--font-headline-size);
   line-height: var(--font-headline-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }
 
 /* ─── Title (26px / 32px) ────────────────────────────────── */
-.title-bold {
+.title {
   font-size: var(--font-title-size);
   line-height: var(--font-title-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }
 
 /* ─── Medium (18px / 25px) ───────────────────────────────── */
-.medium-bold {
+.medium {
   font-size: var(--font-medium-size);
   line-height: var(--font-medium-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }
 
 /* ─── Body (14px / 22px) ─────────────────────────────────── */
@@ -39,11 +41,13 @@
   font-size: var(--font-body-size);
   line-height: var(--font-body-line-height);
   font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
 }
 .body-bold {
   font-size: var(--font-body-size);
   line-height: var(--font-body-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }
 
 /* ─── Label (12px / 16px) ────────────────────────────────── */
@@ -51,11 +55,13 @@
   font-size: var(--font-label-size);
   line-height: var(--font-label-line-height);
   font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
 }
 .label-bold {
   font-size: var(--font-label-size);
   line-height: var(--font-label-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }
 .label-caps {
   font-size: var(--font-label-size);
@@ -70,9 +76,11 @@
   font-size: var(--font-xs-size);
   line-height: var(--font-xs-line-height);
   font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-default);
 }
 .caption-bold {
   font-size: var(--font-xs-size);
   line-height: var(--font-xs-line-height);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-default);
 }

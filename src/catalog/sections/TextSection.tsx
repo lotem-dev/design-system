@@ -43,29 +43,26 @@ type StyleRow = {
   value: string;
   cssClass: string;
   properties: string[];
-  // Which base .root properties this role overrides (by property name)
-  overridesBase?: string[];
 };
 
 const ROLE_PROPERTIES: Record<TypographyRole, string[]> = {
-  "headline":     ["font-size: var(--font-headline-size)", "line-height: var(--font-headline-line-height)", "font-weight: var(--font-weight-bold)"],
-  "title":        ["font-size: var(--font-title-size)",    "line-height: var(--font-title-line-height)",    "font-weight: var(--font-weight-bold)"],
-  "medium":       ["font-size: var(--font-medium-size)",   "line-height: var(--font-medium-line-height)",   "font-weight: var(--font-weight-bold)"],
-  "body":         ["font-size: var(--font-body-size)",     "line-height: var(--font-body-line-height)",     "font-weight: var(--font-weight-regular)"],
-  "body-bold":    ["font-size: var(--font-body-size)",     "line-height: var(--font-body-line-height)",     "font-weight: var(--font-weight-bold)"],
-  "label":        ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-regular)"],
-  "label-bold":   ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-bold)"],
-  "label-caps":   ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-bold)", "text-transform: uppercase", "letter-spacing: var(--letter-spacing-caps)"],
-  "caption":      ["font-size: var(--font-xs-size)",       "line-height: var(--font-xs-line-height)",       "font-weight: var(--font-weight-regular)"],
-  "caption-bold": ["font-size: var(--font-xs-size)",       "line-height: var(--font-xs-line-height)",       "font-weight: var(--font-weight-bold)"],
+  "headline":     ["font-size: var(--font-headline-size)", "line-height: var(--font-headline-line-height)", "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
+  "title":        ["font-size: var(--font-title-size)",    "line-height: var(--font-title-line-height)",    "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
+  "medium":       ["font-size: var(--font-medium-size)",   "line-height: var(--font-medium-line-height)",   "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
+  "body":         ["font-size: var(--font-body-size)",     "line-height: var(--font-body-line-height)",     "font-weight: var(--font-weight-regular)", "letter-spacing: var(--letter-spacing-default)"],
+  "body-bold":    ["font-size: var(--font-body-size)",     "line-height: var(--font-body-line-height)",     "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
+  "label":        ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-regular)", "letter-spacing: var(--letter-spacing-default)"],
+  "label-bold":   ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
+  "label-caps":   ["font-size: var(--font-label-size)",    "line-height: var(--font-label-line-height)",    "font-weight: var(--font-weight-bold)",    "text-transform: uppercase", "letter-spacing: var(--letter-spacing-caps)"],
+  "caption":      ["font-size: var(--font-xs-size)",       "line-height: var(--font-xs-line-height)",       "font-weight: var(--font-weight-regular)", "letter-spacing: var(--letter-spacing-default)"],
+  "caption-bold": ["font-size: var(--font-xs-size)",       "line-height: var(--font-xs-line-height)",       "font-weight: var(--font-weight-bold)",    "letter-spacing: var(--letter-spacing-default)"],
 };
 
 const ROLE_ROWS: StyleRow[] = ROLES.map(role => ({
-  prop:         "role",
-  value:        role,
-  cssClass:     `<${ROLE_TAG[role]}> .${role}`,
-  properties:   ROLE_PROPERTIES[role],
-  overridesBase: role === "label-caps" ? ["letter-spacing"] : undefined,
+  prop:       "role",
+  value:      role,
+  cssClass:   `<${ROLE_TAG[role]}> .${role}`,
+  properties: ROLE_PROPERTIES[role],
 }));
 
 const COLOR_ROWS: StyleRow[] = [
@@ -174,14 +171,6 @@ function Playground({ role, onRole, color, onColor }: {
 // ─── Style Reference ──────────────────────────────────────────────────────────
 
 function StyleReference({ role, color }: { role: TypographyRole; color: string | undefined }) {
-  const activeRow = ROLE_ROWS.find(r => r.value === role);
-  const overriddenBase = activeRow?.overridesBase ?? [];
-
-  const BASE_PROPERTIES: { label: string; key: string }[] = [
-    { label: "font-family: var(--font-sans)",                key: "font-family"     },
-    { label: "letter-spacing: var(--letter-spacing-default)", key: "letter-spacing" },
-  ];
-
   return (
     <div>
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
@@ -196,15 +185,9 @@ function StyleReference({ role, color }: { role: TypographyRole; color: string |
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.root</code>
               </td>
               <td style={TD}>
-                {BASE_PROPERTIES.map(({ label, key }) => {
-                  const overridden = overriddenBase.includes(key);
-                  return (
-                    <div key={label} style={{ fontSize: "12px", fontFamily: "monospace", lineHeight: "1.9", display: "flex", alignItems: "center", gap: "8px" }}>
-                      <span style={{ color: overridden ? "#D4D4D8" : "#52525B", textDecoration: overridden ? "line-through" : "none" }}>{label}</span>
-                      {overridden && <span style={{ fontSize: "10px", fontFamily: "'Open Sans', system-ui, sans-serif", color: "#A1A1AA" }}>overridden by .{role}</span>}
-                    </div>
-                  );
-                })}
+                {["font-family: var(--font-sans)"].map(p => (
+                  <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
+                ))}
               </td>
             </tr>
           </tbody>
