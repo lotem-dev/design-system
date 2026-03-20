@@ -188,14 +188,12 @@ function IconTable({ icons }: { icons: IconNamespace }) {
       }}>
         <colgroup>
           <col style={{ width: "48px" }} />
-          <col style={{ width: "38%" }} />
-          <col style={{ width: "62%" }} />
+          <col />
         </colgroup>
         <thead>
           <tr style={{ borderBottom: "2px solid #E4E4E7" }}>
             <IconTh>Icon</IconTh>
             <IconTh>Name</IconTh>
-            <IconTh>Description</IconTh>
           </tr>
         </thead>
         <tbody>
@@ -218,14 +216,9 @@ function IconTable({ icons }: { icons: IconNamespace }) {
                   backgroundColor: "#F4F4F5",
                   padding: "2px 6px",
                   borderRadius: "4px",
-                  wordBreak: "break-word",
-                  display: "inline-block",
                 }}>
                   {name}
                 </code>
-              </IconTd>
-              <IconTd style={{ color: "#52525B", lineHeight: "1.5" }}>
-                {getDescription(name)}
               </IconTd>
             </tr>
           ))}
