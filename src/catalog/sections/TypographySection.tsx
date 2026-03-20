@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { SplitPage } from "../ui/SplitPage";
 import { TokenTable } from "../ui/TokenTable";
 import { SectionBlock } from "../ui/SectionBlock";
+import { AccordionSection } from "../ui/AccordionSection";
 import typographyCss from "../../../styles/tokens/typography.css?raw";
 
 const sources = [{ filename: "typography.css", code: typographyCss }];
@@ -16,6 +18,9 @@ const SUBTITLE: React.CSSProperties = {
 };
 
 export function TypographySection() {
+  const [primitivesOpen, setPrimitivesOpen] = useState(false);
+  const [semanticOpen,   setSemanticOpen]   = useState(false);
+
   return (
     <SplitPage files={sources} alwaysOpen>
       <div style={{ marginBottom: "32px" }}>
@@ -29,54 +34,70 @@ export function TypographySection() {
         </p>
       </div>
 
-      {/* Layer 1 — same order as the CSS file */}
-
-      <SectionBlock title="Font Family">
-        <TokenTable hideProperty rows={[
-          { property: "font-family", token: "--font-sans", value: '"Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' },
+      {/* Global application — first */}
+      <SectionBlock title="Global Application">
+        <p style={{ fontSize: "14px", color: "#52525B", lineHeight: "1.6", marginBottom: "16px" }}>
+          These rules are applied directly in typography.css - not as tokens, but as global defaults on base elements.
+        </p>
+        <TokenTable rows={[
+          { property: "font-family",     token: "html, body",                      value: "var(--font-sans)"              },
+          { property: "letter-spacing",  token: "html, body",                      value: "var(--letter-spacing-default)" },
+          { property: "color",           token: "html, body",                      value: "var(--text-primary)"           },
+          { property: "color",           token: "a",                               value: "var(--text-brand)"             },
+          { property: "text-decoration", token: "a[data-underline-hover] :hover",  value: "underline"                     },
+          { property: "outline",         token: "a:focus-visible",                 value: "2px solid currentColor"        },
+          { property: "outline-offset",  token: "a:focus-visible",                 value: "2px"                           },
         ]} />
       </SectionBlock>
 
-      <SectionBlock title="Font Weights">
-        <TokenTable hideProperty rows={[
-          { property: "font-weight", token: "--font-weight-regular",  value: "400" },
-          { property: "font-weight", token: "--font-weight-semibold", value: "600" },
-          { property: "font-weight", token: "--font-weight-bold",     value: "700" },
-        ]} />
-      </SectionBlock>
+      {/* Layer 1 — Primitives */}
+      <AccordionSection title="Typography Primitives" open={primitivesOpen} onToggle={() => setPrimitivesOpen(o => !o)}>
+        <SectionBlock title="Font Family">
+          <TokenTable hideProperty rows={[
+            { property: "font-family", token: "--font-sans", value: '"Open Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' },
+          ]} />
+        </SectionBlock>
 
-      <SectionBlock title="Font Sizes">
-        <TokenTable hideProperty rows={[
-          { property: "font-size", token: "--font-size-2xl",  value: "1.875rem" },
-          { property: "font-size", token: "--font-size-xl",   value: "1.625rem" },
-          { property: "font-size", token: "--font-size-lg",   value: "1.125rem" },
-          { property: "font-size", token: "--font-size-base", value: "0.875rem" },
-          { property: "font-size", token: "--font-size-sm",   value: "0.75rem"  },
-          { property: "font-size", token: "--font-size-xs",   value: "0.625rem" },
-        ]} />
-      </SectionBlock>
+        <SectionBlock title="Font Weights">
+          <TokenTable hideProperty rows={[
+            { property: "font-weight", token: "--font-weight-regular",  value: "400" },
+            { property: "font-weight", token: "--font-weight-semibold", value: "600" },
+            { property: "font-weight", token: "--font-weight-bold",     value: "700" },
+          ]} />
+        </SectionBlock>
 
-      <SectionBlock title="Line Heights">
-        <TokenTable hideProperty rows={[
-          { property: "line-height", token: "--line-height-2xl",  value: "2.25rem",   note: "36px" },
-          { property: "line-height", token: "--line-height-xl",   value: "2rem",      note: "32px" },
-          { property: "line-height", token: "--line-height-lg",   value: "1.5625rem", note: "25px" },
-          { property: "line-height", token: "--line-height-base", value: "1.375rem",  note: "22px" },
-          { property: "line-height", token: "--line-height-sm",   value: "1rem",      note: "16px" },
-          { property: "line-height", token: "--line-height-xs",   value: "0.875rem",  note: "14px" },
-        ]} />
-      </SectionBlock>
+        <SectionBlock title="Font Sizes">
+          <TokenTable hideProperty rows={[
+            { property: "font-size", token: "--font-size-2xl",  value: "1.875rem" },
+            { property: "font-size", token: "--font-size-xl",   value: "1.625rem" },
+            { property: "font-size", token: "--font-size-lg",   value: "1.125rem" },
+            { property: "font-size", token: "--font-size-base", value: "0.875rem" },
+            { property: "font-size", token: "--font-size-sm",   value: "0.75rem"  },
+            { property: "font-size", token: "--font-size-xs",   value: "0.625rem" },
+          ]} />
+        </SectionBlock>
 
-      <SectionBlock title="Letter Spacing">
-        <TokenTable hideProperty rows={[
-          { property: "letter-spacing", token: "--letter-spacing-default", value: "0",      note: "Default for all text" },
-          { property: "letter-spacing", token: "--letter-spacing-caps",    value: "0.04em", note: "Uppercase labels and tags" },
-        ]} />
-      </SectionBlock>
+        <SectionBlock title="Line Heights">
+          <TokenTable hideProperty rows={[
+            { property: "line-height", token: "--line-height-2xl",  value: "2.25rem",   note: "36px" },
+            { property: "line-height", token: "--line-height-xl",   value: "2rem",      note: "32px" },
+            { property: "line-height", token: "--line-height-lg",   value: "1.5625rem", note: "25px" },
+            { property: "line-height", token: "--line-height-base", value: "1.375rem",  note: "22px" },
+            { property: "line-height", token: "--line-height-sm",   value: "1rem",      note: "16px" },
+            { property: "line-height", token: "--line-height-xs",   value: "0.875rem",  note: "14px" },
+          ]} />
+        </SectionBlock>
 
-      {/* Layer 2 — split by property type */}
+        <SectionBlock title="Letter Spacing">
+          <TokenTable hideProperty rows={[
+            { property: "letter-spacing", token: "--letter-spacing-default", value: "0",      note: "Default for all text" },
+            { property: "letter-spacing", token: "--letter-spacing-caps",    value: "0.04em", note: "Uppercase labels and tags" },
+          ]} />
+        </SectionBlock>
+      </AccordionSection>
 
-      <SectionBlock title="Semantic Role Tokens">
+      {/* Layer 2 — Semantic tokens */}
+      <AccordionSection title="Semantic Tokens" open={semanticOpen} onToggle={() => setSemanticOpen(o => !o)}>
         <p style={SUBTITLE}>Font size</p>
         <TokenTable hideProperty rows={[
           { property: "font-size", token: "--font-headline-size", value: "var(--font-size-2xl)"  },
@@ -95,24 +116,7 @@ export function TypographySection() {
           { property: "line-height", token: "--font-label-line-height",    value: "var(--line-height-sm)"   },
           { property: "line-height", token: "--font-xs-line-height",       value: "var(--line-height-xs)"   },
         ]} />
-      </SectionBlock>
-
-      {/* Global application */}
-
-      <SectionBlock title="Global Application">
-        <p style={{ fontSize: "14px", color: "#52525B", lineHeight: "1.6", marginBottom: "16px" }}>
-          These rules are applied directly in typography.css - not as tokens, but as global defaults on base elements.
-        </p>
-        <TokenTable rows={[
-          { property: "font-family",     token: "html, body",                      value: "var(--font-sans)"              },
-          { property: "letter-spacing",  token: "html, body",                      value: "var(--letter-spacing-default)" },
-          { property: "color",           token: "html, body",                      value: "var(--text-primary)"           },
-          { property: "color",           token: "a",                               value: "var(--text-brand)"             },
-          { property: "text-decoration", token: "a[data-underline-hover] :hover",  value: "underline"                     },
-          { property: "outline",         token: "a:focus-visible",                 value: "2px solid currentColor"        },
-          { property: "outline-offset",  token: "a:focus-visible",                 value: "2px"                           },
-        ]} />
-      </SectionBlock>
+      </AccordionSection>
 
     </SplitPage>
   );
