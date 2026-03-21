@@ -121,6 +121,7 @@
   width: 40px;
   padding: var(--space-sm) var(--space-xs);
   vertical-align: middle;
+  color: var(--stroke-primary);
 }
 
 .tdActions {
