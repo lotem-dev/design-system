@@ -29,7 +29,9 @@ export type SectionId =
   // Navigation
   | "tab"
   // Card
-  | "card";
+  | "card"
+  // Pages
+  | "page-findings";
 
 type NavItem  = { id: SectionId; label: string };
 type NavGroup = { label: string; items: NavItem[] };
@@ -139,6 +141,12 @@ const NAV: NavGroup[] = [
     label: "Card",
     items: [
       { id: "card", label: "Card" },
+    ],
+  },
+  {
+    label: "Pages",
+    items: [
+      { id: "page-findings", label: "Findings" },
     ],
   },
 ];

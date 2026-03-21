@@ -49,6 +49,7 @@ import { DividerSection }          from "./sections/DividerSection";
 
 import { CardSection }             from "./sections/CardSection";
 import { ChatFieldSection }        from "./sections/ChatFieldSection";
+import { FindingsPage }            from "../pages/findings/FindingsPage";
 
 export function CatalogApp() {
   const [active, setActive] = useState<SectionId>(
@@ -137,15 +138,20 @@ export function CatalogApp() {
 
       // Icons - wrapper
       case "icon-wrapper": return <IconWrapperSection />;
+
+      // Pages
+      case "page-findings": return <FindingsPage />;
     }
   }
+
+  const isPage = active.startsWith("page-");
 
   return (
     <div style={{ fontFamily: "'Open Sans', system-ui, sans-serif" }}>
       <Sidebar active={active} onSelect={navigate} />
       <main style={{ marginLeft: "244px", height: "100vh", overflow: "auto", backgroundColor: "#FFFFFF" }}>
-        <BreadcrumbNav active={active} onSelect={navigate} />
-        <div style={{ borderBottom: "1px solid #F4F4F5" }} />
+        {!isPage && <BreadcrumbNav active={active} onSelect={navigate} />}
+        {!isPage && <div style={{ borderBottom: "1px solid #F4F4F5" }} />}
         {renderSection()}
       </main>
     </div>

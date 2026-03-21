@@ -17,6 +17,7 @@ const SIDEBAR_ORDER: SectionId[] = [
   "modal", "dropdown-menu", "tooltip", "alert", "toast",
   "tab",
   "card",
+  "page-findings",
 ];
 
 // ─── File system paths (reflects actual repo structure post-reorganization) ───
@@ -81,6 +82,8 @@ const PATHS: Record<SectionId, string[]> = {
   "icon-wrapper": ["icons", "IconWrapper.tsx"],
   // card/
   "card": ["layout", "Card.tsx"],
+  // pages/
+  "page-findings": ["pages", "findings", "FindingsPage.tsx"],
 };
 
 // Returns sections that share the same path prefix through segmentIndex (for dropdown content).
