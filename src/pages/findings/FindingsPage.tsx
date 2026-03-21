@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { FindingDrawer, type DrawerFinding } from "./FindingDrawer";
 
 import { TabGroup }                    from "../../../components/navigation/TabGroup";
 import { SearchInput }                 from "../../../components/fields/SearchInput";
@@ -275,6 +276,171 @@ const FINDINGS: Finding[] = [
   },
 ];
 
+// ─── Drawer enrichment data (extra fields shown in the drawer) ────────────────
+
+const DRAWER_DATA: Record<string, Omit<DrawerFinding, keyof Finding>> = {
+  f1: {
+    severity: "critical",
+    cweId: "CWE-502",
+    cweLabel: "Deserialization of Untrusted Data",
+    description: "The application uses PyYAML's yaml.load() without a safe loader, allowing arbitrary Python objects to be deserialized. An attacker who controls the YAML input can execute arbitrary code on the server.",
+    ticket: { tool: "jira", name: "Fix PyYAML deserialization in config loader", id: "SEC-1042", createdDate: "Jun 13, 2025" },
+    teams: ["Platform", "Security Team"],
+    scanTool: "Semgrep Pro",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Jun 12, 2025",
+  },
+  f2: {
+    severity: "critical",
+    cweId: "CWE-79",
+    cweLabel: "Cross-site Scripting",
+    description: "The application reflects unsanitized user input from location.href into the DOM, enabling a DOM-based XSS attack. An attacker can craft a URL that executes arbitrary JavaScript in a victim's browser.",
+    ticket: { tool: "linear", name: "[P1] DOM XSS in app.js via location.href", id: "ENG-488", createdDate: "Jul 9, 2025" },
+    teams: ["Team Alpha"],
+    scanTool: "Bright DAST",
+    scanDate: "Mar 20, 2026",
+    scanFirstSeen: "Jul 8, 2025",
+  },
+  f3: {
+    severity: "high",
+    cweId: "CWE-732",
+    cweLabel: "Incorrect Permission Assignment",
+    description: "The S3 bucket prod-data-bucket has a bucket policy that grants s3:GetObject to Principal: '*'. This means any unauthenticated user on the internet can read the bucket contents.",
+    ticket: { tool: "jira", name: "Remove public read ACL from prod-data-bucket", id: "SEC-1051", createdDate: "Jun 24, 2025" },
+    teams: ["Platform", "Security Team"],
+    scanTool: "Prowler",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Jun 23, 2025",
+  },
+  f4: {
+    severity: "critical",
+    cweId: "CWE-798",
+    cweLabel: "Use of Hard-coded Credentials",
+    description: "An AWS access key (AKIA...) was detected hardcoded in a Terraform file. This credential may grant broad permissions to AWS resources and is now potentially exposed in version control history.",
+    teams: ["Platform"],
+    scanTool: "Trufflehog",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Aug 1, 2025",
+  },
+  f5: {
+    severity: "critical",
+    cweId: "CWE-400",
+    cweLabel: "Uncontrolled Resource Consumption",
+    description: "Log4j 2.x before 2.15.0 is vulnerable to remote code execution via JNDI lookup. An attacker can send a crafted string to any logged input field to trigger a callback to an attacker-controlled server.",
+    ticket: { tool: "github", name: "Upgrade log4j to 2.17.1 in payments-service", id: "#231", createdDate: "Jun 16, 2025" },
+    teams: ["Team Beta"],
+    scanTool: "Checkmarx SCA",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Jun 15, 2025",
+  },
+  f6: {
+    severity: "medium",
+    cweId: "CWE-250",
+    cweLabel: "Execution with Unnecessary Privileges",
+    description: "The container image is built from a base that sets USER to root. Running containers as root means any process inside the container has full host capabilities if they escape the namespace.",
+    teams: ["Platform"],
+    scanTool: "Trivy",
+    scanDate: "Mar 20, 2026",
+    scanFirstSeen: "Jul 30, 2025",
+  },
+  f7: {
+    severity: "high",
+    cweId: "CWE-284",
+    cweLabel: "Improper Access Control",
+    description: "A VPC firewall rule with source range 0.0.0.0/0 allows all inbound TCP traffic. This exposes internal services to the public internet. Only specific ingress ports and sources should be allowed.",
+    teams: ["Platform", "Security Team"],
+    scanTool: "Checkov",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Aug 3, 2025",
+  },
+  f8: {
+    severity: "high",
+    cweId: "CWE-89",
+    cweLabel: "SQL Injection",
+    description: "The user search endpoint accepts a 'query' parameter that is concatenated directly into a SQL string without parameterization. This allows an attacker to read, modify, or delete arbitrary database records.",
+    teams: ["Team Alpha", "Team Beta"],
+    scanTool: "Bright DAST",
+    scanDate: "Mar 19, 2026",
+    scanFirstSeen: "Mar 30, 2025",
+  },
+  f9: {
+    severity: "medium",
+    cweId: "CWE-693",
+    cweLabel: "Protection Mechanism Failure",
+    description: "The default branch of this GitHub organization does not require pull request reviews, status checks, or admin enforcement. Any team member with write access can push directly to main.",
+    ticket: { tool: "linear", name: "Enable branch protection on all org repos", id: "ENG-501", createdDate: "Sep 3, 2025" },
+    teams: ["Security Team"],
+    scanTool: "Legitify",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Sep 2, 2025",
+  },
+  f10: {
+    severity: "low",
+    cweId: "CWE-1104",
+    cweLabel: "Use of Unmaintained Third Party Components",
+    description: "A dependency licensed under GPL-3.0 is included in a closed-source production build. This may create a license obligation to release source code. Legal review required before next release.",
+    teams: ["Team Beta", "Platform"],
+    scanTool: "Checkmarx SCA",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Aug 5, 2025",
+  },
+  f11: {
+    severity: "medium",
+    cweId: "CWE-338",
+    cweLabel: "Use of Cryptographically Weak PRNG",
+    description: "Math.random() is not cryptographically secure and should not be used to generate tokens, session IDs, or any security-sensitive values. Use the Web Crypto API (crypto.getRandomValues) instead.",
+    teams: ["Team Alpha"],
+    scanTool: "Semgrep Pro",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Sep 10, 2025",
+  },
+  f12: {
+    severity: "high",
+    cweId: "CWE-1321",
+    cweLabel: "Prototype Pollution",
+    description: "lodash 4.17.4 is vulnerable to prototype pollution via the merge, mergeWith, defaultsDeep, and zipObjectDeep functions. An attacker can manipulate Object.prototype and affect application behavior.",
+    teams: ["Team Beta"],
+    scanTool: "Checkmarx SCA",
+    scanDate: "Mar 20, 2026",
+    scanFirstSeen: "May 14, 2025",
+  },
+  f13: {
+    severity: "medium",
+    cweId: "CWE-215",
+    cweLabel: "Insertion of Sensitive Information Into Debugging Code",
+    description: "Django's DEBUG=True exposes detailed stack traces, local variable values, and database queries in HTTP error responses. This reveals internal application logic and secrets to any user who triggers an error.",
+    teams: ["Team Alpha"],
+    scanTool: "Bandit",
+    scanDate: "Mar 21, 2026",
+    scanFirstSeen: "Jun 3, 2025",
+  },
+  f14: {
+    severity: "high",
+    cweId: "CWE-311",
+    cweLabel: "Missing Encryption of Sensitive Data",
+    description: "The Azure storage account prod-backups does not have encryption at rest enabled via a customer-managed key. Data stored here may include database backups and audit logs containing PII.",
+    ticket: { tool: "jira", name: "Enable CMK encryption on prod-backups storage", id: "SEC-998", createdDate: "Apr 18, 2025" },
+    teams: ["Platform", "Security Team"],
+    scanTool: "Microsoft Defender for Cloud",
+    scanDate: "Mar 15, 2026",
+    scanFirstSeen: "Apr 17, 2025",
+  },
+  f15: {
+    severity: "low",
+    cweId: "CWE-693",
+    cweLabel: "Protection Mechanism Failure",
+    description: "The nginx reverse proxy does not set a Content-Security-Policy header. Without CSP, the browser has no policy to restrict which scripts, styles, or frames can be loaded, increasing XSS risk.",
+    teams: ["Platform"],
+    scanTool: "Checkov",
+    scanDate: "Mar 18, 2026",
+    scanFirstSeen: "Mar 24, 2025",
+  },
+};
+
+function toDrawerFinding(f: Finding): DrawerFinding {
+  return { ...f, ...DRAWER_DATA[f.id] };
+}
+
 const TAB_STATUS: BadgeStatusValue[] = ["open", "ignored", "fixed"];
 const TAB_COUNTS = {
   open:    FINDINGS.filter(f => f.status === "open").length,
@@ -368,16 +534,17 @@ function UglyPriorityCard({ p1, p2, p3 }: PriorityCount) {
 
 export function FindingsPage() {
   // Tab: 0=Open, 1=Ignored, 2=Resolved
-  const [activeTab,    setActiveTab]    = useState(0);
-  const [page,         setPage]         = useState(1);
-  const [search,       setSearch]       = useState("");
-  const [filterType,   setFilterType]   = useState("");
-  const [filterSev,    setFilterSev]    = useState("");
-  const [filterStatus, setFilterStatus] = useState("");
-  const [filterTeam,   setFilterTeam]   = useState("");
-  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
-  const [sortCol,      setSortCol]      = useState<"priority" | "date" | null>(null);
-  const [sortDir,      setSortDir]      = useState<"asc" | "desc">("desc");
+  const [activeTab,       setActiveTab]       = useState(0);
+  const [page,            setPage]            = useState(1);
+  const [search,          setSearch]          = useState("");
+  const [filterType,      setFilterType]      = useState("");
+  const [filterSev,       setFilterSev]       = useState("");
+  const [filterStatus,    setFilterStatus]    = useState("");
+  const [filterTeam,      setFilterTeam]      = useState("");
+  const [selectedRows,    setSelectedRows]    = useState<Set<string>>(new Set());
+  const [sortCol,         setSortCol]         = useState<"priority" | "date" | null>(null);
+  const [sortDir,         setSortDir]         = useState<"asc" | "desc">("desc");
+  const [openDrawer,      setOpenDrawer]      = useState<DrawerFinding | null>(null);
 
   // ── Filtering + sorting ────────────────────────────────────────────────────
 
@@ -484,6 +651,7 @@ export function FindingsPage() {
   // ── Render ─────────────────────────────────────────────────────────────────
 
   return (
+    <>
     <div data-theme="light" className={styles.scroll}>
       <div className={styles.inner}>
 
@@ -605,10 +773,10 @@ export function FindingsPage() {
                 pageItems.map(finding => {
                   const TypeIcon = FINDING_TYPE_ICON[finding.findingType] ?? IconSAST;
                   return (
-                    <tr key={finding.id}>
+                    <tr key={finding.id} onClick={() => setOpenDrawer(toDrawerFinding(finding))} style={{ cursor: "pointer" }}>
 
                       {/* Checkbox */}
-                      <td className={styles.tdCheckbox}>
+                      <td className={styles.tdCheckbox} onClick={e => e.stopPropagation()}>
                         <Checkbox
                           checked={selectedRows.has(finding.id)}
                           onChange={checked => handleRowSelect(finding.id, checked)}
@@ -650,7 +818,7 @@ export function FindingsPage() {
                       </td>
 
                       {/* Row actions */}
-                      <td className={styles.tdActions}>
+                      <td className={styles.tdActions} onClick={e => e.stopPropagation()}>
                         <div className={styles.rowActions}>
                           <Button
                             variant="ghost"
@@ -711,5 +879,14 @@ export function FindingsPage() {
 
       </div>
     </div>
+
+    {/* Finding detail drawer */}
+    {openDrawer && (
+      <FindingDrawer
+        finding={openDrawer}
+        onClose={() => setOpenDrawer(null)}
+      />
+    )}
+    </>
   );
 }

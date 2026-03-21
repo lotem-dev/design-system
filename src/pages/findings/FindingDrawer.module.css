@@ -1,0 +1,251 @@
+/* ─── Drawer overlay ──────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 200;
+}
+
+/* ─── Drawer panel ────────────────────────────────────────────── */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 520px;
+  background: var(--surface-primary);
+  border-left: 1px solid var(--divider-primary);
+  display: flex;
+  flex-direction: column;
+  z-index: 201;
+  overflow: hidden;
+}
+
+/* ─── Header ─────────────────────────────────────────────────── */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-base) var(--space-lg);
+  border-bottom: 1px solid var(--divider-primary);
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* ─── Body (scrollable) ───────────────────────────────────────── */
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ─── Section: title block ────────────────────────────────────── */
+
+.titleBlock {}
+
+.findingTitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+  line-height: 1.4;
+}
+
+/* Ugly: link component not in design system */
+.uglyPathLink {
+  font-family: monospace;
+  font-size: 12px;
+  color: #3182ce;
+  border: 2px dashed #e53e3e;
+  background: #fff5f5;
+  padding: 2px 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: var(--space-sm);
+}
+
+.uglyPathLink:hover {
+  text-decoration: underline;
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Section: meta strip ─────────────────────────────────────── */
+
+.metaStrip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-base);
+  flex-wrap: wrap;
+  padding: var(--space-sm) var(--space-base);
+  background: var(--surface-secondary);
+  border-radius: var(--radius-base);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.metaLabel {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metaDivider {
+  width: 1px;
+  height: 20px;
+  background: var(--divider-primary);
+  flex-shrink: 0;
+}
+
+/* Ugly: CWE link not in design system */
+.uglyCweLink {
+  font-family: monospace;
+  font-size: 11px;
+  color: #3182ce;
+  border: 2px dashed #e53e3e;
+  background: #fff5f5;
+  padding: 1px 5px;
+  text-decoration: none;
+}
+
+/* ─── Section: ticket card ────────────────────────────────────── */
+
+.sectionLabel {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-xs);
+}
+
+.ticketRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.ticketInfo {
+  flex: 1;
+}
+
+.ticketName {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 2px;
+}
+
+.ticketMeta {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* ─── Section: context graph ──────────────────────────────────── */
+
+/* Ugly: ContextGraph component does not exist yet */
+.uglyContextGraph {
+  border: 3px dashed #e53e3e;
+  background: #fffbeb;
+  border-radius: 0;
+  padding: var(--space-lg);
+  font-family: monospace;
+  text-align: center;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.uglyContextGraph h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.uglyContextGraph p {
+  margin: 0;
+  font-size: 11px;
+  color: #777;
+}
+
+/* ─── Footer strip ────────────────────────────────────────────── */
+
+.footerStrip {
+  border-top: 1px solid var(--divider-primary);
+  padding: var(--space-base) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.footerRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-base);
+}
+
+.footerKey {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  width: 60px;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.footerValue {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex: 1;
+  line-height: 1.5;
+}
+
+.footerValue strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
