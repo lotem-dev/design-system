@@ -37,7 +37,7 @@ export function SelectInput({ label, options, value, disabled = false, placehold
       <span className={isPlaceholder ? styles.placeholder : undefined}>
         {selectedLabel ?? placeholder ?? ""}
       </span>
-      <IconDropdownIndicator width={12} height={12} className={styles.icon} />
+      <IconDropdownIndicator width={12} height={19} className={styles.icon} />
     </button>
   );
 

@@ -44,7 +44,7 @@ function SortIcon({ direction }: { direction: SortDirection }) {
     direction === "asc"  ? IconSortAscending  :
     direction === "desc" ? IconSortDescending :
     IconSortDefault;
-  return <Icon width={12} height={12} className={styles.sortIcon} />;
+  return <Icon width={12} height={19} className={styles.sortIcon} />;
 }
 
 // ─── Component ────────────────────────────────────────────
