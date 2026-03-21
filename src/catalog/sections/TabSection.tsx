@@ -5,6 +5,7 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import tabTsx    from "../../../components/navigation/Tab.tsx?raw";
 import tabCss    from "../../../components/navigation/Tab.module.css?raw";
@@ -21,6 +22,11 @@ const sources = [
 type TabTarget = "single" | "group";
 
 // ─── Style Reference data ──────────────────────────────────────────────────────
+
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Tab label",   role: "body-bold" },
+  { element: "Count badge", role: "label-bold" },
+];
 
 const TH: React.CSSProperties = {
   textAlign: "left", padding: "6px 12px 10px",
@@ -159,6 +165,7 @@ function isActive(row: StyleRow, state: ActiveState): boolean {
 function StyleReference({ selected, count }: ActiveState) {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       {/* Base styles */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.
@@ -197,7 +204,7 @@ function StyleReference({ selected, count }: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.label</code>
               </td>
               <td style={TD}>
-                {["composes: body-bold", "font-size: var(--font-size-base)", "font-weight: var(--font-weight-bold)", "font-family: var(--font-sans)", "white-space: nowrap"].map(p => (
+                {["composes: body-bold", "white-space: nowrap"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

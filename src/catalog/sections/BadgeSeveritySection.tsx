@@ -4,6 +4,7 @@ import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import badgeSeverityTsx from "../../../components/badges/BadgeSeverity.tsx?raw";
 import badgeSeverityCss from "../../../components/badges/BadgeSeverity.module.css?raw";
@@ -17,6 +18,11 @@ const SCALES: SeverityScale[] = ["critical", "high", "medium", "low"];
 
 // ─── Style Reference ──────────────────────────────────────────────────────────
 
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Badge text (sm)", role: "label-bold" },
+  { element: "Badge text (lg)", role: "body-bold" },
+];
+
 type StyleRow = {
   prop:       string;
   value:      string;
@@ -29,8 +35,8 @@ const STYLE_ROWS: StyleRow[] = [
   { prop: "scale", value: "high",     cssClass: ".high",     properties: ["background: var(--scale-high-secondary)",     "color: var(--scale-high-primary)"] },
   { prop: "scale", value: "medium",   cssClass: ".medium",   properties: ["background: var(--scale-medium-secondary)",   "color: var(--scale-medium-primary)"] },
   { prop: "scale", value: "low",      cssClass: ".low",      properties: ["background: var(--scale-low-secondary)",      "color: var(--scale-low-primary)"] },
-  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "padding: 2px 8px", "font-size: var(--font-size-sm)"] },
-  { prop: "size", value: "lg", cssClass: ".lg", properties: ["composes: body-bold", "padding: 4px 12px", "font-size: var(--font-size-base)"] },
+  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "padding: 2px 8px"] },
+  { prop: "size", value: "lg", cssClass: ".lg", properties: ["composes: body-bold", "padding: 4px 12px"] },
 ];
 
 const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((acc, row) => {
@@ -63,6 +69,7 @@ function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
 function StyleReference(state: ActiveState) {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.
       </p>
@@ -80,7 +87,7 @@ function StyleReference(state: ActiveState) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>.badge</code>
               </td>
               <td style={TD}>
-                {["display: inline-flex", "align-items: center", "border-radius: var(--radius-round)", "font-weight: var(--font-weight-bold)", "white-space: nowrap"].map(p => (
+                {["display: inline-flex", "align-items: center", "border-radius: var(--radius-round)", "white-space: nowrap"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

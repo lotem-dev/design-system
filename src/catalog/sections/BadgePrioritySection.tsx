@@ -4,6 +4,7 @@ import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import badgePriorityTsx from "../../../components/badges/BadgePriority.tsx?raw";
 import badgePriorityCss from "../../../components/badges/BadgePriority.module.css?raw";
@@ -17,6 +18,10 @@ const SCORES: PriorityScore[] = ["p1", "p2", "p3"];
 const SCORE_TEXT: Record<PriorityScore, string> = { p1: "95", p2: "62", p3: "28" };
 
 // ─── Style Reference ──────────────────────────────────────────────────────────
+
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Score text", role: "label-bold" },
+];
 
 type StyleRow = {
   prop:       string;
@@ -60,6 +65,7 @@ function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
 function StyleReference(state: ActiveState) {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.
       </p>

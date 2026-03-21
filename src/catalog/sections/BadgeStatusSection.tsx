@@ -5,6 +5,7 @@ import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import badgeTsx from "../../../components/badges/BadgeStatus.tsx?raw";
 
@@ -76,6 +77,10 @@ function Playground({ status, onStatus }: PlaygroundProps) {
 
 // ─── Style Reference ──────────────────────────────────────────────────────────
 
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Badge label", role: "label-bold" },
+];
+
 const TH: React.CSSProperties = {
   textAlign: "left", padding: "6px 12px 10px",
   fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
@@ -100,6 +105,7 @@ const STYLE_ROWS: StyleRow[] = [
 function StyleReference({ status }: { status: BadgeStatusType }) {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.
       </p>
@@ -127,7 +133,7 @@ function StyleReference({ status }: { status: BadgeStatusType }) {
                 <code style={{ fontSize: "12px", fontFamily: "monospace", color: "#18181B", backgroundColor: "#F4F4F5", padding: "2px 6px", borderRadius: "4px" }}>label</code>
               </td>
               <td style={TD}>
-                {["font-size: var(--font-label-size)", "font-weight: var(--font-weight-bold)"].map(p => (
+                {["composes: label-bold"].map(p => (
                   <div key={p} style={{ fontSize: "12px", fontFamily: "monospace", color: "#52525B", lineHeight: "1.9" }}>{p}</div>
                 ))}
               </td>

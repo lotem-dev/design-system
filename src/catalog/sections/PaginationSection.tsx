@@ -4,6 +4,7 @@ import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
 import { PropsTable } from "../ui/PropsTable";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import paginationTsx from "../../../components/navigation/Pagination.tsx?raw";
 import paginationCss from "../../../components/navigation/Pagination.module.css?raw";
@@ -87,6 +88,12 @@ function Playground() {
 
 // ─── Style Reference ──────────────────────────────────────────────────────────
 
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Items per page (left)", role: "label" },
+  { element: "Page number",           role: "label" },
+  { element: "Results count (right)", role: "label" },
+];
+
 const TH: React.CSSProperties = {
   textAlign: "left", padding: "6px 12px 10px",
   fontSize: "11px", fontWeight: 600, color: "#A1A1AA",
@@ -103,8 +110,8 @@ const TD: React.CSSProperties = {
 type StyleRow = { prop: string; value: string; cssClass: string; properties: string[] };
 
 const STYLE_ROWS: StyleRow[] = [
-  { prop: "page", value: "other",   cssClass: ".pageBtn",        properties: ["font-weight: var(--font-weight-regular)", "color: var(--text-primary)"] },
-  { prop: "page", value: "current", cssClass: ".pageBtn.active", properties: ["font-weight: var(--font-weight-bold)", "color: var(--brand-primary)", "pointer-events: none"] },
+  { prop: "page", value: "other",   cssClass: ".pageBtn",        properties: ["color: var(--text-primary)"] },
+  { prop: "page", value: "current", cssClass: ".pageBtn.active", properties: ["color: var(--brand-primary)", "pointer-events: none"] },
   { prop: "page <= 1",    value: "true", cssClass: ".chevronBtn:disabled", properties: ["opacity: 0.4", "cursor: not-allowed"] },
   { prop: "page >= total", value: "true", cssClass: ".chevronBtn:disabled", properties: ["opacity: 0.4", "cursor: not-allowed"] },
 ];
@@ -119,6 +126,7 @@ const STYLE_GROUPS = STYLE_ROWS.reduce<{ prop: string; rows: StyleRow[] }[]>((ac
 function StyleReference() {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.
       </p>
@@ -133,7 +141,7 @@ function StyleReference() {
           <tbody>
             {[
               { cls: ".root",    props: ["display: flex", "justify-content: space-between", "padding: var(--space-lg)"] },
-              { cls: ".meta",    props: ["composes: label", "font-size: var(--font-label-size)", "color: var(--text-secondary)"] },
+              { cls: ".meta",    props: ["composes: label", "color: var(--text-secondary)"] },
               { cls: ".right",   props: ["display: flex", "gap: var(--space-xl)"] },
               { cls: ".nav",     props: ["display: flex", "gap: var(--space-base)"] },
               { cls: ".pageBtn", props: ["composes: label", "background: none", "border: none", "color: var(--text-primary)"] },

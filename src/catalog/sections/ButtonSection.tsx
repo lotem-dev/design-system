@@ -6,6 +6,7 @@ import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import buttonTsx from "../../../components/interactions/Button.tsx?raw";
 import buttonCss from "../../../components/interactions/Button.module.css?raw";
@@ -127,6 +128,11 @@ function Playground({ variant, onVariant, size, onSize, disabled, onDisabled, ic
 // Rows matching the current playground state are highlighted so you see exactly
 // what CSS is applied to the component as you interact with it.
 
+const TYPOGRAPHY_ROWS: TypographyEntry[] = [
+  { element: "Button text (md / lg)", role: "body-bold" },
+  { element: "Button text (sm)",      role: "label-bold" },
+];
+
 type StyleRow = {
   prop:       string;
   value:      string;
@@ -140,8 +146,8 @@ const STYLE_ROWS: StyleRow[] = [
   { prop: "variant", value: "ghost",       cssClass: ".ghost",       properties: ["background: transparent", "color: var(--text-primary)", "hover bg: var(--surface-tertiary)", "focus ring: var(--stroke-primary)"] },
   { prop: "variant", value: "destructive", cssClass: ".destructive", properties: ["background: var(--error-primary)", "color: var(--text-invert)", "focus ring: var(--error-primary)"] },
   // size
-  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "height: 32px", "padding: 0 var(--space-sm)", "font-size: var(--font-size-sm)"] },
-  { prop: "size", value: "md", cssClass: ".md", properties: ["composes: body-bold", "height: 38px", "padding: 0 var(--space-base)", "font-size: var(--font-size-base)"] },
+  { prop: "size", value: "sm", cssClass: ".sm", properties: ["composes: label-bold", "height: 32px", "padding: 0 var(--space-sm)"] },
+  { prop: "size", value: "md", cssClass: ".md", properties: ["composes: body-bold", "height: 38px", "padding: 0 var(--space-base)"] },
   // disabled
   { prop: "disabled", value: "true", cssClass: ":disabled", properties: ["opacity: 0.5", "cursor: not-allowed"] },
 ];
@@ -179,6 +185,7 @@ function isActive({ prop, value }: StyleRow, state: ActiveState): boolean {
 function StyleReference(state: ActiveState) {
   return (
     <div>
+      <TypographyReference rows={TYPOGRAPHY_ROWS} />
       {/* Base styles - always applied, no prop controls these */}
       <p style={{ margin: "0 0 10px", fontSize: "12px", color: "#A1A1AA", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
         Base - always applied regardless of props.

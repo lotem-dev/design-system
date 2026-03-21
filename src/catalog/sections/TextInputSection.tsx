@@ -4,6 +4,7 @@ import { PropsTable } from "../ui/PropsTable";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
+import { TypographyReference, type TypographyEntry } from "../ui/TypographyReference";
 
 import textInputTsx from "../../../components/fields/TextInput.tsx?raw";
 import textInputCss from "../../../components/fields/TextInput.module.css?raw";
