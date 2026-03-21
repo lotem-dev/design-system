@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { TableHeaderCell, type SortDirection, type TableHeaderCellColumn } from "../../../components/tables/TableHeaderCell";
 import { TokenTable } from "../ui/TokenTable";
 import { PropsTable } from "../ui/PropsTable";
@@ -14,14 +14,22 @@ const sources = [
   { filename: "TableHeaderCell.module.css", code: tableHeaderCellCss },
 ];
 
-function generateSnippet(column: TableHeaderCellColumn, sort: SortDirection, checked: boolean): string {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "140px",
+};
+
+function generateSnippet(column: TableHeaderCellColumn, sort: SortDirection, checked: boolean, label: string): string {
   if (column === "checkbox") {
     return `<TableHeaderCell column="checkbox" checked={${checked}} onCheck={setChecked} />`;
   }
   if (column === "actions") {
     return `<TableHeaderCell column="actions" />`;
   }
-  const props: string[] = [`column="${column}"`, `label="Column"`];
+  const props: string[] = [`column="${column}"`, `label="${label}"`];
   if (sort !== "none") props.push(`sort="${sort}"`);
   props.push(`onSort={() => {}}`);
   return `<TableHeaderCell ${props.join(" ")} />`;
@@ -31,9 +39,10 @@ function Playground() {
   const [column, setColumn]   = useState<TableHeaderCellColumn>("regular");
   const [sort, setSort]       = useState<SortDirection>("none");
   const [checked, setChecked] = useState(false);
+  const [label, setLabel]     = useState("Column");
   const [copied, setCopied]   = useState(false);
 
-  const snippet = generateSnippet(column, sort, checked);
+  const snippet = generateSnippet(column, sort, checked, label);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -50,7 +59,7 @@ function Playground() {
             <tr>
               <TableHeaderCell
                 column={column}
-                label="Column"
+                label={label}
                 sort={sort}
                 onSort={column !== "checkbox" && column !== "actions" ? () => {
                   setSort(s => s === "none" ? "asc" : s === "asc" ? "desc" : "none");
@@ -69,6 +78,11 @@ function Playground() {
               <Pill key={c} active={column === c} onClick={() => setColumn(c)}>{c}</Pill>
             ))}
           </ControlRow>
+          {column !== "checkbox" && column !== "actions" && (
+            <ControlRow label="Label">
+              <input value={label} onChange={e => setLabel(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+          )}
           <ControlRow label="Sort">
             {(["none", "asc", "desc"] as const).map(s => (
               <Pill key={s} active={sort === s} onClick={() => setSort(s)}>{s}</Pill>

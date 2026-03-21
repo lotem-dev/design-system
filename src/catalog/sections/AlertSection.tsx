@@ -136,24 +136,34 @@ function StyleReference({ type }: ActiveState) {
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  type: AlertType; onType: (t: AlertType) => void;
-  showTitle: boolean; onShowTitle: (v: boolean) => void;
-  closable: boolean; onClosable: (v: boolean) => void;
+  type: AlertType;    onType:      (t: AlertType) => void;
+  showTitle: boolean; onShowTitle: (v: boolean)   => void;
+  closable: boolean;  onClosable:  (v: boolean)   => void;
+  title: string;      onTitle:     (v: string)    => void;
+  message: string;    onMessage:   (v: string)    => void;
 };
 
-function generateSnippet(type: AlertType, showTitle: boolean, closable: boolean): string {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "200px",
+};
+
+function generateSnippet(type: AlertType, showTitle: boolean, closable: boolean, title: string, message: string): string {
   const lines: string[] = [`<Alert`];
   lines.push(`  type="${type}"`);
-  if (showTitle) lines.push(`  title="Heads up"`);
-  lines.push(`  message="This is an inline alert message giving the user important context about the current state."`);
+  if (showTitle) lines.push(`  title="${title}"`);
+  lines.push(`  message="${message}"`);
   if (closable) lines.push(`  onClose={() => {}}`);
   lines.push(`/>`);
   return lines.join("\n");
 }
 
-function Playground({ type, onType, showTitle, onShowTitle, closable, onClosable }: PlaygroundProps) {
+function Playground({ type, onType, showTitle, onShowTitle, closable, onClosable, title, onTitle, message, onMessage }: PlaygroundProps) {
   const [copied, setCopied] = useState(false);
-  const snippet = generateSnippet(type, showTitle, closable);
+  const snippet = generateSnippet(type, showTitle, closable, title, message);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -168,8 +178,8 @@ function Playground({ type, onType, showTitle, onShowTitle, closable, onClosable
           <div style={{ width: "340px" }}>
             <Alert
               type={type}
-              title={showTitle ? "Heads up" : undefined}
-              message="This is an inline alert message giving the user important context about the current state."
+              title={showTitle ? title : undefined}
+              message={message}
               onClose={closable ? () => {} : undefined}
             />
           </div>
@@ -182,6 +192,14 @@ function Playground({ type, onType, showTitle, onShowTitle, closable, onClosable
             <ControlRow label="Title">
               <Pill active={showTitle}  onClick={() => onShowTitle(true)}>show</Pill>
               <Pill active={!showTitle} onClick={() => onShowTitle(false)}>hide</Pill>
+            </ControlRow>
+            {showTitle && (
+              <ControlRow label="Title text">
+                <input value={title} onChange={e => onTitle(e.target.value)} style={INPUT_STYLE} />
+              </ControlRow>
+            )}
+            <ControlRow label="Message">
+              <input value={message} onChange={e => onMessage(e.target.value)} style={INPUT_STYLE} />
             </ControlRow>
             <ControlRow label="Closable">
               <Pill active={!closable} onClick={() => onClosable(false)}>no</Pill>
@@ -223,6 +241,8 @@ export function AlertSection() {
   const [type, setType]           = useState<AlertType>("info");
   const [showTitle, setShowTitle] = useState(true);
   const [closable, setClosable]   = useState(false);
+  const [title, setTitle]         = useState("Heads up");
+  const [message, setMessage]     = useState("This is an inline alert message giving the user important context about the current state.");
 
   return (
     <SplitPage files={sources}>
@@ -237,9 +257,11 @@ export function AlertSection() {
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
             <Playground
-              type={type} onType={setType}
+              type={type}           onType={setType}
               showTitle={showTitle} onShowTitle={setShowTitle}
-              closable={closable} onClosable={setClosable}
+              closable={closable}   onClosable={setClosable}
+              title={title}         onTitle={setTitle}
+              message={message}     onMessage={setMessage}
             />
           </SectionBlock>
         </div>

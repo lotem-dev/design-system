@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FormField } from "../../../components/fields/FormField";
 import { TextInput } from "../../../components/fields/TextInput";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -14,17 +14,27 @@ const sources = [
   { filename: "FormField.module.css", code: formFieldCss },
 ];
 
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "200px",
+};
+
 function Playground() {
-  const [value, setValue] = useState("");
+  const [value, setValue]       = useState("");
+  const [label, setLabel]       = useState("Repository URL");
+  const [hint, setHint]         = useState("Where your code lives, e.g. github.com/org/repo");
   const [showHint, setShowHint] = useState(true);
   const [showError, setShowError] = useState(false);
   const [required, setRequired] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied]     = useState(false);
 
   function generateSnippet() {
-    const props: string[] = [`  label="Repository URL"`];
+    const props: string[] = [`  label="${label}"`];
     if (required)   props.push(`  required`);
-    if (showHint)   props.push(`  hint="Where your code lives, e.g. github.com/org/repo"`);
+    if (showHint)   props.push(`  hint="${hint}"`);
     if (showError)  props.push(`  error="This field is required"`);
     return `<FormField\n${props.join("\n")}\n>\n  <TextInput value={value} onChange={setValue} />\n</FormField>`;
   }
@@ -42,8 +52,8 @@ function Playground() {
       preview={
         <div style={{ width: "100%", maxWidth: "360px" }}>
           <FormField
-            label="Repository URL"
-            hint={showHint ? "Where your code lives, e.g. github.com/org/repo" : undefined}
+            label={label}
+            hint={showHint ? hint : undefined}
             error={showError ? "This field is required" : undefined}
             required={required}
           >
@@ -53,10 +63,18 @@ function Playground() {
       }
       controls={
         <>
+          <ControlRow label="Label">
+            <input value={label} onChange={e => setLabel(e.target.value)} style={INPUT_STYLE} />
+          </ControlRow>
           <ControlRow label="Hint">
             <Pill active={showHint}  onClick={() => setShowHint(true)}>show</Pill>
             <Pill active={!showHint} onClick={() => setShowHint(false)}>hide</Pill>
           </ControlRow>
+          {showHint && (
+            <ControlRow label="Hint text">
+              <input value={hint} onChange={e => setHint(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+          )}
           <ControlRow label="Error">
             <Pill active={!showError} onClick={() => setShowError(false)}>none</Pill>
             <Pill active={showError}  onClick={() => setShowError(true)}>show</Pill>

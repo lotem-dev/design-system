@@ -15,22 +15,31 @@ const sources = [
 
 // ─── Code snippet ──────────────────────────────────────────────────────────────
 
-function generateSnippet(disabled: boolean): string {
+function generateSnippet(disabled: boolean, label: string, placeholder: string): string {
   const props = disabled ? ' disabled' : '';
-  return `<TextInput label="Label" placeholder="Placeholder"${props} />`;
+  return `<TextInput label="${label}" placeholder="${placeholder}"${props} />`;
 }
 
 // ─── Playground ────────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  disabled: boolean;
-  onDisabled: (d: boolean) => void;
+  disabled: boolean;    onDisabled:    (d: boolean) => void;
+  label: string;        onLabel:       (v: string)  => void;
+  placeholder: string;  onPlaceholder: (v: string)  => void;
 };
 
-function Playground({ disabled, onDisabled }: PlaygroundProps) {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "140px",
+};
+
+function Playground({ disabled, onDisabled, label, onLabel, placeholder, onPlaceholder }: PlaygroundProps) {
   const [value, setValue] = useState("");
   const [copied, setCopied] = useState(false);
-  const snippet = generateSnippet(disabled);
+  const snippet = generateSnippet(disabled, label, placeholder);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -43,14 +52,22 @@ function Playground({ disabled, onDisabled }: PlaygroundProps) {
       <PlaygroundShell
         preview={
           <div style={{ width: "200px" }}>
-            <TextInput label="Label" placeholder="Placeholder" value={value} onChange={setValue} disabled={disabled} />
+            <TextInput label={label} placeholder={placeholder} value={value} onChange={setValue} disabled={disabled} />
           </div>
         }
         controls={
-          <ControlRow label="State">
-            <Pill active={!disabled} onClick={() => onDisabled(false)}>default</Pill>
-            <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
-          </ControlRow>
+          <>
+            <ControlRow label="Label">
+              <input value={label} onChange={e => onLabel(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+            <ControlRow label="Placeholder">
+              <input value={placeholder} onChange={e => onPlaceholder(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+            <ControlRow label="State">
+              <Pill active={!disabled} onClick={() => onDisabled(false)}>default</Pill>
+              <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
+            </ControlRow>
+          </>
         }
       />
 
@@ -205,7 +222,9 @@ function StyleReference(state: ActiveState) {
 // ─── Section ───────────────────────────────────────────────────────────────────
 
 export function TextInputSection() {
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled]         = useState(false);
+  const [label, setLabel]               = useState("Label");
+  const [placeholder, setPlaceholder]   = useState("Placeholder");
 
   return (
     <SplitPage files={sources}>
@@ -219,7 +238,11 @@ export function TextInputSection() {
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
-            <Playground disabled={disabled} onDisabled={setDisabled} />
+            <Playground
+              disabled={disabled}       onDisabled={setDisabled}
+              label={label}             onLabel={setLabel}
+              placeholder={placeholder} onPlaceholder={setPlaceholder}
+            />
           </SectionBlock>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>

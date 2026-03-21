@@ -124,17 +124,26 @@ function StyleReference({ size }: { size: ModalSize }) {
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  size: ModalSize; onSize: (s: ModalSize) => void;
+  size: ModalSize;  onSize:  (s: ModalSize) => void;
+  title: string;    onTitle: (v: string)    => void;
 };
 
-function generateSnippet(size: ModalSize): string {
-  return `<Modal open onClose={() => {}} title="Title" size="${size}">\n  Content\n</Modal>`;
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "160px",
+};
+
+function generateSnippet(size: ModalSize, title: string): string {
+  return `<Modal open onClose={() => {}} title="${title}" size="${size}">\n  Content\n</Modal>`;
 }
 
-function Playground({ size, onSize }: PlaygroundProps) {
+function Playground({ size, onSize, title, onTitle }: PlaygroundProps) {
   const [open, setOpen]         = useState(false);
   const [copied, setCopied]     = useState(false);
-  const snippet = generateSnippet(size);
+  const snippet = generateSnippet(size, title);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -148,7 +157,7 @@ function Playground({ size, onSize }: PlaygroundProps) {
         preview={
           <>
             <Button variant="primary" onClick={() => setOpen(true)}>Open Modal</Button>
-            <Modal open={open} onClose={() => setOpen(false)} title="Confirm action" size={size}>
+            <Modal open={open} onClose={() => setOpen(false)} title={title} size={size}>
               <p style={{ margin: "0 0 16px", fontSize: "14px", color: "#52525B", lineHeight: "1.6", fontFamily: "'Open Sans', system-ui, sans-serif" }}>
                 This is the modal body. You can put a form, confirmation message, or any content here.
               </p>
@@ -160,9 +169,14 @@ function Playground({ size, onSize }: PlaygroundProps) {
           </>
         }
         controls={
-          <ControlRow label="Size">
-            {SIZES.map(s => <Pill key={s} active={size === s} onClick={() => onSize(s)}>{s}</Pill>)}
-          </ControlRow>
+          <>
+            <ControlRow label="Title">
+              <input value={title} onChange={e => onTitle(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+            <ControlRow label="Size">
+              {SIZES.map(s => <Pill key={s} active={size === s} onClick={() => onSize(s)}>{s}</Pill>)}
+            </ControlRow>
+          </>
         }
       />
 
@@ -195,7 +209,8 @@ function Playground({ size, onSize }: PlaygroundProps) {
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export function ModalSection() {
-  const [size, setSize] = useState<ModalSize>("md");
+  const [size, setSize]   = useState<ModalSize>("md");
+  const [title, setTitle] = useState("Confirm action");
 
   return (
     <SplitPage files={sources}>
@@ -209,7 +224,7 @@ export function ModalSection() {
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
-            <Playground size={size} onSize={setSize} />
+            <Playground size={size} onSize={setSize} title={title} onTitle={setTitle} />
           </SectionBlock>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>

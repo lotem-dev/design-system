@@ -21,22 +21,29 @@ const OPTIONS = [
 
 // ─── Code snippet ──────────────────────────────────────────────────────────────
 
-function generateSnippet(disabled: boolean): string {
-  const props = disabled ? ' disabled' : '';
-  return `<SelectInput\n  label="Label"\n  options={[{ label: "Option A", value: "a" }, ...]}\n${props ? '  disabled\n' : ''}/>`;
+function generateSnippet(disabled: boolean, label: string): string {
+  return `<SelectInput\n  label="${label}"\n  options={[{ label: "Option A", value: "a" }, ...]}\n${disabled ? '  disabled\n' : ''}/>`;
 }
 
 // ─── Playground ────────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  disabled: boolean;
-  onDisabled: (d: boolean) => void;
+  disabled: boolean;  onDisabled: (d: boolean) => void;
+  label: string;      onLabel:    (v: string)  => void;
 };
 
-function Playground({ disabled, onDisabled }: PlaygroundProps) {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "140px",
+};
+
+function Playground({ disabled, onDisabled, label, onLabel }: PlaygroundProps) {
   const [value, setValue] = useState("");
   const [copied, setCopied] = useState(false);
-  const snippet = generateSnippet(disabled);
+  const snippet = generateSnippet(disabled, label);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -49,14 +56,19 @@ function Playground({ disabled, onDisabled }: PlaygroundProps) {
       <PlaygroundShell
         preview={
           <div style={{ width: "200px" }}>
-            <SelectInput label="Label" options={OPTIONS} placeholder="Select..." value={value} onChange={setValue} disabled={disabled} />
+            <SelectInput label={label} options={OPTIONS} placeholder="Select..." value={value} onChange={setValue} disabled={disabled} />
           </div>
         }
         controls={
-          <ControlRow label="State">
-            <Pill active={!disabled} onClick={() => onDisabled(false)}>default</Pill>
-            <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
-          </ControlRow>
+          <>
+            <ControlRow label="Label">
+              <input value={label} onChange={e => onLabel(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+            <ControlRow label="State">
+              <Pill active={!disabled} onClick={() => onDisabled(false)}>default</Pill>
+              <Pill active={disabled}  onClick={() => onDisabled(true)}>disabled</Pill>
+            </ControlRow>
+          </>
         }
       />
 
@@ -211,6 +223,7 @@ function StyleReference(state: ActiveState) {
 
 export function SelectInputSection() {
   const [disabled, setDisabled] = useState(false);
+  const [label, setLabel]       = useState("Label");
 
   return (
     <SplitPage files={sources}>
@@ -224,7 +237,7 @@ export function SelectInputSection() {
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
-            <Playground disabled={disabled} onDisabled={setDisabled} />
+            <Playground disabled={disabled} onDisabled={setDisabled} label={label} onLabel={setLabel} />
           </SectionBlock>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>

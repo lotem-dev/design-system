@@ -68,12 +68,20 @@ function StyleReference() {
 
 // ─── Playground ───────────────────────────────────────────────────────────────
 
-function generateSnippet(secondary: boolean, link: boolean): string {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "160px",
+};
+
+function generateSnippet(text: string, secondary: boolean, secondaryText: string, link: boolean, linkLabel: string): string {
   const lines: string[] = ["<Tooltip"];
-  lines.push(`  text="CVSS Score: 9.8"`);
-  if (secondary) lines.push(`  secondaryText="Last seen 2 days ago"`);
+  lines.push(`  text="${text}"`);
+  if (secondary) lines.push(`  secondaryText="${secondaryText}"`);
   if (link) {
-    lines.push(`  linkLabel="View details"`);
+    lines.push(`  linkLabel="${linkLabel}"`);
     lines.push(`  linkHref="#"`);
   }
   lines.push("/>");
@@ -81,10 +89,13 @@ function generateSnippet(secondary: boolean, link: boolean): string {
 }
 
 function Playground() {
-  const [secondary, setSecondary] = useState(false);
-  const [link, setLink]           = useState(false);
-  const [copied, setCopied]       = useState(false);
-  const snippet = generateSnippet(secondary, link);
+  const [text, setText]               = useState("CVSS Score: 9.8");
+  const [secondary, setSecondary]     = useState(false);
+  const [secondaryText, setSecondaryText] = useState("Last seen 2 days ago");
+  const [link, setLink]               = useState(false);
+  const [linkLabel, setLinkLabel]     = useState("View details");
+  const [copied, setCopied]           = useState(false);
+  const snippet = generateSnippet(text, secondary, secondaryText, link, linkLabel);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -97,22 +108,35 @@ function Playground() {
       <PlaygroundShell
         preview={
           <Tooltip
-            text="CVSS Score: 9.8"
-            secondaryText={secondary ? "Last seen 2 days ago" : undefined}
-            linkLabel={link ? "View details" : undefined}
+            text={text}
+            secondaryText={secondary ? secondaryText : undefined}
+            linkLabel={link ? linkLabel : undefined}
             linkHref={link ? "#" : undefined}
           />
         }
         controls={
           <>
+            <ControlRow label="Text">
+              <input value={text} onChange={e => setText(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
             <ControlRow label="Secondary">
               <Pill active={!secondary} onClick={() => setSecondary(false)}>none</Pill>
               <Pill active={secondary}  onClick={() => setSecondary(true)}>with text</Pill>
             </ControlRow>
+            {secondary && (
+              <ControlRow label="Secondary text">
+                <input value={secondaryText} onChange={e => setSecondaryText(e.target.value)} style={INPUT_STYLE} />
+              </ControlRow>
+            )}
             <ControlRow label="Link">
               <Pill active={!link} onClick={() => setLink(false)}>none</Pill>
               <Pill active={link}  onClick={() => setLink(true)}>with link</Pill>
             </ControlRow>
+            {link && (
+              <ControlRow label="Link label">
+                <input value={linkLabel} onChange={e => setLinkLabel(e.target.value)} style={INPUT_STYLE} />
+              </ControlRow>
+            )}
           </>
         }
       />

@@ -15,8 +15,8 @@ const sources = [
 
 // ─── Code snippet ──────────────────────────────────────────────────────────────
 
-function generateSnippet(disabled: boolean, showError: boolean): string {
-  const lines: string[] = ['<Textarea', '  label="Description"', '  placeholder="Write something..."'];
+function generateSnippet(disabled: boolean, showError: boolean, label: string, placeholder: string): string {
+  const lines: string[] = [`<Textarea`, `  label="${label}"`, `  placeholder="${placeholder}"`];
   if (disabled)   lines.push('  disabled');
   if (showError)  lines.push('  error="This field is required."');
   lines.push('/>');
@@ -26,14 +26,24 @@ function generateSnippet(disabled: boolean, showError: boolean): string {
 // ─── Playground ────────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  disabled: boolean;  onDisabled:  (d: boolean) => void;
-  showError: boolean; onShowError: (e: boolean) => void;
+  disabled: boolean;    onDisabled:    (d: boolean) => void;
+  showError: boolean;   onShowError:   (e: boolean) => void;
+  label: string;        onLabel:       (v: string)  => void;
+  placeholder: string;  onPlaceholder: (v: string)  => void;
 };
 
-function Playground({ disabled, onDisabled, showError, onShowError }: PlaygroundProps) {
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "140px",
+};
+
+function Playground({ disabled, onDisabled, showError, onShowError, label, onLabel, placeholder, onPlaceholder }: PlaygroundProps) {
   const [value, setValue] = useState("");
   const [copied, setCopied] = useState(false);
-  const snippet = generateSnippet(disabled, showError);
+  const snippet = generateSnippet(disabled, showError, label, placeholder);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -47,8 +57,8 @@ function Playground({ disabled, onDisabled, showError, onShowError }: Playground
         preview={
           <div style={{ width: "280px" }}>
             <Textarea
-              label="Description"
-              placeholder="Write something..."
+              label={label}
+              placeholder={placeholder}
               value={value}
               onChange={setValue}
               disabled={disabled}
@@ -58,6 +68,12 @@ function Playground({ disabled, onDisabled, showError, onShowError }: Playground
         }
         controls={
           <>
+            <ControlRow label="Label">
+              <input value={label} onChange={e => onLabel(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+            <ControlRow label="Placeholder">
+              <input value={placeholder} onChange={e => onPlaceholder(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
             <ControlRow label="Disabled">
               <Pill active={!disabled} onClick={() => onDisabled(false)}>no</Pill>
               <Pill active={disabled}  onClick={() => onDisabled(true)}>yes</Pill>
@@ -225,8 +241,10 @@ function StyleReference(state: ActiveState) {
 // ─── Section ───────────────────────────────────────────────────────────────────
 
 export function TextareaSection() {
-  const [disabled, setDisabled]   = useState(false);
-  const [showError, setShowError] = useState(false);
+  const [disabled, setDisabled]         = useState(false);
+  const [showError, setShowError]       = useState(false);
+  const [label, setLabel]               = useState("Description");
+  const [placeholder, setPlaceholder]   = useState("Write something...");
 
   return (
     <SplitPage files={sources}>
@@ -241,8 +259,10 @@ export function TextareaSection() {
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
             <Playground
-              disabled={disabled}   onDisabled={setDisabled}
-              showError={showError} onShowError={setShowError}
+              disabled={disabled}       onDisabled={setDisabled}
+              showError={showError}     onShowError={setShowError}
+              label={label}             onLabel={setLabel}
+              placeholder={placeholder} onPlaceholder={setPlaceholder}
             />
           </SectionBlock>
         </div>

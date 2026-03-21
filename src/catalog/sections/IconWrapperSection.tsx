@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { IconWrapper, type IconSize } from "../../../components/layout/IconWrapper";
-import { IconSearch } from "../../../components/icons/usecases/IconSearch";
-import { IconAdd } from "../../../components/icons/usecases/IconAdd";
+import { IconSearch }       from "../../../components/icons/usecases/IconSearch";
+import { IconAdd }          from "../../../components/icons/usecases/IconAdd";
+import { IconEdit }         from "../../../components/icons/usecases/IconEdit";
+import { IconDelete }       from "../../../components/icons/usecases/IconDelete";
+import { IconDownload }     from "../../../components/icons/usecases/IconDownload";
+import { IconFilter }       from "../../../components/icons/usecases/IconFilter";
+import { IconSend }         from "../../../components/icons/usecases/IconSend";
+import { IconShare }        from "../../../components/icons/usecases/IconShare";
+import { IconExternalLink } from "../../../components/icons/usecases/IconExternalLink";
+import { IconCopy }         from "../../../components/icons/usecases/IconCopy";
+import { IconX }            from "../../../components/icons/usecases/IconX";
+import { IconTicket }       from "../../../components/icons/usecases/IconTicket";
+import { IconIgnore }       from "../../../components/icons/usecases/IconIgnore";
+import { IconWarning }      from "../../../components/icons/usecases/IconWarning";
 import { SectionBlock } from "../ui/SectionBlock";
 import { SplitPage } from "../ui/SplitPage";
 import { PlaygroundShell, ControlRow, Pill } from "../ui/PlaygroundShell";
@@ -18,6 +30,53 @@ const COLORS = [
   { label: "error",   value: "var(--error-primary)"   },
   { label: "success", value: "var(--success-primary)" },
 ];
+
+type IconOption = { name: string; component: React.ComponentType };
+
+const ICON_OPTIONS: IconOption[] = [
+  { name: "IconSearch",       component: IconSearch },
+  { name: "IconAdd",          component: IconAdd },
+  { name: "IconEdit",         component: IconEdit },
+  { name: "IconDelete",       component: IconDelete },
+  { name: "IconDownload",     component: IconDownload },
+  { name: "IconFilter",       component: IconFilter },
+  { name: "IconSend",         component: IconSend },
+  { name: "IconShare",        component: IconShare },
+  { name: "IconExternalLink", component: IconExternalLink },
+  { name: "IconCopy",         component: IconCopy },
+  { name: "IconX",            component: IconX },
+  { name: "IconTicket",       component: IconTicket },
+  { name: "IconIgnore",       component: IconIgnore },
+  { name: "IconWarning",      component: IconWarning },
+];
+
+function IconPicker({ selected, onSelect }: { selected: IconOption; onSelect: (icon: IconOption) => void }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+      {ICON_OPTIONS.map(option => {
+        const isSelected = option.name === selected.name;
+        return (
+          <button
+            key={option.name}
+            title={option.name}
+            onClick={() => onSelect(option)}
+            style={{
+              width: "28px", height: "28px",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              border: isSelected ? "1px solid #18181B" : "1px solid #E4E4E7",
+              borderRadius: "6px", cursor: "pointer",
+              background: isSelected ? "#18181B" : "#FFFFFF",
+              color: isSelected ? "#FFFFFF" : "#52525B",
+              transition: "all 100ms ease",
+            }}
+          >
+            <IconWrapper icon={option.component} size="sm" />
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 // ─── Style Reference data ──────────────────────────────────────────────────────
 
@@ -45,14 +104,15 @@ const SIZE_ROWS: SizeRow[] = [
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  size: IconSize;   onSize:  (s: IconSize) => void;
-  color: string;    onColor: (c: string)   => void;
+  size: IconSize;       onSize:   (s: IconSize)   => void;
+  color: string;        onColor:  (c: string)     => void;
+  icon: IconOption;     onIcon:   (i: IconOption) => void;
 };
 
-function Playground({ size, onSize, color, onColor }: PlaygroundProps) {
-  const [copied, setCopied]     = useState(false);
+function Playground({ size, onSize, color, onColor, icon, onIcon }: PlaygroundProps) {
+  const [copied, setCopied] = useState(false);
 
-  const snippet = `<IconWrapper icon={IconAdd} size="${size}" />`;
+  const snippet = `<IconWrapper icon={${icon.name}} size="${size}" />`;
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -63,9 +123,12 @@ function Playground({ size, onSize, color, onColor }: PlaygroundProps) {
   return (
     <>
       <PlaygroundShell
-        preview={<IconWrapper icon={IconSearch} size={size} style={{ color }} />}
+        preview={<IconWrapper icon={icon.component} size={size} style={{ color }} />}
         controls={
           <>
+            <ControlRow label="Icon">
+              <IconPicker selected={icon} onSelect={onIcon} />
+            </ControlRow>
             <ControlRow label="Size">
               {SIZES.map(s => <Pill key={s} active={size === s} onClick={() => onSize(s)}>{s}</Pill>)}
             </ControlRow>
@@ -180,9 +243,7 @@ function StyleReference({ size }: { size: IconSize }) {
 export function IconWrapperSection() {
   const [size, setSize]   = useState<IconSize>("md");
   const [color, setColor] = useState(COLORS[0].value);
-
-  // Suppress unused import warning - IconAdd is referenced in the snippet only
-  void IconAdd;
+  const [icon, setIcon]   = useState<IconOption>(ICON_OPTIONS[0]);
 
   return (
     <SplitPage files={sources}>
@@ -197,7 +258,7 @@ export function IconWrapperSection() {
       <div style={{ display: "flex", gap: "32px", alignItems: "flex-start", marginBottom: "8px" }}>
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
-            <Playground size={size} onSize={setSize} color={color} onColor={setColor} />
+            <Playground size={size} onSize={setSize} color={color} onColor={setColor} icon={icon} onIcon={setIcon} />
           </SectionBlock>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>

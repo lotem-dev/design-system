@@ -136,18 +136,27 @@ function StyleReference({ type }: ActiveState) {
 // ─── Playground ───────────────────────────────────────────────────────────────
 
 type PlaygroundProps = {
-  type: ToastType; onType: (t: ToastType) => void;
-  dismissable: boolean; onDismissable: (v: boolean) => void;
+  type: ToastType;      onType:        (t: ToastType) => void;
+  dismissable: boolean; onDismissable: (v: boolean)   => void;
+  message: string;      onMessage:     (v: string)    => void;
 };
 
-function generateSnippet(type: ToastType, dismissable: boolean): string {
-  return `<Toast\n  message="Your changes have been saved."\n  type="${type}"\n  visible\n  onClose=${dismissable ? "{() => {}}" : "{undefined}"}\n/>`;
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "200px",
+};
+
+function generateSnippet(type: ToastType, dismissable: boolean, message: string): string {
+  return `<Toast\n  message="${message}"\n  type="${type}"\n  visible\n  onClose=${dismissable ? "{() => {}}" : "{undefined}"}\n/>`;
 }
 
-function Playground({ type, onType, dismissable, onDismissable }: PlaygroundProps) {
+function Playground({ type, onType, dismissable, onDismissable, message, onMessage }: PlaygroundProps) {
   const [visible, setVisible]   = useState(true);
   const [copied, setCopied]     = useState(false);
-  const snippet = generateSnippet(type, dismissable);
+  const snippet = generateSnippet(type, dismissable, message);
 
   function copy() {
     navigator.clipboard.writeText(snippet);
@@ -161,7 +170,7 @@ function Playground({ type, onType, dismissable, onDismissable }: PlaygroundProp
         preview={
           <div style={{ position: "relative", minHeight: "64px" }}>
             <Toast
-              message="Your changes have been saved."
+              message={message}
               type={type}
               visible={visible}
               onClose={dismissable ? () => setVisible(false) : undefined}
@@ -178,6 +187,9 @@ function Playground({ type, onType, dismissable, onDismissable }: PlaygroundProp
         }
         controls={
           <>
+            <ControlRow label="Message">
+              <input value={message} onChange={e => { onMessage(e.target.value); setVisible(true); }} style={INPUT_STYLE} />
+            </ControlRow>
             <ControlRow label="Type">
               {TYPES.map(t => <Pill key={t} active={type === t} onClick={() => { onType(t); setVisible(true); }}>{t}</Pill>)}
             </ControlRow>
@@ -218,8 +230,9 @@ function Playground({ type, onType, dismissable, onDismissable }: PlaygroundProp
 // ─── Section ──────────────────────────────────────────────────────────────────
 
 export function ToastSection() {
-  const [type, setType]           = useState<ToastType>("success");
+  const [type, setType]               = useState<ToastType>("success");
   const [dismissable, setDismissable] = useState(true);
+  const [message, setMessage]         = useState("Your changes have been saved.");
 
   return (
     <SplitPage files={sources}>
@@ -234,8 +247,9 @@ export function ToastSection() {
         <div style={{ flex: "0 0 52%", minWidth: 0, position: "sticky", top: "24px", alignSelf: "flex-start" }}>
           <SectionBlock title="Playground">
             <Playground
-              type={type} onType={setType}
+              type={type}           onType={setType}
               dismissable={dismissable} onDismissable={setDismissable}
+              message={message}     onMessage={setMessage}
             />
           </SectionBlock>
         </div>

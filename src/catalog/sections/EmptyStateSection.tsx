@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { EmptyState } from "../../../components/visualization/EmptyState";
 import { Button } from "../../../components/interactions/Button";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -14,15 +14,26 @@ const sources = [
   { filename: "EmptyState.module.css", code: emptyStateCss },
 ];
 
+const INPUT_STYLE: React.CSSProperties = {
+  padding: "4px 10px", fontSize: "12px",
+  fontFamily: "'Open Sans', system-ui, sans-serif",
+  border: "1px solid #E4E4E7", borderRadius: "6px",
+  color: "#09090B", background: "#FFFFFF",
+  outline: "none", width: "200px",
+};
+
 function Playground() {
-  const [showDesc, setShowDesc] = useState(true);
+  const [title, setTitle]           = useState("No findings yet");
+  const [description, setDescription] = useState("Run a scan to see your first results here.");
+  const [actionLabel, setActionLabel] = useState("Run scan");
+  const [showDesc, setShowDesc]     = useState(true);
   const [showAction, setShowAction] = useState(true);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied]         = useState(false);
 
   function generateSnippet() {
-    const lines = [`<EmptyState`, `  title="No findings yet"`];
-    if (showDesc) lines.push(`  description="Run a scan to see your first results here."`);
-    if (showAction) lines.push(`  action={<Button variant="primary">Run scan</Button>}`);
+    const lines = [`<EmptyState`, `  title="${title}"`];
+    if (showDesc) lines.push(`  description="${description}"`);
+    if (showAction) lines.push(`  action={<Button variant="primary">${actionLabel}</Button>}`);
     lines.push(`/>`);
     return lines.join("\n");
   }
@@ -39,21 +50,34 @@ function Playground() {
     <PlaygroundShell
       preview={
         <EmptyState
-          title="No findings yet"
-          description={showDesc ? "Run a scan to see your first results here." : undefined}
-          action={showAction ? <Button variant="primary">Run scan</Button> : undefined}
+          title={title}
+          description={showDesc ? description : undefined}
+          action={showAction ? <Button variant="primary">{actionLabel}</Button> : undefined}
         />
       }
       controls={
         <>
+          <ControlRow label="Title">
+            <input value={title} onChange={e => setTitle(e.target.value)} style={INPUT_STYLE} />
+          </ControlRow>
           <ControlRow label="Description">
             <Pill active={showDesc}  onClick={() => setShowDesc(true)}>show</Pill>
             <Pill active={!showDesc} onClick={() => setShowDesc(false)}>hide</Pill>
           </ControlRow>
+          {showDesc && (
+            <ControlRow label="Desc text">
+              <input value={description} onChange={e => setDescription(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+          )}
           <ControlRow label="Action">
             <Pill active={showAction}  onClick={() => setShowAction(true)}>show</Pill>
             <Pill active={!showAction} onClick={() => setShowAction(false)}>hide</Pill>
           </ControlRow>
+          {showAction && (
+            <ControlRow label="Action label">
+              <input value={actionLabel} onChange={e => setActionLabel(e.target.value)} style={INPUT_STYLE} />
+            </ControlRow>
+          )}
         </>
       }
     />
