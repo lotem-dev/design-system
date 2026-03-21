@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Table } from "../../../components/tables/Table";
 import { BadgeSeverity } from "../../../components/badges/BadgeSeverity";
 import { SectionBlock } from "../ui/SectionBlock";
@@ -28,12 +29,55 @@ const ROWS = [
   { name: "SQL injection risk",       severity: <BadgeSeverity scale="low" />,      source: "SAST",   date: "Mar 8, 2026" },
 ];
 
+const TABLE_SNIPPET = `<Table
+  columns={[
+    { id: "name",     label: "Finding",  width: "220px" },
+    { id: "severity", label: "Severity" },
+    { id: "source",   label: "Source" },
+    { id: "date",     label: "Detected" },
+  ]}
+  rows={rows}
+/>`;
+
 function Playground() {
+  const [copied, setCopied] = useState(false);
+
+  function copy() {
+    navigator.clipboard.writeText(TABLE_SNIPPET);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
+
   return (
+    <>
     <PlaygroundShell
       preview={<Table columns={COLUMNS} rows={ROWS} />}
       controls={null}
     />
+
+    <div style={{ marginTop: "12px" }}>
+      <div style={{ position: "relative" }}>
+        <pre style={{
+          margin: 0, padding: "14px 52px 14px 16px",
+          backgroundColor: "#18181B", borderRadius: "8px",
+          fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+        }}>
+          {TABLE_SNIPPET}
+        </pre>
+        <button onClick={copy} style={{
+          position: "absolute", top: "10px", right: "10px",
+          padding: "3px 10px", fontSize: "11px",
+          fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+          color: copied ? "#A1A1AA" : "#71717A",
+          backgroundColor: "#27272A", border: "1px solid #3F3F46",
+          borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+        }}>
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+    </div>
+    </>
   );
 }
 

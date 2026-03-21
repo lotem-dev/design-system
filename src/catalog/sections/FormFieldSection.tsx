@@ -19,8 +19,25 @@ function Playground() {
   const [showHint, setShowHint] = useState(true);
   const [showError, setShowError] = useState(false);
   const [required, setRequired] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  function generateSnippet() {
+    const props: string[] = [`  label="Repository URL"`];
+    if (required)   props.push(`  required`);
+    if (showHint)   props.push(`  hint="Where your code lives, e.g. github.com/org/repo"`);
+    if (showError)  props.push(`  error="This field is required"`);
+    return `<FormField\n${props.join("\n")}\n>\n  <TextInput value={value} onChange={setValue} />\n</FormField>`;
+  }
+  const snippet = generateSnippet();
+
+  function copy() {
+    navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
 
   return (
+    <>
     <PlaygroundShell
       preview={
         <div style={{ width: "100%", maxWidth: "360px" }}>
@@ -51,6 +68,30 @@ function Playground() {
         </>
       }
     />
+
+    <div style={{ marginTop: "12px" }}>
+      <div style={{ position: "relative" }}>
+        <pre style={{
+          margin: 0, padding: "14px 52px 14px 16px",
+          backgroundColor: "#18181B", borderRadius: "8px",
+          fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+        }}>
+          {snippet}
+        </pre>
+        <button onClick={copy} style={{
+          position: "absolute", top: "10px", right: "10px",
+          padding: "3px 10px", fontSize: "11px",
+          fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+          color: copied ? "#A1A1AA" : "#71717A",
+          backgroundColor: "#27272A", border: "1px solid #3F3F46",
+          borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+        }}>
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+    </div>
+    </>
   );
 }
 

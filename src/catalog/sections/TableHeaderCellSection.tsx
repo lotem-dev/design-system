@@ -14,12 +14,35 @@ const sources = [
   { filename: "TableHeaderCell.module.css", code: tableHeaderCellCss },
 ];
 
+function generateSnippet(column: TableHeaderCellColumn, sort: SortDirection, checked: boolean): string {
+  if (column === "checkbox") {
+    return `<TableHeaderCell column="checkbox" checked={${checked}} onCheck={setChecked} />`;
+  }
+  if (column === "actions") {
+    return `<TableHeaderCell column="actions" />`;
+  }
+  const props: string[] = [`column="${column}"`, `label="Column"`];
+  if (sort !== "none") props.push(`sort="${sort}"`);
+  props.push(`onSort={() => {}}`);
+  return `<TableHeaderCell ${props.join(" ")} />`;
+}
+
 function Playground() {
   const [column, setColumn]   = useState<TableHeaderCellColumn>("regular");
   const [sort, setSort]       = useState<SortDirection>("none");
   const [checked, setChecked] = useState(false);
+  const [copied, setCopied]   = useState(false);
+
+  const snippet = generateSnippet(column, sort, checked);
+
+  function copy() {
+    navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  }
 
   return (
+    <>
     <PlaygroundShell
       preview={
         <table style={{ borderCollapse: "collapse" }}>
@@ -54,6 +77,30 @@ function Playground() {
         </>
       }
     />
+
+    <div style={{ marginTop: "12px" }}>
+      <div style={{ position: "relative" }}>
+        <pre style={{
+          margin: 0, padding: "14px 52px 14px 16px",
+          backgroundColor: "#18181B", borderRadius: "8px",
+          fontSize: "12px", fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          color: "#E4E4E7", lineHeight: "1.7", overflowX: "auto", whiteSpace: "pre",
+        }}>
+          {snippet}
+        </pre>
+        <button onClick={copy} style={{
+          position: "absolute", top: "10px", right: "10px",
+          padding: "3px 10px", fontSize: "11px",
+          fontFamily: "'Open Sans', system-ui, sans-serif", fontWeight: 600,
+          color: copied ? "#A1A1AA" : "#71717A",
+          backgroundColor: "#27272A", border: "1px solid #3F3F46",
+          borderRadius: "5px", cursor: "pointer", transition: "color 0.15s",
+        }}>
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+    </div>
+    </>
   );
 }
 
