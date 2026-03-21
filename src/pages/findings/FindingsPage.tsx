@@ -785,7 +785,7 @@ export function FindingsPage() {
 
                       {/* Finding type icon */}
                       <td className={styles.tdType}>
-                        <IconWrapper icon={TypeIcon} size="sm" />
+                        <IconWrapper icon={TypeIcon} size="lg" />
                       </td>
 
                       {/* Finding name + location */}

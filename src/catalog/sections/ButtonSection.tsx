@@ -131,7 +131,7 @@ function Playground({
     setTimeout(() => setCopied(false), 1500);
   }
 
-  const iconEl = <IconWrapper icon={selectedIcon.component} size="sm" />;
+  const iconEl = <IconWrapper icon={selectedIcon.component} size={size === "sm" ? "sm" : "md"} />;
 
   const preview = iconPosition === "only" ? (
     <Button variant={variant} size={size} disabled={disabled} icon={iconEl} ariaLabel="Action" />
